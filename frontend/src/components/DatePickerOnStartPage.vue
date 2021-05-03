@@ -11,13 +11,16 @@
 
 <script setup>
   import Datepicker from 'vue3-datepicker'
-  import { ref } from 'vue' //Ref transmutes a value to become part of a reactive Object
-  
-  const minimumDate = ref(new Date()) //The earliest date a user can pick is Today
-  const startDate = ref(new Date()) //The date for the From datePicker - the start Date
-  const endDate = ref(new Date()) //The date for the To datePicker - the end date
-  
 </script>
+<script>
+export default {
+  methods:
+  {
+    
+  }
+}
+</script>
+
 
 <style scoped>
 .fromDatePickerDiv, .toDatePickerDiv{
