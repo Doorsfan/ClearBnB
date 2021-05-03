@@ -1,8 +1,11 @@
 <template>
+  <div>
+    <Datepicker />  
+  </div>
 </template>
 
 <script setup>
-
+import Datepicker from './components/DatepickerForAvailableDates.vue'
 </script>
 
 <style>
