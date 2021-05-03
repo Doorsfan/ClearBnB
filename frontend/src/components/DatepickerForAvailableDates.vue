@@ -1,47 +1,56 @@
-<script setup>
+<script setup="">
 import Datepicker from 'vue3-datepicker'
+</script>
+<script>
 import { ref } from 'vue'
 import { add } from 'date-fns'
 //NOTE: Datepickers are Readonly in properties, meaning you cannot directly attach CSS to them outside of built in
 // API - which only affects the input field in terms of selection of Date
-//this.disabledDays = { dates: [new Date("2021-05-08"), new Date("2021-05-10")] } //Can utilize object literal
-//this.disabledDays.dates.push(new Date("2021-05-12")) //And add disabled dates through various means
 let thisDay = ref(new Date())
-</script>
-<script>
+let startDate = ref(new Date())
+let endDate = ref(new Date())
 export default {
   data() {
     return {
+      thisDay: thisDay,
+      startDate: startDate,
+      endDate: endDate,
       disabledDays: {
         dates: []
       }
     }
   },
   methods: {
-    addDisabledDate(){
-      this.disabledDays.dates.push(new Date("2021-05-20"))
+    addDisabledDate(dateString){ //"2021-05-20"
+      this.disabledDays.dates.push(new Date(dateString))
     },
     getDisabledDays(){
       return this.disabledDays.dates
+    },
+    getStartDate(){
+      return this.startDate
+    },
+    getEndDate(){
+      return this.endDate
     }
   }
 }
 </script>
-
-
 <template>
   <div class="myDatePickerDiv">
+    Available from:
   <datepicker
-    class="myDatePicker"
-    v-model="pickedDate"
-    placeholder="Please select a date"
+    v-model="startDate"
+    placeholder="Lease starts at"    
     :lowerLimit="thisDay"
     :disabledDates="disabledDays"
   />
-  </div>
-  <div>
-    <button @click="addDisabledDate" class="addDate" value="add a date">Add Date
-    </button>
+  To:
+  <datepicker
+    v-model="endDate"
+    placeholder="Lease ends at"
+    :lower-limit="startDate"
+  />
   </div>
 </template>
 <style scoped>
