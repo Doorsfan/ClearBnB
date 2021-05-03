@@ -31,18 +31,13 @@ export default {
   methods: {
     login() {
       let credentials = {
-        email: this.email,
+        userName: this.userName,
         password: this.password
       }
       console.log("login is not in yet");
     },
 
     cancel() {
-      let credentials = {
-        firstName: this.firstName,
-        email: this.email,
-        password: this.password
-      }
       console.log("Cancel is not in yet");
     }
   }
@@ -85,5 +80,8 @@ h1{
 }
 a{
   font-weight:bolder;
+}
+a:visited{
+  color:blue;
 }
 </style>
