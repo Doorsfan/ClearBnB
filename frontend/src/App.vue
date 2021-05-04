@@ -1,13 +1,26 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld msg="Hello Vue 3 + Vite" />
+  <div>
+    <HousingRadioButtons @choseHouseType="updateHousingChosen"/>
+  </div>
 </template>
 
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
-
-// This starter template is using Vue 3 experimental <script setup> SFCs
-// Check out https://github.com/vuejs/rfcs/blob/script-setup-2/active-rfcs/0000-script-setup.md
+  import HousingRadioButtons from "./components/HousingRadioButtons.vue"
+</script>
+<script>
+export default {
+  data() {
+    return {
+      choseHousing: '',
+    }
+  },
+  methods: {
+    updateHousingChosen(choseHousing){
+      //Have in Add Residence View that it updates based on this function
+      console.log(choseHousing)
+    }
+  }
+}
 </script>
 
 <style>
