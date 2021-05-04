@@ -13,7 +13,7 @@
     methods: {
       updateLocationArea(){
         let updatedLocationArea = location
-        
+        this.$emit("updatedLocation", updatedLocationArea)
       }
     }
   }
