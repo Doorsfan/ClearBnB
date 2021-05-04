@@ -1,8 +1,9 @@
 <template>
+  <LocationInputForm />
 </template>
 
 <script setup>
-
+  import LocationInputForm from './components/LocationInputForm.vue'
 </script>
 
 <style>

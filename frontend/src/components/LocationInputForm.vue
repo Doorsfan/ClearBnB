@@ -1,6 +1,9 @@
 <template>
-  <div>
-    <textarea @change="updateLocationArea" class="inputForLocationArea" v-model="location"></textarea>
+  <div class="addResidenceDiv">
+    <div class="innerDiv">
+    <h3 class="addResidenceHeader">Add a residence</h3>
+    <textarea placeholder="Location" @change="updateLocationArea" class="inputForLocationArea" v-model="location"></textarea>
+    </div>
   </div>
 </template>
 <script>
@@ -19,5 +22,24 @@
   }
 </script>
 <style scoped>
-
+  .innerDiv{
+    width:max-content;
+    padding-left:15px;
+  }
+  .addResidenceHeader{
+    margin:0px;
+    margin-bottom: 3px;
+    width:max-content;
+  }
+  .inputForLocationArea{
+    height:14px;
+    padding:3px;
+    width: 80vw;
+    max-width: 200px;
+  }
+  .addResidenceDiv{
+    width:max-content;
+    margin-left:auto;
+    margin-right:auto;
+  }
 </style>
