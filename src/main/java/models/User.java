@@ -1,50 +1,28 @@
 package models;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import nosqlite.annotations.Document;
 import nosqlite.annotations.Id;
-import nosqlite.annotations.Transient;
-
-import java.util.List;
 
 // use with collections
 @Document
-@JsonIgnoreProperties(ignoreUnknown = true) // don't crash on unknown properties
-public class User {
+public class UserLogin {
   
   @Id // uuid for this document
   private String id;
-  private String firstName;
   private String email;
   private String password;
-  
-  // ignore this property when saving to the collection
-  @Transient
-  private List<Cat> cats;
-  
+
   // default constructor
-  public User() { }
-  
+  public UserLogin() { }
   
   @Override
   public String toString() {
     return "\nUser{" +
         "id='" + id + '\'' +
-        ", firstName='" + firstName + '\'' +
         ", email='" + email + '\'' +
-        ", password='" + password + '\'' +
-        ", cats=" + cats +
         '}';
   }
-  
-  public List<Cat> getCats() {
-    return cats;
-  }
-  
-  public void setCats(List<Cat> cats) {
-    this.cats = cats;
-  }
-  
+
   public String getId() {
     return id;
   }
@@ -52,15 +30,7 @@ public class User {
   public void setId(String id) {
     this.id = id;
   }
-  
-  public String getFirstName() {
-    return firstName;
-  }
-  
-  public void setFirstName(String firstName) {
-    this.firstName = firstName;
-  }
-  
+
   public String getEmail() {
     return email;
   }
