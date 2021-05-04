@@ -2,7 +2,6 @@ import express.Express;
 import models.Cat;
 import models.User;
 
-import java.util.List;
 import java.util.Map;
 
 import static nosqlite.Database.collection;

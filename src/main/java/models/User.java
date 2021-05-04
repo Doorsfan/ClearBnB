@@ -5,7 +5,7 @@ import nosqlite.annotations.Id;
 
 // use with collections
 @Document
-public class UserLogin {
+public class User {
   
   @Id // uuid for this document
   private String id;
@@ -13,7 +13,7 @@ public class UserLogin {
   private String password;
 
   // default constructor
-  public UserLogin() { }
+  public User() { }
   
   @Override
   public String toString() {

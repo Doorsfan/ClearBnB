@@ -52,7 +52,7 @@ public class Auth {
             // Validate password
             if(HashPassword.match(user.getPassword(), userInColl.getPassword())){
                 // Save user in session, to remember logged in state
-                req.session("current-user",userInColl);
+                req.session("current-user", userInColl);
 
                 res.json(userInColl);
             }else {
