@@ -15,7 +15,7 @@ export default {
       thisDay: thisDay,
       startDate: startDate,
       endDate: endDate,
-      disabledDays: {
+      disabledDays: { //Can integrate so that there are disabled days, just leaving this open as a possibility
         dates: []
       }
     }
