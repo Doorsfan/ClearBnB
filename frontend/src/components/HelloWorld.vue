@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>{{ msg }}</h1>
-
+    <router-view></router-view>
     <p>
       <a href="https://vitejs.dev/guide/features.html" target="_blank">
         Vite Documentation
