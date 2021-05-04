@@ -1,10 +1,11 @@
 <template>
   <div>
     <p class="myDescriptionP">Description:</p>
-    <textarea class="myInput" v-model="message" placeholder="Add a description to your Lease.."></textarea>
+    <textarea @change="sendUpMessage" class="myInput" v-model="message" placeholder="Add a description to your Lease..">
+    </textarea>
   </div>
 </template>
-<script>
+<script> //Between Components, utilize Emit - Between Views, utilize saving into the Database
   export default {
     data() {
       return {
@@ -12,8 +13,9 @@
       }
     },
     methods: {
-      getMessage(){
-        return this.message
+      sendUpMessage() {
+        let messageToSendUp = this.message
+        this.$emit("updatedDescription", messageToSendUp)
       }
     }
   }
