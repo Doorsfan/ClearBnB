@@ -23,6 +23,7 @@ public class Main {
     //Init auth
     new Auth(app);
     new LeaseHandler(app);
+    new BookingHandler(app);
 
     /*
     Cat tyson = new Cat();

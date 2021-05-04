@@ -28,5 +28,9 @@ public class LeaseHandler {
         app.get("/rest/leases:id", (req,res) -> {
             res.json(collection("Lease").findById(req.params("id")));
         });
+        // delete a specific lease
+        app.get("/rest/leases:id", (req,res) -> {
+            res.json(collection("Lease").deleteById(req.params("id")));
+        });
     }
 }
