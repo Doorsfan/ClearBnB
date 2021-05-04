@@ -1,11 +1,10 @@
 <template>
   <div>
-    <textarea v-model="message" placeholder="Add a description to your Lease.."></textarea>
+    <p class="myDescriptionP">Description:</p>
+    <textarea class="myInput" v-model="message" placeholder="Add a description to your Lease.."></textarea>
   </div>
 </template>
 <script>
-  import ref from 'vue'
-  let message = ref("")
   export default {
     data() {
       return {
@@ -20,4 +19,15 @@
   }
 </script>
 <style scoped>
+  .myInput{
+    min-width: 150px;
+    width: 250px;
+    height: 100px;
+    min-height: 80px;
+    padding: 5px;
+  }
+  .myDescriptionP{
+    margin:3px;
+    padding:0px;
+  }
 </style>

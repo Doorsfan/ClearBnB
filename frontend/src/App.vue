@@ -2,7 +2,7 @@
   <DescriptionForm />
 </template>
 
-<script>
+<script setup="">
   import DescriptionForm from './components/DescriptionForm.vue'
 </script>
 
