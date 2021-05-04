@@ -1,11 +1,11 @@
 <template>
   <div class="fromDatePickerDiv">
       <div><label for="fromDatePicker">From the:</label>
-      <datepicker id="fromDatePicker" class="fromDatePicker" v-model="startDate" :lower-limit="minimumDate" :upper-limit="endDate"/></div>
+      <datepicker @change="updateStartDate" id="fromDatePicker" class="fromDatePicker" v-model="startDate" :lower-limit="minimumDate" :upper-limit="endDate"/></div>
   </div>
   <div class="toDatePickerDiv">
     <label for="toDatePicker">To the:</label>
-    <datepicker id="toDatePicker" class="toDatePicker" v-model="endDate" :lower-limit="startDate"/>
+    <datepicker @change="updateEndDate" id="toDatePicker" class="toDatePicker" v-model="endDate" :lower-limit="startDate"/>
   </div>
 </template>
 
@@ -27,11 +27,13 @@ export default {
     }
   },
   methods: {
-    getStartDate(){
-      return this.startDate
+    updateStartDate(){
+      let updatedStartDate = this.startDate
+      this.$emit("updatedStartDate", updatedStartDate)
     },
-    getEndDate(){
-      return this.endDate
+    updateEndDate(){
+      let updatedEndDate = this.endDate
+      this.$emit("updatedEndDate", updatedEndDate)
     }
   }
 }
