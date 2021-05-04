@@ -16,6 +16,17 @@ public class UserInfo {
 
     public UserInfo() {}
 
+    public UserInfo(String userId, String firstName, String lastName, String streetAddress, String zipCode, String city, String country, String phoneNumber) {
+        this.userId = userId;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.streetAddress = streetAddress;
+        this.zipCode = zipCode;
+        this.city = city;
+        this.country = country;
+        this.phoneNumber = phoneNumber;
+    }
+
     public String getUserId() {
         return userId;
     }

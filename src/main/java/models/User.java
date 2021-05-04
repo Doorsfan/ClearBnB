@@ -14,7 +14,12 @@ public class User {
 
   // default constructor
   public User() { }
-  
+
+  public User(String email, String password) {
+    this.email = email;
+    this.password = password;
+  }
+
   @Override
   public String toString() {
     return "\nUser{" +

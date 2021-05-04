@@ -11,6 +11,14 @@ public class Amenity {
 
     public Amenity() {}
 
+    public Amenity(boolean wifi, boolean kitchen, boolean washer, boolean heating, boolean airConditioner) {
+        this.wifi = wifi;
+        this.kitchen = kitchen;
+        this.washer = washer;
+        this.heating = heating;
+        this.airConditioner = airConditioner;
+    }
+
     public boolean hasWifi() {
         return wifi;
     }

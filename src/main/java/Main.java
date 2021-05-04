@@ -1,5 +1,4 @@
 import express.Express;
-import models.Cat;
 import models.User;
 
 import java.util.Map;
