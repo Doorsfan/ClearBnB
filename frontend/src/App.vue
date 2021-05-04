@@ -1,14 +1,36 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld msg="Hello Vue 3 + Vite" />
+  <InputForPricingBedAndPeople @updateBeds="updateNrOfBeds" @updateMaxPeople="updateNrOfMaxPeople" @updatePrice="updatePricePerPerson"/>
 </template>
 
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
-
-// This starter template is using Vue 3 experimental <script setup> SFCs
-// Check out https://github.com/vuejs/rfcs/blob/script-setup-2/active-rfcs/0000-script-setup.md
+  import InputForPricingBedAndPeople from './components/InputForPricingBedAndPeople.vue'
 </script>
+<script>
+export default {
+  data() {
+    return {
+      nrOfBeds: '',
+      maxPeople: '',
+      pricePerPerson: ''
+    }
+  },
+  methods: {
+    updateNrOfBeds(amountOfBeds){
+      this.nrOfBeds = amountOfBeds
+      console.log("new amount of beds was: ", this.nrOfBeds);
+    },
+    updateNrOfMaxPeople(maxPeople){
+      this.maxPeople = maxPeople
+      console.log("new amount of beds was: ", this.maxPeople);
+    },
+    updatePricePerPerson(updatedPrice){
+      this.pricePerPerson = updatedPrice
+      console.log("new amount of beds was: ", this.pricePerPerson);
+    }
+  }
+}
+</script>
+
 
 <style>
 #app {
