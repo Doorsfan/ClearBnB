@@ -11,13 +11,12 @@
 export default {
   data() {
     return {
-      choseHousing: '',
     }
   },
   methods: {
     updateHousingChosen(choseHousing){
       //Have in Add Residence View that it updates based on this function
-      console.log(choseHousing)
+      console.log("Chosen housing was: ", choseHousing)
     }
   }
 }

@@ -1,16 +1,16 @@
 <template>
   <div class="firstRow">
-    <input @change="updateChosenHousing" class="buttonForHouse" type="radio" id="House" value="House" v-model="chosenHouseType">
+    <input @change="updateChosenHousing" class="buttonForHouse" type="radio" id="House" value="House" v-model="picked">
     <label class="labelForHouse" for="House">House</label>
-    <input @change="updateChosenHousing" class="buttonForFlat" type="radio" id="Flat" value="Flat" v-model="chosenHouseType">
+    <input @change="updateChosenHousing" class="buttonForFlat" type="radio" id="Flat" value="Flat" v-model="picked">
     <label class="labelForFlat" for="Flat">Flat</label>
-    <input @change="updateChosenHousing" class="buttonForOther" type="radio" id="Other" value="Other" v-model="chosenHouseType">
+    <input @change="updateChosenHousing" class="buttonForOther" type="radio" id="Other" value="Other" v-model="picked">
     <label class="labelForOther" for="Other">Other</label>
   </div>
   <div class="secondRow">
-    <input @change="updateChosenHousing" class="buttonForEntire" type="radio" id="Entire" value="Entire residence" v-model="chosenHouseType">
+    <input @change="updateChosenHousing" class="buttonForEntire" type="radio" id="Entire" value="Entire residence" v-model="picked">
     <label class="labelForEntire" for="Entire">Entire residence</label>
-    <input @change="updateChosenHousing" class="buttonForPart" type="radio" id="Part" value="Part" v-model="chosenHouseType">
+    <input @change="updateChosenHousing" class="buttonForPart" type="radio" id="Part" value="Part" v-model="picked">
     <label class="labelForPart" for="Part">Part</label>
   </div>
 </template>
@@ -18,13 +18,12 @@
 export default {
   data() {
     return {
-      chosenHouseType: ''
+      picked: ''
     }
   },
   methods: {
     updateChosenHousing() {
-      console.log(this.chosenHouseType);
-      this.$emit("chosenHouseType", this.chosenHouseType)
+      this.$emit("choseHouseType", this.picked)
     }
   }
 }
