@@ -30,6 +30,7 @@ public class Auth {
                 res.json(Map.of("error", "User already exists"));
                 return;
             }
+
             // hash password (encrypt password)
             String hashedPassword = HashPassword.hash(user.getPassword()); // "hemligt" -> Hashed SHA String
             user.setPassword(hashedPassword);
@@ -38,6 +39,7 @@ public class Auth {
 
             res.json(user);
         });
+
         // log in user
         app.post("/api/login", (req, res) -> {
             User user = req.body(User.class);

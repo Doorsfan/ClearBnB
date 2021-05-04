@@ -5,7 +5,7 @@ import static nosqlite.Database.collection;
 
 public class LeaseHandler {
 
-    private final Express app; // DEBUGABLE remove final if errors on this line
+    private final Express app; // DEBUGGABLE remove final if errors on this line
 
     public LeaseHandler(Express app) {
         this.app = app;
