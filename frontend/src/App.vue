@@ -1,13 +1,15 @@
 <template>
   <div>
-    <Datepicker />  
+    <Datepicker />
+    <DatepickerForAvailableDates @updateDisabledDays="myFunction" /> 
   </div>
 </template>
 
 <script setup>
 import Datepicker from './components/DatepickerForAvailableDates.vue'
 </script>
-
+<script>
+</script>
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;

@@ -1,3 +1,22 @@
+<template>
+  <div class="myDatePickerDiv">
+    Available from:
+  <datepicker
+    @change="updateLeaseStartDate"
+    v-model="startDate"
+    placeholder="Lease starts at"    
+    :lowerLimit="thisDay"
+    :disabledDates="disabledDays"
+  />
+  To:
+  <datepicker
+    @change="updateLeaseEndDate"
+    v-model="endDate"
+    placeholder="Lease ends at"
+    :lower-limit="startDate"
+  />
+  </div>
+</template>
 <script setup="">
 import Datepicker from 'vue3-datepicker'
 </script>
@@ -38,25 +57,6 @@ export default {
   }
 }
 </script>
-<template>
-  <div class="myDatePickerDiv">
-    Available from:
-  <datepicker
-    @change="updateLeaseStartDate"
-    v-model="startDate"
-    placeholder="Lease starts at"    
-    :lowerLimit="thisDay"
-    :disabledDates="disabledDays"
-  />
-  To:
-  <datepicker
-    @change="updateLeaseEndDate"
-    v-model="endDate"
-    placeholder="Lease ends at"
-    :lower-limit="startDate"
-  />
-  </div>
-</template>
 <style scoped>
   .myDatePickerDiv{
     width:max-content;
