@@ -1,15 +1,13 @@
 <template>
+  <div>
+    <AddResidence />
+  </div>
 </template>
 
-<script setup="">
+<script setup>
+  import Header from './components/Header.vue'
+  import AddResidence from './views/AddResidence.vue'
 </script>
-<script>
-export default {
-  methods: {
-  }
-}
-</script>
-
 
 <style>
 #app {

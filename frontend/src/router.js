@@ -5,10 +5,15 @@ import Home from './views/Home.vue'
 import UserPage from './views/UserPage.vue'
 import SignUp from './views/SignUp.vue'
 import Login from './views/Login.vue'
+import AddResidence from './views/AddResidence.vue'
 
 export default createRouter({
   history: createWebHistory(),
   routes: [
+    {
+      path: '/addResidence',
+      component: AddResidence
+    },
     {
       path: '/',
       component: Home

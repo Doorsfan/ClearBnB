@@ -29,19 +29,20 @@ export default {
 </script>
 <style scoped>
 .innerDiv {
-  width: max-content;
-  padding-left: 15px;
+  width: 205px;
+  text-align:center;
 }
 .addResidenceHeader {
   margin: 0px;
   margin-bottom: 3px;
-  width: max-content;
+  width:205px;
+  text-align:center;
 }
 .inputForLocationArea {
   height: 14px;
-  padding: 3px;
-  width: 80vw;
-  max-width: 200px;
+  width:180px;
+  margin-left:12.5px;
+  margin-right:12.5px;
 }
 .addResidenceDiv {
   width: max-content;

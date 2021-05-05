@@ -23,13 +23,14 @@
 <style scoped>
   .myInput{
     min-width: 150px;
-    width: 250px;
+    width: 195px;
     height: 100px;
     min-height: 80px;
-    padding: 5px;
+    padding: 4px;
   }
   .myDescriptionP{
     margin:3px;
     padding:0px;
+    font-weight:bolder;
   }
 </style>
