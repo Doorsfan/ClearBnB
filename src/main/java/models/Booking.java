@@ -81,4 +81,18 @@ public class Booking {
     public void setTotalPrice(double totalPrice) {
         this.totalPrice = totalPrice;
     }
+
+    @Override
+    public String toString() {
+        return "Booking{" +
+                "id='" + id + '\'' +
+                ", userId='" + userId + '\'' +
+                ", leaseId='" + leaseId + '\'' +
+                ", location='" + location + '\'' +
+                ", startDate='" + startDate + '\'' +
+                ", endDate='" + endDate + '\'' +
+                ", guests=" + guests +
+                ", totalPrice=" + totalPrice +
+                '}';
+    }
 }
