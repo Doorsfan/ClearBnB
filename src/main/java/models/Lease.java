@@ -146,4 +146,23 @@ public class Lease {
     public void setImageURLs(List<String> imageURLs) {
         this.imageURLs = imageURLs;
     }
+
+    @Override
+    public String toString() {
+        return "Lease{" +
+                "id='" + id + '\'' +
+                ", ownerId='" + ownerId + '\'' +
+                ", title='" + title + '\'' +
+                ", location='" + location + '\'' +
+                ", description='" + description + '\'' +
+                ", typeOfHousing='" + typeOfHousing + '\'' +
+                ", startDate='" + startDate + '\'' +
+                ", endDate='" + endDate + '\'' +
+                ", pricePerNight=" + pricePerNight +
+                ", maxGuests=" + maxGuests +
+                ", beds=" + beds +
+                ", amenities=" + amenities +
+                ", imageURLs=" + imageURLs +
+                '}';
+    }
 }
