@@ -1,11 +1,9 @@
 <template>
   <div>
-    <HousingRadioButtons @choseHouseType="updateHousingChosen"/>
   </div>
 </template>
 
 <script setup>
-  import HousingRadioButtons from "./components/HousingRadioButtons.vue"
 </script>
 <script>
 export default {
