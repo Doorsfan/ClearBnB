@@ -1,12 +1,11 @@
 <template>
   <div>
-    <Datepicker />
     <DatepickerForAvailableDates @updateDisabledDays="myFunction" /> 
   </div>
 </template>
 
 <script setup>
-import Datepicker from './components/DatepickerForAvailableDates.vue'
+import DatepickerForAvailableDates from './components/DatepickerForAvailableDates.vue'
 </script>
 <script>
 </script>
