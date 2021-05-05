@@ -65,10 +65,21 @@ export default {
       console.log(await res.json());
     },
     async tryDELETERequestForBookingsWithId(){
-      let res = await fetch('/rest/bookings/:id')
+      let res = await fetch('/rest/bookings/u8wIeBkOCW-K_upXkmLhb',
+      {
+        method: 'DELETE'
+      })
       console.log(await res.json());
     },
     async tryPOSTRequestForLeases(){
+      let amenities = {
+        wifi: true,
+        kitchen: false,
+        washer: false,
+        heating: false,
+        airConditioner: false
+      }
+      let amenitiesAsJson = JSON.stringify(amenities);
       let lease = {
         ownerId: 1,
         title: "Cottage in LA",
@@ -80,7 +91,7 @@ export default {
         pricePerNight: 1000,
         maxGuests: 1,
         beds: 1,
-        amenities: {},
+        amenities: amenitiesAsJson,
         imageURLs: []
       }
       let res = await fetch('/rest/leases', {
