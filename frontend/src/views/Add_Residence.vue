@@ -1,12 +1,14 @@
 <template>
   <LocationInputForm @updatedLocation="updateLocation" />
-  <InputForPricingBedAndPeople @updateBeds="updateNrOfBeds" @updateMaxPeople="updateNrOfMaxPeople" @updatePrice="updatePricePerPerson"/>
-  <HousingRadioButtons @choseHouseType="updateHousingChosen"/>
+  <InputForPricingBedAndPeople @updateBeds="updateNrOfBeds" @updateMaxPeople="updateNrOfMaxPeople" @updatePrice="updatePricePerPerson" />
+  <HousingRadioButtons @choseHouseType="updateHousingChosen" />
+  <ImageUrlInputForm @updatedImageURLs="updateImageURLs" />
 </template>
 <script>
 import LocationInputForm from '../components/Add Residence View/LocationInputForm.vue'
 import InputForPricingBedAndPeople from '../components/Add Residence View/InputForPricingBedAndPeople.vue'
 import HousingRadioButtons from "../components/Add Residence View/HousingRadioButtons.vue"
+import ImageUrlInputForm from '../components/Add Residence View/ImageUrlInputForm.vue'
 
 export default {
   data() {
@@ -15,10 +17,14 @@ export default {
       maxPeople: '',
       pricePerPerson: '',
       chosenHousing: '',
-      location: ''
+      location: '',
+      imageURLs: []
     }
   },
   methods: {
+    updateImageURLs(newImageURLs){
+      this.imageURLs = newImageURLs
+    },
     updateLocation(newLocation){
       this.location = newLocation
     },

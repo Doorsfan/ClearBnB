@@ -1,10 +1,22 @@
 <template>
-<div>
-</div>
+  <div>
+  </div>
 </template>
 
 <script setup>
 </script>
+<script>
+export default {
+  data() {
+    return {
+
+    }
+  },
+  methods: {
+  }
+}
+</script>
+
 
 <style>
 #app {
