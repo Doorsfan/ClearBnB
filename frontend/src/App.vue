@@ -5,20 +5,6 @@
 
 <script setup>
 </script>
-<script>
-export default {
-  data() {
-    return {
-    }
-  },
-  methods: {
-    updateHousingChosen(choseHousing){
-      //Have in Add Residence View that it updates based on this function
-      console.log("Chosen housing was: ", choseHousing)
-    }
-  }
-}
-</script>
 
 <style>
 #app {
