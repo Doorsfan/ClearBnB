@@ -28,7 +28,7 @@ public class BookingHandler {
             res.json(collection("Booking").findById(req.params("id")));
         });
         // delete a specific booking
-        app.get("/rest/bookings:id", (req, res) -> {
+        app.get("/rest/delete/bookings:id", (req, res) -> {
             res.json(collection("Booking").deleteById(req.params("id")));
         });
     }

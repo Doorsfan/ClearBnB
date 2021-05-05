@@ -1,10 +1,13 @@
 package models;
 
 import nosqlite.annotations.Document;
+import nosqlite.annotations.Id;
 
 @Document
 public class UserInfo {
 
+    @Id
+    private String id;
     private String userId;
     private String firstName;
     private String lastName;
