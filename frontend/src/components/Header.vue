@@ -1,6 +1,6 @@
 <template>
   <div>
-    <router-link to="home">Home</router-link>
+    <router-link to="/">Home</router-link>
     <router-link to="userPage">User Page</router-link>
     <router-link to="signUp">Sign Up</router-link>
     <router-link to="login">Login</router-link>
