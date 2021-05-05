@@ -1,10 +1,12 @@
 <template>
+  <LocationInputForm @updatedLocation="updateLocation" />
   <InputForPricingBedAndPeople @updateBeds="updateNrOfBeds" @updateMaxPeople="updateNrOfMaxPeople" @updatePrice="updatePricePerPerson"/>
   <HousingRadioButtons @choseHouseType="updateHousingChosen"/>
 </template>
 <script>
-import HousingRadioButtons from "../components/Add Residence View/HousingRadioButtons.vue"
+import LocationInputForm from '../components/Add Residence View/LocationInputForm.vue'
 import InputForPricingBedAndPeople from '../components/Add Residence View/InputForPricingBedAndPeople.vue'
+import HousingRadioButtons from "../components/Add Residence View/HousingRadioButtons.vue"
 
 export default {
   data() {
@@ -12,10 +14,14 @@ export default {
       nrOfBeds: '',
       maxPeople: '',
       pricePerPerson: '',
-      chosenHousing: ''
+      chosenHousing: '',
+      location: ''
     }
   },
   methods: {
+    updateLocation(newLocation){
+      this.location = newLocation
+    },
     updateNrOfBeds(amountOfBeds){
       this.nrOfBeds = amountOfBeds
       console.log("new amount of beds was: ", this.nrOfBeds);
