@@ -5,6 +5,19 @@ import nosqlite.annotations.Id;
 
 @Document
 public class Booking {
+    @Override
+    public String toString() {
+        return "Booking{" +
+                "id='" + id + '\'' +
+                ", userId='" + userId + '\'' +
+                ", leaseId='" + leaseId + '\'' +
+                ", location='" + location + '\'' +
+                ", startDate='" + startDate + '\'' +
+                ", endDate='" + endDate + '\'' +
+                ", guests=" + guests +
+                ", totalPrice=" + totalPrice +
+                '}';
+    }
 
     @Id
     private String id;

@@ -9,14 +9,14 @@ public class User {
   
   @Id // uuid for this document
   private String id;
-  private String email;
+  private String username;
   private String password;
 
   // default constructor
   public User() { }
 
-  public User(String email, String password) {
-    this.email = email;
+  public User(String username, String password) {
+    this.username = username;
     this.password = password;
   }
 
@@ -24,7 +24,7 @@ public class User {
   public String toString() {
     return "\nUser{" +
         "id='" + id + '\'' +
-        ", email='" + email + '\'' +
+        ", username='" + username + '\'' +
         '}';
   }
 
@@ -36,12 +36,12 @@ public class User {
     this.id = id;
   }
 
-  public String getEmail() {
-    return email;
+  public String getUsername() {
+    return username;
   }
   
-  public void setEmail(String email) {
-    this.email = email;
+  public void setUsername(String email) {
+    this.username = username;
   }
   
   public String getPassword() {

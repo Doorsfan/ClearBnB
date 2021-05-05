@@ -9,6 +9,17 @@ public class Amenity {
     private boolean heating;
     private boolean airConditioner;
 
+    @Override
+    public String toString() {
+        return "Amenity{" +
+                "wifi=" + wifi +
+                ", kitchen=" + kitchen +
+                ", washer=" + washer +
+                ", heating=" + heating +
+                ", airConditioner=" + airConditioner +
+                '}';
+    }
+
     public Amenity() {}
 
     public Amenity(boolean wifi, boolean kitchen, boolean washer, boolean heating, boolean airConditioner) {

@@ -102,6 +102,10 @@ export default {
       console.log(await res.json());
     },
     async tryPOSTRequestForApiRegister(){
+      let user = {
+        username: "john.doe@hotmail.com",
+        password: "supersecret"
+      }
       let res = await fetch('/api/register', {
         method: 'POST',
         body: JSON.stringify(user)

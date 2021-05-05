@@ -7,6 +7,24 @@ import java.util.List;
 
 @Document
 public class Lease {
+    @Override
+    public String toString() {
+        return "Lease{" +
+                "id='" + id + '\'' +
+                ", ownerId='" + ownerId + '\'' +
+                ", title='" + title + '\'' +
+                ", location='" + location + '\'' +
+                ", description='" + description + '\'' +
+                ", typeOfHousing='" + typeOfHousing + '\'' +
+                ", startDate='" + startDate + '\'' +
+                ", endDate='" + endDate + '\'' +
+                ", pricePerNight=" + pricePerNight +
+                ", maxGuests=" + maxGuests +
+                ", beds=" + beds +
+                ", amenities=" + amenities +
+                ", imageURLs=" + imageURLs +
+                '}';
+    }
 
     @Id
     private String id;
