@@ -24,7 +24,7 @@ public class User {
   public String toString() {
     return "\nUser{" +
         "id='" + id + '\'' +
-        ", email='" + username + '\'' +
+        ", username='" + username + '\'' +
         '}';
   }
 
@@ -41,7 +41,7 @@ public class User {
   }
   
   public void setEmail(String email) {
-    this.username = email;
+    this.username = username;
   }
   
   public String getPassword() {
