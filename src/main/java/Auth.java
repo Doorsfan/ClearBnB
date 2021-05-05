@@ -23,7 +23,7 @@ public class Auth {
             User user = req.body(User.class);
 
             // check if email is not taken
-            User exists = collection("User").findOne(Filter.eq("email", user.getEmail()));
+            User exists = collection("User").findOne(Filter.eq("email", user.getUsername()));
 
             //If it found a match, it's not null
             if(exists != null) {
@@ -44,7 +44,7 @@ public class Auth {
         app.post("/api/login", (req, res) -> {
             User user = req.body(User.class);
 
-            User userInColl = collection("User").findOne("email==" + user.getEmail());
+            User userInColl = collection("User").findOne("username==" + user.getUsername());
 
             if(userInColl == null) {
                 res.json(Map.of("error", "Bad credentials"));
