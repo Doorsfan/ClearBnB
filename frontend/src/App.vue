@@ -1,9 +1,9 @@
 <template>
-  <Datepicker />
+  <DatePickerOnStartPage />
 </template>
 
 <script setup>
-  import Datepicker from './components/DatePickerOnStartPage.vue'
+  import DatePickerOnStartPage from './components/DatePickerOnStartPage.vue'
 </script>
 <style>
 #app {
