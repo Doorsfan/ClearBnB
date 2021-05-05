@@ -25,11 +25,11 @@ public class UserInfoHandler {
             res.json(collection("UserInfo").find());
         });
         // get a specific userInfo
-        app.get("/rest/userinfos:id", (req,res) -> {
+        app.get("/rest/userinfos/:id", (req,res) -> {
             res.json(collection("UserInfo").findById(req.params("id")));
         });
         // delete a specific userInfo
-        app.delete("/rest/userinfos:id", (req,res) -> {
+        app.delete("/rest/userinfos/:id", (req,res) -> {
             res.json(collection("UserInfo").deleteById(req.params("id")));
         });
     }
