@@ -23,7 +23,7 @@ public class Auth {
             User user = req.body(User.class);
 
             // check if email is not taken
-            User exists = collection("User").findOne(Filter.eq("email", user.getUsername()));
+            User exists = collection("User").findOne(Filter.eq("username", user.getUsername()));
 
             //If it found a match, it's not null
             if(exists != null) {
@@ -44,20 +44,23 @@ public class Auth {
         app.post("/api/login", (req, res) -> {
             User user = req.body(User.class);
 
-            User userInColl = collection("User").findOne("email==" + user.getUsername());
+            User userInColl = collection("User").findOne("username==" + user.getUsername());
 
             if(userInColl == null) {
+                System.out.println("Did not find user");
                 res.json(Map.of("error", "Bad credentials"));
                 return;
             }
 
             // Validate password
             if(HashPassword.match(user.getPassword(), userInColl.getPassword())){
+                System.out.println("Found password");
                 // Save user in session, to remember logged in state
                 req.session("current-user", userInColl);
 
                 res.json(userInColl);
             }else {
+                System.out.println("Failed in password check");
                 res.json(Map.of("error", "Bad credentials"));
             }
         });

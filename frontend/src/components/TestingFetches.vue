@@ -49,9 +49,18 @@ export default {
       console.log(await res.json());
     },
     async tryPOSTRequestForBookings(){
+      let booking = {
+        userId: 1,
+        leaseId: 1,
+        location: "Los Angeles",
+        startDate: "2021-04-05",
+        endDate: "2021-05-05",
+        guests: 1,
+        totalPrice: 1000
+      }
       let res = await fetch('/rest/bookings', {
         method: 'POST',
-        body: JSON.stringify(user)
+        body: JSON.stringify(booking)
       })
       console.log(await res.json());
     },
@@ -60,9 +69,23 @@ export default {
       console.log(await res.json());
     },
     async tryPOSTRequestForLeases(){
+      let lease = {
+        ownerId: 1,
+        title: "Cottage in LA",
+        location: "Los Angeles",
+        description: "Lorem Ipsum",
+        typeOfHousing: "House",
+        startDate: "2021-04-05",
+        endDate: "2021-05-05",
+        pricePerNight: 1000,
+        maxGuests: 1,
+        beds: 1,
+        amenities: {},
+        imageURLs: []
+      }
       let res = await fetch('/rest/leases', {
         method: 'POST',
-        body: JSON.stringify(booking)
+        body: JSON.stringify(lease)
       })
       console.log(await res.json());
     },
@@ -81,6 +104,16 @@ export default {
       console.log(await res.json());
     },
     async tryPOSTRequestForUserinfos(){
+      let userinfos = {
+        userId: 1,
+        firstName: "John",
+        lastName: "Doe",
+        streetAddress: "Example Street 2",
+        zipCode: "666 666",
+        city: "Jönnköping",
+        country: "Sweden",
+        phoneNumber: "046705 - 102135"
+      }
       let res = await fetch('/rest/userinfos', {
         method: 'POST',
         body: JSON.stringify(userinfos)
@@ -113,6 +146,10 @@ export default {
       console.log(await res.json());
     },
     async tryPOSTRequestForApiLogin(){
+      let user = {
+        username: "john.doe@hotmail.com",
+        password: "supersecret"
+      }
       let res = await fetch('/api/login', {
         method: 'POST',
         body: JSON.stringify(user)
