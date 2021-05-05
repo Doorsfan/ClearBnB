@@ -1,0 +1,49 @@
+<template>
+  <div class="firstRow">
+    <input @change="updateChosenHousing" class="buttonForHouse" type="radio" id="House" value="House" v-model="picked">
+    <label class="labelForHouse" for="House">House</label>
+    <input @change="updateChosenHousing" class="buttonForFlat" type="radio" id="Flat" value="Flat" v-model="picked">
+    <label class="labelForFlat" for="Flat">Flat</label>
+    <input @change="updateChosenHousing" class="buttonForOther" type="radio" id="Other" value="Other" v-model="picked">
+    <label class="labelForOther" for="Other">Other</label>
+  </div>
+  <div class="secondRow">
+    <input @change="updateChosenHousing" class="buttonForEntire" type="radio" id="Entire" value="Entire residence" v-model="picked">
+    <label class="labelForEntire" for="Entire">Entire residence</label>
+    <input @change="updateChosenHousing" class="buttonForPart" type="radio" id="Part" value="Part" v-model="picked">
+    <label class="labelForPart" for="Part">Part</label>
+  </div>
+</template>
+<script>
+export default {
+  data() {
+    return {
+      picked: ''
+    }
+  },
+  methods: {
+    updateChosenHousing() {
+      this.$emit("choseHouseType", this.picked)
+    }
+  }
+}
+</script>
+<style scoped>
+  .firstRow{
+    width:210px;
+    margin-left:auto;
+    margin-right:auto;
+    padding-right:10px;
+  }
+  .secondRow{
+    width:210px;
+    margin-left:auto;
+    margin-right:auto;
+    padding-right:10px;
+  }
+  label{
+    margin-right: 5px;
+    margin-left: 5px;
+  }
+
+</style>

@@ -1,18 +1,25 @@
 <template>
   <div>
-    <Header />
-    <router-view></router-view>
-    <TestingFetches />
+    <HousingRadioButtons @choseHouseType="updateHousingChosen"/>
   </div>
 </template>
 
 <script setup>
-import Header from "./components/Header.vue";
-//import HelloWorld from "./components/HelloWorld.vue";
-
-// This starter template is using Vue 3 experimental <script setup> SFCs
-// Check out https://github.com/vuejs/rfcs/blob/script-setup-2/active-rfcs/0000-script-setup.md
-import TestingFetches from "./components/TestingFetches.vue";
+  import HousingRadioButtons from "./components/HousingRadioButtons.vue"
+</script>
+<script>
+export default {
+  data() {
+    return {
+    }
+  },
+  methods: {
+    updateHousingChosen(choseHousing){
+      //Have in Add Residence View that it updates based on this function
+      console.log("Chosen housing was: ", choseHousing)
+    }
+  }
+}
 </script>
 
 <style>
