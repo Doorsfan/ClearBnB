@@ -2,6 +2,7 @@
   <div>
     <Header />
     <router-view></router-view>
+    <TestingFetches />
   </div>
 </template>
 
@@ -11,6 +12,7 @@ import Header from "./components/Header.vue";
 
 // This starter template is using Vue 3 experimental <script setup> SFCs
 // Check out https://github.com/vuejs/rfcs/blob/script-setup-2/active-rfcs/0000-script-setup.md
+import TestingFetches from "./components/TestingFetches.vue";
 </script>
 
 <style>
