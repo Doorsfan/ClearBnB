@@ -2,13 +2,17 @@
   <LocationInputForm @updatedLocation="updateLocation" />
   <InputForPricingBedAndPeople @updateBeds="updateNrOfBeds" @updateMaxPeople="updateNrOfMaxPeople" @updatePrice="updatePricePerPerson" />
   <HousingRadioButtons @choseHouseType="updateHousingChosen" />
+  <input type="text" placeholder="Title" v-model="myTitle" />
   <ImageUrlInputForm @updatedImageURLs="updateImageURLs" />
+  <DescriptionForm @updatedDescription="updateDescription" />
+  <router-link to="preview">Preview</router-link>
 </template>
 <script>
 import LocationInputForm from '../components/Add Residence View/LocationInputForm.vue'
 import InputForPricingBedAndPeople from '../components/Add Residence View/InputForPricingBedAndPeople.vue'
 import HousingRadioButtons from "../components/Add Residence View/HousingRadioButtons.vue"
 import ImageUrlInputForm from '../components/Add Residence View/ImageUrlInputForm.vue'
+import DescriptionForm from '../components/Add Residence View/DescriptionForm.vue'
 
 export default {
   data() {
@@ -18,10 +22,15 @@ export default {
       pricePerPerson: '',
       chosenHousing: '',
       location: '',
-      imageURLs: []
+      myTitle: '',
+      imageURLs: [],
+      description: ''
     }
   },
   methods: {
+    updateDescription(newDescription){
+      this.description = newDescription
+    },
     updateImageURLs(newImageURLs){
       this.imageURLs = newImageURLs
     },

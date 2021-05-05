@@ -1,17 +1,10 @@
 <template>
-  <div>
-  </div>
 </template>
 
-<script setup>
+<script setup="">
 </script>
 <script>
 export default {
-  data() {
-    return {
-
-    }
-  },
   methods: {
   }
 }
