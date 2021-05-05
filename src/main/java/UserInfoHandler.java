@@ -29,7 +29,7 @@ public class UserInfoHandler {
             res.json(collection("UserInfo").findById(req.params("id")));
         });
         // delete a specific userInfo
-        app.get("/rest/delete/userinfos:id", (req,res) -> {
+        app.delete("/rest/userinfos:id", (req,res) -> {
             res.json(collection("UserInfo").deleteById(req.params("id")));
         });
     }
