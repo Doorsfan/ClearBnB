@@ -2,7 +2,7 @@
   <div class="mainBoxDiv">
     <div class="titleDiv">{{ lease.title }}</div>
     <Carousel :myLease="lease"/>
-    <div class="secondDiv">
+    <div class="divHoldingLocationAndPrice">
       <div class="textBox">
         <div class="locationDiv">Location: {{ lease.location }}</div>
         <div class="pricePerNightDiv">Price Per Night: {{ lease.pricePerNight }}</div>
@@ -36,36 +36,7 @@ export default {
 .titleDiv{
   font-weight:bolder;
 }
-.LeftArrowButton{
-  border: solid black;
-  border-width: 0 3px 3px 0;
-  display: inline-block;
-  padding: 3px;
-  transform: rotate(135deg);
-  -webkit-transform: rotate(135deg);
-  z-index:2;
-  position:absolute;
-  margin-top:110px;
-  margin-left:-17px;
-}
-.RightArrowButton{
-  border: solid black;
-  border-width: 0 3px 3px 0;
-  display: inline-block;
-  padding: 3px;
-  transform: rotate(-45deg);
-  -webkit-transform: rotate(-45deg);
-  z-index:2;
-  position:absolute;
-  margin-top:110px;
-  margin-left:157px;
-}
-.imageBox{
-  height:180px;
-  width: 150px;
-  margin-top:5px;
-  margin-bottom:5px;
-}
+
 .mainBoxDiv{
   margin-left:auto;
   margin-right:auto;
@@ -76,12 +47,8 @@ export default {
 .titleDiv{
   text-align:center;
 }
-.leaseBoxDiv{
-  height:109px;
-  width:200px;
-  display:inline;
-}
-.secondDiv{
+
+.divHoldingLocationAndPrice{
   display:inline;
   height:166px;
   width:300px;
