@@ -35,6 +35,11 @@ export default {
   watch:{
     startDate(){
       console.log("Add relevant leases based on start Date")
+      for(let lease of allLeases){
+        if(lease.date >= startDate){
+          console.log("Found a match for", lease);
+        }
+      }
     },
     endDate(){
       console.log("Add relevant leases based on end Date")
