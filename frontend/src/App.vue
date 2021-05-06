@@ -2,10 +2,12 @@
   <div>
     <LocationForm @changedLocation="filterBasedOnLocation"/>
   </div>
+  <DatePickerOnStartPage />
 </template>
 
 <script setup>
   import LocationForm from './components/DateForm.vue'
+  import DatePickerOnStartPage from './components/DatePickerOnStartPage.vue'
 </script>
 <script>
 export default {
