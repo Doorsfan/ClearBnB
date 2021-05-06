@@ -4,10 +4,22 @@
   </div>
 </template>
 
-<script setup="">
-  import DatePickerOnStartPage from '../components/StartView/DatePickerOnStartPage.vue'
-</script>
 <script>
+import DatePickerOnStartPage from '../components/StartView/DatePickerOnStartPage.vue'
+  let today = new Date()
+  let month = today.getMonth() + 1;
+  let day = today.getDate();
+  let zeroBeforeMonth = '';
+  let zeroBeforeDay = '';
+  if(month < 10){
+    zeroBeforeMonth += '0' + month
+    month = zeroBeforeMonth
+  }
+  if(day < 10){
+    zeroBeforeDay += '0' + day
+    day = zeroBeforeDay
+  }
+  let convertedToday = today.getFullYear() + '-' + month + '-' + day
 export default {
   components: {
     DatePickerOnStartPage
@@ -16,20 +28,31 @@ export default {
     return {
       relevantLeases: [], //An array of Lease objects
       allLeases: [],
-      startDate: new Date()
+      startDate: convertedToday,
+      endDate: ''
+    }
+  },
+  watch:{
+    startDate(){
+      console.log("Add relevant leases based on start Date")
+    },
+    endDate(){
+      console.log("Add relevant leases based on end Date")
     }
   },
   methods:{
     updateSearchEndDate(newDate){
       console.log("The updated end date received was: ", newDate);
+      this.endDate = newDate
     },
     updateSearchStartDate(newDate){
       //this.startDate = newDate
       console.log("The updated start date recieved was: ", newDate)
+      this.startDate = newDate
     },
-    filterBasedOnDate(newDate){
-      this.relevantDates = []
-      for(let date of allDates){
+    filterBasedOnDate(startDate, endDate){
+      this.relevantLeases = []
+      for(let lease of this.allLeases){
         if(lease.date.includes(newDate)){
           this.relevantLeases.push(lease);
         }
