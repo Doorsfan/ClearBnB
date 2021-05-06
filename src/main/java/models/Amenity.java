@@ -19,7 +19,7 @@ public class Amenity {
         this.airConditioner = airConditioner;
     }
 
-    public boolean hasWifi() {
+    public boolean isWifi() {
         return wifi;
     }
 
@@ -27,7 +27,7 @@ public class Amenity {
         this.wifi = wifi;
     }
 
-    public boolean hasKitchen() {
+    public boolean isKitchen() {
         return kitchen;
     }
 
@@ -35,7 +35,7 @@ public class Amenity {
         this.kitchen = kitchen;
     }
 
-    public boolean hasWasher() {
+    public boolean isWasher() {
         return washer;
     }
 
@@ -43,7 +43,7 @@ public class Amenity {
         this.washer = washer;
     }
 
-    public boolean hasHeating() {
+    public boolean isHeating() {
         return heating;
     }
 
@@ -51,7 +51,7 @@ public class Amenity {
         this.heating = heating;
     }
 
-    public boolean hasAirConditioner() {
+    public boolean isAirConditioner() {
         return airConditioner;
     }
 
