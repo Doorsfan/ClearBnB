@@ -49,24 +49,7 @@ export default {
       this.$emit("updateEndDate", convertedDate)     
     }
   },
-  methods: {
-    hello(){
-      console.log("hi");
-      let updateStartDate = this.startDate
-      updateStartDate = this.convertDate(updateStartDate)
-      this.$emit("updateStartDate", updateStartDate);
-    },
-    updateStartDate(){
-      console.log("Was updated");
-      //let updateStartDate = this.startDate
-      //updateStartDate = this.convertDate(updateStartDate)
-      //this.$emit("updateStartDate", updateStartDate)
-    },
-    updateEndDate(){
-      //let updateEndDate = this.endDate
-      //updateEndDate = this.convertDate(updateStartDate)
-      //this.$emit("updateEndDate", 5)
-    },
+  methods: {  
     convertDate(dateToConvert){
       let month = dateToConvert.getMonth() + 1;
       let day = dateToConvert.getDate();
