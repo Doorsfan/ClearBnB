@@ -1,10 +1,7 @@
 <template>
-  <div>
-    <LeaseDisplayBox 
-      v-for="(leaseItem, index) of leases"
+  <LeaseDisplayBox v-for="(leaseItem, index) of leases"
       :key="index"
       :lease="leaseItem"/>
-  </div>
 </template>
 
 <script setup="">
@@ -16,6 +13,7 @@ export default {
   name: "App",
   components: {
     Lease,
+    LeaseDisplayBox,
   },
   data() {
     return {
@@ -72,7 +70,4 @@ export default {
 }
 </script>
 <style>
-#app {
-  
-}
 </style>

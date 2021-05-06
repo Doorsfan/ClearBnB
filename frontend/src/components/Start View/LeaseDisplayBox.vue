@@ -1,46 +1,41 @@
 <template>
   <div class="mainBoxDiv">
-    <button class="LeftArrowButton" @click="previousImage"></button>
-    <button class="RightArrowButton" @click="nextImage"></button>
     <div class="titleDiv">{{ lease.title }}</div>
-    <div class="leaseBoxDiv">
-      <img class="imageBox" :src="lease.imageURLs[currentImage]">
-      <div class="secondDiv"><p>{{ lease.description }}</p></div>
+    <Carousel :myLease="lease"/>
+    <div class="secondDiv">
+      <div class="textBox">
+        <div class="locationDiv">Location: {{ lease.location }}</div>
+        <div class="pricePerNightDiv">Price Per Night: {{ lease.pricePerNight }}</div>
+        <div class="descriptionDiv">Description: {{ lease.description }}</div>
+      </div>
+      <router-link class="readMoreLink" to="/">Read more..</router-link>
     </div>
   </div>
 </template>
+<script setup="">
+  import Carousel from '../Carousel.vue'
+</script>
 <script>
 export default {
   props: ["lease"],
   data() {
     return {
-      currentImage: 0
     }
   },
   methods: {
-    previousImage(){
-      if(this.currentImage == 0){
-        this.currentImage = (this.lease.imageURLs.length - 1)
-      }
-      else{
-        this.currentImage -= 1
-      }
-    },
-    nextImage(){
-      if(this.currentImage == (this.lease.imageURLs.length - 1)){
-        this.currentImage = 0;
-      }
-      else{
-        this.currentImage += 1;
-      }
-    },
-    temp(){
-      console.log("hi")
-    }
   }
 }
 </script>
 <style scoped>
+.readMoreLink{
+  margin-left:150px;
+}
+.readMoreLink:visited{
+  color:blue;
+}
+.titleDiv{
+  font-weight:bolder;
+}
 .LeftArrowButton{
   border: solid black;
   border-width: 0 3px 3px 0;
@@ -88,18 +83,25 @@ export default {
 }
 .secondDiv{
   display:inline;
-  height:109px;
+  height:166px;
   width:300px;
   margin:0px;
   padding:0px;
   position:absolute;
 }
-p{
+.textBox{
   margin:2px;
   margin-left: 30px;
   margin-top:5px;
   word-wrap:break-word; 
-  height:180px;
-  overflow:scroll;
+  width: 230px;
+  overflow-y:hidden;
+  overflow-x:hidden;
+  padding:3px;
+  height:143px;
+  margin-bottom:10px;
+}
+.descriptionDiv{
+  height:124px;
 }
 </style>
