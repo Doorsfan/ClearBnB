@@ -1,18 +1,11 @@
 <template>
   <div>
-    <Header />
-    <router-view></router-view>
-    <TestingFetches />
+    <LocationForm />
   </div>
 </template>
 
 <script setup>
-import Header from "./components/Header.vue";
-//import HelloWorld from "./components/HelloWorld.vue";
-
-// This starter template is using Vue 3 experimental <script setup> SFCs
-// Check out https://github.com/vuejs/rfcs/blob/script-setup-2/active-rfcs/0000-script-setup.md
-import TestingFetches from "./components/TestingFetches.vue";
+  import LocationForm from './components/LocationForm.vue'
 </script>
 
 <style>
