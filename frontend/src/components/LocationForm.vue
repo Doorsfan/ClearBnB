@@ -10,8 +10,7 @@
     },
     methods: {
       updateWantedLocation(newLocation){
-        console.log(newLocation);
-        this.wantedLocation = newLocation
+        this.$emit("changedLocation", newLocation)
       }
     }
   }
