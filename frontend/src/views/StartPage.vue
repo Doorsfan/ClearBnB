@@ -26,23 +26,55 @@ export default {
   },
   data() {
     return {
-      relevantLeases: [], //An array of Lease objects
-      allLeases: [],
+      relevantLeases: [
+      ], //An array of Lease objects
+      allLeases: [
+        {
+          "ownerId": "balder0@fda.gov",
+          "title": "Lovely cottage",
+          "location": "Bellevue Island",
+          "description": "Cosy 4 room cottage in central Bellevue. The cottage is located in the wonderful district, St Palmas with city nearby as well as green parks, local shops, and restaurants. Within walking distance to the heart of Bellevue. You will have the whole cottage for yourself.",
+          "typeOfHousing": "Entire Residence",
+          "startDate": "2021-05-27",
+          "endDate": "2021-07-30",
+          "PPPN": 45,
+          "maxGuests": 4,
+          "beds": 3,
+          "amenities": {
+            "wifi": true,
+            "kitchen": true,
+            "washer": true,
+            "heating": true,
+            "airConditioner": false
+          },
+          "imageURLs": [
+            "https://images.unsplash.com/photo-1588046130717-0eb0c9a3ba15?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1438&q=80",
+            "https://images.unsplash.com/photo-1598204326847-aeedbc139508?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1534&q=80"
+          ]
+        }
+      ],
       startDate: convertedToday,
       endDate: ''
     }
   },
   watch:{
     startDate(){
-      console.log("Add relevant leases based on start Date")
-      for(let lease of allLeases){
-        if(lease.date >= startDate){
+      for(let lease of this.allLeases){
+        if(lease.startDate >= this.startDate && !this.relevantLeases.includes(lease)){
           console.log("Found a match for", lease);
+          this.relevantLeases.push(lease);
+          console.log("relevantLeases was: ", this.relevantLeases);
+        }
+        else if(lease.startDate < this.startDate && this.relevantLeases.includes(lease)){
+          console.log("Should remove ", lease);
         }
       }
     },
     endDate(){
-      console.log("Add relevant leases based on end Date")
+      console.log("Should Add relevant leases based on end Date")
+      //for(let lease of this.allLeases){
+        
+      //}
     }
   },
   methods:{
