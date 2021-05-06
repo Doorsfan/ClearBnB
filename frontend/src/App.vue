@@ -1,32 +1,14 @@
 <template>
   <div>
-    <LocationForm @changedLocation="filterBasedOnLocation"/>
+    <StartPage />
   </div>
-  <DatePickerOnStartPage />
 </template>
 
 <script setup>
-  import LocationForm from './components/DateForm.vue'
-  import DatePickerOnStartPage from './components/DatePickerOnStartPage.vue'
 </script>
 <script>
+import StartPage from './views/StartPage.vue'
 export default {
-  data() {
-    return {
-      relevantLeases: [],
-      allLeases: []
-    }
-  },
-  methods:{
-    filterBasedOnLocation(newLocation){
-      this.relevantLeases = []
-      for(let lease of allLeases){
-        if(lease.location.includes(newLocation)){
-          this.relevantLeases.push(lease);
-        }
-      }
-    }
-  }
 }
 </script>
 

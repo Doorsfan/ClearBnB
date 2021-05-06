@@ -5,24 +5,11 @@
   </div>
 </template>
 <script>
-let base = new Date();
-let month = base.getMonth()+1;
-let day = base.getDate();
-let zeroBeforeMonth = '';
-let zeroBeforeDay = '';
-if(month < 10){
-  zeroBeforeMonth += '0' + month
-  month = zeroBeforeMonth
-}
-if(day < 10){
-  zeroBeforeDay += '0' + day
-  day = zeroBeforeDay
-}
   export default {
     data() {
       return {
         wantedLocation: '',
-        today: base.getFullYear()+'-'+month+'-'+day
+        today: base.getFullYear() + '-' + month + '-' + day
       }
     },
     methods: {
