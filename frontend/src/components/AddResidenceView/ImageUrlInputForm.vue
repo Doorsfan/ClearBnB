@@ -6,7 +6,6 @@
         v-model="imageURL"
         type="text"
         placeholder="Image URL.."
-        required
       />
       <button class="addImageButton" type="submit">Add</button>
     </form>

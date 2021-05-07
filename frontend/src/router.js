@@ -11,24 +11,24 @@ export default createRouter({
   history: createWebHistory(),
   routes: [
     {
-      path: '/AddResidence', 
-      component: AddResidence
+      path: '/',
+      component: Home,
     },
     {
-      path: '/',
-      component: Home
+      path: '/AddResidence',
+      component: AddResidence,
     },
     {
       path: '/UserPage',
-      component: UserPage
+      component: UserPage,
     },
     {
       path: '/SignUp',
-      component: SignUp
+      component: SignUp,
     },
     {
       path: '/Login',
-      component: Login
+      component: Login,
     },
-  ]
-})
+  ],
+});

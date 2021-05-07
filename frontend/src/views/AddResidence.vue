@@ -1,36 +1,39 @@
 <template>
   <div class="mainDiv">
+  <h3 class="addResidenceHeader">Add a residence</h3>
+  <p class="myTitle">Title</p>
+  <input type="text" required placeholder="Title" v-model="myTitle" />
+  <p class="myLocation">Location</p>
   <LocationInputForm @updatedLocation="updateLocation" />
+  <DescriptionForm @updatedDescription="updateDescription" />
   <InputForPricingBedAndPeople @updateBeds="updateNrOfBeds" @updateMaxPeople="updateNrOfMaxPeople" @updatePrice="updatePricePerPerson" />
   <HousingRadioButtons @choseHouseType="updateHousingChosen" />
-  <p class="myTitle">Title</p>
-  <input type="text" placeholder="Title" v-model="myTitle" />
   <ImageUrlInputForm @updatedImageURLs="updateImageURLs" />
-  <DescriptionForm @updatedDescription="updateDescription" />
   <DatepickerForAvailableDates @updatedLeaseStartDate="updateStartDate" @updatedLeaseEndDate="updateEndDate" 
   @updatedDisabledDays="updateDisabledDays" />
   <router-link class="previewButton" to="preview">Preview</router-link>
   </div>
 </template>
 <script setup="">
-import LocationInputForm from '../components/AddResidenceView/LocationInputForm.vue'
-import InputForPricingBedAndPeople from '../components/AddResidenceView/InputForPricingBedAndPeople.vue'
-import HousingRadioButtons from '../components/AddResidenceView/HousingRadioButtons.vue'
-import ImageUrlInputForm from '../components/AddResidenceView/ImageUrlInputForm.vue'
-import DescriptionForm from '../components/AddResidenceView/DescriptionForm.vue'
 import DatepickerForAvailableDates from '../components/AddResidenceView/DatepickerForAvailableDates.vue'
+import DescriptionForm from '../components/AddResidenceView/DescriptionForm.vue'
+import HousingRadioButtons from '../components/AddResidenceView/HousingRadioButtons.vue'
+import InputForPricingBedAndPeople from '../components/AddResidenceView/InputForPricingBedAndPeople.vue'
+import ImageUrlInputForm from '../components/AddResidenceView/ImageUrlInputForm.vue'
+import LocationInputForm from '../components/AddResidenceView/LocationInputForm.vue'
 </script>
 <script>
-
 export default {
+  name: 'AddResidence',
+  components: ['DatepickerForAvailableDates', 'DescriptionForm', 'HousingRadioButtons', 'InputForPricingBedAndPeople',  'ImageUrlInputForm','LocationInputForm'],
   data() {
     return {
-      nrOfBeds: '',
-      maxPeople: '',
-      pricePerPerson: '',
-      chosenHousing: '',
+      beds: '',
+      maxGuests: '',
+      PPPN: '',
+      typeOfHousing: '',
       location: '',
-      myTitle: '',
+      title: '',
       imageURLs: [],
       description: '',
       startDate: '',
@@ -59,62 +62,61 @@ export default {
     },
     updateNrOfBeds(amountOfBeds){
       this.nrOfBeds = amountOfBeds
-      console.log("new amount of beds was: ", this.nrOfBeds);
     },
     updateNrOfMaxPeople(maxPeople){
       this.maxPeople = maxPeople
-      console.log("new amount of beds was: ", this.maxPeople);
     },
     updatePricePerPerson(updatedPrice){
       this.pricePerPerson = updatedPrice
-      console.log("new amount of beds was: ", this.pricePerPerson);
     },
-    updateHousingChosen(choseHousing){
+    updateHousingChosen(chosenHousing){
       //Have in Add Residence View that it updates based on this function
-      console.log("Chosen housing was: ", choseHousing)
       this.chosenHousing = chosenHousing
     }
   }
 }
 </script>
 <style scoped>
+.addResidenceHeader{
+  margin: 8px;
+}
 div{
   margin:5px;
-  width: 205px;
-  padding:0px;
-  margin-left:auto;
-  margin-right:auto;
+  width: 210px;
+  padding: 0px;
+  margin-left: auto;
+  margin-right: auto;
 }
 textarea{
-  width:205px;
+  width:210px;
 }
 .addResidenceDiv{
-  width: 205px;
+  width: 210px;
 }
-.myTitle{
-  width:205px;
-  margin:0px;
-  padding:0px;
-  font-weight:bolder;
-  margin-top:3px;
-  margin-bottom:3px;
+.myTitle, .myLocation{
+  width: 210px;
+  margin: 0px;
+  padding: 0px;
+  font-weight: bolder;
+  margin-top: 3px;
+  margin-bottom: 3px;
 }
 .previewButton, .previewButton:visited{
-  display:block;
-  width:max-content;
-  margin-left:auto;
-  margin-right:auto;
-  margin-top:20px;
+  display: block;
+  width: max-content;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
   background-color:rgb(243, 189, 10);
   color:black;
   border: 2px solid rgb(200, 159, 23);
-  border-radius:25px;
-  text-decoration:none;
-  font-weight:bolder;
+  border-radius: 25px;
+  text-decoration: none;
+  font-weight: bolder;
   height: 14px;
-  padding:5px;
-  padding-top:3px;
-  font-size:13px;
+  padding: 5px;
+  padding-top: 3px;
+  font-size: 13px;
 }
 .mainDiv{
   height: 500px;

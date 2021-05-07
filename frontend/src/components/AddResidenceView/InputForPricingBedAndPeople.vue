@@ -2,7 +2,7 @@
   <div class="holdingDiv">
     <div class="divHoldingThePs">
       <p class="BedsP">Beds</p>
-      <p class="MaxPeopleP">Max People</p>
+      <p class="MaxPeopleP">Max Guests</p>
       <p class="PriceP">Price</p>
     </div>
     <div class="divHoldingTheDivs">
@@ -37,18 +37,31 @@ export default {
 </script>
 
 <style scoped>
+  .MaxPeopleP{
+    margin-left: 22px;
+    margin-right: 18px;
+  }
   p{
-    margin:2px;
-    width:max-content;
-    display:inline;
+    margin: 2px;
+    width: max-content;
+    display: inline;
+  }
+  .BedsP{
+    margin: 0px;
+    margin-left: 4px;
+  }
+  .divHoldingThePs{    
+    margin: 0px;
+    padding: 0px;
+    text-align: left;
   }
   input{
     width: 30px;
-    display:inline;
-    margin:2px;
+    display: inline;
+    margin: 2px;
   }
   .peopleInputField{
-    margin-left:24px;
-    margin-right:24px;
+    margin-left: 42px;
+    margin-right: 42px;
   }
 </style>

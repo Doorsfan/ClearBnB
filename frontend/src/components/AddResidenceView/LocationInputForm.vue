@@ -1,7 +1,6 @@
 <template>
   <div class="addResidenceDiv">
     <div class="innerDiv">
-      <h3 class="addResidenceHeader">Add a residence</h3>
       <input
         type="text"
         placeholder="Location"
