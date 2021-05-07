@@ -59,6 +59,7 @@ export default {
   },
   watch:{
     startDate(){
+      let index = 0;
       for(let lease of this.allLeases){
         if(lease.startDate >= this.startDate && !this.relevantLeases.includes(lease)){
           console.log("Found a match for", lease);
@@ -67,11 +68,27 @@ export default {
         }
         else if(lease.startDate < this.startDate && this.relevantLeases.includes(lease)){
           console.log("Should remove ", lease);
+          this.relevantLeases = [...relevantLeases.slice(0,index), ...relevantLeases.slice(index + 1)]
         }
       }
+      index += 1;
     },
     endDate(){
+      let index = 0;
       console.log("Should Add relevant leases based on end Date")
+      for(let lease of this.allLeases){
+        if(lease.endDate <= this.endDate && !this.relevantLeases.includes(lease)){
+          console.log("Found a match for", lease);
+          this.relevantLeases.push(lease);
+          console.log("relevantLeases was: ", this.relevantLeases);
+        }
+        else if(lease.endDate > this.endDate && this.relevantLeases.includes(lease)){
+          console.log("Found a match for", lease);
+          //Should remove respective lease
+          this.relevantLeases = [...relevantLeases.slice(0,index), ...relevantLeases.slice(index + 1)]
+        }
+        index += 1;
+      }
       //for(let lease of this.allLeases){
         
       //}
