@@ -1,10 +1,15 @@
 <template>
   <div>
     <DatePickerOnStartPage @updateStartDate="updateSearchStartDate" @updateEndDate="updateSearchEndDate"/>
+    <LeaseDisplayBox v-for="(leaseItem, index) of allLeases"
+      :key="index"
+      :lease="leaseItem"/>
   </div>
 </template>
 
 <script>
+import LeaseDisplayBox from "../components/StartView/LeaseDisplayBox.vue"
+import Lease from '../components/Lease.vue'
 import DatePickerOnStartPage from '../components/StartView/DatePickerOnStartPage.vue'
   let today = new Date()
   let month = today.getMonth() + 1;
@@ -22,7 +27,8 @@ import DatePickerOnStartPage from '../components/StartView/DatePickerOnStartPage
   let convertedToday = today.getFullYear() + '-' + month + '-' + day
 export default {
   components: {
-    DatePickerOnStartPage
+    DatePickerOnStartPage,
+    LeaseDisplayBox
   },
   data() {
     return {
