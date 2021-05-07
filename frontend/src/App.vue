@@ -1,7 +1,6 @@
 <template>
   <StartPage />
 </template>
-
 <script setup="">
 </script>
 <script>

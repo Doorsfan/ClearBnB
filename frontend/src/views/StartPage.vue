@@ -1,6 +1,8 @@
 <template>
   <div>
-    <DatePickerOnStartPage @updateStartDate="updateSearchStartDate" @updateEndDate="updateSearchEndDate"/>
+    <div class="startPageDateDiv">
+      <DatePickerOnStartPage @updateStartDate="updateSearchStartDate" @updateEndDate="updateSearchEndDate"/>
+    </div>
     <LeaseDisplayBox v-for="(leaseItem, index) of relevantLeases"
       :key="index"
       :lease="leaseItem"/>
@@ -25,7 +27,31 @@ import DatePickerOnStartPage from '../components/StartView/DatePickerOnStartPage
   }
   let convertedToday = today.getFullYear() + '-' + month + '-' + day
   //Load in all the leases of the page from the DB here
-  let originalListOfAllLeases = [{
+  let originalListOfAllLeases = [
+      {
+    "ownerId": "rmarkie5@list-manage.com",
+    "title": "Entire Flat",
+    "location": "Holiday Resort",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ipsum mi, finibus ac placerat congue, placerat a enim. Phasellus eleifend, nulla et tincidunt pharetra, metus magna venenatis magna, quis mollis turpis tortor eget quam. Curabitur porta enim non augue auctor, vel bibendum sem iaculis. Nam orci mi, hendrerit quis pulvinar sed, rutrum nec lorem. Pellentesque euismod purus fringilla, mollis odio quis, fringilla purus. Aliquam erat volutpat. Aliquam id neque vel massa mattis hendrerit. Vestibulum finibus egestas eleifend. Etiam ut erat rutrum, maximus odio porta, euismod est.",
+    "typeOfHousing": "Flat",
+    "startDate": "2021-08-01",
+    "endDate": "2021-09-30",
+    "PPPN": 220,
+    "maxGuests": 4,
+    "beds": 3,
+    "amenities": {
+      "wifi": true,
+      "kitchen": true,
+      "washer": true,
+      "heating": false,
+      "airConditioner": true
+    },
+    "imageURLs": [
+      "https://images.unsplash.com/photo-1613377739358-92aca92e9e13?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80",
+      "https://images.unsplash.com/photo-1618660920685-4505debb785a?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=751&q=80"
+    ]
+  },
+  {
           "ownerId": "balder0@fda.gov",
           "title": "Lovely cottage",
           "location": "Bellevue Island",
@@ -58,54 +84,77 @@ export default {
       relevantLeases: originalListOfAllLeases, //An array of Lease objects
       allLeases: originalListOfAllLeases,
       startDate: convertedToday,
-      endDate: ''
+      endDate: '',
+      validStartDate: false,
+      validEndDate: false,
+      shouldAddLease: false
     }
   },
   watch:{
     startDate(){
-      let index = 0;
+      this.validStartDate = false;
+      this.validEndDate = false;
+      this.shouldAddLease = false;
       for(let lease of this.allLeases){
-        if(this.startDate >= lease.startDate && !this.relevantLeases.includes(lease)){
-          console.log("Found a match for", lease);
+        if(lease.startDate <= this.startDate){
+          this.validStartDate = true;
+        }
+        if(this.endDate <= lease.endDate){
+          this.validEndDate = true;
+        }
+        if(this.validEndDate && this.validStartDate){
+          this.shouldAddLease = true;
+        }
+        if(this.shouldAddLease && !this.relevantLeases.includes(lease)){
           this.relevantLeases.push(lease);
-          console.log("relevantLeases was: ", this.relevantLeases);
         }
-        else if(this.startDate < lease.startDate && this.relevantLeases.includes(lease)){
-          console.log("Should remove ", lease);
-          this.relevantLeases = [...this.relevantLeases.slice(0,index), ...this.relevantLeases.slice(index + 1)]
+        if(!this.validEndDate || !this.validStartDate){
+          if(this.relevantLeases.includes(lease)){
+            let indexToRemove = this.relevantLeases.indexOf(lease);
+            this.relevantLeases = [...this.relevantLeases.slice(0,indexToRemove), ...this.relevantLeases.slice(indexToRemove + 1)]
+          }
         }
+        this.shouldAddLease = false;
+        this.validStartDate = false;
+        this.validEndDate = false;
       }
-      index += 1;
     },
     endDate(){
-      let index = 0;
-      console.log("Should Add relevant leases based on end Date")
+      this.index = 0;
+      this.validStartDate = false;
+      this.validEndDate = false;
+      this.shouldAddLease = false;
       for(let lease of this.allLeases){
-        if(lease.endDate <= this.endDate && !this.relevantLeases.includes(lease) && lease.startDate <= this.startDate){
-          console.log("Found a match for", lease);
+        if(lease.startDate <= this.startDate){
+          this.validStartDate = true;
+        }
+        if(this.endDate <= lease.endDate){
+          this.validEndDate = true;
+        }
+        if(this.validEndDate && this.validStartDate){
+          this.shouldAddLease = true;
+        }
+        if(this.shouldAddLease && !this.relevantLeases.includes(lease)){
           this.relevantLeases.push(lease);
-          console.log("relevantLeases was: ", this.relevantLeases);
         }
-        else if(lease.endDate < this.endDate && this.relevantLeases.includes(lease)){
-          console.log("Found a match for", lease);
-          //Should remove respective lease
-          this.relevantLeases = [...this.relevantLeases.slice(0,index), ...this.relevantLeases.slice(index + 1)]
+        if(!this.validEndDate || !this.validStartDate){
+          if(this.relevantLeases.includes(lease)){
+            let indexToRemove = this.relevantLeases.indexOf(lease);
+            this.relevantLeases = [...this.relevantLeases.slice(0,indexToRemove), ...this.relevantLeases.slice(indexToRemove + 1)]
+          }
         }
-        index += 1;
+        this.shouldAddLease = false;
+        this.validStartDate = false;
+        this.validEndDate = false;
       }
-      //for(let lease of this.allLeases){
-        
-      //}
     }
   },
   methods:{
     updateSearchEndDate(newDate){
-      console.log("The updated end date received was: ", newDate);
       this.endDate = newDate
     },
     updateSearchStartDate(newDate){
       //this.startDate = newDate
-      console.log("The updated start date recieved was: ", newDate)
       this.startDate = newDate
     },
     filterBasedOnDate(startDate, endDate){
@@ -128,4 +177,9 @@ export default {
 }
 </script>
 <style scoped>
+.startPageDateDiv{
+  width:max-content;
+  margin-left:auto;
+  margin-right:auto;
+}
 </style>

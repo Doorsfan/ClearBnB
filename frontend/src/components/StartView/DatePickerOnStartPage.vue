@@ -1,5 +1,5 @@
 <template>
-<div>
+<div class="datePickersMainDiv">
   <div class="firstDiv">
     <label for="fromDatePicker">From the:</label>
     <Datepicker id="fromDatePicker" class="fromDatePicker" v-model="startDate" :lower-limit="minimumStartDate" :upper-limit="endDate"/>
