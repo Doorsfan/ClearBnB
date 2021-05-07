@@ -91,39 +91,21 @@ export default {
       validStartDate: false,
       validEndDate: false,
       shouldAddLease: false,
-      myLocation: ''
+      myLocation: '',
+      removedBasedOnDate: [],
+      removedBasedOnLocation: []
     }
   },
   watch:{
     startDate(){
-      this.validStartDate = false;
-      this.validEndDate = false;
-      this.shouldAddLease = false;
-      for(let lease of this.allLeases){
-        if(lease.startDate <= this.startDate){
-          this.validStartDate = true;
-        }
-        if(this.endDate <= lease.endDate){
-          this.validEndDate = true;
-        }
-        if(this.validEndDate && this.validStartDate){
-          this.shouldAddLease = true;
-        }
-        if(this.shouldAddLease && !this.relevantLeases.includes(lease)){
-          this.relevantLeases.push(lease);
-        }
-        if(!this.validEndDate || !this.validStartDate){
-          if(this.relevantLeases.includes(lease)){
-            let indexToRemove = this.relevantLeases.indexOf(lease);
-            this.relevantLeases = [...this.relevantLeases.slice(0,indexToRemove), ...this.relevantLeases.slice(indexToRemove + 1)]
-          }
-        }
-        this.shouldAddLease = false;
-        this.validStartDate = false;
-        this.validEndDate = false;
-      }
+      this.filterBasedOnDate()
     },
     endDate(){
+      this.filterBasedOnDate()
+    }
+  },
+  methods:{
+    filterBasedOnDate(){
       this.index = 0;
       this.validStartDate = false;
       this.validEndDate = false;
@@ -140,10 +122,19 @@ export default {
         }
         if(this.shouldAddLease && !this.relevantLeases.includes(lease)){
           this.relevantLeases.push(lease);
+          if(this.removedBasedOnDate.includes(lease)){
+            let indexToCut = this.removedBasedOnDate.indexOf(lease);
+            this.removedBasedOnDate = [...this.removedBasedOnDate.slice(0,indexToCut), ...this.removedBasedOnDate.slice(indexToCut + 1,this.removedBasedOnDate.length)]
+            console.log("The updated removedBasedOnDate based on pushing, was: ", this.removedBasedOnDate);
+          }
         }
         if(!this.validEndDate || !this.validStartDate){
           if(this.relevantLeases.includes(lease)){
             let indexToRemove = this.relevantLeases.indexOf(lease);
+            if(!this.removedBasedOnDate.includes(this.relevantLeases[indexToRemove])){
+              this.removedBasedOnDate.push(this.relevantLeases[this.relevantLeases.indexOf(lease)]);
+              console.log("The updated removedBasedOnDate is now: ", this.removedBasedOnDate);
+            }
             this.relevantLeases = [...this.relevantLeases.slice(0,indexToRemove), ...this.relevantLeases.slice(indexToRemove + 1)]
           }
         }
@@ -151,11 +142,16 @@ export default {
         this.validStartDate = false;
         this.validEndDate = false;
       }
-    }
-  },
-  methods:{
+    },
     updateMyLocation(newLocation){
       this.myLocation = newLocation
+      console.log("The new location is: ", this.myLocation)
+      for(let lease of this.allLeases){
+        console.log("All the locations are: ", lease.location);
+        if(!lease.location.toLowerCase().includes(newLocation.toLowerCase())){
+          //integrate slice in terms of moving out a not relevant part and move it to the removedLocation Array
+        }
+      }
     },
     updateSearchEndDate(newDate){
       this.endDate = newDate
@@ -164,22 +160,6 @@ export default {
       //this.startDate = newDate
       this.startDate = newDate
     },
-    filterBasedOnDate(startDate, endDate){
-      this.relevantLeases = []
-      for(let lease of this.allLeases){
-        if(lease.date.includes(newDate)){
-          this.relevantLeases.push(lease);
-        }
-      }
-    },
-    filterBasedOnLocation(newLocation){
-      this.relevantLeases = []
-      for(let lease of allLeases){
-        if(lease.location.includes(newLocation)){
-          this.relevantLeases.push(lease);
-        }
-      }
-    }
   }
 }
 </script>

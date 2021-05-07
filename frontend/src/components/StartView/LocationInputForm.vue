@@ -1,11 +1,17 @@
 <template>
-    Location: <input class="locationInput" type="text" v-model="locationInput" placeholder="Location">
+    Location: <input class="locationInput" @change="updateMyLocation" type="text" v-model="locationInput" placeholder="Location">
 </template>
 <script>
 export default {
+  emits: ['updateMyLocation'],
   data() {
     return {
       locationInput: ''
+    }
+  },
+  watch: {
+    locationInput(){
+      this.$emit("updateMyLocation", this.locationInput)
     }
   },
   methods: {
