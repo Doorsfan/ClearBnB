@@ -3,6 +3,7 @@
     <Header />
     <BookingView />
     <DatePickerOnStartPage />
+    <Carousel />
 
   </div>
 </template>
@@ -11,8 +12,10 @@
 import Header from "./components/Header.vue";
 import BookingView from "./views/BookingView.vue"
 import DatePickerOnStartPage from './components/DatePickerOnStartPage.vue'
+import Carousel from './components/Carousel.vue'
 </script>
 <style>
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
