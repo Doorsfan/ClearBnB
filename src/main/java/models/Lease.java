@@ -15,6 +15,7 @@ public class Lease {
     private String location;
     private String description;
     private String typeOfHousing;
+    private boolean entireResidence;
     private String startDate;
     private String endDate;
     private double PPPN;
@@ -71,6 +72,14 @@ public class Lease {
 
     public void setTypeOfHousing(String typeOfHousing) {
         this.typeOfHousing = typeOfHousing;
+    }
+
+    public boolean isEntireResidence() {
+        return entireResidence;
+    }
+
+    public void setEntireResidence(boolean entireResidence) {
+        this.entireResidence = entireResidence;
     }
 
     public String getStartDate() {
