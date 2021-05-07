@@ -2,17 +2,15 @@
   <div>
     <Header />
     <BookingView />
+    <DatePickerOnStartPage />
+
   </div>
 </template>
 
 <script setup>
 import Header from "./components/Header.vue";
 import BookingView from "./views/BookingView.vue"
-  <DatePickerOnStartPage />
-</template>
-
-<script setup>
-  import DatePickerOnStartPage from './components/DatePickerOnStartPage.vue'
+import DatePickerOnStartPage from './components/DatePickerOnStartPage.vue'
 </script>
 <style>
 #app {
