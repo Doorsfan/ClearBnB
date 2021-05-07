@@ -8,8 +8,12 @@
 <script setup>
 import Header from "./components/Header.vue";
 import BookingView from "./views/BookingView.vue"
-</script>
+  <DatePickerOnStartPage />
+</template>
 
+<script setup>
+  import DatePickerOnStartPage from './components/DatePickerOnStartPage.vue'
+</script>
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
