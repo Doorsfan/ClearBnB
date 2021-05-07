@@ -17,6 +17,7 @@
 <script>
 //Implement so that it is a seperate section in the Radio Buttons for Entire residence/part
 export default {
+  emits: ['updateChosenHousing'],
   data() {
     return {
       firstRowChoice: '',
@@ -25,7 +26,7 @@ export default {
   },
   methods: {
     updateChosenHousing() {
-      this.$emit("choseHouseType", this.picked)
+      this.$emit("updateChosenHousing", this.picked)
     }
   }
 }

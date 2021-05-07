@@ -7,7 +7,7 @@
   <LocationInputForm @updatedLocation="updateLocation" />
   <DescriptionForm @updatedDescription="updateDescription" />
   <InputForPricingBedAndPeople @updateBeds="updateNrOfBeds" @updateMaxPeople="updateNrOfMaxPeople" @updatePrice="updatePricePerPerson" />
-  <HousingRadioButtons @choseHouseType="updateHousingChosen" />
+  <HousingRadioButtons @updateChosenHousing="updateChosenHousing" />
   <ImageUrlInputForm @updatedImageURLs="updateImageURLs" />
   <DatepickerForAvailableDates @updatedLeaseStartDate="updateStartDate" @updatedLeaseEndDate="updateEndDate" 
   @updatedDisabledDays="updateDisabledDays" />
@@ -28,6 +28,7 @@ export default {
   components: ['DatepickerForAvailableDates', 'DescriptionForm', 'HousingRadioButtons', 'InputForPricingBedAndPeople',  'ImageUrlInputForm','LocationInputForm'],
   data() {
     return {
+      myTitle: '',
       beds: '',
       maxGuests: '',
       PPPN: '',
@@ -69,7 +70,7 @@ export default {
     updatePricePerPerson(updatedPrice){
       this.pricePerPerson = updatedPrice
     },
-    updateHousingChosen(chosenHousing){
+    updateChosenHousing(chosenHousing){
       //Have in Add Residence View that it updates based on this function
       this.chosenHousing = chosenHousing
     }
