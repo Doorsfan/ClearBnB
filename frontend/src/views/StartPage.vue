@@ -1,6 +1,7 @@
 <template>
   <div>
     <div class="startPageDateDiv">
+      <LocationInputForm @updateMyLocation="updateMyLocation" />
       <DatePickerOnStartPage @updateStartDate="updateSearchStartDate" @updateEndDate="updateSearchEndDate"/>
     </div>
     <LeaseDisplayBox v-for="(leaseItem, index) of relevantLeases"
@@ -12,6 +13,7 @@
 import LeaseDisplayBox from "../components/StartView/LeaseDisplayBox.vue"
 import Lease from '../components/Lease.vue'
 import DatePickerOnStartPage from '../components/StartView/DatePickerOnStartPage.vue'
+import LocationInputForm from '../components/StartView/LocationInputForm.vue'
   let today = new Date()
   let month = today.getMonth() + 1;
   let day = today.getDate();
@@ -77,7 +79,8 @@ import DatePickerOnStartPage from '../components/StartView/DatePickerOnStartPage
 export default {
   components: {
     DatePickerOnStartPage,
-    LeaseDisplayBox
+    LeaseDisplayBox,
+    LocationInputForm
   },
   data() {
     return {
@@ -87,7 +90,8 @@ export default {
       endDate: '',
       validStartDate: false,
       validEndDate: false,
-      shouldAddLease: false
+      shouldAddLease: false,
+      myLocation: ''
     }
   },
   watch:{
@@ -150,6 +154,9 @@ export default {
     }
   },
   methods:{
+    updateMyLocation(newLocation){
+      this.myLocation = newLocation
+    },
     updateSearchEndDate(newDate){
       this.endDate = newDate
     },
