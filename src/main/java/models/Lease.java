@@ -16,7 +16,7 @@ public class Lease {
     private String typeOfHousing;
     private String startDate;
     private String endDate;
-    private double pricePerNight;
+    private double PPPN;
     private int maxGuests;
     private int beds;
     private Amenity amenities; // Or should I be using a map?
@@ -88,12 +88,12 @@ public class Lease {
         this.endDate = endDate;
     }
 
-    public double getPricePerNight() {
-        return pricePerNight;
+    public double getPPPN() {
+        return PPPN;
     }
 
-    public void setPricePerNight(double pricePerNight) {
-        this.pricePerNight = pricePerNight;
+    public void setPPPN(double PPPN) {
+        this.PPPN = PPPN;
     }
 
     public int getMaxGuests() {
@@ -139,7 +139,7 @@ public class Lease {
                 ", typeOfHousing='" + typeOfHousing + '\'' +
                 ", startDate='" + startDate + '\'' +
                 ", endDate='" + endDate + '\'' +
-                ", pricePerNight=" + pricePerNight +
+                ", PPPN=" + PPPN +
                 ", maxGuests=" + maxGuests +
                 ", beds=" + beds +
                 ", amenities=" + amenities +
