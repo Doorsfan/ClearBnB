@@ -7,7 +7,7 @@
   <LocationInputForm @updatedLocation="updateLocation" />
   <DescriptionForm @updatedDescription="updateDescription" />
   <InputForPricingBedAndPeople @updateBeds="updateNrOfBeds" @updateMaxPeople="updateNrOfMaxPeople" @updatePrice="updatePricePerPerson" />
-  <HousingRadioButtons @updateChosenHousing="updateChosenHousing" />
+  <HousingRadioButtons @updateChosenHousing="updateChosenHousing" @updateChosenSize="updateChosenSize"/>
   <ImageUrlInputForm @updatedImageURLs="updateImageURLs" />
   <DatepickerForAvailableDates @updatedLeaseStartDate="updateStartDate" @updatedLeaseEndDate="updateEndDate" 
   @updatedDisabledDays="updateDisabledDays" />
@@ -33,6 +33,7 @@ export default {
       maxGuests: '',
       PPPN: '',
       typeOfHousing: '',
+      size: '',
       location: '',
       title: '',
       imageURLs: [],
@@ -72,7 +73,12 @@ export default {
     },
     updateChosenHousing(chosenHousing){
       //Have in Add Residence View that it updates based on this function
-      this.chosenHousing = chosenHousing
+      this.typeOfHousing = chosenHousing
+      console.log("new type of housing is: ", this.typeOfHousing);
+    },
+    updateChosenSize(chosenSize){
+      this.size = chosenSize
+      console.log("new chosen size is", this.size)
     }
   }
 }

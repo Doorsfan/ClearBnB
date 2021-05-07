@@ -8,16 +8,16 @@
     <label class="labelForOther" for="Other">Other</label>
   </div>
   <div class="secondRow">
-    <input @change="updateChosenHousing" required name="entireResidence" class="buttonForEntire" type="radio" id="Entire" value="Entire residence" v-model="secondRowChoice">
+    <input @change="updateChosenSize" required name="entireResidence" class="buttonForEntire" type="radio" id="Entire" value="Entire residence" v-model="secondRowChoice">
     <label class="labelForEntire" for="Entire">Entire residence</label>
-    <input @change="updateChosenHousing" name="entireResidence" class="buttonForPart" type="radio" id="Part" value="Part" v-model="secondRowChoice">
+    <input @change="updateChosenSize" name="entireResidence" class="buttonForPart" type="radio" id="Part" value="Part" v-model="secondRowChoice">
     <label class="labelForPart" for="Part">Part</label>
   </div>
 </template>
 <script>
 //Implement so that it is a seperate section in the Radio Buttons for Entire residence/part
 export default {
-  emits: ['updateChosenHousing'],
+  emits: ['updateChosenHousing', 'updateChosenSize'],
   data() {
     return {
       firstRowChoice: '',
@@ -26,7 +26,10 @@ export default {
   },
   methods: {
     updateChosenHousing() {
-      this.$emit("updateChosenHousing", this.picked)
+      this.$emit("updateChosenHousing", this.firstRowChoice)
+    },
+    updateChosenSize(){
+      this.$emit("updateChosenSize", this.secondRowChoice)
     }
   }
 }
