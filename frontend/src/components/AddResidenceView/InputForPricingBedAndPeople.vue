@@ -6,9 +6,9 @@
       <p class="PriceP">Price</p>
     </div>
     <div class="divHoldingTheDivs">
-        <input @change="sendUpAmountOfBeds" class="bedsInputField" v-model="Beds" placeholder="Beds" />
-        <input @change="sendUpMaxPeople" class="peopleInputField" v-model="MaxPeople" placeholder="Max" />
-        <input @change="sendUpNewPrice" class="priceInputField" v-model="Price" placeholder="Price" />
+        <input @change="sendUpAmountOfBeds" class="bedsInputField" v-model="Beds" placeholder="Beds" required/>
+        <input @change="sendUpMaxPeople" class="peopleInputField" v-model="MaxPeople" placeholder="Max" required/>
+        <input @change="sendUpNewPrice" class="priceInputField" v-model="Price" placeholder="Price" required/>
     </div>
   </div>
 </template>

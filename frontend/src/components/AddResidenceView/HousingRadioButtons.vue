@@ -15,6 +15,7 @@
   </div>
 </template>
 <script>
+//Implement so that it is a seperate section in the Radio Buttons for Entire residence/part
 export default {
   data() {
     return {
