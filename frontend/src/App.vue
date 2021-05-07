@@ -2,19 +2,27 @@
   <div>
     <Header />
     <router-view></router-view>
-    <TestingFetches />
+    <HamburgerMenu />
   </div>
 </template>
 
-<script setup>
+<script>
 import Header from "./components/Header.vue";
-//import HelloWorld from "./components/HelloWorld.vue";
-
-// This starter template is using Vue 3 experimental <script setup> SFCs
-// Check out https://github.com/vuejs/rfcs/blob/script-setup-2/active-rfcs/0000-script-setup.md
 import TestingFetches from "./components/TestingFetches.vue";
-</script>
+import HamburgerMenu from "./components/HamburgerMenu.vue";
 
+export default {
+  name: "App",
+  components: {
+    Header,
+    TestingFetches,
+    HamburgerMenu,
+  },
+  data() {
+    return {};
+  },
+};
+</script>
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
