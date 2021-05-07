@@ -5,6 +5,7 @@
   </div>
 </template>
 <script>
+//Implement Interaction with Arrow Buttons again in regards to Carousel Component
 export default {
   props: ["myLease"],
   data() {
@@ -13,7 +14,6 @@ export default {
   }
 }
 </script>
-
 <style scoped>
 .imageCarousel{
   position:relative;
