@@ -3,11 +3,13 @@
     <Header />
     <router-view></router-view>
     <TestingFetches />
+    <Amenities />
   </div>
 </template>
 
 <script setup>
 import Header from "./components/Header.vue";
+import Amenities from "./components/Amenities.vue";
 //import HelloWorld from "./components/HelloWorld.vue";
 
 // This starter template is using Vue 3 experimental <script setup> SFCs
