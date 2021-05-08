@@ -3,6 +3,7 @@
     <div class="startPageDateDiv">
       <LocationInputForm @updateMyLocation="updateMyLocation" />
       <DatePickerOnStartPage @updateStartDate="updateSearchStartDate" @updateEndDate="updateSearchEndDate"/>
+      <BedsInputForm @updateMyAmountOfBeds="updateMyAmountOfBeds"/>
     </div>
     <LeaseDisplayBox v-for="(leaseItem, index) of relevantLeases"
       :key="index"
@@ -14,6 +15,7 @@ import LeaseDisplayBox from "../components/StartView/LeaseDisplayBox.vue"
 import Lease from '../components/Lease.vue'
 import DatePickerOnStartPage from '../components/StartView/DatePickerOnStartPage.vue'
 import LocationInputForm from '../components/StartView/LocationInputForm.vue'
+import BedsInputForm from '../components/StartView/BedsInputForm.vue'
 
   //Load in all the leases of the page from the DB here
   let originalListOfAllLeases = [
@@ -27,7 +29,7 @@ import LocationInputForm from '../components/StartView/LocationInputForm.vue'
     "endDate": "2021-09-30",
     "PPPN": 220,
     "maxGuests": 4,
-    "beds": 3,
+    "beds": 4,
     "amenities": {
       "wifi": true,
       "kitchen": true,
@@ -67,7 +69,8 @@ export default {
   components: {
     DatePickerOnStartPage,
     LeaseDisplayBox,
-    LocationInputForm
+    LocationInputForm,
+    BedsInputForm
   },
   data() {
     return {
@@ -80,18 +83,52 @@ export default {
       shouldAddLease: false,
       myLocation: '',
       removedBasedOnDate: [],
-      removedBasedOnLocation: []
-    }
-  },
-  watch:{
-    startDate(){
-      this.filterBasedOnDate()
-    },
-    endDate(){
-      this.filterBasedOnDate()
+      removedBasedOnLocation: [],
+      myAmountOfBeds: ''
     }
   },
   methods:{
+    checkWhichFilterToRun(){
+      if(this.endDate.length > 0 && this.myAmountOfBeds > 0 && this.myLocation.length > 0){
+        this.filterBasedOnDateBedsAndLocation()
+        return
+      } //Date + Beds + Location - Done - Here
+      else if(this.myAmountOfBeds > 0 && this.myLocation > 0){
+        this.filterBasedOnBedsAndLocation()
+        return
+      } //Beds + Location - Done
+      else if(this.myAmountOfBeds > 0 && this.endDate.length > 0){
+        this.filterBasedOnBedsAndDate()
+        return
+      } //Beds + Date - Done
+      else if(this.endDate.length > 0 && this.myLocation.length > 0){
+        this.filterBasedOnDateAndLocation()
+        return
+      } //Date + Location - Done
+      else if(this.myAmountOfBeds > 0){
+        this.filterBasedOnBeds()
+        return
+      }
+      else if(this.endDate.length > 0){
+        this.filterBasedOnDate()
+        return
+      }
+      else if(this.myLocation.length > 0){
+        this.filterBasedOnLocation()
+        return
+      }
+      else{
+        this.relevantLeases = this.allLeases;
+      }
+    },
+    filterBasedOnDateBedsAndLocation(){
+      this.relevantLeases = []
+      for(let lease of this.allLeases){
+        if(lease.startDate <= this.startDate && this.endDate <= lease.endDate && lease.beds == this.myAmountOfBeds && lease.location.toLowerCase().includes(this.myLocation.toLowerCase())){
+          this.relevantLeases.push(lease)
+        }
+      }
+    },
     filterBasedOnDateAndLocation(){
       this.relevantLeases = []
       for(let lease of this.allLeases){
@@ -99,6 +136,73 @@ export default {
           this.relevantLeases.push(lease)
         }
       }
+    },
+    filterBasedOnBedsAndLocation(){
+      this.relevantLeases = []
+      for(let lease of this.allLeases){
+        if(lease.beds == this.myAmountOfBeds && lease.location.toLowerCase().includes(this.myLocation.toLowerCase())){
+          this.relevantLeases.push(lease)
+        }
+      }
+    },
+    filterBasedOnBedsAndDate(){
+      this.relevantLeases = []
+      for(let lease of this.allLeases){
+        if(lease.startDate <= this.startDate && this.endDate <= lease.endDate && lease.beds == this.myAmountOfBeds){
+          this.relevantLeases.push(lease)
+        }
+      }
+    },
+    filterBasedOnDateAndLocation(){
+      this.relevantLeases = []
+      for(let lease of this.allLeases){
+        if(lease.startDate <= this.startDate && this.endDate <= lease.endDate && lease.location.toLowerCase().includes(this.myLocation.toLowerCase())){
+          this.relevantLeases.push(lease)
+        }
+      }
+    },
+    filterBasedOnBeds(){
+      this.relevantLeases = []
+      for (let lease of this.allLeases){
+        if(lease.beds == this.myAmountOfBeds){
+          this.relevantLeases.push(lease)
+        }
+      }
+    },
+    filterBasedOnDate(){
+      this.relevantLeases = []
+      for(let lease of this.allLeases){
+        if(lease.startDate <= this.startDate && this.endDate <= lease.endDate){
+          this.relevantLeases.push(lease)
+        }
+      }
+    },
+    filterBasedOnLocation(){
+      this.relevantLeases = []
+      for(let lease of this.allLeases){
+        if(lease.location.toLowerCase().includes(this.myLocation.toLowerCase())){
+          this.relevantLeases.push(lease)
+        }
+      }
+    },
+    updateMyAmountOfBeds(newAmountOfBeds){
+      if(Number.isNaN(Number(newAmountOfBeds))){
+        return
+      }
+      this.myAmountOfBeds = Number(newAmountOfBeds);
+      this.checkWhichFilterToRun()
+    },
+    updateMyLocation(newLocation){
+      this.myLocation = newLocation
+      this.checkWhichFilterToRun()
+    },
+    updateSearchEndDate(newDate){
+      this.endDate = newDate
+      this.checkWhichFilterToRun()
+    },
+    updateSearchStartDate(newDate){
+      this.startDate = newDate
+      this.checkWhichFilterToRun()
     },
     getTodayInCorrectFormat(){
       let today = new Date()
@@ -115,48 +219,6 @@ export default {
         day = zeroBeforeDay
       }
       return today.getFullYear() + '-' + month + '-' + day
-    },
-    filterBasedOnDateAndLocation(){
-      this.relevantLeases = []
-      for(let lease of this.allLeases){
-        if(lease.startDate <= this.startDate && this.endDate <= lease.endDate && lease.location.toLowerCase().includes(this.myLocation.toLowerCase())){
-          this.relevantLeases.push(lease)
-        }
-      }
-    },
-    filterBasedOnDate(){
-      if(this.myLocation.length > 0){
-        this.filterBasedOnDateAndLocation()
-        return
-      }
-      this.relevantLeases = []
-      for(let lease of this.allLeases){
-        if(lease.startDate <= this.startDate && this.endDate <= lease.endDate){
-          this.relevantLeases.push(lease)
-        }
-      }
-    },
-    filterBasedOnLocation(){
-      if(this.endDate.length > 0){
-        this.filterBasedOnDateAndLocation()
-        return;
-      }
-      this.relevantLeases = []
-      for(let lease of this.allLeases){
-        if(lease.location.toLowerCase().includes(this.myLocation.toLowerCase())){
-          this.relevantLeases.push(lease)
-        }
-      }
-    },
-    updateMyLocation(newLocation){
-      this.myLocation = newLocation
-      this.filterBasedOnLocation()
-    },
-    updateSearchEndDate(newDate){
-      this.endDate = newDate
-    },
-    updateSearchStartDate(newDate){
-      this.startDate = newDate
     },
   }
 }
