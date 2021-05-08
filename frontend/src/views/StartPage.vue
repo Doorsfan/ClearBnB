@@ -14,20 +14,7 @@ import LeaseDisplayBox from "../components/StartView/LeaseDisplayBox.vue"
 import Lease from '../components/Lease.vue'
 import DatePickerOnStartPage from '../components/StartView/DatePickerOnStartPage.vue'
 import LocationInputForm from '../components/StartView/LocationInputForm.vue'
-  let today = new Date()
-  let month = today.getMonth() + 1;
-  let day = today.getDate();
-  let zeroBeforeMonth = '';
-  let zeroBeforeDay = '';
-  if(month < 10){
-    zeroBeforeMonth += '0' + month
-    month = zeroBeforeMonth
-  }
-  if(day < 10){
-    zeroBeforeDay += '0' + day
-    day = zeroBeforeDay
-  }
-  let convertedToday = today.getFullYear() + '-' + month + '-' + day
+
   //Load in all the leases of the page from the DB here
   let originalListOfAllLeases = [
       {
@@ -86,7 +73,7 @@ export default {
     return {
       relevantLeases: originalListOfAllLeases, //An array of Lease objects
       allLeases: originalListOfAllLeases,
-      startDate: convertedToday,
+      startDate: this.getTodayInCorrectFormat(),
       endDate: '',
       validStartDate: false,
       validEndDate: false,
@@ -105,59 +92,70 @@ export default {
     }
   },
   methods:{
-    filterBasedOnDate(){
-      this.index = 0;
-      this.validStartDate = false;
-      this.validEndDate = false;
-      this.shouldAddLease = false;
+    filterBasedOnDateAndLocation(){
+      this.relevantLeases = []
       for(let lease of this.allLeases){
-        if(lease.startDate <= this.startDate){
-          this.validStartDate = true;
+        if(lease.location.toLowerCase().includes(this.myLocation.toLowerCase()) && lease.startDate <= this.startDate && this.endDate <= lease.endDate){
+          this.relevantLeases.push(lease)
         }
-        if(this.endDate <= lease.endDate){
-          this.validEndDate = true;
+      }
+    },
+    getTodayInCorrectFormat(){
+      let today = new Date()
+      let month = today.getMonth() + 1;
+      let day = today.getDate();
+      let zeroBeforeMonth = '';
+      let zeroBeforeDay = '';
+      if(month < 10){
+        zeroBeforeMonth += '0' + month
+        month = zeroBeforeMonth
+      }
+      if(day < 10){
+        zeroBeforeDay += '0' + day
+        day = zeroBeforeDay
+      }
+      return today.getFullYear() + '-' + month + '-' + day
+    },
+    filterBasedOnDateAndLocation(){
+      this.relevantLeases = []
+      for(let lease of this.allLeases){
+        if(lease.startDate <= this.startDate && this.endDate <= lease.endDate && lease.location.toLowerCase().includes(this.myLocation.toLowerCase())){
+          this.relevantLeases.push(lease)
         }
-        if(this.validEndDate && this.validStartDate){
-          this.shouldAddLease = true;
+      }
+    },
+    filterBasedOnDate(){
+      if(this.myLocation.length > 0){
+        this.filterBasedOnDateAndLocation()
+        return
+      }
+      this.relevantLeases = []
+      for(let lease of this.allLeases){
+        if(lease.startDate <= this.startDate && this.endDate <= lease.endDate){
+          this.relevantLeases.push(lease)
         }
-        if(this.shouldAddLease && !this.relevantLeases.includes(lease)){
-          this.relevantLeases.push(lease);
-          if(this.removedBasedOnDate.includes(lease)){
-            let indexToCut = this.removedBasedOnDate.indexOf(lease);
-            this.removedBasedOnDate = [...this.removedBasedOnDate.slice(0,indexToCut), ...this.removedBasedOnDate.slice(indexToCut + 1,this.removedBasedOnDate.length)]
-            console.log("The updated removedBasedOnDate based on pushing, was: ", this.removedBasedOnDate);
-          }
+      }
+    },
+    filterBasedOnLocation(){
+      if(this.endDate.length > 0){
+        this.filterBasedOnDateAndLocation()
+        return;
+      }
+      this.relevantLeases = []
+      for(let lease of this.allLeases){
+        if(lease.location.toLowerCase().includes(this.myLocation.toLowerCase())){
+          this.relevantLeases.push(lease)
         }
-        if(!this.validEndDate || !this.validStartDate){
-          if(this.relevantLeases.includes(lease)){
-            let indexToRemove = this.relevantLeases.indexOf(lease);
-            if(!this.removedBasedOnDate.includes(this.relevantLeases[indexToRemove])){
-              this.removedBasedOnDate.push(this.relevantLeases[this.relevantLeases.indexOf(lease)]);
-              console.log("The updated removedBasedOnDate is now: ", this.removedBasedOnDate);
-            }
-            this.relevantLeases = [...this.relevantLeases.slice(0,indexToRemove), ...this.relevantLeases.slice(indexToRemove + 1)]
-          }
-        }
-        this.shouldAddLease = false;
-        this.validStartDate = false;
-        this.validEndDate = false;
       }
     },
     updateMyLocation(newLocation){
       this.myLocation = newLocation
-      console.log("The new location is: ", this.myLocation)
-      for(let lease of this.allLeases){
-        console.log("All the locations are: ", lease.location);
-        if(!lease.location.toLowerCase().includes(newLocation.toLowerCase())){
-          //integrate slice in terms of moving out a not relevant part and move it to the removedLocation Array
-        }
-      }
+      this.filterBasedOnLocation()
     },
     updateSearchEndDate(newDate){
       this.endDate = newDate
     },
     updateSearchStartDate(newDate){
-      //this.startDate = newDate
       this.startDate = newDate
     },
   }
