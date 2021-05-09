@@ -1,4 +1,5 @@
 <template>
+  <button @click="addTakenDates" value="Add Taken Dates">Add Taken Dates</button>
 </template>
 <script>
 export default {
@@ -21,13 +22,16 @@ export default {
   },
   methods: {
     addTakenDates(startDate, endDate){
-      let differenceInTime = Math.abs(endDate - startDate)
-      differenceInDays = Math.ceil(differenceInTime / (1000 * 60 * 60 * 24));
+      let testEndDate = new Date("2021/05/28")
+      let testStartDate = new Date("2021/05/04")
+      let differenceInTime = Math.abs(testEndDate - testStartDate)
+      let differenceInDays = Math.ceil(differenceInTime / (1000 * 60 * 60 * 24));
       console.log("The days of this booking was: ", differenceInDays);
+      /*
       while(differenceInDays > 0){
         this.takenDates.push("taken date");
         differenceInDays -= 1;
-      }
+      }*/
     }
   }
 }

@@ -1,4 +1,5 @@
 <template>
+  <Lease />
   <DatePickerForLease v-for="(leaseItem, index) of myLease" :key="index" :relevantLease="leaseItem"/>
 </template>
 <script>
@@ -26,7 +27,7 @@ export default {
         beds: '3',
         amenities: [],
         imageURLs: [],
-        takenDates: ["2021-05-05", "2021-05-06", "2021-05-07"]
+        takenDates: [new Date("2021-05-05"), new Date("2021-05-06"), new Date("2021-05-07")]
         }
       ]
     }
