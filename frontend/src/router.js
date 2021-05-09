@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
 // import views
-import Home from './views/Home.vue'
+import StartPage from './views/StartPage.vue'
 import UserPage from './views/UserPage.vue'
 import SignUp from './views/SignUp.vue'
 import Login from './views/Login.vue'
@@ -11,7 +11,7 @@ export default createRouter({
   routes: [
     {
       path: '/',
-      component: Home
+      component: StartPage
     },
     {
       path: '/userPage',
