@@ -16,9 +16,12 @@
           required
         />
       </div>
+      <div class="failedLoginDiv">
+        <p class="errorText">Error - Bad credentials</p>
+      </div>
     </form>
     <div class="ButtonsDiv">
-      <button @click.prevent="cancel" class="CancelButton">Cancel</button>
+      <router-link class="CancelButton" to="/">Cancel</router-link>
       <button @click.prevent="login" class="LoginButton">Login</button>
     </div>
     <a href="api/register">Register</a>
@@ -26,6 +29,7 @@
 </template>
 
 <script>
+import store from '../../store.js'
 export default {
   data() {
     return {
@@ -34,24 +38,52 @@ export default {
     };
   },
   methods: {
-    login() {
-      let credentials = {
-        userName: this.userName,
-        password: this.password,
-      };
-      console.log("login is not in yet");
-    },
-
-    cancel() {
-      console.log("Cancel is not in yet");
-    },
+    async login(){
+      let user = {
+        username: this.userName,
+        password: this.password
+      }
+      let res = await fetch('/api/login', {
+        method: 'POST',
+        body: JSON.stringify(user)
+      })
+      let response = await res.json()
+      if(response.error == "Bad credentials"){ //Failed to log in
+        document.getElementsByClassName("failedLoginDiv")[0].style.display = "block";
+      }
+      else{
+        document.getElementsByClassName("failedLoginDiv")[0].style.display = "none";
+        this.$store.dispatch('login', response)
+        //window.location = '/'
+        document.getElementsByClassName('CancelButton')[0].click(); //Simulate a click on the Cancel button to go to the start page
+        //To interact with the stores getters, write this.$store.getters.<gettersName>
+        //console.log(this.$store.getters.getCurrentUser) Example
+      }
+    }
   },
 };
 </script>
 
 <style scoped>
+
+.errorText{
+  margin: 0px;
+  padding: 0px;
+}
+.failedLoginDiv{
+  margin: 0px;
+  margin-left: 12px;
+  background-color: red;
+  color: white;
+  padding: 3px;
+  height: 16px;
+  width: 148px;
+  border: 1px solid darkred;
+  text-align: center;
+  display: none;
+}
 .LoginForm{
-  margin-left:15px;
+  margin-left: 15px;
 }
 div {
   margin-left: auto;
@@ -60,9 +92,9 @@ div {
   text-align: center;
 }
 .ButtonsDiv{
-  width:205px;
-  margin:0px;
-  text-align:left;
+  width: 205px;
+  margin: 0px;
+  text-align: left;
 }
 h1 {
   margin: 3px;
@@ -82,13 +114,24 @@ h1 {
   margin-bottom: 7px;
 }
 .CancelButton {
-  margin: 3px;
+  text-decoration: none;
+  color: black;
+  text-decoration-color: black;
+  -moz-text-decoration-color: black;
+  margin: 0px;
+  padding: 3px;
+  display: inline-block;
+  margin-right: 10px;
+  font-weight: bolder;
+  height: 14px;
+  font-size: 13px;
+  width: max-content;
   margin-bottom: 8px;
   border-radius: 8px;
   outline: none;
   border: none;
   background-color: lightgrey;
-  margin-left:50px;
+  margin-left: 55px;
 }
 .LoginButton {
   border-radius: 8px;
