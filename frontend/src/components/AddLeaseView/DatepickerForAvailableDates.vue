@@ -8,7 +8,7 @@
     :lowerLimit="thisDay"
     :disabledDates="disabledDays"
   />
-  <p class="AvailableToP">To:</p>
+  <p class="AvailableToP">Available To:</p>
   <datepicker
     @change="updateLeaseEndDate"
     v-model="endDate"
@@ -63,7 +63,10 @@ export default {
 
   }
   p{
-    margin:0px;
+    margin:2px;
     font-weight:bolder;
+  }
+  *{
+    padding-left: 2px;
   }
 </style>

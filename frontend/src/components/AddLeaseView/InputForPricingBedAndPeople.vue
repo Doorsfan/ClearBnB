@@ -37,9 +37,15 @@ export default {
 </script>
 
 <style scoped>
+  * {
+    padding:0px;
+    margin:0px;
+    text-align: left;
+  }
   .MaxPeopleP{
-    margin-left: 24px;
-    margin-right: 32px;
+    width:30px;
+    margin-left:22px;
+    margin-right:10px;
   }
   p{
     margin: 2px;
@@ -53,15 +59,38 @@ export default {
   .divHoldingThePs{    
     margin: 0px;
     padding: 0px;
-    text-align: left;
   }
   input{
     width: 30px;
-    display: inline;
-    margin: 2px;
+    display: inline-block;
+    margin-top:0px;
   }
   .peopleInputField{
     margin-left: 42px;
     margin-right: 42px;
+  }
+  .bedsInputField{
+    font-size: 14px;
+    margin:1px;
+    margin-left:3px;
+    margin-top:2px;
+    padding:2px;
+    width:40px;
+  }
+  .peopleInputField{
+    font-size:14px;
+    margin:1px;
+    margin-top:2px;
+    padding:2px;
+    width:35px;
+    margin-left:40px;
+  }
+  .priceInputField{
+    font-size:14px;
+    margin:1px;
+    margin-top:2px;
+    padding:2px;
+    width:40px;
+    margin-left:40px;
   }
 </style>

@@ -48,6 +48,8 @@ export default {
 input {
   width: 120px;
   display:inline;
+  font-size:14px;
+  padding:2px;
 }
 button {
   display:inline;
