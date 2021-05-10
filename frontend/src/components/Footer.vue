@@ -26,6 +26,9 @@
 </template>
 
 <style scoped>
+* {
+  font-size: 13px;
+}
 footer {
   background-color: #00200c;
   padding: 10px;
@@ -65,7 +68,6 @@ footer {
 
 .links a{
   text-decoration: none;
-  font-size: 1.1rem;
   text-transform: uppercase;
   font-weight: 100;
   color: white;

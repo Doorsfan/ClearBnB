@@ -539,5 +539,6 @@ export default {
   width:max-content;
   margin-left:auto;
   margin-right:auto;
+  font-size:20px;
 }
 </style>
