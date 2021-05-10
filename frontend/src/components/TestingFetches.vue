@@ -48,22 +48,6 @@ export default {
       let res = await fetch('/rest/bookings/:id')
       console.log(await res.json());
     },
-    async tryPOSTRequestForBookings(){
-      let booking = {
-        userId: 1,
-        leaseId: 1,
-        location: "Los Angeles",
-        startDate: "2021-04-05",
-        endDate: "2021-05-05",
-        guests: 1,
-        totalPrice: 1000
-      }
-      let res = await fetch('/rest/bookings', {
-        method: 'POST',
-        body: JSON.stringify(booking)
-      })
-      console.log(await res.json());
-    },
     async tryDELETERequestForBookingsWithId(){
       let res = await fetch('/rest/bookings/u8wIeBkOCW-K_upXkmLhb',
       {
