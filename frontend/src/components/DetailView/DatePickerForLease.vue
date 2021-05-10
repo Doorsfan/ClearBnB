@@ -1,6 +1,5 @@
 <template>
   <Datepicker v-model="pickedDate" :disabledDates="{ dates: bookedDays }"/>
-  <button @click="triggerAddDisabledDates">add disable dates</button>
 </template>
 <script setup="">
   import Datepicker from 'vue3-datepicker'
