@@ -1,5 +1,6 @@
 <template>
   <div>
+    <Header/>
     <div class="startPageDateDiv">
       <LocationInputForm @updateMyLocation="updateMyLocation" />
       <DatePickerOnStartPage @updateStartDate="updateSearchStartDate" @updateEndDate="updateSearchEndDate"/>
@@ -18,6 +19,7 @@ import DatePickerOnStartPage from '../components/StartView/DatePickerOnStartPage
 import LocationInputForm from '../components/StartView/LocationInputForm.vue'
 import BedsInputForm from '../components/StartView/BedsInputForm.vue'
 import PriceRangeForm from '../components/StartView/PriceRangeForm.vue'
+import Header from '../components/Header.vue'
 
   //Load in all the leases of the page from the DB here
   let originalListOfAllLeases = [
@@ -73,7 +75,8 @@ export default {
     LeaseDisplayBox,
     LocationInputForm,
     BedsInputForm,
-    PriceRangeForm
+    PriceRangeForm,
+    Header
   },
   data() {
     return {
