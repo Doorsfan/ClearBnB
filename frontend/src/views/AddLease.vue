@@ -127,7 +127,6 @@ textarea{
   border-radius: 25px;
   text-decoration: none;
   font-weight: bolder;
-  height: 14px;
   padding: 5px;
   padding-top: 3px;
   font-size: 13px;

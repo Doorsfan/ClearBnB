@@ -1,7 +1,6 @@
 <template>
   <div>
     <div class="startPageDateDiv">
-      <HambugerMenu />
       <LocationInputForm @updateMyLocation="updateMyLocation" />
       <DatePickerOnStartPage @updateStartDate="updateSearchStartDate" @updateEndDate="updateSearchEndDate"/>
       <BedsInputForm @updateMyAmountOfBeds="updateMyAmountOfBeds"/>
