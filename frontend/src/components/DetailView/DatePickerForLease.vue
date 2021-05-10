@@ -1,5 +1,5 @@
 <template>
-  <Datepicker v-model="pickedDate" :disabledDates="{ dates: bookedDays }"/>
+  <Datepicker :disabledDates="{ dates: bookedDays }"/>
 </template>
 <script setup="">
   import Datepicker from 'vue3-datepicker'
@@ -9,23 +9,12 @@ import { ref } from 'vue' //Ref transmutes a value to become part of a reactive 
 let chosenDate = ref(new Date())
 export default {
   props: ["relevantLease", "allBookings"],
-  emits: ["addDisabledDates"],
   data() {
     return {
-      pickedDate: chosenDate,
       bookedDays: this.relevantLease.takenDates
     }
   },
   methods: {
-    triggerAddDisabledDates(){
-      console.log(this.relevantLease);
-    },
-    findBookedDays(){
-      //relevantLease has - Title, location, description, typeOfHousing, startDate, endDate, PPPN, maxGuests, numberOfBeds, amenities, imageURLs
-      //
-      let result = new Date('2021-05-07')
-      console.log(result)
-    }
   }
 }
 </script>

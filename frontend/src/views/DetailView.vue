@@ -8,7 +8,7 @@
     </div>
     <div class="checkOutDiv">
       <p class="checkOutText">Check Out</p>
-      <DatePickerForLease :lower-limit="minimumEndDate" v-model="toDate" v-for="(leaseItem, index) of myLease" :key="index" :relevantLease="leaseItem"/>
+      <DatePickerForLease :lower-limit="fromDate" v-model="toDate" v-for="(leaseItem, index) of myLease" :key="index" :relevantLease="leaseItem"/>
     </div>
   </div>
 </template>
@@ -28,6 +28,14 @@ export default {
       for(let myDate of newTakenDates){
         relevantLease.takenDates.push(myDate);
       }
+    }
+  },
+  watch:{
+    fromDate(){
+      console.log("The new fromDate is: ", this.fromDate);
+    },
+    toDate(){
+      console.log("The new toDate is: ", this.toDate);
     }
   },
   data() {
