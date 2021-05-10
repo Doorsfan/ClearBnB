@@ -10,6 +10,10 @@ export default createRouter({
   history: createWebHistory(),
   routes: [
     {
+      path: '/AddLease',
+      component: AddLease
+    },
+    {
       path: '/',
       component: StartPage
     },

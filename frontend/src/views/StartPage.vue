@@ -1,6 +1,5 @@
 <template>
   <div>
-    <Header/>
     <div class="startPageDateDiv">
       <LocationInputForm @updateMyLocation="updateMyLocation" />
       <DatePickerOnStartPage @updateStartDate="updateSearchStartDate" @updateEndDate="updateSearchEndDate"/>

@@ -50,6 +50,12 @@ export default {
 </script>
 
 <style scoped>
+div {
+  margin-left: auto;
+  margin-right: auto;
+  width: max-content;
+  text-align: center;
+}
 h1 {
   margin: 3px;
   padding: 0px;
