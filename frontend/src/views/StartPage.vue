@@ -134,7 +134,7 @@ export default {
         this.filterBasedOnLocationMinAndMaxPrice()
         return
       } //Location + Min Price + Max Price - Done
-      else if(this.endDate.length > 0 && this.myMinprice.length > 0 && this.myMaxPrice.length > 0){
+      else if(this.endDate.length > 0 && this.myMinPrice.length > 0 && this.myMaxPrice.length > 0){
         this.filterBasedOnDateMinAndMaxPrice()
         return
       } //Date + Min Price + Max Price - Done
