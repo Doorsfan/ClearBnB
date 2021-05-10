@@ -5,6 +5,7 @@ import StartPage from './views/StartPage.vue'
 import UserPage from './views/UserPage.vue'
 import SignUp from './views/SignUp.vue'
 import Login from './views/Login.vue'
+import AddLease from './views/AddLease.vue'
 
 export default createRouter({
   history: createWebHistory(),
