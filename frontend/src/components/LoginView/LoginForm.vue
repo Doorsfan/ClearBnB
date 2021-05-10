@@ -50,11 +50,19 @@ export default {
 </script>
 
 <style scoped>
+.LoginForm{
+  margin-left:15px;
+}
 div {
   margin-left: auto;
   margin-right: auto;
   width: max-content;
   text-align: center;
+}
+.ButtonsDiv{
+  width:205px;
+  margin:0px;
+  text-align:left;
 }
 h1 {
   margin: 3px;
@@ -76,14 +84,13 @@ h1 {
 .CancelButton {
   margin: 3px;
   margin-bottom: 8px;
-  margin-right: 7px;
   border-radius: 8px;
   outline: none;
   border: none;
   background-color: lightgrey;
+  margin-left:50px;
 }
 .LoginButton {
-  margin-left: 7px;
   border-radius: 8px;
   outline: none;
   border: none;
