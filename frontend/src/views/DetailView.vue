@@ -1,6 +1,16 @@
 <template>
-  <Lease />
-  <DatePickerForLease v-for="(leaseItem, index) of myLease" :key="index" :relevantLease="leaseItem"/>
+  <Lease @updateTakenDates="updateTakenDates"/>
+  <br/>
+  <div class="datePickerDiv">
+    <div class="checkInDiv">
+      <p class="checkInText">Check In</p>
+      <DatePickerForLease :lower-limit="minimumEndDate" v-model="fromDate" v-for="(leaseItem, index) of myLease" :key="index" :relevantLease="leaseItem"/>
+    </div>
+    <div class="checkOutDiv">
+      <p class="checkOutText">Check Out</p>
+      <DatePickerForLease :lower-limit="minimumEndDate" v-model="toDate" v-for="(leaseItem, index) of myLease" :key="index" :relevantLease="leaseItem"/>
+    </div>
+  </div>
 </template>
 <script>
 import DatePickerForLease from '../components/DetailView/DatePickerForLease.vue'
@@ -12,8 +22,19 @@ export default {
     DatePickerForLease,
     Lease
   },
+  methods:{
+    updateTakenDates(newTakenDates){
+      let relevantLease = this.myLease[0];
+      for(let myDate of newTakenDates){
+        relevantLease.takenDates.push(myDate);
+      }
+    }
+  },
   data() {
     return {
+      minimumEndDate: new Date(),
+      fromDate: new Date(),
+      toDate: new Date().addDays(1),
       myLease: [
         {
         title: 'Cozy Cottage',
@@ -27,7 +48,7 @@ export default {
         beds: '3',
         amenities: [],
         imageURLs: [],
-        takenDates: [new Date("2021-05-05"), new Date("2021-05-06"), new Date("2021-05-07")]
+        takenDates: []
         }
       ]
     }
@@ -35,5 +56,15 @@ export default {
 }
 </script>
 <style scoped>
+p{
+  margin:0px;
+  margin:3px;
+  text-align:center;
+}
+.checkInDiv,.checkOutDiv{
+  width: max-content;
+  display:inline-block;
+  margin:5px;
+}
 
 </style>
