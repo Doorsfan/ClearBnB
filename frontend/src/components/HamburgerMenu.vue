@@ -40,8 +40,11 @@ export default {
   position: relative;
 }
 .fa {
-  display: block;
+  display: inline-block;
   left: 0;
   top: 0;
+  height: max-content;
+  width: max-content;
+  font-size:60px;
 }
 </style>
