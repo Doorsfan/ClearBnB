@@ -5,7 +5,6 @@ export default class User{
   constructor(myBookings){
     this.myBookings = myBookings;
   }
-
   getBookings(){
     return this.myBookings
   }
