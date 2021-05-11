@@ -9,9 +9,10 @@ export default {
     return {
       startDate: "2021-05-10", //mock data
       endDate: "2021-06-15", //mock data
+      days: 5, //mock data
       price: 10, //mock data
-      dateRange: computeDateRange(startDate, endDate),
-      totalPrice: computeCost(days, price),
+      dateRange: this.computeDateRange(this.startDate, this.endDate),
+      totalPrice: this.computeCost(this.days, this.price),
     };
   },
   methods: {
