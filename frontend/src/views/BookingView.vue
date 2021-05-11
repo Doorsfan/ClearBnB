@@ -1,47 +1,46 @@
 <template>
   <div class="booking-view-app-main">
-  <div class="booking-view-container">
-    <div>
-      <div class="location-maxguests">
-      <h1>{{ lease.title }}</h1>
-      <p> {{ lease.location }} | Maximum {{ lease.maxGuests }} guests</p>
-      </div>
-      <div class="booking-view-images-container">
-        <img class="booking-view-image" :src="lease.imageURLs[0]" /> 
-        <img class="booking-view-image" :src="lease.imageURLs[1]" /> 
-      </div>
+    <div class="booking-view-container">
+      <div>
+        <div class="location-maxguests">
+        <h1>{{ lease.title }}</h1>
+        <p> {{ lease.location }} | Maximum {{ lease.maxGuests }} guests</p>
+        </div>
+        <div class="booking-view-images-container">
+          <img class="booking-view-image" :src="lease.imageURLs[0]" /> 
+          <img class="booking-view-image" :src="lease.imageURLs[1]" /> 
+        </div>
       <!-- <Carousel :myLease="lease" /> -->
       <!-- <div class="lease-images">
         {{lease.imageURLs[0]}} {{lease.imageURLs[1]}}
       </div> -->
-      <div class="type-pppn">
-        <p>{{ lease.typeOfHousing }} | Per person per night: {{ lease.PPPN }} SEK</p>
-      </div>
-      <div class="booking-view-description">
-        <p> {{ lease.description}} </p>
-      </div>
-      <div class="amenities">Amenities
-      <p>*** Insert component ***</p></div>
+        <div class="type-pppn">
+          <p>{{ lease.typeOfHousing }} | Per person per night: {{ lease.PPPN }} SEK</p>
+        </div>
+        <div class="booking-view-description">
+          <p> {{ lease.description}} </p>
+        </div>
+        <div class="amenities">Amenities
+        <p>*** Insert component ***</p></div>
       <!-- 
-        Insert component Amenities.vue
+        Insert component for Amenities
        -->
 
-      <p>
+        <p>
        <!-- Edit with data from leases.json --> 
-       <select v-model="selectedNumberOfGuests"> 
-          <option disabled value="">Select number of guests</option>
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-        </select> guests
-      </p>
+          <select v-model="selectedNumberOfGuests"> 
+            <option disabled value="">Select number of guests</option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select> guests
+        </p>
       
-  <!-- Insert DatePickerOnStartPage -->
-
+      <!-- Insert DatePickerOnStartPage -->
+      </div>
     </div>
-  </div>
   </div>
 </template>
 
