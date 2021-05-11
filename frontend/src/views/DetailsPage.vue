@@ -1,13 +1,19 @@
 <template>
-  <PPPN />
+  <p>hi</p>
 </template>
 
 <script>
 import PPPN from "../components/PPPN.vue";
 
+let myPPPN = new PPPN();
+myPPPN.computeCost();
+
 export default {
-  components: {
-    PPPN,
+  data() {
+    return {
+      myPrice: "",
+      totalPrice: "",
+    };
   },
 };
 </script>
