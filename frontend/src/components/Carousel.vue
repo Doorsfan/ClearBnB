@@ -1,19 +1,36 @@
 <template>
+  <i @click="previousPicture" class="arrow left"></i>
   <div class="imageCarousel">
     <img class="firstImage" :src="myLease.imageURLs[0]"/>
     <img class="secondImage" :src="myLease.imageURLs[1]"/>
   </div>
+  <i @click="nextPicture" class="arrow right"></i>
 </template>
 <script>
+//Implement Interaction with Arrow Buttons again in regards to Carousel Component
 export default {
   props: ["myLease"],
   data() {
     return {
+
+    }
+  },
+  methods: {
+    previousPicture(){
+      let firstPicture = this.myLease.imageURLs[0]
+      let secondPicture = this.myLease.imageURLs[1]
+      this.myLease.imageURLs[1] = firstPicture
+      this.myLease.imageURLs[0] = secondPicture
+    },
+    nextPicture(){
+      let firstPicture = this.myLease.imageURLs[0]
+      let secondPicture = this.myLease.imageURLs[1]
+      this.myLease.imageURLs[0] = secondPicture
+      this.myLease.imageURLs[1] = firstPicture
     }
   }
 }
 </script>
-
 <style scoped>
 .imageCarousel{
   position:relative;
@@ -27,12 +44,11 @@ img{
   width:150px;
   position:absolute;
   left:0;
-  -webkit-transition: opacity 1s ease-in-out;
-  -moz-transition: opacity 1s ease-in-out;
-  -o-transition: opacity 1s ease-in-out;
-  transition: opacity 1s ease-in-out;
+  -webkit-transition: opacity 0.7s ease-in-out;
+  -moz-transition: opacity 0.7s ease-in-out;
+  -o-transition: opacity 0.7s ease-in-out;
+  transition: opacity 0.7s ease-in-out;
 }
-
 @keyframes cyclingOpacity {
   0% {
   opacity:1;
@@ -47,12 +63,26 @@ img{
   opacity:0;
   }
 }
-
 .secondImage {
   animation-name: cyclingOpacity;
   animation-timing-function: ease-in-out;
   animation-iteration-count: infinite;
-  animation-duration: 10s;
+  animation-duration: 15s;
   animation-direction: alternate;
+}
+.arrow {
+  border: solid black;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 3px;
+  margin-bottom:85px;
+}
+.left {
+  transform: rotate(135deg);
+  -webkit-transform: rotate(135deg);
+}
+.right {
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
 }
 </style>

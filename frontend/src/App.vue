@@ -1,24 +1,39 @@
 <template>
-  <div>
+  <header>
     <Header />
-    <BookingView />
+  </header>
 
-  </div>
+  <main class="app-main">
+    <router-view />
+  </main>
+
+  <footer>
+    <Footer />
+  </footer>
 </template>
+<script setup="">
+</script>
+<script>
+import Header from './components/Header.vue'
+import Footer from './components/Footer.vue'
 
-<script setup>
-import Header from "./components/Header.vue";
-import BookingView from "./views/BookingView.vue"
-import DatePickerOnStartPage from './components/DatePickerOnStartPage.vue'
-import Carousel from './components/Carousel.vue'
+export default {
+  name: "App",
+  components: {
+    Header,
+    Footer
+  },
+  data() {
+    return {
+      
+    }
+  }
+}
 </script>
 <style>
-
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+.app-main{
+  height:max-content;
+  padding-top:5px;
+  padding-bottom:20px;
 }
 </style>

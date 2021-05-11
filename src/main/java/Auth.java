@@ -23,7 +23,7 @@ public class Auth {
             User user = req.body(User.class);
 
             // check if email is not taken
-            User exists = collection("User").findOne(Filter.eq("email", user.getUsername()));
+            User exists = collection("User").findOne(Filter.eq("username", user.getUsername()));
 
             //If it found a match, it's not null
             if(exists != null) {

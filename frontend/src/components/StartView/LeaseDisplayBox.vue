@@ -4,9 +4,11 @@
     <Carousel :myLease="lease"/>
     <div class="divHoldingLocationAndPrice">
       <div class="textBox">
-        <div class="locationDiv">Location: {{ lease.location }}</div>
-        <div class="pricePerNightDiv">Price Per Night: {{ lease.pricePerNight }}</div>
-        <div class="descriptionDiv">Description: {{ lease.description }}</div>
+        <div class="locationDiv"><b>Location:</b> {{ lease.location }}</div>
+        <div class="startsFromDiv"><b>Available from:</b> {{ lease.startDate }}</div>
+        <div clas="endsOnDiv"><b>Available to:</b> {{ lease.endDate }}</div>
+        <div class="pricePerNightDiv"><b>Price Per Night:</b> {{ lease.PPPN }}</div>
+        <div class="descriptionDiv"><b>Description:</b> {{ lease.description }}</div>
       </div>
       <router-link class="readMoreLink" to="/">Read more..</router-link>
     </div>
