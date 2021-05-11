@@ -146,6 +146,7 @@ public class Lease {
                 ", location='" + location + '\'' +
                 ", description='" + description + '\'' +
                 ", typeOfHousing='" + typeOfHousing + '\'' +
+                ", entireResidence=" + entireResidence +
                 ", startDate='" + startDate + '\'' +
                 ", endDate='" + endDate + '\'' +
                 ", PPPN=" + PPPN +
