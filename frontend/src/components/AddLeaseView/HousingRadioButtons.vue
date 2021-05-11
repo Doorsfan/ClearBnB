@@ -35,6 +35,18 @@ export default {
 }
 </script>
 <style scoped>
+  .labelForEntire{
+    padding-right:10px;
+  }
+  .buttonForEntire{
+    margin-left:-2px;
+  }
+  .labelForHouse{
+    padding-right:0px;
+  }
+  .labelForFlat{
+    padding-right: 20px;
+  }
   .firstRow{
     width:210px;
     margin-left:auto;

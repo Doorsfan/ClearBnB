@@ -31,4 +31,9 @@ export default {
 }
 </script>
 <style>
+.app-main{
+  height:max-content;
+  padding-top:5px;
+  padding-bottom:20px;
+}
 </style>

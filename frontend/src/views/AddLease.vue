@@ -8,6 +8,7 @@
   <DescriptionForm @updatedDescription="updateDescription" />
   <InputForPricingBedAndPeople @updateBeds="updateNrOfBeds" @updateMaxPeople="updateNrOfMaxPeople" @updatePrice="updatePricePerPerson" />
   <HousingRadioButtons @updateChosenHousing="updateChosenHousing" @updateChosenSize="updateChosenSize"/>
+  <AddAmenities />
   <ImageUrlInputForm @updatedImageURLs="updateImageURLs" />
   <DatepickerForAvailableDates @updatedLeaseStartDate="updateStartDate" @updatedLeaseEndDate="updateEndDate" 
   @updatedDisabledDays="updateDisabledDays" />
@@ -21,11 +22,12 @@ import HousingRadioButtons from '../components/AddLeaseView/HousingRadioButtons.
 import InputForPricingBedAndPeople from '../components/AddLeaseView/InputForPricingBedAndPeople.vue'
 import ImageUrlInputForm from '../components/AddLeaseView/ImageUrlInputForm.vue'
 import LocationInputForm from '../components/AddLeaseView/LocationInputForm.vue'
+import AddAmenities from '../components/AddLeaseView/AddAmenities.vue'
 </script>
 <script>
 export default {
   name: 'AddResidence',
-  components: ['DatepickerForAvailableDates', 'DescriptionForm', 'HousingRadioButtons', 'InputForPricingBedAndPeople',  'ImageUrlInputForm','LocationInputForm'],
+  components: ['DatepickerForAvailableDates', 'DescriptionForm', 'HousingRadioButtons', 'InputForPricingBedAndPeople',  'ImageUrlInputForm','LocationInputForm', 'AddAmenities'],
   data() {
     return {
       myTitle: '',
@@ -33,6 +35,11 @@ export default {
       maxGuests: '',
       PPPN: '',
       typeOfHousing: '',
+      hasWifi: false,
+      hasKitchen: false,
+      hasWasher: false,
+      hasHeating: false,
+      hasAirConditioner: false,
       size: '',
       location: '',
       title: '',
@@ -86,6 +93,7 @@ export default {
 <style scoped>
 .mainDiv{
   text-align: center;
+  height: max-content;
 }
 .addResidenceHeader{
   margin: 8px;
@@ -130,9 +138,6 @@ textarea{
   padding: 5px;
   padding-top: 3px;
   font-size: 13px;
-}
-.mainDiv{
-  height: 500px;
 }
 
 </style>
