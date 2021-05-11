@@ -26,9 +26,6 @@
 </template>
 
 <style scoped>
-* {
-  font-size: 13px;
-}
 footer {
   background-color: #00200c;
   padding: 10px;
@@ -41,13 +38,13 @@ footer {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  margin-bottom: 2rem;
+  margin-bottom: 20px;
 }
 
 .icons div{
-  width: 4.5rem;
-  height: 4.5rem;
-  margin: 0rem 1rem;
+  width: 45px;
+  height: 45px;
+  margin: 0rem 10px;
   display: grid;
   place-content: center;
   background-color: white;
@@ -55,7 +52,7 @@ footer {
 }
 
 .icons div i{
-  font-size: 2rem;
+  font-size: 20px;
   color: black;
 }
 
@@ -70,6 +67,7 @@ footer {
   text-decoration: none;
   text-transform: uppercase;
   font-weight: 100;
+  font-size: 11px;
   color: white;
 }
 
@@ -78,15 +76,16 @@ footer {
 }
 
 .links div{
-  width: 0.5rem;
-  height: 0.5rem;
+  width: 5px;
+  height: 5px;
   border-radius: 50%;
-  margin: 0rem 1rem;
+  margin: 0rem 10px;
   background-color: rgb(153, 153, 153);
 }
 
 .last{
   color: rgb(153, 153, 153);
-  margin-top: 1rem;
+  margin-top: 10px;
+  font-size: 10px;
 }
 </style>

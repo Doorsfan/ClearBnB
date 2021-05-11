@@ -1,22 +1,50 @@
 <template>
   <div class="navbar">
-    <div class="left">
-    <router-link to="/">Home</router-link>
+    <div v-if="!isSmall" class="pc-nav">
+      <div class="left">
+      <router-link to="/">Home</router-link>
+      </div>
+      <div class="center">
+      <router-link to="userPage">User Page</router-link>
+      <router-link to="AddLease">Add Lease</router-link>
+      </div>
+      <div class="right">
+      <router-link to="signUp"><i class="fas fa-user-plus"></i>Sign Up</router-link>
+      <span>|</span>
+      <router-link to="login"><i class="fas fa-sign-in-alt"></i>Login</router-link>
+      </div>
     </div>
-    <div class="center">
-    <router-link to="userPage">User Page</router-link>
-    <router-link to="AddLease">Add Lease</router-link>
-    </div>
-    <div class="right">
-    <router-link to="signUp"><i class="fas fa-user-plus"></i>Sign Up</router-link>
-    <span>|</span>
-    <router-link to="login"><i class="fas fa-sign-in-alt"></i>Login</router-link>
+    <div v-else class="tablet-nav">
+      <Hamburger/>
+      <router-link to="/">Home</router-link>
+      <router-link to="login">Login</router-link>
     </div>
   </div>
 </template>
 
 <script>
-export default {};
+import Hamburger from './HamburgerMenu.vue'
+export default {
+  components:{
+    Hamburger
+  },
+  data(){
+    return{
+      isSmall:false,
+      big: window.matchMedia('(min-width:750px)')
+    }
+  },
+  mounted(){
+    this.watchMedia(this.big);
+    this.big.addEventListener('change', this.watchMedia)
+  },
+  methods:{
+    watchMedia: function(x){
+      if(x.matches) this.isSmall = false;
+      else this.isSmall = true;
+    }
+  }
+};
 </script>
 
 <style scoped>
@@ -24,46 +52,52 @@ export default {};
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  border-bottom: 1px solid #00200c;
+  height: 70px;
+  padding: 0 20px;
+}
+.pc-nav, .tablet-nav{
+  height: 100%;
   display: flex;
   flex-direction: row;
   justify-content:space-between;
-  border-bottom: 0.1rem solid #00200c;
-  height: 7rem;
   align-items: center;
-  padding: 0 2rem;
 }
 a {
-  font-size: 1.7rem;
+  font-size: 17px;
   text-decoration: none;
   color: rgb(63, 63, 63);
 
 }
 .center a{
-margin: 0 1rem;
+margin: 0 10px;
 font-weight: bold;
 }
 .right{
   align-self: flex-start;
-  margin-top: 1rem;
+  margin-top: 10px;
   display: flex;
   flex-direction: row;
   align-items: baseline;
 }
 .right span{
-  font-size: 1.3rem;
-  margin: 0 1rem;
+  font-size: 13px;
+  margin: 0 10px;
   color: rgb(172, 172, 172);
 }
 .right a{
-  font-size: 1.3rem;
+  font-size: 13px;
   color: rgb(172, 172, 172);
   transition: color 0.3s;
 }
 .right i{
-  font-size: 1.3rem;
-  margin-right: 0.5rem;
+  font-size: 13px;
+  margin-right: 5px;
 }
 .right a:hover{
   color: rgb(112, 112, 112);
+}
+.tablet-nav a{
+  font-weight: bold;
 }
 </style>
