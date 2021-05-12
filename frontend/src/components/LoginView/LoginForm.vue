@@ -52,8 +52,13 @@ export default {
         document.getElementsByClassName("failedLoginDiv")[0].style.display = "block";
       }
       else{
-        let responseForUserInfo = await fetch('/rest/userinfos/' + response['id'])
-        console.log("responseForUserInfo was: ", responseForUserInfo);
+        let responseForUserInfo = await fetch('/rest/userinfos')
+        let responseForUserInfoAsJson = await responseForUserInfo.json()
+        for(let userInfo of responseForUserInfoAsJson){
+          if(userInfo.userId == response['id']){
+            response.userInfo = userInfo
+          }
+        }
         document.getElementsByClassName("failedLoginDiv")[0].style.display = "none";
         this.$store.dispatch('login', response)
         //window.location = '/'
