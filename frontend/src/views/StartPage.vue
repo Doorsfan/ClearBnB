@@ -339,7 +339,7 @@ export default {
     filterBasedOnDateBedsAndMinPrice(){
       this.relevantLeases = []
       for(let lease of this.allLeases){
-        if(lease.startDate <= this.startDate && lease.endDate <= this.endDate && this.myAmountOfBeds == lease.beds && this.myMinPrice <= lease.PPPN){
+        if(lease.startDate <= this.startDate && lease.endDate >= this.endDate && this.myAmountOfBeds == lease.beds && this.myMinPrice <= lease.PPPN){
           this.relevantLeases.push(lease)
         }
       }
@@ -347,7 +347,7 @@ export default {
     filterBasedOnDateBedsAndMaxPrice(){
       this.relevantLeases = []
       for(let lease of this.allLeases){
-        if(lease.startDate <= this.startDate && lease.endDate <= this.endDate && this.myAmountOfBeds == lease.beds && this.myMaxPrice >= lease.PPPN){
+        if(lease.startDate <= this.startDate && lease.endDate >= this.endDate && this.myAmountOfBeds == lease.beds && this.myMaxPrice >= lease.PPPN){
           this.relevantLeases.push(lease)
         }
       }
@@ -355,7 +355,7 @@ export default {
     filterBasedOnDateAndMinPrice(){
       this.relevantLeases = []
       for(let lease of this.allLeases){
-        if(lease.startDate <= this.startDate && lease.endDate <= this.endDate && this.myMinPrice <= lease.PPPN){
+        if(lease.startDate <= this.startDate && lease.endDate >= this.endDate && this.myMinPrice <= lease.PPPN){
           this.relevantLeases.push(lease)
         }
       }
@@ -363,7 +363,7 @@ export default {
     filterBasedOnDateAndMaxPrice(){
       this.relevantLeases = []
       for(let lease of this.allLeases){
-        if(lease.startDate <= this.startDate && lease.endDate <= this.endDate && this.myMaxPrice <= lease.PPPN){
+        if(lease.startDate <= this.startDate && lease.endDate >= this.endDate && this.myMaxPrice <= lease.PPPN){
           this.relevantLeases.push(lease)
         }
       }
