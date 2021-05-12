@@ -67,13 +67,12 @@ a {
   font-size: 17px;
   text-decoration: none;
   color: rgb(63, 63, 63);
-
 }
 .center a{
 margin: 0 10px;
 font-weight: bold;
 }
-.right{
+.right {
   align-self: flex-start;
   margin-top: 10px;
   display: flex;
@@ -94,7 +93,7 @@ font-weight: bold;
   font-size: 13px;
   margin-right: 5px;
 }
-.right a:hover{
+.right a:hover {
   color: rgb(112, 112, 112);
 }
 .tablet-nav a{
