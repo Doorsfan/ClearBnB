@@ -36,15 +36,16 @@
           </select> guests
         </p>
       
-      <!-- Insert DatePickerOnStartPage -->
+      <DatepickerForAvailableDates />
       </div>
     </div>
   </div>
 </template>
 
+<script setup="">
+  import DatepickerForAvailableDates from '../components/AddLeaseView/DatepickerForAvailableDates.vue'
+</script>
 <script>
-import leases from '../../json_temp/leases.json'
-import DatePickerOnStartpage from '../components/StartView/DatePickerOnStartPage.vue'
 export default  {
   watch: {
     lease(){
