@@ -32,4 +32,12 @@ input{
   width:max-content;
   margin-left:20px;
 }
+.maxPriceInputForm{
+  width:90px;
+  padding:1px;
+}
+.minPriceInputForm{
+  width:83px;
+  padding:1px;
+}
 </style>

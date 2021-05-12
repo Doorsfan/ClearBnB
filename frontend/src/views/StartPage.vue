@@ -1,7 +1,6 @@
 <template>
   <div>
     <div class="startPageDateDiv">
-      <HambugerMenu />
       <LocationInputForm @updateMyLocation="updateMyLocation" />
       <DatePickerOnStartPage @updateStartDate="updateSearchStartDate" @updateEndDate="updateSearchEndDate"/>
       <BedsInputForm @updateMyAmountOfBeds="updateMyAmountOfBeds"/>
@@ -340,7 +339,7 @@ export default {
     filterBasedOnDateBedsAndMinPrice(){
       this.relevantLeases = []
       for(let lease of this.allLeases){
-        if(lease.startDate <= this.startDate && lease.endDate <= this.endDate && this.myAmountOfBeds == lease.beds && this.myMinPrice <= lease.PPPN){
+        if(lease.startDate <= this.startDate && lease.endDate >= this.endDate && this.myAmountOfBeds == lease.beds && this.myMinPrice <= lease.PPPN){
           this.relevantLeases.push(lease)
         }
       }
@@ -348,7 +347,7 @@ export default {
     filterBasedOnDateBedsAndMaxPrice(){
       this.relevantLeases = []
       for(let lease of this.allLeases){
-        if(lease.startDate <= this.startDate && lease.endDate <= this.endDate && this.myAmountOfBeds == lease.beds && this.myMaxPrice >= lease.PPPN){
+        if(lease.startDate <= this.startDate && lease.endDate >= this.endDate && this.myAmountOfBeds == lease.beds && this.myMaxPrice >= lease.PPPN){
           this.relevantLeases.push(lease)
         }
       }
@@ -356,7 +355,7 @@ export default {
     filterBasedOnDateAndMinPrice(){
       this.relevantLeases = []
       for(let lease of this.allLeases){
-        if(lease.startDate <= this.startDate && lease.endDate <= this.endDate && this.myMinPrice <= lease.PPPN){
+        if(lease.startDate <= this.startDate && lease.endDate >= this.endDate && this.myMinPrice <= lease.PPPN){
           this.relevantLeases.push(lease)
         }
       }
@@ -364,7 +363,7 @@ export default {
     filterBasedOnDateAndMaxPrice(){
       this.relevantLeases = []
       for(let lease of this.allLeases){
-        if(lease.startDate <= this.startDate && lease.endDate <= this.endDate && this.myMaxPrice <= lease.PPPN){
+        if(lease.startDate <= this.startDate && lease.endDate >= this.endDate && this.myMaxPrice <= lease.PPPN){
           this.relevantLeases.push(lease)
         }
       }
@@ -540,5 +539,6 @@ export default {
   width:max-content;
   margin-left:auto;
   margin-right:auto;
+  font-size:20px;
 }
 </style>

@@ -71,6 +71,9 @@ export default {
 
 
 <style scoped>
+* {
+  font-size: 20px;
+}
 div{
   width:max-content;
   display:inline-block;

@@ -16,10 +16,11 @@ public class UserInfo {
     private String city;
     private String country;
     private String phoneNumber;
+    private boolean newsLetter;
 
     public UserInfo() {}
 
-    public UserInfo(String userId, String firstName, String lastName, String streetAddress, String zipCode, String city, String country, String phoneNumber) {
+    public UserInfo(String userId, String firstName, String lastName, String streetAddress, String zipCode, String city, String country, String phoneNumber, boolean newsLetter) {
         this.userId = userId;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -28,6 +29,15 @@ public class UserInfo {
         this.city = city;
         this.country = country;
         this.phoneNumber = phoneNumber;
+        this.newsLetter = newsLetter;
+    }
+
+    public boolean getNewsLetter() {
+        return newsLetter;
+    }
+
+    public void setNewsLetter(boolean newsLetter) {
+        this.newsLetter = newsLetter;
     }
 
     public String getUserId() {
@@ -106,6 +116,7 @@ public class UserInfo {
                 ", city='" + city + '\'' +
                 ", country='" + country + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
+                ", newsLetter=" + newsLetter +
                 '}';
     }
 }

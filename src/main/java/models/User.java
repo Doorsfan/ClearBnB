@@ -11,21 +11,25 @@ public class User {
   private String id;
   private String username;
   private String password;
+  private UserInfo userInfo;
 
   // default constructor
   public User() { }
 
-  public User(String username, String password) {
+  public User(String username, String password, UserInfo userInfo) {
     this.username = username;
     this.password = password;
+    this.userInfo = userInfo;
   }
 
   @Override
   public String toString() {
-    return "\nUser{" +
-        "id='" + id + '\'' +
-        ", username='" + username + '\'' +
-        '}';
+    return "User{" +
+            "id='" + id + '\'' +
+            ", username='" + username + '\'' +
+            ", password='" + password + '\'' +
+            ", userInfo=" + userInfo +
+            '}';
   }
 
   public String getId() {

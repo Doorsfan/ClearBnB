@@ -38,7 +38,8 @@ export default {
   text-align:center;
 }
 .inputForLocationArea {
-  height: 14px;
+  height: 26px;
+  padding:3px;
   width:180px;
   margin-left:12.5px;
   margin-right:12.5px;

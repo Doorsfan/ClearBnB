@@ -1,5 +1,5 @@
 <template>
-    Location: <input class="locationInput" @change="updateMyLocation" type="text" v-model="locationInput" placeholder="Location">
+  Location: <input class="locationInput" @change="updateMyLocation" type="text" v-model="locationInput" placeholder="Location">
 </template>
 <script>
 export default {
@@ -22,7 +22,11 @@ export default {
 }
 </script>
 <style scoped>
+* {
+  font-size:20px;
+}
 .locationInput{
   width:150px;
+  padding-left:2px;
 }
 </style>

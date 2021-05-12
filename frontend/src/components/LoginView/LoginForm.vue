@@ -94,9 +94,10 @@ div {
   text-align: center;
 }
 .ButtonsDiv{
-  width: 205px;
-  margin: 0px;
-  text-align: left;
+  width:max-content;
+  margin:0px;
+  margin-left:auto;
+  margin-right:auto;
 }
 h1 {
   margin: 3px;
@@ -133,13 +134,15 @@ h1 {
   outline: none;
   border: none;
   background-color: lightgrey;
-  margin-left: 55px;
+  margin-right: 10px;
+  padding:4px;
 }
 .LoginButton {
   border-radius: 8px;
   outline: none;
   border: none;
   background-color: #32a83a;
+  padding:4px;
 }
 a {
   font-weight: bolder;

@@ -18,6 +18,7 @@ export default {
 </script>
 <style scoped>
 .bedsInputForm{
-  width:32px;
+  width:48px;
+  padding:1px;
 }
 </style>
