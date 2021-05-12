@@ -9,6 +9,7 @@
     <LeaseDisplayBox v-for="(leaseItem, index) of relevantLeases"
       :key="index"
       :lease="leaseItem"/>
+    <button @click="populateLeases">Populate Leases</button>
   </div>
 </template>
 <script>
@@ -20,54 +21,67 @@ import BedsInputForm from '../components/StartView/BedsInputForm.vue'
 import PriceRangeForm from '../components/StartView/PriceRangeForm.vue'
 import Header from '../components/Header.vue'
 import HambugerMenu from '../components/HamburgerMenu.vue'
+
   //Load in all the leases of the page from the DB here
-  let originalListOfAllLeases = [
-      {
-    "ownerId": "rmarkie5@list-manage.com",
-    "title": "Entire Flat",
-    "location": "Holiday Resort",
-    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ipsum mi, finibus ac placerat congue, placerat a enim. Phasellus eleifend, nulla et tincidunt pharetra, metus magna venenatis magna, quis mollis turpis tortor eget quam. Curabitur porta enim non augue auctor, vel bibendum sem iaculis. Nam orci mi, hendrerit quis pulvinar sed, rutrum nec lorem. Pellentesque euismod purus fringilla, mollis odio quis, fringilla purus. Aliquam erat volutpat. Aliquam id neque vel massa mattis hendrerit. Vestibulum finibus egestas eleifend. Etiam ut erat rutrum, maximus odio porta, euismod est.",
-    "typeOfHousing": "Flat",
-    "startDate": "2021-08-01",
-    "endDate": "2021-09-30",
-    "PPPN": 220,
-    "maxGuests": 4,
-    "beds": 4,
-    "amenities": {
-      "wifi": true,
-      "kitchen": true,
-      "washer": true,
-      "heating": false,
-      "airConditioner": true
-    },
-    "imageURLs": [
-      "https://images.unsplash.com/photo-1613377739358-92aca92e9e13?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80",
-      "https://images.unsplash.com/photo-1618660920685-4505debb785a?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=751&q=80"
-    ]
-  },
-  {
-          "ownerId": "balder0@fda.gov",
-          "title": "Lovely cottage",
-          "location": "Bellevue Island",
-          "description": "Cosy 4 room cottage in central Bellevue. The cottage is located in the wonderful district, St Palmas with city nearby as well as green parks, local shops, and restaurants. Within walking distance to the heart of Bellevue. You will have the whole cottage for yourself.",
-          "typeOfHousing": "Entire Residence",
-          "startDate": "2021-05-27",
-          "endDate": "2021-07-30",
-          "PPPN": 45,
-          "maxGuests": 4,
-          "beds": 3,
-          "amenities": {
-            "wifi": true,
-            "kitchen": true,
-            "washer": true,
-            "heating": true,
-            "airConditioner": false
-          },
-          "imageURLs": [
-            "https://images.unsplash.com/photo-1588046130717-0eb0c9a3ba15?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1438&q=80",
-            "https://images.unsplash.com/photo-1598204326847-aeedbc139508?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1534&q=80"
-          ]
-        }];
+  let res = await fetch('/rest/leases')
+  let responseInJson = await res.json();
+  let originalListOfAllLeases = [];
+  for(let eachLease in responseInJson){
+    let myLease = {}
+    myLease.leaseId = responseInJson[eachLease].id;
+    myLease.ownerId = responseInJson[eachLease].ownerId;
+    myLease.title = responseInJson[eachLease].title;
+    myLease.location = responseInJson[eachLease].location;
+    myLease.description = responseInJson[eachLease].description;
+    myLease.typeOfHousing = responseInJson[eachLease].typeOfHousing;
+    myLease.startDate = responseInJson[eachLease].startDate;
+    myLease.endDate = responseInJson[eachLease].endDate;
+    myLease.PPPN = responseInJson[eachLease].price;
+    myLease.maxGuests = responseInJson[eachLease].maxGuests;
+    myLease.beds = responseInJson[eachLease].beds;
+    myLease.amenities = {}
+    for(let amenity in responseInJson[eachLease].amenities){
+      if(amenity.includes("false")){
+        if(amenity.includes("wifi")){
+          myLease.amenities.wifi = false;
+        }
+        if(amenity.includes("kitchen")){
+          myLease.amenities.kitchen = false;
+        }
+        if(amenity.includes("washer")){
+          myLease.amenities.washer = false;
+        }
+        if(amenity.includes("heating")){
+          myLease.amenities.heating = false;
+        }
+        if(amenity.includes("airConditioner")){
+          myLease.amenities.airConditioner = false;
+        }
+      }
+      if(amenity.includes("true")){
+        if(amenity.includes("wifi")){
+          myLease.amenities.wifi = true;
+        }
+        if(amenity.includes("kitchen")){
+          myLease.amenities.kitchen = true;
+        }
+        if(amenity.includes("washer")){
+          myLease.amenities.washer = true;
+        }
+        if(amenity.includes("heating")){
+          myLease.amenities.heating = true;
+        }
+        if(amenity.includes("airConditioner")){
+          myLease.amenities.airConditioner = true;
+        }
+      }
+    }
+    myLease.imageURLs = []
+    for(let i = 0; i < responseInJson[eachLease].imageURLs.length; i++){
+      myLease.imageURLs.push(responseInJson[eachLease].imageURLs[i])
+    }
+    originalListOfAllLeases.push(myLease);
+  }
 export default {
   components: {
     DatePickerOnStartPage,
@@ -96,6 +110,30 @@ export default {
     }
   },
   methods:{
+    //Can be used to populate the DB with dummy data
+    /*
+    async populateLeases(){
+      let lease = {
+        ownerId: 1,
+        title: "House in Alaska",
+        location: "USA, Alaska",
+        description: "Lorem Ipsum",
+        typeOfHousing: "House",
+        startDate: "2021-05-15",
+        endDate: "2021-06-25",
+        price: 1200,
+        maxGuests: 5,
+        beds: 5,
+        amenities: ['wifi: true', 'kitchen: true', 'washer: true', 'heating: true', 'airConditioner: true'],
+        imageURLs: ["https://images.unsplash.com/photo-1583845112203-29329902332e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=334&q=80",
+      "https://images.unsplash.com/photo-1572120360610-d971b9d7767c?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80"]
+      } 
+      let res = await fetch('/rest/leases', {
+        method: 'POST',
+        body: JSON.stringify(lease)
+      })
+      console.log(await res.json());
+    }, */
     checkWhichFilterToRun(){
       // 5 ATTRIBUTE SECTION - DONE
       if(this.endDate.length > 0 && this.myAmountOfBeds > 0 && this.myLocation.length > 0 && this.myMinPrice.length > 0 && this.myMaxPrice.length > 0){

@@ -3,22 +3,22 @@
     <div class="booking-view-container">
       <div>
         <div class="location-maxguests">
-        <h1>{{ lease.title }}</h1>
-        <p> {{ lease.location }} | Maximum {{ lease.maxGuests }} guests</p>
+        <h1>{{ title }}</h1>
+        <p> {{ location }} | Maximum {{ maxGuests }} guests</p>
         </div>
         <div class="booking-view-images-container">
-          <img class="booking-view-image" :src="lease.imageURLs[0]" /> 
-          <img class="booking-view-image" :src="lease.imageURLs[1]" /> 
+          <img class="booking-view-image" :src="imageURLs[0]" /> 
+          <img class="booking-view-image" :src="imageURLs[1]" /> 
         </div>
       <!-- <Carousel :myLease="lease" /> -->
       <!-- <div class="lease-images">
         {{lease.imageURLs[0]}} {{lease.imageURLs[1]}}
       </div> -->
         <div class="type-pppn">
-          <p>{{ lease.typeOfHousing }} | Per person per night: {{ lease.PPPN }} SEK</p>
+          <p>{{ typeOfHousing }} | Per person per night: {{ PPPN }} SEK</p>
         </div>
         <div class="booking-view-description">
-          <p> {{ lease.description}} </p>
+          <p> {{ description}} </p>
         </div>
         <div class="amenities">Amenities
         <p>*** Insert component ***</p></div>
@@ -42,30 +42,49 @@
   </div>
 </template>
 
-<script setup="">
-  import Carousel from '../components/Carousel.vue'
-</script>
-
 <script>
 import leases from '../../json_temp/leases.json'
 import DatePickerOnStartpage from '../components/StartView/DatePickerOnStartPage.vue'
 export default  {
+  watch: {
+    lease(){
+      console.log("loaded in");
+      this.title = this.lease.title
+      this.location = this.lease.location
+      this.maxGuests = this.lease.maxGuests
+      this.imageURLs = this.lease.imageURLs
+      this.typeOfHousing = this.lease.typeOfHousing
+      this.PPPN = this.lease.price
+      this.description = this.lease.description
+    }
+  },
 data()  {
   return  {
-    lease: null
+    title: 'test',
+    location: '',
+    maxGuests: '',
+    imageURLs: ['',''],
+    typeOfHousing: '',
+    PPPN: '',
+    description: '',
+    lease: '',
+    selectedNumberOfGuests: ''
   }
 },
-created() {
-  for(let lease of leases)  {
-    if(lease.leaseId == this.$route.params.leaseId) {
-      this.lease = lease
-    }
+methods: {
+  async getMyLease(){
+    let res = await fetch('/rest/leases/' + this.$route.query.leaseId)
+    let responseInJson = await res.json();
+    this.lease = responseInJson
   }
+},
+async created() {
+  await this.getMyLease();
   // for(let amenity of lease.amenities) {
   //  if(lease.amenity === true)
   //  this.amenity = amenity
   //}
-}
+  }
 }
 </script>
 

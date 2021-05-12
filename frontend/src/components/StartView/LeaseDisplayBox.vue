@@ -10,7 +10,7 @@
         <div class="pricePerNightDiv"><b>Price Per Night:</b> {{ lease.PPPN }}</div>
         <div class="descriptionDiv"><b>Description:</b> {{ lease.description }}</div>
       </div>
-      <router-link class="readMoreLink" to="/">Read more..</router-link>
+      <router-link class="readMoreLink" :to="{ path: '/BookingView', query: { leaseId: lease.leaseId }}">Read More..</router-link>
     </div>
   </div>
 </template>
