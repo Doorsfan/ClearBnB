@@ -52,6 +52,8 @@ export default {
         document.getElementsByClassName("failedLoginDiv")[0].style.display = "block";
       }
       else{
+        let responseForUserInfo = await fetch('/rest/userinfos/' + response['id'])
+        console.log("responseForUserInfo was: ", responseForUserInfo);
         document.getElementsByClassName("failedLoginDiv")[0].style.display = "none";
         this.$store.dispatch('login', response)
         //window.location = '/'
