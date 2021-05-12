@@ -6,6 +6,7 @@ import UserPage from './views/UserPage.vue'
 import SignUp from './views/SignUp.vue'
 import Login from './views/Login.vue'
 import AddLease from './views/AddLease.vue'
+import BookingView from './views/BookingView.vue'
 
 export default createRouter({
   history: createWebHistory(),
@@ -29,6 +30,10 @@ export default createRouter({
     {
       path: '/login',
       component: Login
+    },
+    {
+      path: '/BookingView',
+      component: BookingView
     },
   ]
 })
