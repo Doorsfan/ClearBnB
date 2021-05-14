@@ -18,8 +18,7 @@ public class User {
   // default constructor
   public User() { }
 
-  public User(String username, String password, ArrayList<Booking> myBookings) {
-  public User(String username, String password, UserInfo userInfo) {
+  public User(String username, String password, ArrayList<Booking> myBookings, UserInfo userInfo) {
     this.username = username;
     this.password = password;
     this.myBookings = myBookings;
@@ -33,11 +32,6 @@ public class User {
             ", username='" + username + '\'' +
             ", password='" + password + '\'' +
             ", myBookings=" + myBookings +
-            '}';
-    return "User{" +
-            "id='" + id + '\'' +
-            ", username='" + username + '\'' +
-            ", password='" + password + '\'' +
             ", userInfo=" + userInfo +
             '}';
   }
