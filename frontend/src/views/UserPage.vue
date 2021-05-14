@@ -2,12 +2,24 @@
   <div class="mainDiv">
     <p class="userPageTitle">User Page</p>
     <p class="welcomeMessage"></p>
-    <p class="yourBookingsText">Your bookings so far:</p>
-    <div class="bookings">
-      <div class="bookingBox">temp</div>
-      <div class="bookingBox">temp</div>
-      <div class="bookingBox">temp</div>
-      <div class="bookingBox">temp</div>
+    <button @click="switchHistoricalDisplay" class="changeHistoricalDisplay">Show Past Bookings</button>
+    <div class="currentBookingsDiv">
+      <p class="yourBookingsText">Your <b>CURRENT</b> bookings so far:</p>
+      <div class="bookings">
+        <div class="bookingBox">temp</div>
+        <div class="bookingBox">temp</div>
+        <div class="bookingBox">temp</div>
+        <div class="bookingBox">temp</div>
+      </div>
+    </div>
+    <div class="pastBookingsDiv">
+      <p class="yourBookingsText">Your <b>PAST</b> bookings so far:</p>
+      <div class="bookings">
+        <div class="bookingBox">temp</div>
+        <div class="bookingBox">temp</div>
+        <div class="bookingBox">temp</div>
+        <div class="bookingBox">temp</div>
+      </div>
     </div>
     <p class="showAdventure">Show me my next adventure!</p>
     <div class="residencesOutBox">
@@ -79,6 +91,19 @@ export default {
     $('.welcomeMessage').text("Welcome " + this.user.userInfo.firstName + " " + this.user.userInfo.lastName + "!");
   },
   methods:{
+    switchHistoricalDisplay(){
+      if($('.changeHistoricalDisplay').text() == "Show Past Bookings"){
+        $('.changeHistoricalDisplay').text("Show Current Bookings")
+        document.getElementsByClassName('currentBookingsDiv')[0].style.display = 'none';
+        document.getElementsByClassName('pastBookingsDiv')[0].style.display = 'block';
+      }
+      else if($('.changeHistoricalDisplay').text() == "Show Current Bookings"){
+        $('.changeHistoricalDisplay').text("Show Past Bookings")
+        document.getElementsByClassName('currentBookingsDiv')[0].style.display = 'block';
+        document.getElementsByClassName('pastBookingsDiv')[0].style.display = 'none';
+      }
+      
+    },
     changeUserInfo(){
       this.myFirstName = this.user.userInfo.firstName;
       this.myLastName = this.user.userInfo.lastName;
@@ -99,6 +124,26 @@ export default {
 }
 </script>
 <style scoped>
+.changeHistoricalDisplay, .changeHistoricalDisplay:active{
+  background: none!important;
+  background-color:none;
+  border: none;
+  padding: 0!important;
+  /*optional*/
+  font-family: arial, sans-serif;
+  /*input has OS specific font-family*/
+  color: #069;
+  text-decoration: none;
+  width:max-content;
+  font-size:20px;
+  margin-bottom:15px;
+}
+.pastBookingsDiv{
+  display:none;
+}
+.userPageTitle{
+  text-align:center;
+}
   .bookingBox{
     text-align:center;
   }
@@ -183,6 +228,7 @@ export default {
     margin-left:auto;
     margin-right:auto;
     margin-top:20px;
+    text-align:center;
   }
   .userPageTitle{
     margin-bottom:20px;
