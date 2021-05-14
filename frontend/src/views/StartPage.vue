@@ -93,6 +93,7 @@ import User from '../components/User.vue'
   }
   console.log(originalListOfAllLeases);
 export default {
+  emits: ['loggedIn', 'loggedOut'],
   components: {
     DatePickerOnStartPage,
     LeaseDisplayBox,
@@ -117,6 +118,19 @@ export default {
       myAmountOfBeds: '',
       myMinPrice: '',
       myMaxPrice: ''
+    }
+  },
+  mounted(){
+    if(this.$store.getters.getCurrentUser != null){
+      $('.signUpLink').text("My Page")
+      $('.loginLink').text("Log Out")
+      this.$emit("loggedIn", true)
+    }
+    else{
+      $('.signUpLink').text("Sign Up")
+      $('.loginLink').text("Log In")
+      this.$emit("loggedOut", true)
+      this.$store.commit('setUser', null)
     }
   },
   methods:{

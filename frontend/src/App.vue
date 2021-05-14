@@ -1,10 +1,10 @@
 <template>
   <header>
-    <Header />
+    <Header @loggedOut="loggedOut" :signUp="signUp" :login="login"/>
   </header>
 
   <main class="app-main">
-    <router-view />
+    <router-view @loggedIn="loggedIn"/>
   </main>
 
   <footer>
@@ -25,7 +25,20 @@ export default {
   },
   data() {
     return {
-      
+      signUp: 'signUp',
+      login: 'login'
+    }
+  },
+  methods:{
+    loggedIn(){
+      this.signUp = 'userPage'
+      this.login = ''
+    },
+    loggedOut(){
+      this.signUp = 'signUp'
+      this.login = 'login'
+      $('.signUpLink').text("Sign Up")
+      $('.loginLink').text("Log In")
     }
   }
 }

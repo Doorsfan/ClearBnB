@@ -10,13 +10,9 @@
         <router-link to="BookingView">Booking View</router-link>
       </div>
       <div class="right">
-        <router-link to="signUp"
-          ><i class="fas fa-user-plus"></i>Sign Up</router-link
-        >
+        <router-link class="signUpLink" :to="signUp"><i class="fas fa-user-plus"></i>Sign Up</router-link>
         <span>|</span>
-        <router-link to="login"
-          ><i class="fas fa-sign-in-alt"></i>Login</router-link
-        >
+        <router-link @click="seeIfLoggingOut" class="loginLink" :to="login"><i class="fas fa-sign-in-alt"></i>Login</router-link>
       </div>
     </div>
     <div v-else class="tablet-nav">
@@ -30,6 +26,8 @@
 <script>
 import Hamburger from "./HamburgerMenu.vue";
 export default {
+  props:['signUp', 'login'],
+  emits: ['loggedOut'],
   components: {
     Hamburger,
   },
@@ -44,6 +42,12 @@ export default {
     this.big.addEventListener("change", this.watchMedia);
   },
   methods: {
+    seeIfLoggingOut(){
+      if($('.loginLink').text() == 'Log Out'){
+        this.$store.commit('setUser', null)
+        this.$emit("loggedOut", true)
+      }
+    },
     watchMedia: function (x) {
       if (x.matches) this.isSmall = false;
       else this.isSmall = true;
