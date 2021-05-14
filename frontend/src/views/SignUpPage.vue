@@ -59,7 +59,8 @@ export default {
       }
       let myUser = { 
         username: this.email,
-        password: this.password
+        password: this.password,
+        myBookings: []
       }
       let myUserInfo = {
         phoneNumber: this.phoneNumber,
