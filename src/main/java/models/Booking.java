@@ -15,8 +15,23 @@ public class Booking {
     private String endDate;
     private int guests;
     private double totalPrice;
+    private Lease bookedStay;
 
-    public Booking() {}
+    public Booking(String userId, String leaseId, String location, String startDate,
+                   String endDate, int guests, double totalPrice, Lease bookedStay) {
+        this.userId = userId;
+        this.leaseId = leaseId;
+        this.location = location;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.guests = guests;
+        this.totalPrice = totalPrice;
+        this.bookedStay = bookedStay;
+    }
+
+    public Lease getBookedStay() { return bookedStay; }
+
+    public void setBookedStay(Lease bookedStay) { this.bookedStay = bookedStay; }
 
     public String getId() {
         return id;
@@ -93,6 +108,7 @@ public class Booking {
                 ", endDate='" + endDate + '\'' +
                 ", guests=" + guests +
                 ", totalPrice=" + totalPrice +
+                ", bookedStay=" + bookedStay +
                 '}';
     }
 }

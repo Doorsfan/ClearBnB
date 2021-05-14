@@ -21,7 +21,14 @@ import BedsInputForm from '../components/StartView/BedsInputForm.vue'
 import PriceRangeForm from '../components/StartView/PriceRangeForm.vue'
 import Header from '../components/Header.vue'
 import HambugerMenu from '../components/HamburgerMenu.vue'
-  console.log("hi");
+import User from '../components/User.vue'
+
+  let myUser = new User([]);
+  myUser.addBooknig({ location: "Holiday Resort", startDate: "2021-05-20", endDate: "2021-05-30", guests: 5, totalPrice: 1000, bookedStay: new Lease("Entire Flat", "Holiday Resort", "Lorem Ipsum", "Flat", "2021-08-01", "2021-09-30", 220, 5, 4, { wifi: true, kitchen: true, washer: true, heating: false, airConditioner: true }, [
+      "https://images.unsplash.com/photo-1613377739358-92aca92e9e13?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80",
+      "https://images.unsplash.com/photo-1618660920685-4505debb785a?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=751&q=80"
+    ] )})
+  console.log(myUser);
   //Load in all the leases of the page from the DB here
   let res = await fetch('/rest/leases')
   let responseInJson = await res.json();
