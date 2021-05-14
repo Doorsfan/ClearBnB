@@ -21,7 +21,7 @@ import BedsInputForm from '../components/StartView/BedsInputForm.vue'
 import PriceRangeForm from '../components/StartView/PriceRangeForm.vue'
 import Header from '../components/Header.vue'
 import HambugerMenu from '../components/HamburgerMenu.vue'
-
+  console.log("hi");
   //Load in all the leases of the page from the DB here
   let res = await fetch('/rest/leases')
   let responseInJson = await res.json();
@@ -40,6 +40,7 @@ import HambugerMenu from '../components/HamburgerMenu.vue'
     myLease.maxGuests = responseInJson[eachLease].maxGuests;
     myLease.beds = responseInJson[eachLease].beds;
     myLease.amenities = {}
+
     for(let amenity in responseInJson[eachLease].amenities){
       if(amenity.includes("false")){
         if(amenity.includes("wifi")){
@@ -81,7 +82,9 @@ import HambugerMenu from '../components/HamburgerMenu.vue'
       myLease.imageURLs.push(responseInJson[eachLease].imageURLs[i])
     }
     originalListOfAllLeases.push(myLease);
+    console.log(originalListOfAllLeases);
   }
+  console.log(originalListOfAllLeases);
 export default {
   components: {
     DatePickerOnStartPage,

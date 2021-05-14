@@ -3,11 +3,11 @@ package models;
 // DO NOT preface with @Document. Used by Lease
 public class Amenity {
 
-    private boolean wifi;
-    private boolean kitchen;
-    private boolean washer;
-    private boolean heating;
-    private boolean airConditioner;
+    private String wifi;
+    private String kitchen;
+    private String washer;
+    private String heating;
+    private String airConditioner;
 
     @Override
     public String toString() {
@@ -22,7 +22,7 @@ public class Amenity {
 
     public Amenity() {}
 
-    public Amenity(boolean wifi, boolean kitchen, boolean washer, boolean heating, boolean airConditioner) {
+    public Amenity(String wifi, String kitchen, String washer, String heating, String airConditioner) {
         this.wifi = wifi;
         this.kitchen = kitchen;
         this.washer = washer;
@@ -30,43 +30,43 @@ public class Amenity {
         this.airConditioner = airConditioner;
     }
 
-    public boolean isWifi() {
+    public String isWifi() {
         return wifi;
     }
 
-    public void setWifi(boolean wifi) {
+    public void setWifi(String wifi) {
         this.wifi = wifi;
     }
 
-    public boolean isKitchen() {
+    public String isKitchen() {
         return kitchen;
     }
 
-    public void setKitchen(boolean kitchen) {
+    public void setKitchen(String kitchen) {
         this.kitchen = kitchen;
     }
 
-    public boolean isWasher() {
+    public String isWasher() {
         return washer;
     }
 
-    public void setWasher(boolean washer) {
+    public void setWasher(String washer) {
         this.washer = washer;
     }
 
-    public boolean isHeating() {
+    public String isHeating() {
         return heating;
     }
 
-    public void setHeating(boolean heating) {
+    public void setHeating(String heating) {
         this.heating = heating;
     }
 
-    public boolean isAirConditioner() {
+    public String isAirConditioner() {
         return airConditioner;
     }
 
-    public void setAirConditioner(boolean airConditioner) {
+    public void setAirConditioner(String airConditioner) {
         this.airConditioner = airConditioner;
     }
 }
