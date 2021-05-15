@@ -26,8 +26,8 @@ Date.prototype.addDays = function(days) {
   date.setDate(date.getDate() + days);
   return date;
 }
-let endDateOneDayAhead = new Date().addDays(1);
-const endDate = ref(endDateOneDayAhead) //The date for the To datePicker - the end date
+let endDateSevenDaysAhead = new Date().addDays(7);
+const endDate = ref(endDateSevenDaysAhead) //The date for the To datePicker - the end date
 
 export default {
   //emits: ['updateEndDate', 'updateStartDate'],
