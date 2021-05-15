@@ -195,11 +195,11 @@ export default {
       this.checkWhichFilterToRun()
     },
     updateSearchEndDate(newDate){
-      this.endDate = newDate
+      this.choseEndDate = newDate
       this.checkWhichFilterToRun()
     },
     updateSearchStartDate(newDate){
-      this.startDate = newDate
+      this.choseStartDate = newDate
       this.checkWhichFilterToRun()
     },
     updateMyMinPrice(newMinPrice){
