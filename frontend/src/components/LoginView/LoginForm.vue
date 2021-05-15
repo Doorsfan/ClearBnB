@@ -6,7 +6,7 @@
     </div>
     <form class="LoginForm" @submit.prevent="login">
       <div class="emailDiv">
-        <input v-model="userName" type="email" placeholder="E-mail" required />
+        <input v-model="username" type="email" placeholder="E-mail" required />
       </div>
       <div class="passwordDiv">
         <input
@@ -30,37 +30,49 @@
 
 <script>
 import store from '../../store.js'
+import User from '../../components/User.js'
+import UserInfo from '../UserInfo.js'
 export default {
   data() {
     return {
-      userName: "",
+      username: "",
       password: "",
     };
   },
   methods: {
     async login(){
-      let user = {
-        username: this.userName,
-        password: this.password
-      }
+      let user = new User(this.username, this.password, [], new UserInfo(
+        'N/A',
+        'N/A',
+        'N/A',
+        'N/A',
+        'N/A',
+        'N/A',
+        'N/A',
+        'N/A',
+        false
+        ));
       let res = await fetch('/api/login', {
         method: 'POST',
         body: JSON.stringify(user)
       })
       let response = await res.json()
+      console.log("Response was: ", response);
       if(response.error == "Bad credentials"){ //Failed to log in
         document.getElementsByClassName("failedLoginDiv")[0].style.display = "block";
       }
       else{
+        user.password = response['password']
         let responseForUserInfo = await fetch('/rest/userinfos')
         let responseForUserInfoAsJson = await responseForUserInfo.json()
         for(let userInfo of responseForUserInfoAsJson){
           if(userInfo.userId == response['id']){
             response.userInfo = userInfo
+            user.setUserInfo(userInfo)
           }
         }
         document.getElementsByClassName("failedLoginDiv")[0].style.display = "none";
-        this.$store.dispatch('login', response)
+        this.$store.dispatch('login', user)
         //window.location = '/'
         document.getElementsByClassName('CancelButton')[0].click(); //Simulate a click on the Cancel button to go to the start page
         //To interact with the stores getters, write this.$store.getters.<gettersName>

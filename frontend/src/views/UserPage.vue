@@ -6,19 +6,17 @@
     <div class="currentBookingsDiv">
       <p class="yourBookingsText">Your <b>CURRENT</b> bookings so far:</p>
       <div class="bookings">
-        <div class="bookingBox">temp</div>
-        <div class="bookingBox">temp</div>
-        <div class="bookingBox">temp</div>
-        <div class="bookingBox">temp</div>
+        <BookingsList v-for="(booking, index) of myBookings"
+        :key="index"
+        :myBooking="booking" />
       </div>
     </div>
     <div class="pastBookingsDiv">
       <p class="yourBookingsText">Your <b>PAST</b> bookings so far:</p>
       <div class="bookings">
-        <div class="bookingBox">temp</div>
-        <div class="bookingBox">temp</div>
-        <div class="bookingBox">temp</div>
-        <div class="bookingBox">temp</div>
+        <BookingsList v-for="(booking, index) of myBookings"
+        :key="index"
+        :myBooking="booking" />
       </div>
     </div>
     <p class="showAdventure">Show me my next adventure!</p>
@@ -69,12 +67,19 @@
 </template>
 
 <script>
-
+import User from '../components/User.js'
+import UserInfo from '../components/UserInfo.js'
+import Booking from '../components/Booking.js'
+import Lease from '../components/Lease.vue'
+import BookingsList from "../components/UserView/BookingsList.vue"
 export default {
+  components: {
+    BookingsList
+  },
   data() {
     return {
       user: '',
-      myBooking: ['temp', 'temp', 'temp'],
+      myBookings: [],
       myFirstName: '',
       myLastName: '',
       myPhoneNumber:'',
@@ -82,12 +87,22 @@ export default {
       myCity: '',
       myZipCode: '',
       myCountry: '',
-      myNewsLetter: ''
+      myNewsLetter: false
     }
   },
   mounted(){
+    let emptyUser = new User('', '', [], new UserInfo('','','','','','','','',false));
+    let emptyUserInfo = new UserInfo('','','','','','','','',false)
     this.user = this.$store.getters.getCurrentUser
-    console.log(this.user.userInfo);
+    let currentUser = Object.assign(emptyUser,this.user)
+    let myUserInfo = Object.assign(emptyUserInfo,this.user.userInfo)
+    currentUser.userInfo = myUserInfo
+
+    let myLease = new Lease(1, currentUser.getUserInfo().getUserId(),'Cozy Winter Cottage', 'The Alps', 'Lorem Ipsum', 'House', 'Entire', '2021-05-15', '2021-05-21', 1000, '2', '1',['Shower: true', 'Heating: true'], ["https://images.unsplash.com/photo-1583845112203-29329902332e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=334&q=80",
+      "https://images.unsplash.com/photo-1572120360610-d971b9d7767c?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80"])
+    currentUser.addBooking(new Booking(currentUser.getUserInfo().getUserId(), 1, myLease.getLocation(), '2021-05-22', '2021-05-23', 1,1000, myLease))
+    this.user = currentUser
+    this.myBookings = currentUser.getBookings();
     $('.welcomeMessage').text("Welcome " + this.user.userInfo.firstName + " " + this.user.userInfo.lastName + "!");
   },
   methods:{
@@ -124,6 +139,7 @@ export default {
 }
 </script>
 <style scoped>
+
 .changeHistoricalDisplay, .changeHistoricalDisplay:active{
   background: none!important;
   background-color:none;
@@ -167,6 +183,8 @@ export default {
     text-decoration: none;
     cursor: pointer;
     width:max-content;
+    font-size:20px;
+    margin-top:25px;
   }
   .changeUserInfoDiv{
     display:none;
@@ -243,8 +261,11 @@ export default {
   .yourBookingsText{
     margin-bottom:20px;
   }
-  .userInfoForm{
-    
+  .residencesOutBox{
+    margin-top:15px;
+  }
+  .residencesLink{
+    font-weight:bolder;
   }
 </style>
 

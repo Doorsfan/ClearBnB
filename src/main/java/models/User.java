@@ -3,6 +3,8 @@ package models;
 import nosqlite.annotations.Document;
 import nosqlite.annotations.Id;
 import java.util.ArrayList;
+import models.Booking;
+import models.UserInfo;
 
 // use with collections
 @Document
@@ -12,8 +14,8 @@ public class User {
   private String id;
   private String username;
   private String password;
-  private ArrayList<Booking> myBookings;
-  private UserInfo userInfo;
+  private ArrayList<Booking> myBookings = new ArrayList<Booking>();
+  private UserInfo userInfo = new UserInfo("","","","","","","","",false);
 
   // default constructor
   public User() { }
@@ -42,6 +44,14 @@ public class User {
   
   public void setId(String id) {
     this.id = id;
+  }
+
+  public UserInfo getUserInfo() {
+    return userInfo;
+  }
+
+  public void setUserInfo(UserInfo userInfo) {
+    this.userInfo = userInfo;
   }
 
   public String getUsername() {
