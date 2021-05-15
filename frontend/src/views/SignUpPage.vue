@@ -57,32 +57,39 @@ export default {
         document.getElementsByClassName('errorBox')[0].style.display = 'block';
         return;
       }
-      let myUser = { 
-        username: this.email,
-        password: this.password,
-        myBookings: []
-      }
-      let myUserInfo = {
-        phoneNumber: this.phoneNumber,
-        firstName: this.firstName, 
-        lastName: this.lastName, 
-        streetAddress: this.streetAddress, 
-        zipCode: this.zipCode, 
-        city: this.City, 
-        country: this.country,
-        newsLetter: this.newsLetter 
-      }
-
+      /*
+      userId,
+    firstName,
+    lastName,
+    streetAddress,
+    zipCode,
+    city,
+    country,
+    phoneNumber,
+    newsLetter */
+      //Look at again when back from dinner
+      let newUser = new User(this.email, this.password, [], {});
+      let newUserInfo = new UserInfo(
+        '',
+        this.firstName,
+        this.lastName,
+        this.streetAddress,
+        this.zipCode,
+        this.City,
+        this.phoneNumber,
+        this.newsLetter
+      )
+      newUser.userInfo = newUserInfo
       let res = await fetch('/api/register', {
         method: 'POST',
-        body: JSON.stringify(myUser)
+        body: JSON.stringify(newUser)
       })
       let responseAsJson = await res.json();
       if(responseAsJson['error'] == "User already exists"){
         document.getElementsByClassName('takenUserBox')[0].style.display = 'block';
         return;
       }
-      myUserInfo.userId = responseAsJson['id'];
+      newUser.userInfo.userId = responseAsJson['id'];
       await fetch('/rest/userinfos', {
         method: 'POST',
         body: JSON.stringify(myUserInfo)
