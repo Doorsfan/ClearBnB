@@ -1,5 +1,6 @@
 import express.Express;
 import models.User;
+import models.UserInfo;
 import nosqlite.utilities.Filter;
 import utilities.HashPassword;
 
@@ -18,6 +19,16 @@ public class Auth {
     }
 
     private void initAuth() {
+
+        app.post("/api/updateUser", (req, res) -> {
+            User user = req.body(User.class);
+            UserInfo newInfo = user.getUserInfo();
+            User existingUser = collection("User").findOne(Filter.eq("username", user.getUsername()));
+            existingUser.setUserInfo(newInfo);
+            collection("User").save(existingUser);
+            res.json("The new user info was: " + existingUser);
+        });
+
         // register user
         app.post("/api/register", (req,res) -> {
             User user = req.body(User.class);
@@ -35,6 +46,10 @@ public class Auth {
             String hashedPassword = HashPassword.hash(user.getPassword()); // "hemligt" -> Hashed SHA String
             user.setPassword(hashedPassword);
 
+            collection("User").save(user);
+            User myUser = collection("User").findOne(Filter.eq("username", user.getUsername()));
+            System.out.println("myUser was " + myUser);
+            user.getUserInfo().setUserId(myUser.getId());
             collection("User").save(user);
 
             res.json(user);

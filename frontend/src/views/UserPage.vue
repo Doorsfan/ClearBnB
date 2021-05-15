@@ -61,7 +61,7 @@
       </div>
     </form>
     <div class="buttonsDiv">
-      <button @click="redisplayUserPage" class="cancelButton" value="Cancel">Cancel</button><button class="saveChangesButton" @click="updateUser" value="Save Changes">Save Changes</button>
+      <button @click="redisplayUserPage" class="cancelButton" value="Cancel">Cancel</button><button class="saveChangesButton" @click="updateUserInfo" value="Save Changes">Save Changes</button>
     </div>
   </div>
 </template>
@@ -128,6 +128,34 @@ export default {
     $('.welcomeMessage').text("Welcome " + this.user.userInfo.firstName + " " + this.user.userInfo.lastName + "!");
   },
   methods:{
+    async updateUserInfo(){
+      console.log("haha");
+      let newUserInfo = new UserInfo(
+        this.user.userInfo.getUserId(),
+        this.myFirstName,
+        this.myLastName,
+        this.myStreetAddress,
+        this.myZipCode,
+        this.myCity,
+        this.myCountry,
+        this.myPhoneNumber,
+        this.myNewsLetter
+      )
+      let res = await fetch('/rest/userinfos', {
+        method: 'POST',
+        body: JSON.stringify(newUserInfo)
+      })
+      let responseAsJson = await res.json();
+      console.log("User info response: ", responseAsJson);
+      this.user.userInfo = newUserInfo
+      this.user.myBookings = []
+      let secondRes = await fetch('/api/updateUser', {
+        method: 'POST',
+        body: JSON.stringify(this.user)
+      })
+      let secondResponseAsJson = await secondRes.json();
+      console.log("User response: ", secondResponseAsJson);
+    },
     switchHistoricalDisplay(){
       if($('.changeHistoricalDisplay').text() == "Show Past Bookings"){
         $('.changeHistoricalDisplay').text("Show Current Bookings")

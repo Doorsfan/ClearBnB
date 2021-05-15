@@ -34,6 +34,8 @@
   </div>
 </template>
 <script>
+import User from '../components/User.js'
+import UserInfo from '../components/UserInfo.js'
 export default {
   data() {
     return {
@@ -76,6 +78,7 @@ export default {
         this.streetAddress,
         this.zipCode,
         this.City,
+        this.country,
         this.phoneNumber,
         this.newsLetter
       )
@@ -85,14 +88,15 @@ export default {
         body: JSON.stringify(newUser)
       })
       let responseAsJson = await res.json();
+      console.log(responseAsJson);
       if(responseAsJson['error'] == "User already exists"){
         document.getElementsByClassName('takenUserBox')[0].style.display = 'block';
         return;
       }
-      newUser.userInfo.userId = responseAsJson['id'];
+      newUserInfo.userId = responseAsJson['id']
       await fetch('/rest/userinfos', {
         method: 'POST',
-        body: JSON.stringify(myUserInfo)
+        body: JSON.stringify(newUserInfo)
       })
       document.getElementsByClassName('cancelButton')[0].click();
     }

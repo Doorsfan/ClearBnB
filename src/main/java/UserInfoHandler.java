@@ -1,5 +1,7 @@
 import express.Express;
+import models.User;
 import models.UserInfo;
+import nosqlite.utilities.Filter;
 
 import static nosqlite.Database.collection;
 
@@ -16,9 +18,14 @@ public class UserInfoHandler {
         // save a userInfo and return the object on the server
         app.post("/rest/userinfos", (req,res) -> {
             UserInfo userInfo = req.body(UserInfo.class);
+            UserInfo userInfoToDelete = collection("UserInfo").findOne(Filter.eq("userId", userInfo.getUserId()));
+            if(userInfoToDelete != null){
+                collection("UserInfo").deleteOne(Filter.eq("userId", userInfo.getUserId()));
+            }
             collection("UserInfo").save(userInfo);
-            res.json(userInfo);
+            res.json("Updated User info");
         });
+
         // get all userInfos
         app.get("/rest/userinfos", (req,res) -> {
             //res.json(req.session("current-userInfo")); //???
