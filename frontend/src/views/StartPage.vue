@@ -109,7 +109,9 @@ export default {
       removedBasedOnLocation: [],
       myAmountOfBeds: '',
       myMinPrice: '',
-      myMaxPrice: ''
+      myMaxPrice: '',
+      choseStartDate: this.getTodayInCorrectFormat(),
+      choseEndDate: new Date().addDays(7)
     }
   },
   mounted(){
