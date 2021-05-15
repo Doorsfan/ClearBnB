@@ -94,7 +94,8 @@ export default {
       myNewsLetter: false
     }
   },
-  mounted(){
+  async mounted(){
+    this.myBookings = [];
     let emptyUser = new User('', '', [], new UserInfo('','','','','','','','',false));
     let emptyUserInfo = new UserInfo('','','','','','','','',false)
     this.user = this.$store.getters.getCurrentUser
@@ -102,21 +103,20 @@ export default {
     let myUserInfo = Object.assign(emptyUserInfo,this.user.userInfo)
     currentUser.userInfo = myUserInfo
 
-    // CREATE FIRST BOOKING WITH FIRST LEASE
-    let myLease = new Lease(1, currentUser.getUserInfo().getUserId(),'Cozy Winter Cottage', 'The Alps', 'Lorem Ipsum', 'House', 'Entire', '2021-05-05', '2021-05-14', 1000, '2', '1',['Shower: true', 'Heating: true'], ["https://images.unsplash.com/photo-1579627559241-aa855a66df15?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=717&q=80",
-      "https://images.unsplash.com/photo-1572120360610-d971b9d7767c?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80"])
-    let firstBooking = new Booking(currentUser.getUserInfo().getUserId(), 2, myLease.getLocation(), '2021-05-05', '2021-05-14', 2,2000, myLease)
-    currentUser.addBooking(firstBooking)
-
-    //CREATE SECOND BOOKING WITH SECOND LEASE
-    let secondLease = new Lease(2, currentUser.getUserInfo().getUserId(),'Summer Resort', 'Colorado', 'Lorem Ipsum', 'House', 'Entire', '2021-15-16', '2021-05-25', 2000, '3', '2',['Shower: true', 'Heating: true'], ["https://images.unsplash.com/photo-1583845112203-29329902332e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=334&q=80",
-      "https://images.unsplash.com/photo-1583845112203-29329902332e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=334&q=80"])
-    let secondBooking = new Booking(currentUser.getUserInfo().getUserId(), 1, secondLease.getLocation(), '2021-05-16', '2021-05-20', 1,1000, secondLease)
-    currentUser.addBooking(secondBooking)
-
-
     this.user = currentUser
-    this.myBookings = currentUser.getBookings();
+    //Load from the DB all the Bookings that are tied to this users userId based on the userInfo
+    let secondRes = await fetch('/rest/bookings', {
+        method: 'GET'
+      });
+    let theResponse = await secondRes.json();
+    console.log(theResponse);
+    for(let eachBooking of theResponse){
+      if(eachBooking.userId == this.user.getUserInfo().getUserId()){
+        let emptyBooking = new Booking('','','','','','','','');
+        let filledBooking = Object.assign(emptyBooking, eachBooking);
+        this.myBookings.push(filledBooking);
+      }
+    }
     for(let booking of this.myBookings){
       if(booking.isInTheFuture(booking.endDate)){
         this.futureBookings.push(booking)
@@ -146,15 +146,12 @@ export default {
         body: JSON.stringify(newUserInfo)
       })
       let responseAsJson = await res.json();
-      console.log("User info response: ", responseAsJson);
       this.user.userInfo = newUserInfo
-      this.user.myBookings = []
       let secondRes = await fetch('/api/updateUser', {
         method: 'POST',
         body: JSON.stringify(this.user)
-      })
+      });
       let secondResponseAsJson = await secondRes.json();
-      console.log("User response: ", secondResponseAsJson);
     },
     switchHistoricalDisplay(){
       if($('.changeHistoricalDisplay').text() == "Show Past Bookings"){

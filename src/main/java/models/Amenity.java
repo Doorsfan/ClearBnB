@@ -3,6 +3,7 @@ package models;
 // DO NOT preface with @Document. Used by Lease
 public class Amenity {
 
+
     private String wifi;
     private String kitchen;
     private String washer;

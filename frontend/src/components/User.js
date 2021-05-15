@@ -1,8 +1,7 @@
 export default class User {
-  constructor(username, password, myBookings, userInfo) {
+  constructor(username, password, userInfo) {
     this.username = username;
     this.password = password;
-    this.myBookings = myBookings;
     this.userInfo = userInfo;
   }
   getUsername() {
@@ -10,15 +9,6 @@ export default class User {
   }
   setUsername(newUsername) {
     this.username = newUsername;
-  }
-  getBookings() {
-    return this.myBookings;
-  }
-  setBookings(newSetOfBookings) {
-    this.myBookings = newSetOfBookings;
-  }
-  addBooking(newBooking) {
-    this.myBookings.push(newBooking);
   }
   getUserInfo() {
     return this.userInfo;

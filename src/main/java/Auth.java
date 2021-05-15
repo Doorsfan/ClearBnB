@@ -24,8 +24,13 @@ public class Auth {
             User user = req.body(User.class);
             UserInfo newInfo = user.getUserInfo();
             User existingUser = collection("User").findOne(Filter.eq("username", user.getUsername()));
-            existingUser.setUserInfo(newInfo);
-            collection("User").save(existingUser);
+            if(existingUser != null){
+                existingUser.setUserInfo(newInfo);
+                collection("User").save(existingUser);
+            }
+            else{
+                collection("User").save(user);
+            }
             res.json("The new user info was: " + existingUser);
         });
 

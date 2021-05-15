@@ -126,6 +126,22 @@ export default {
     }
   },
   methods:{
+    async pretendToBook(){
+      //Mt6ZUN7dYDQ1a2zuwbTYx the id of the place to book
+
+      let myLease = new Lease("Mt6ZUN7dYDQ1a2zuwbTYx","someOwnerId", "Cozy House in Detroit", "USA, Alaska","Lorem Ipsum",
+        "House", false, "2021-04-15", "2021-05-25", 1000, 4, 4, ["wifi: false","kitchen: false","washer: true","heating: true","airConditioner: false"],["https://images.unsplash.com/photo-1618221118493-9cfa1a1c00da?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=889&q=80",
+        "https://images.unsplash.com/photo-1580202313707-46a966af5c6f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1. 2.1&auto=format&fit=crop&w=743&q=80"
+      ])
+      let myBooking = new Booking(this.$store.getters.getCurrentUser.getUserInfo().getUserId(), 'Mt6ZUN7dYDQ1a2zuwbTYx',
+      "USA, Alaska", "2021-04-20", "2021-04-25", 1, 1000, myLease);
+      let secondRes = await fetch('/rest/bookings', {
+        method: 'POST',
+        body: JSON.stringify(myBooking)
+      });
+      let secondResponseAsJson = await secondRes.json();
+      console.log("response based on booking was: ", secondResponseAsJson)
+    },
     //Can be used to populate the DB with dummy data
     /*
     async populateLeases(){

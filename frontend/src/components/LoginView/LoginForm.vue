@@ -41,7 +41,7 @@ export default {
   },
   methods: {
     async login(){
-      let user = new User(this.username, this.password, [], new UserInfo(
+      let user = new User(this.username, this.password, new UserInfo(
         'N/A',
         'N/A',
         'N/A',

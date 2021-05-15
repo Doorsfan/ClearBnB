@@ -21,6 +21,7 @@ public class BookingHandler {
         });
         // get all bookings
         app.get("/rest/bookings", (req, res) -> {
+            System.out.println("All bookings was: " + collection("Booking").find());
             res.json(collection("Booking").find());
         });
         // get a specific booking
