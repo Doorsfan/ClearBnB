@@ -6,7 +6,7 @@
     <div class="currentBookingsDiv">
       <p class="yourBookingsText">Your <b>CURRENT</b> bookings so far:</p>
       <div class="bookings">
-        <BookingsList v-for="(booking, index) of myBookings"
+        <BookingsList v-for="(booking, index) of futureBookings"
         :key="index"
         :myBooking="booking" />
       </div>
@@ -14,7 +14,7 @@
     <div class="pastBookingsDiv">
       <p class="yourBookingsText">Your <b>PAST</b> bookings so far:</p>
       <div class="bookings">
-        <BookingsList v-for="(booking, index) of myBookings"
+        <BookingsList v-for="(booking, index) of pastBookings"
         :key="index"
         :myBooking="booking" />
       </div>
@@ -80,6 +80,8 @@ export default {
     return {
       user: '',
       myBookings: [],
+      futureBookings: [],
+      pastBookings: [],
       myFirstName: '',
       myLastName: '',
       myPhoneNumber:'',
@@ -98,11 +100,26 @@ export default {
     let myUserInfo = Object.assign(emptyUserInfo,this.user.userInfo)
     currentUser.userInfo = myUserInfo
 
-    let myLease = new Lease(1, currentUser.getUserInfo().getUserId(),'Cozy Winter Cottage', 'The Alps', 'Lorem Ipsum', 'House', 'Entire', '2021-05-15', '2021-05-21', 1000, '2', '1',['Shower: true', 'Heating: true'], ["https://images.unsplash.com/photo-1583845112203-29329902332e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=334&q=80",
+    let myLease = new Lease(1, currentUser.getUserInfo().getUserId(),'Cozy Winter Cottage', 'The Alps', 'Lorem Ipsum', 'House', 'Entire', '2021-05-05', '2021-05-14', 1000, '2', '1',['Shower: true', 'Heating: true'], ["https://images.unsplash.com/photo-1583845112203-29329902332e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=334&q=80",
       "https://images.unsplash.com/photo-1572120360610-d971b9d7767c?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80"])
-    currentUser.addBooking(new Booking(currentUser.getUserInfo().getUserId(), 1, myLease.getLocation(), '2021-05-22', '2021-05-23', 1,1000, myLease))
+    currentUser.addBooking(new Booking(currentUser.getUserInfo().getUserId(), 1, myLease.getLocation(), '2021-05-05', '2021-05-14', 1,1000, myLease))
+
+    let secondLease = new Lease(1, currentUser.getUserInfo().getUserId(),'Winter Ski Resort', 'Colorado', 'Lorem Ipsum', 'House', 'Entire', '2021-15-16', '2021-05-25', 1000, '2', '1',['Shower: true', 'Heating: true'], ["https://images.unsplash.com/photo-1583845112203-29329902332e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=334&q=80",
+      "https://images.unsplash.com/photo-1572120360610-d971b9d7767c?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80"])
+    currentUser.addBooking(new Booking(currentUser.getUserInfo().getUserId(), 1, secondLease.getLocation(), '2021-05-16', '2021-05-20', 1,1000, myLease))
     this.user = currentUser
     this.myBookings = currentUser.getBookings();
+    for(let booking of this.myBookings){
+      if(booking.isInTheFuture(booking.endDate) && !this.futureBookings.includes(booking)){
+        console.log("Added to future")
+        this.futureBookings.push(booking)
+      }
+      else if(!booking.isInTheFuture(booking.endDate) && !this.pastBookings.includes(booking)){
+        console.log("Added to past")
+        this.pastBookings.push(booking)
+      }
+    }
+    console.log("This booking was in the future: ", this.myBookings[0].isInTheFuture()) //Should be false
     $('.welcomeMessage').text("Welcome " + this.user.userInfo.firstName + " " + this.user.userInfo.lastName + "!");
   },
   methods:{

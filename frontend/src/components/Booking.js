@@ -1,3 +1,5 @@
+import { toDisplayString } from "@vue/shared";
+
 export default class Booking {
   constructor(userId, leaseId, location, startDate, endDate, guests, totalPrice, bookedStay) {
     this.userId = userId;
@@ -56,5 +58,12 @@ export default class Booking {
   }
   setBookedStay(newBookedStay) {
     this.bookedStay = newBookedStay
+  }
+  isInTheFuture(toCompare) {
+    console.log("Based on : ", toCompare);
+    console.log("Versus : ", new Date());
+    console.log("It was deemed to be in the future: ", toCompare < new Date());
+    let isInTheFuture = toCompare < new Date()
+    return isInTheFuture
   }
 }
