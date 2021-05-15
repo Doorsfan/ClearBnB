@@ -1,11 +1,11 @@
 <template>
   <div class="mainBoxDiv">
-    <router-link class="goToBookedItem" :to="{ path: '/BookingView', query: { leaseId: myBooking.leaseId }}">
-      <img class="firstImage" :src="myBooking.bookedStay.imageURLs[0]"/>
-      <div class="titleDiv">{{ myBooking.getLocation() }}</div>
-      <div class="guestsDiv">{{ "Guests: " + myBooking.getGuests() }}</div>
-      <div class="dateDiv">{{ myBooking.getStartDate() + " - " + myBooking.getEndDate() }}</div>
-      <div class="priceDiv">{{ "Total price: " + myBooking.getTotalPrice() }}</div>
+    <router-link class="goToBookedItem" :to="{ path: '/BookingView', query: { leaseId: futureBooking.leaseId }}">
+      <img class="firstImage" :src="futureBooking.bookedStay.imageURLs[0]"/>
+      <div class="titleDiv">{{ futureBooking.getLocation() }}</div>
+      <div class="guestsDiv">{{ "Guests: " + futureBooking.getGuests() }}</div>
+      <div class="dateDiv">{{ futureBooking.getStartDate() + " - " + futureBooking.getEndDate() }}</div>
+      <div class="priceDiv">{{ "Total price: " + futureBooking.getTotalPrice() }}</div>
     </router-link>
   </div>
 </template>
@@ -14,9 +14,9 @@
 </script>
 <script>
 export default {
-  props: ["myBooking"],
+  props: ["futureBooking"],
   created(){
-    //console.log(this.myBooking.bookedStay);
+    console.log("this futureBooking was: ", this.futureBooking);
   },
   data() {
     return {

@@ -8,15 +8,15 @@
       <div class="bookings">
         <FutureBookingsList v-for="(futureBooking, futureIndex) of futureBookings"
         :key="futureIndex"
-        :myBooking="futureBooking" />
+        :futureBooking="futureBooking" />
       </div>
     </div>
     <div class="pastBookingsDiv">
       <p class="yourBookingsText">Your <b>PAST</b> bookings so far:</p>
       <div class="bookings">
-        <BookingsList v-for="(pastBooking, pastIndex) of pastBookings"
+        <PastBookingsList v-for="(pastBooking, pastIndex) of pastBookings"
         :key="pastIndex"
-        :myBooking="pastBooking" />
+        :pastBooking="pastBooking" />
       </div>
     </div>
     <p class="showAdventure">Show me my next adventure!</p>
@@ -72,10 +72,11 @@ import UserInfo from '../components/UserInfo.js'
 import Booking from '../components/Booking.js'
 import Lease from '../components/Lease.vue'
 import FutureBookingsList from '../components/UserView/FutureBookingsList.vue'
-import PastBookingList from '../components/UserView/PastBookingList.vue'
+import PastBookingsList from '../components/UserView/PastBookingsList.vue'
 export default {
   components: {
-    BookingsList
+    FutureBookingsList,
+    PastBookingsList
   },
   data() {
     return {
