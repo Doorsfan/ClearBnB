@@ -99,8 +99,6 @@ export default {
     return {
       relevantLeases: originalListOfAllLeases, //An array of Lease objects
       allLeases: originalListOfAllLeases,
-      startDate: this.getTodayInCorrectFormat(),
-      endDate: '',
       validStartDate: false,
       validEndDate: false,
       shouldAddLease: false,
