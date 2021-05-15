@@ -1,7 +1,16 @@
 import { toDisplayString } from "@vue/shared";
 
 export default class Booking {
-  constructor(userId, leaseId, location, startDate, endDate, guests, totalPrice, bookedStay) {
+  constructor(
+    userId,
+    leaseId,
+    location,
+    startDate,
+    endDate,
+    guests,
+    totalPrice,
+    bookedStay
+  ) {
     this.userId = userId;
     this.leaseId = leaseId;
     this.location = location;
@@ -33,7 +42,7 @@ export default class Booking {
     return this.startDate;
   }
   setStartDate(newStartDate) {
-    this.startDate = newStartDate
+    this.startDate = newStartDate;
   }
   getEndDate() {
     return this.endDate;
@@ -42,28 +51,56 @@ export default class Booking {
     this.endDate = newEndDate;
   }
   getGuests() {
-    return this.guests
+    return this.guests;
   }
   setGuests(newAmountOfGuests) {
-    this.guests = newAmountOfGuests
+    this.guests = newAmountOfGuests;
   }
   getTotalPrice() {
-    return this.totalPrice
+    return this.totalPrice;
   }
   setTotalPrice(newTotalPrice) {
-    this.totalPrice = newTotalPrice
+    this.totalPrice = newTotalPrice;
   }
   getBookedStay() {
-    return this.bookedStay
+    return this.bookedStay;
   }
   setBookedStay(newBookedStay) {
-    this.bookedStay = newBookedStay
+    this.bookedStay = newBookedStay;
   }
   isInTheFuture(toCompare) {
-    console.log("Based on : ", toCompare);
-    console.log("Versus : ", new Date());
-    console.log("It was deemed to be in the future: ", toCompare < new Date());
-    let isInTheFuture = toCompare < new Date()
-    return isInTheFuture
+    let correctFormatToCompare = this.getDateInCorrectFormat(toCompare)
+    let splitFirstDate = correctFormatToCompare.split('-')
+    let todayInCorrectFormat = this.getDateInCorrectFormat(new Date())
+    let splitSecondDate = todayInCorrectFormat.split('-')
+    /*
+    console.log("splitFirstDate 0 : ", splitFirstDate[0])
+    console.log('splitFirstDate 1 : ', splitFirstDate[1]);
+    console.log('splitFirstDate 2 : ', splitFirstDate[2]);
+    console.log('splitSecondDate 0 : ', splitSecondDate[0]);
+    console.log('splitSecondDate 1 : ', splitSecondDate[1]);
+    console.log('splitSecondDate 2 : ', splitSecondDate[2]); */
+
+    if (splitFirstDate[0] >= splitSecondDate[0] && splitFirstDate[1] >= splitSecondDate[1] && splitFirstDate[2] >= splitSecondDate[2]) {
+      return true
+    }
+    return false
+  }
+  getDateInCorrectFormat(myDate) {
+    let today = new Date(myDate);
+    let month = today.getMonth() + 1;
+    let day = today.getDate();
+    let zeroBeforeMonth = '';
+    let zeroBeforeDay = '';
+    if (month < 10) {
+      zeroBeforeMonth += '0' + month;
+      month = zeroBeforeMonth;
+    }
+    if (day < 10) {
+      zeroBeforeDay += '0' + day;
+      day = zeroBeforeDay;
+    }
+    console.log("returned : ", today.getFullYear() + "-" + month + "-" + day);
+    return today.getFullYear() + '-' + month + '-' + day;
   }
 }

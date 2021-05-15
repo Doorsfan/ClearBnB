@@ -15,6 +15,9 @@
 <script>
 export default {
   props: ["myBooking"],
+  created(){
+    //console.log(this.myBooking.bookedStay);
+  },
   data() {
     return {
     }
