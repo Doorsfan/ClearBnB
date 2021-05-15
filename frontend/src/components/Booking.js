@@ -73,13 +73,6 @@ export default class Booking {
     let splitFirstDate = correctFormatToCompare.split('-')
     let todayInCorrectFormat = this.getDateInCorrectFormat(new Date())
     let splitSecondDate = todayInCorrectFormat.split('-')
-    /*
-    console.log("splitFirstDate 0 : ", splitFirstDate[0])
-    console.log('splitFirstDate 1 : ', splitFirstDate[1]);
-    console.log('splitFirstDate 2 : ', splitFirstDate[2]);
-    console.log('splitSecondDate 0 : ', splitSecondDate[0]);
-    console.log('splitSecondDate 1 : ', splitSecondDate[1]);
-    console.log('splitSecondDate 2 : ', splitSecondDate[2]); */
 
     if (splitFirstDate[0] >= splitSecondDate[0] && splitFirstDate[1] >= splitSecondDate[1] && splitFirstDate[2] >= splitSecondDate[2]) {
       return true
@@ -100,7 +93,6 @@ export default class Booking {
       zeroBeforeDay += '0' + day;
       day = zeroBeforeDay;
     }
-    console.log("returned : ", today.getFullYear() + "-" + month + "-" + day);
     return today.getFullYear() + '-' + month + '-' + day;
   }
 }

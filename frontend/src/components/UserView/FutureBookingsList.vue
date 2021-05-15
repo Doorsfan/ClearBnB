@@ -15,9 +15,6 @@
 <script>
 export default {
   props: ["futureBooking"],
-  created(){
-    console.log("this futureBooking was: ", this.futureBooking);
-  },
   data() {
     return {
     }

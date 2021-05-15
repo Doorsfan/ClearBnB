@@ -83,9 +83,7 @@ import User from '../components/User'
       myLease.imageURLs.push(responseInJson[eachLease].imageURLs[i])
     }
     originalListOfAllLeases.push(myLease);
-    console.log(originalListOfAllLeases);
   }
-  console.log(originalListOfAllLeases);
 export default {
   emits: ['loggedIn', 'loggedOut'],
   components: {

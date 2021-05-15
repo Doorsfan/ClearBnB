@@ -102,31 +102,29 @@ export default {
     let myUserInfo = Object.assign(emptyUserInfo,this.user.userInfo)
     currentUser.userInfo = myUserInfo
 
+    // CREATE FIRST BOOKING WITH FIRST LEASE
     let myLease = new Lease(1, currentUser.getUserInfo().getUserId(),'Cozy Winter Cottage', 'The Alps', 'Lorem Ipsum', 'House', 'Entire', '2021-05-05', '2021-05-14', 1000, '2', '1',['Shower: true', 'Heating: true'], ["https://images.unsplash.com/photo-1579627559241-aa855a66df15?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=717&q=80",
       "https://images.unsplash.com/photo-1572120360610-d971b9d7767c?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80"])
-    currentUser.addBooking(new Booking(currentUser.getUserInfo().getUserId(), 2, myLease.getLocation(), '2021-05-05', '2021-05-14', 2,2000, myLease))
+    let firstBooking = new Booking(currentUser.getUserInfo().getUserId(), 2, myLease.getLocation(), '2021-05-05', '2021-05-14', 2,2000, myLease)
+    currentUser.addBooking(firstBooking)
 
+    //CREATE SECOND BOOKING WITH SECOND LEASE
     let secondLease = new Lease(2, currentUser.getUserInfo().getUserId(),'Summer Resort', 'Colorado', 'Lorem Ipsum', 'House', 'Entire', '2021-15-16', '2021-05-25', 2000, '3', '2',['Shower: true', 'Heating: true'], ["https://images.unsplash.com/photo-1583845112203-29329902332e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=334&q=80",
       "https://images.unsplash.com/photo-1583845112203-29329902332e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=334&q=80"])
-    currentUser.addBooking(new Booking(currentUser.getUserInfo().getUserId(), 1, secondLease.getLocation(), '2021-05-16', '2021-05-20', 1,1000, myLease))
+    let secondBooking = new Booking(currentUser.getUserInfo().getUserId(), 1, secondLease.getLocation(), '2021-05-16', '2021-05-20', 1,1000, secondLease)
+    currentUser.addBooking(secondBooking)
+
+
     this.user = currentUser
     this.myBookings = currentUser.getBookings();
-    console.log("user bookings was: ", this.myBookings);
     for(let booking of this.myBookings){
-      console.log("Checking agaisnt : ", booking);
-      console.log("The end date was: ", booking.endDate);
       if(booking.isInTheFuture(booking.endDate)){
-        console.log("Added to future")
         this.futureBookings.push(booking)
-        console.log("FUTURE BOOKINGS IS NOW: ", this.futureBookings);
       }
       else if(!booking.isInTheFuture(booking.endDate)){
-        console.log("Added to past")
         this.pastBookings.push(booking)
-        console.log("PAST BOOKINGS IS NOW: ", this.pastBookings);
       }
     }
-    console.log("This booking was in the future: ", this.myBookings[0].isInTheFuture()) //Should be false
     $('.welcomeMessage').text("Welcome " + this.user.userInfo.firstName + " " + this.user.userInfo.lastName + "!");
   },
   methods:{
