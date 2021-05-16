@@ -20,6 +20,7 @@ public class Main {
     new LeaseHandler(app);
     new BookingHandler(app);
     new UserInfoHandler(app);
+    new AdminBookingHandler(app);
 
     //app.get("/rest/hello", (req, res) -> {
     //  res.json(Map.of("message", "Hello from express"));

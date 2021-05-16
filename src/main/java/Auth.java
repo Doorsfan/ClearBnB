@@ -53,7 +53,6 @@ public class Auth {
 
             collection("User").save(user);
             User myUser = collection("User").findOne(Filter.eq("username", user.getUsername()));
-            System.out.println("myUser was " + myUser);
             user.getUserInfo().setUserId(myUser.getId());
             collection("User").save(user);
 
@@ -67,14 +66,12 @@ public class Auth {
             User userInColl = collection("User").findOne("username==" + user.getUsername());
 
             if(userInColl == null) {
-                System.out.println("Did not find user");
                 res.json(Map.of("error", "Bad credentials"));
                 return;
             }
 
             // Validate password
             if(HashPassword.match(user.getPassword(), userInColl.getPassword())){
-                System.out.println("Found password");
                 // Save user in session, to remember logged in state
                 req.session("current-user", userInColl);
 

@@ -1,7 +1,8 @@
-import { toDisplayString } from "@vue/shared";
+import { toDisplayString } from '@vue/shared';
 
-export default class Booking {
+export default class AdminBooking {
   constructor(
+    bookingId,
     userId,
     leaseId,
     location,
@@ -11,6 +12,7 @@ export default class Booking {
     totalPrice,
     bookedStay
   ) {
+    this.bookingId = bookingId;
     this.userId = userId;
     this.leaseId = leaseId;
     this.location = location;
@@ -20,7 +22,12 @@ export default class Booking {
     this.totalPrice = totalPrice;
     this.bookedStay = bookedStay;
   }
-  
+  getBookingId() {
+    return this.bookingId;
+  }
+  setBookingId(newBookingId) {
+    this.bookingId = newBookingId;
+  }
   getUserId() {
     return this.userId;
   }
@@ -70,15 +77,19 @@ export default class Booking {
     this.bookedStay = newBookedStay;
   }
   isInTheFuture(toCompare) {
-    let correctFormatToCompare = this.getDateInCorrectFormat(toCompare)
-    let splitFirstDate = correctFormatToCompare.split('-')
-    let todayInCorrectFormat = this.getDateInCorrectFormat(new Date())
-    let splitSecondDate = todayInCorrectFormat.split('-')
+    let correctFormatToCompare = this.getDateInCorrectFormat(toCompare);
+    let splitFirstDate = correctFormatToCompare.split('-');
+    let todayInCorrectFormat = this.getDateInCorrectFormat(new Date());
+    let splitSecondDate = todayInCorrectFormat.split('-');
 
-    if (splitFirstDate[0] >= splitSecondDate[0] && splitFirstDate[1] >= splitSecondDate[1] && splitFirstDate[2] >= splitSecondDate[2]) {
-      return true
+    if (
+      splitFirstDate[0] >= splitSecondDate[0] &&
+      splitFirstDate[1] >= splitSecondDate[1] &&
+      splitFirstDate[2] >= splitSecondDate[2]
+    ) {
+      return true;
     }
-    return false
+    return false;
   }
   getDateInCorrectFormat(myDate) {
     let today = new Date(myDate);

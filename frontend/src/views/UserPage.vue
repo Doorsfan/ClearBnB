@@ -4,7 +4,7 @@
     <p class="welcomeMessage"></p>
     <button @click="switchHistoricalDisplay" class="changeHistoricalDisplay">Show Past Bookings</button>
     <div class="currentBookingsDiv">
-      <p class="yourBookingsText">Your <b>CURRENT</b> bookings so far:</p>
+      <p class="yourFutureBookingsText">Your <b>CURRENT</b> bookings so far:</p>
       <div class="bookings">
         <FutureBookingsList v-for="(futureBooking, futureIndex) of futureBookings"
         :key="futureIndex"
@@ -12,7 +12,7 @@
       </div>
     </div>
     <div class="pastBookingsDiv">
-      <p class="yourBookingsText">Your <b>PAST</b> bookings so far:</p>
+      <p class="yourPastBookingsText">Your <b>PAST</b> bookings so far:</p>
       <div class="bookings">
         <PastBookingsList v-for="(pastBooking, pastIndex) of pastBookings"
         :key="pastIndex"
@@ -73,6 +73,7 @@ import Booking from '../components/Booking.js'
 import Lease from '../components/Lease.vue'
 import FutureBookingsList from '../components/UserView/FutureBookingsList.vue'
 import PastBookingsList from '../components/UserView/PastBookingsList.vue'
+import AdminBooking from '../components/AdminBooking.js'
 export default {
   components: {
     FutureBookingsList,
@@ -102,21 +103,36 @@ export default {
     let currentUser = Object.assign(emptyUser,this.user)
     let myUserInfo = Object.assign(emptyUserInfo,this.user.userInfo)
     currentUser.userInfo = myUserInfo
-
     this.user = currentUser
+
     //Load from the DB all the Bookings that are tied to this users userId based on the userInfo
-    let secondRes = await fetch('/rest/bookings', {
+    if(this.user.username == 'admin@ClearBnB.se'){
+      $(".yourPastBookingsText").text("All PAST Bookings in the System so far")
+      $(".yourFutureBookingsText").text("All FUTURE Bookings in the System so far")
+      let secondRes = await fetch('/rest/adminBookings', {
         method: 'GET'
       });
-    let theResponse = await secondRes.json();
-    console.log(theResponse);
-    for(let eachBooking of theResponse){
-      if(eachBooking.userId == this.user.getUserInfo().getUserId()){
-        let emptyBooking = new Booking('','','','','','','','');
+      let theResponse = await secondRes.json();
+      for(let eachBooking of theResponse){
+        let emptyBooking = new AdminBooking('','','','','','','','');
         let filledBooking = Object.assign(emptyBooking, eachBooking);
-        this.myBookings.push(filledBooking);
+        this.myBookings.push(filledBooking); 
       }
     }
+    else{
+      let secondRes = await fetch('/rest/bookings', {
+        method: 'GET'
+      });
+      let theResponse = await secondRes.json();
+      for(let eachBooking of theResponse){
+        if(eachBooking.userId == this.user.getUserInfo().getUserId()){
+          let emptyBooking = new Booking('','','','','','','','');
+          let filledBooking = Object.assign(emptyBooking, eachBooking);
+          this.myBookings.push(filledBooking);
+        }
+      }
+    }
+    
     for(let booking of this.myBookings){
       if(booking.isInTheFuture(booking.endDate)){
         this.futureBookings.push(booking)
@@ -129,7 +145,6 @@ export default {
   },
   methods:{
     async updateUserInfo(){
-      console.log("haha");
       let newUserInfo = new UserInfo(
         this.user.userInfo.getUserId(),
         this.myFirstName,
@@ -305,7 +320,7 @@ export default {
   .residencesLink:visited{
     color:blue;
   }
-  .yourBookingsText{
+  .yourFutureBookingsText, .yourPastBookingsText{
     margin-bottom:20px;
   }
   .residencesOutBox{

@@ -24,6 +24,7 @@ import HambugerMenu from '../components/HamburgerMenu.vue'
 import User from '../components/User'
 import Booking from '../components/Booking.js'
 import UserInfo from '../components/UserInfo.js'
+import AdminBooking from '../components/AdminBooking.js'
 
   //Load in all the leases of the page from the DB here
   let res = await fetch('/rest/leases')
@@ -141,7 +142,7 @@ export default {
       let emptyUserInfo = new UserInfo('','','','','','','','',false);
       let filledUserInfo = Object.assign(emptyUserInfo,filledUser.getUserInfo())
       filledUser.setUserInfo(filledUserInfo);
-      console.log("Filled user is: ", filledUser);
+
       let myBooking = new Booking(filledUser.getUserInfo().getUserId(), 'Mt6ZUN7dYDQ1a2zuwbTYx',
       "USA, Alaska", "2021-04-20", "2021-04-25", 1, 1000, myLease);
       let secondRes = await fetch('/rest/bookings', {
@@ -149,7 +150,15 @@ export default {
         body: JSON.stringify(myBooking)
       });
       let secondResponseAsJson = await secondRes.json();
-      console.log("response based on booking was: ", secondResponseAsJson)
+      
+      let filledAdminBooking = new AdminBooking(secondResponseAsJson['id'], filledUser.getUserInfo().getUserId(), 'Mt6ZUN7dYDQ1a2zuwbTYx',
+      "USA, Alaska", "2021-04-20", "2021-04-25", 1, 1000, myLease);
+      let adminRes = await fetch('/rest/adminBookings', {
+        method: 'POST',
+        body: JSON.stringify(filledAdminBooking)
+      });
+      let adminResponseAsJson = await adminRes.json();
+      console.log("response based on booking was: ", adminResponseAsJson)
     },
     //Can be used to populate the DB with dummy data
     /*
