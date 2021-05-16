@@ -10,6 +10,7 @@ import java.util.List;
 public class Lease {
     @Id
     private String id;
+    private String leaseId;
     private String ownerId;
     private String title;
     private String location;
@@ -25,6 +26,18 @@ public class Lease {
     private List<String> imageURLs;
 
     public Lease() {}
+
+    public String getLeaseId() {
+        return leaseId;
+    }
+
+    public void setLeaseId(String leaseId) {
+        this.leaseId = leaseId;
+    }
+
+    public void setImageURLs(List<String> imageURLs) {
+        this.imageURLs = imageURLs;
+    }
 
     public String getId() {
         return id;
@@ -138,6 +151,7 @@ public class Lease {
     public String toString() {
         return "Lease{" +
                 "id='" + id + '\'' +
+                ", leaseId='" + leaseId + '\'' +
                 ", ownerId='" + ownerId + '\'' +
                 ", title='" + title + '\'' +
                 ", location='" + location + '\'' +

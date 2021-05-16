@@ -9,7 +9,7 @@
     <LeaseDisplayBox v-for="(leaseItem, index) of relevantLeases"
       :key="index"
       :lease="leaseItem"/>
-    <button @click="populateLeases">Populate Leases</button>
+    <button @click="pretendToBook">Pretend to Book</button>
   </div>
 </template>
 <script>
@@ -22,6 +22,8 @@ import PriceRangeForm from '../components/StartView/PriceRangeForm.vue'
 import Header from '../components/Header.vue'
 import HambugerMenu from '../components/HamburgerMenu.vue'
 import User from '../components/User'
+import Booking from '../components/Booking.js'
+import UserInfo from '../components/UserInfo.js'
 
   //Load in all the leases of the page from the DB here
   let res = await fetch('/rest/leases')
@@ -133,7 +135,14 @@ export default {
         "House", false, "2021-04-15", "2021-05-25", 1000, 4, 4, ["wifi: false","kitchen: false","washer: true","heating: true","airConditioner: false"],["https://images.unsplash.com/photo-1618221118493-9cfa1a1c00da?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=889&q=80",
         "https://images.unsplash.com/photo-1580202313707-46a966af5c6f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1. 2.1&auto=format&fit=crop&w=743&q=80"
       ])
-      let myBooking = new Booking(this.$store.getters.getCurrentUser.getUserInfo().getUserId(), 'Mt6ZUN7dYDQ1a2zuwbTYx',
+      let myUser = this.$store.getters.getCurrentUser;
+      let emptyUser = new User('','',new UserInfo(0,'','','','','','','',false));
+      let filledUser = Object.assign(emptyUser,myUser);
+      let emptyUserInfo = new UserInfo('','','','','','','','',false);
+      let filledUserInfo = Object.assign(emptyUserInfo,filledUser.getUserInfo())
+      filledUser.setUserInfo(filledUserInfo);
+      console.log("Filled user is: ", filledUser);
+      let myBooking = new Booking(filledUser.getUserInfo().getUserId(), 'Mt6ZUN7dYDQ1a2zuwbTYx',
       "USA, Alaska", "2021-04-20", "2021-04-25", 1, 1000, myLease);
       let secondRes = await fetch('/rest/bookings', {
         method: 'POST',
