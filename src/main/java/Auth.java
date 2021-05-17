@@ -22,10 +22,11 @@ public class Auth {
 
         app.post("/api/updateUser", (req, res) -> {
             User user = req.body(User.class);
-            UserInfo newInfo = user.getUserInfo();
+            String newInfoId = user.getUserInfo();
+            UserInfo myUserInfo = collection("UserInfo").findOne(Filter.eq("id", newInfoId));
             User existingUser = collection("User").findOne(Filter.eq("username", user.getUsername()));
             if(existingUser != null){
-                existingUser.setUserInfo(newInfo);
+                existingUser.setUserInfo(newInfoId);
                 collection("User").save(existingUser);
             }
             else{
@@ -53,7 +54,7 @@ public class Auth {
 
             collection("User").save(user);
             User myUser = collection("User").findOne(Filter.eq("username", user.getUsername()));
-            user.getUserInfo().setUserId(myUser.getId());
+            // Just integrate id to userInfo based on userId user.getUserInfo().setUserId(myUser.getId());
             collection("User").save(user);
 
             res.json(user);

@@ -14,12 +14,12 @@ public class User {
   private String id;
   private String username;
   private String password;
-  private UserInfo userInfo = new UserInfo();
+  private String userInfo;
 
   // default constructor
   public User() { }
 
-  public User(String username, String password, UserInfo userInfo) {
+  public User(String username, String password, String userInfo) {
     this.username = username;
     this.password = password;
     this.userInfo = userInfo;
@@ -59,11 +59,11 @@ public class User {
     this.password = password;
   }
 
-  public UserInfo getUserInfo() {
+  public String getUserInfo() {
     return userInfo;
   }
 
-  public void setUserInfo(UserInfo userInfo) {
+  public void setUserInfo(String userInfo) {
     this.userInfo = userInfo;
   }
 }
