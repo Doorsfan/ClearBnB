@@ -8,7 +8,7 @@
     "entireResidence": true,
     "startDate": "2021-05-27",
     "endDate": "2021-07-30",
-    "PPPN": 45,
+    "price": 45,
     "maxGuests": 4,
     "beds": 3,
     "amenities": {
@@ -32,7 +32,7 @@
     "entireResidence": true,
     "startDate": "2021-05-27",
     "endDate": "2021-07-30",
-    "PPPN": 35,
+    "price": 35,
     "maxGuests": 8,
     "beds": 4,
     "amenities": {
@@ -56,7 +56,7 @@
     "entireResidence": true,
     "startDate": "2021-05-27",
     "endDate": "2021-07-30",
-    "PPPN": 75,
+    "price": 75,
     "maxGuests": 4,
     "beds": 4,
     "amenities": {
@@ -80,7 +80,7 @@
     "entireResidence": true,
     "startDate": "2021-05-27",
     "endDate": "2021-07-30",
-    "PPPN": 65,
+    "price": 65,
     "maxGuests": 3,
     "beds": 2,
     "amenities": {
@@ -104,7 +104,7 @@
     "entireResidence": true,
     "startDate": "2021-05-27",
     "endDate": "2021-07-30",
-    "PPPN": 65,
+    "price": 65,
     "maxGuests": 5,
     "beds": 4,
     "amenities": {
@@ -128,7 +128,7 @@
     "entireResidence": false,
     "startDate": "2021-05-27",
     "endDate": "2021-07-30",
-    "PPPN": 55,
+    "price": 55,
     "maxGuests": 3,
     "beds": 3,
     "amenities": {
@@ -152,7 +152,7 @@
     "entireResidence": true,
     "startDate": "2021-05-27",
     "endDate": "2021-07-30",
-    "PPPN": 400,
+    "price": 400,
     "maxGuests": 12,
     "beds": 6,
     "amenities": {
@@ -176,7 +176,7 @@
     "entireResidence": false,
     "startDate": "2021-05-27",
     "endDate": "2021-07-30",
-    "PPPN": 120,
+    "price": 120,
     "maxGuests": 2,
     "beds": 1,
     "amenities": {
@@ -200,7 +200,7 @@
     "entireResidence": false,
     "startDate": "2021-05-27",
     "endDate": "2021-07-30",
-    "PPPN": 135,
+    "price": 135,
     "maxGuests": 2,
     "beds": 1,
     "amenities": {
@@ -224,7 +224,7 @@
     "entireResidence": false,
     "startDate": "2021-05-27",
     "endDate": "2021-07-30",
-    "PPPN": 140,
+    "price": 140,
     "maxGuests": 4,
     "beds": 4,
     "amenities": {
@@ -248,7 +248,7 @@
     "entireResidence": false,
     "startDate": "2021-08-01",
     "endDate": "2021-09-30",
-    "PPPN": 220,
+    "price": 220,
     "maxGuests": 4,
     "beds": 3,
     "amenities": {
@@ -272,7 +272,7 @@
     "entireResidence": false,
     "startDate": "2021-08-01",
     "endDate": "2021-09-30",
-    "PPPN": 100,
+    "price": 100,
     "maxGuests": 1,
     "beds": 1,
     "amenities": {
@@ -296,7 +296,7 @@
     "entireResidence": false,
     "startDate": "2021-08-01",
     "endDate": "2021-09-30",
-    "PPPN": 150,
+    "price": 150,
     "maxGuests": 2,
     "beds": 1,
     "amenities": {
@@ -320,7 +320,7 @@
     "entireResidence": false,
     "startDate": "2021-08-01",
     "endDate": "2021-09-30",
-    "PPPN": 140,
+    "price": 140,
     "maxGuests": 2,
     "beds": 1,
     "amenities": {
@@ -344,7 +344,7 @@
     "entireResidence": false,
     "startDate": "2021-08-01",
     "endDate": "2021-09-30",
-    "PPPN": 110,
+    "price": 110,
     "maxGuests": 2,
     "beds": 1,
     "amenities": {
@@ -368,7 +368,7 @@
     "entireResidence": false,
     "startDate": "2021-08-01",
     "endDate": "2021-09-30",
-    "PPPN": 180,
+    "price": 180,
     "maxGuests": 3,
     "beds": 2,
     "amenities": {
