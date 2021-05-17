@@ -191,7 +191,7 @@ export default {
       if(this.myMaxPrice == 0){
         passedMaxPriceCheck = true;
       }
-      else if(this.myMaxPrice >= lease.PPPN){
+      else if(this.myMaxPrice >= Math.round((lease.price * 1.15))){
         passedMaxPriceCheck = true;
       }
       if(this.choseStartDate.length == 0){
@@ -207,7 +207,7 @@ export default {
         passedEndDate = true;
       }
       let passedLocation = lease.location.toLowerCase().includes(this.myLocation.toLowerCase());
-      let passedMinPrice = this.myMinPrice <= lease.PPPN;
+      let passedMinPrice = this.myMinPrice <= Math.round((lease.price * 1.15));
       let passedBeds = this.myAmountOfBeds <= lease.beds;
       if(passedLocation && passedMinPrice && passedBeds && passedEndDate && passedStartDate && passedMaxPriceCheck){
         return lease

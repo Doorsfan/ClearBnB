@@ -33,7 +33,7 @@ export default {
       myTitle: '',
       beds: '',
       maxGuests: '',
-      PPPN: '',
+      price: '',
       typeOfHousing: '',
       hasWifi: false,
       hasKitchen: false,
