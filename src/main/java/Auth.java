@@ -22,11 +22,8 @@ public class Auth {
 
         app.post("/api/updateUser", (req, res) -> {
             User user = req.body(User.class);
-            String newInfoId = user.getUserInfo();
-            UserInfo myUserInfo = collection("UserInfo").findOne(Filter.eq("id", newInfoId));
             User existingUser = collection("User").findOne(Filter.eq("username", user.getUsername()));
             if(existingUser != null){
-                existingUser.setUserInfo(newInfoId);
                 collection("User").save(existingUser);
             }
             else{
