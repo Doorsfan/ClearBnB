@@ -19,7 +19,7 @@ public class AdminBookingHandler {
         // save a adminBooking and return the object on the server
         app.post("/rest/adminBookings", (req, res) -> {
             AdminBooking adminBooking = req.body(AdminBooking.class);
-            adminBooking.getBookedStay().setId(adminBooking.getBookedStay().getId());
+            adminBooking.getBookedStay().setId(adminBooking.getLeaseId());
             collection("AdminBooking").save(adminBooking);
             res.json(adminBooking);
         });

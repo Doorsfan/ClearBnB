@@ -81,6 +81,7 @@ export default {
   data() {
     return {
       user: '',
+      currentUserInfo: '',
       myBookings: [],
       futureBookings: [],
       pastBookings: [],
@@ -95,14 +96,13 @@ export default {
     }
   },
   async mounted(){
-    this.myBookings = [];
-    let emptyUser = new User('', '', [], new UserInfo('','','','','','','','',false));
-    let emptyUserInfo = new UserInfo('','','','','','','','',false)
     this.user = this.$store.getters.getCurrentUser
-    let currentUser = Object.assign(emptyUser,this.user)
-    let myUserInfo = Object.assign(emptyUserInfo,this.user.userInfo)
-    currentUser.userInfo = myUserInfo
-    this.user = currentUser
+    let secondRes = await fetch('/rest/userinfos/' + this.user.id, {
+        method: 'GET'
+      });
+    let result = await secondRes.json()
+    console.log("Found the user info of: ", result);
+    this.currentUserInfo = result;
 
     //Load from the DB all the Bookings that are tied to this users userId based on the userInfo
     if(this.user.username == 'admin@ClearBnB.se'){
@@ -124,7 +124,7 @@ export default {
       });
       let theResponse = await secondRes.json();
       for(let eachBooking of theResponse){
-        if(eachBooking.userId == this.user.getUserInfo().getUserId()){
+        if(eachBooking.userId == this.user.id){
           let emptyBooking = new Booking('','','','','','','','');
           let filledBooking = Object.assign(emptyBooking, eachBooking);
           this.myBookings.push(filledBooking);
@@ -140,12 +140,12 @@ export default {
         this.pastBookings.push(booking)
       }
     }
-    $('.welcomeMessage').text("Welcome " + this.user.userInfo.firstName + " " + this.user.userInfo.lastName + "!");
+    $('.welcomeMessage').text("Welcome " + this.user.firstName + " " + this.user.lastName + "!");
   },
   methods:{
     async updateUserInfo(){
       let newUserInfo = new UserInfo(
-        this.user.userInfo.getUserId(),
+        this.user.id,
         this.myFirstName,
         this.myLastName,
         this.myStreetAddress,
@@ -155,17 +155,12 @@ export default {
         this.myPhoneNumber,
         this.myNewsLetter
       )
-      let res = await fetch('/rest/userinfos', {
+      let res = await fetch('/rest/userinfos/' + this.user.id, {
         method: 'POST',
         body: JSON.stringify(newUserInfo)
       })
       let responseAsJson = await res.json();
-      this.user.userInfo = newUserInfo
-      let secondRes = await fetch('/api/updateUser', {
-        method: 'POST',
-        body: JSON.stringify(this.user)
-      });
-      let secondResponseAsJson = await secondRes.json();
+      console.log("The response was: " + responseAsJson);
     },
     switchHistoricalDisplay(){
       if($('.changeHistoricalDisplay').text() == "Show Past Bookings"){
@@ -181,14 +176,14 @@ export default {
       
     },
     changeUserInfo(){
-      this.myFirstName = this.user.userInfo.firstName;
-      this.myLastName = this.user.userInfo.lastName;
-      this.myPhoneNumber = this.user.userInfo.phoneNumber;
-      this.myStreetAddress = this.user.userInfo.streetAddress;
-      this.myCity = this.user.userInfo.city;
-      this.myZipCode = this.user.userInfo.zipCode;
-      this.myCountry = this.user.userInfo.country;
-      this.myNewsLetter = this.user.userInfo.newsLetter;
+      this.myFirstName = this.currentUserInfo.firstName;
+      this.myLastName = this.currentUserInfo.lastName;
+      this.myPhoneNumber = this.currentUserInfo.phoneNumber;
+      this.myStreetAddress = this.currentUserInfo.streetAddress;
+      this.myCity = this.currentUserInfo.city;
+      this.myZipCode = this.currentUserInfo.zipCode;
+      this.myCountry = this.currentUserInfo.country;
+      this.myNewsLetter = this.currentUserInfo.newsLetter;
       document.getElementsByClassName('mainDiv')[0].style.display = "none";
       document.getElementsByClassName('changeUserInfoDiv')[0].style.display = "block";
     },

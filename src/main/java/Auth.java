@@ -50,9 +50,6 @@ public class Auth {
             user.setPassword(hashedPassword);
 
             collection("User").save(user);
-            User myUser = collection("User").findOne(Filter.eq("username", user.getUsername()));
-            // Just integrate id to userInfo based on userId user.getUserInfo().setUserId(myUser.getId());
-            collection("User").save(user);
 
             res.json(user);
         });
@@ -72,10 +69,8 @@ public class Auth {
             if(HashPassword.match(user.getPassword(), userInColl.getPassword())){
                 // Save user in session, to remember logged in state
                 req.session("current-user", userInColl);
-
                 res.json(userInColl);
             }else {
-                System.out.println("Failed in password check");
                 res.json(Map.of("error", "Bad credentials"));
             }
         });

@@ -41,35 +41,18 @@ export default {
   },
   methods: {
     async login(){
-      let user = new User(this.username, this.password, new UserInfo(
-        'N/A',
-        'N/A',
-        'N/A',
-        'N/A',
-        'N/A',
-        'N/A',
-        'N/A',
-        'N/A',
-        false
-        ));
+      let user = new User(this.username, this.password);
       let res = await fetch('/api/login', {
         method: 'POST',
         body: JSON.stringify(user)
       })
       let response = await res.json()
+      console.log("Response was: ", response);
       if(response.error == "Bad credentials"){ //Failed to log in
         document.getElementsByClassName("failedLoginDiv")[0].style.display = "block";
       }
       else{
-        user.password = response['password']
-        let responseForUserInfo = await fetch('/rest/userinfos')
-        let responseForUserInfoAsJson = await responseForUserInfo.json()
-        for(let userInfo of responseForUserInfoAsJson){
-          if(userInfo.userId == response['id']){
-            response.userInfo = userInfo
-            user.setUserInfo(userInfo)
-          }
-        }
+        user.id = response.id;
         document.getElementsByClassName("failedLoginDiv")[0].style.display = "none";
         this.$store.dispatch('login', user)
         //window.location = '/'

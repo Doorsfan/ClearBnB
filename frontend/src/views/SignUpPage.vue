@@ -10,7 +10,7 @@
       <input v-model="streetAddress" required type="text" class="StreetInput" placeholder="Street address">
     </div>
     <div class="thirdDiv">
-      <input required v-model="zipCode" class="zipCodeInput" type="text" placeholder="Zip code"><input required v-model="country" class="countryInput" type="text" placeholder="Country"><input v-model="City" required class="cityInput" type="text" placeholder="City">
+      <input required v-model="zipCode" class="zipCodeInput" type="text" placeholder="Zip code"><input required v-model="country" class="countryInput" type="text" placeholder="Country"><input v-model="city" required class="cityInput" type="text" placeholder="City">
     </div>
     <div class="emailDiv">
       <input v-model="email" required type="email" placeholder="e-mail address"><input v-model="repeatEmail" required type="email" placeholder="Repeat e-mail">
@@ -44,7 +44,7 @@ export default {
       streetAddress: '',
       zipCode: '',
       country: '',
-      City: '',
+      city: '',
       email: '',
       repeatEmail: '',
       password: '',
@@ -70,24 +70,29 @@ export default {
     phoneNumber,
     newsLetter */
       //Look at again when back from dinner
-      let newUser = new User(this.email, this.password, [], {});
+      let newUser = new User(this.email, this.password);
       let newUserInfo = new UserInfo(
         '',
         this.firstName,
         this.lastName,
         this.streetAddress,
         this.zipCode,
-        this.City,
+        this.city,
         this.country,
         this.phoneNumber,
         this.newsLetter
       )
-      newUser.userInfo = newUserInfo
+      let myRes = await fetch('/rest/userinfos/Pw-26FQNIcS6gnM5Bk8nR',{
+        method: 'DELETE'
+      });
+      
       let res = await fetch('/api/register', {
         method: 'POST',
         body: JSON.stringify(newUser)
       })
       let responseAsJson = await res.json();
+
+
       console.log(responseAsJson);
       if(responseAsJson['error'] == "User already exists"){
         document.getElementsByClassName('takenUserBox')[0].style.display = 'block';

@@ -2,8 +2,7 @@
 </template>
 <script>
 export default class Lease {
-  constructor(leaseId, ownerId, title, location, description, typeOfHousing, entireResidence, startDate, endDate, price, maxGuests, beds, amenities, imageURLs){
-    this.leaseId = leaseId
+  constructor(ownerId, title, location, description, typeOfHousing, entireResidence, startDate, endDate, price, maxGuests, beds, amenities, imageURLs){
     this.ownerId = ownerId
     this.title = title
     this.location = location
