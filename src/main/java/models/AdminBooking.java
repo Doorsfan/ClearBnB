@@ -18,7 +18,8 @@ public class AdminBooking {
     private double totalPrice;
     private Lease bookedStay;
 
-    public AdminBooking() {
+    public AdminBooking() {}
+    public AdminBooking(String bookingId, String userId, String leaseId, String location, String startDate, String endDate, int guests, double totalPrice, Lease bookedStay) {
         this.bookingId = bookingId;
         this.userId = userId;
         this.leaseId = leaseId;

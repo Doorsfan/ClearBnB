@@ -70,7 +70,6 @@
 import User from '../components/User.js'
 import UserInfo from '../components/UserInfo.js'
 import Booking from '../components/Booking.js'
-import Lease from '../components/Lease.vue'
 import FutureBookingsList from '../components/UserView/FutureBookingsList.vue'
 import PastBookingsList from '../components/UserView/PastBookingsList.vue'
 import AdminBooking from '../components/AdminBooking.js'

@@ -1,5 +1,3 @@
-import { toDisplayString } from "@vue/shared";
-
 export default class Booking {
   constructor(
     userId,
@@ -20,7 +18,7 @@ export default class Booking {
     this.totalPrice = totalPrice;
     this.bookedStay = bookedStay;
   }
-  
+
   getUserId() {
     return this.userId;
   }

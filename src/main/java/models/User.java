@@ -14,7 +14,7 @@ public class User {
   private String id;
   private String username;
   private String password;
-  private UserInfo userInfo = new UserInfo("","","","","","","","",false);
+  private UserInfo userInfo = new UserInfo();
 
   // default constructor
   public User() { }

@@ -17,7 +17,8 @@ public class Booking {
     private double totalPrice;
     private Lease bookedStay;
 
-    public Booking() {
+    public Booking() {}
+    public Booking(String userId, String leaseId, String location, String startDate, String endDate, int guests, double totalPrice, Lease bookedStay) {
         this.userId = userId;
         this.leaseId = leaseId;
         this.location = location;
