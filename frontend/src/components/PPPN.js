@@ -1,9 +1,3 @@
-<template>
-  <p>Price (per person per night): {{ price }}</p>
-  <p>Price for selected days: {{ totalPrice }}</p>
-</template>
-
-<script>
 //computeDateRange(this.startDate, this.endDate)
 //computeCost(this.days, this.price)
 
@@ -28,15 +22,18 @@ export default class PPPN {
 
     let dateDifferenceInMs = endDate.getTime() - startDate.getTime();
     let days = dateDifferenceInMs / (1000 * 60 * 60 * 24);
-
+    days = Math.round(days)
     return days;
   }
 
   convertToDate(isoDate) {
     let year = isoDate.substring(0, 4);
-    let month = isoDate.substring(6, 8);
-    let day = isoDate.substring(9, 11);
+    let month = isoDate.substring(5, 7);
+    let day = isoDate.substring(9, 10);
     let date = new Date();
+    year = parseInt(year)
+    month = parseInt(month) - 1
+    day = parseInt(day)
     date.setFullYear(year);
     date.setMonth(month);
     date.setDate(day);
@@ -48,7 +45,3 @@ export default class PPPN {
     return days * price;
   }
 }
-</script>
-
-<style>
-</style>
