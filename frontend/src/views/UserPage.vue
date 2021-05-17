@@ -6,7 +6,7 @@
     <div class="currentBookingsDiv">
       <p class="yourFutureBookingsText">Your <b>CURRENT</b> bookings so far:</p>
       <div class="bookings">
-        <FutureBookingsList v-for="(futureBooking, futureIndex) of futureBookings"
+        <FutureBookingsList @cancelBooking="cancelABooking" v-for="(futureBooking, futureIndex) of futureBookings"
         :key="futureIndex"
         :futureBooking="futureBooking" />
       </div>
@@ -101,7 +101,6 @@ export default {
         method: 'GET'
       });
     let result = await secondRes.json()
-    console.log("Found the user info of: ", result);
     this.currentUserInfo = result;
 
     //Load from the DB all the Bookings that are tied to this users userId based on the userInfo
@@ -115,6 +114,7 @@ export default {
       for(let eachBooking of theResponse){
         let emptyBooking = new AdminBooking('','','','','','','','');
         let filledBooking = Object.assign(emptyBooking, eachBooking);
+        filledBooking.id = eachBooking.id;
         this.myBookings.push(filledBooking); 
       }
     }
@@ -127,6 +127,7 @@ export default {
         if(eachBooking.userId == this.user.id){
           let emptyBooking = new Booking('','','','','','','','');
           let filledBooking = Object.assign(emptyBooking, eachBooking);
+          filledBooking.id = eachBooking.id;
           this.myBookings.push(filledBooking);
         }
       }
@@ -140,9 +141,42 @@ export default {
         this.pastBookings.push(booking)
       }
     }
-    $('.welcomeMessage').text("Welcome " + this.user.firstName + " " + this.user.lastName + "!");
+    if(this.currentUserInfo.firstName == "admin" && this.currentUserInfo.lastName == "admin"){
+      $('.welcomeMessage').text("Welcome Admin User!");
+    }
+    else{
+      $('.welcomeMessage').text("Welcome " + this.currentUserInfo.firstName + " " + this.currentUserInfo.lastName + "!");
+    }
+    
   },
   methods:{
+    async cancelABooking(idToCancel){
+      let index = 0;
+      for(let bookingToRemoveFromAll of this.myBookings){
+        if(bookingToRemoveFromAll.id == idToCancel){
+          this.myBookings = [...this.myBookings.slice(0,index), ...this.myBookings.slice(index+1)]
+        }
+        index += 1;
+      }
+      index = 0;
+      for(let bookingToRemoveFromFuture of this.futureBookings){
+        if(bookingToRemoveFromFuture.id == idToCancel){
+          this.futureBookings = [...this.futureBookings.slice(0,index), ...this.futureBookings.slice(index+1)]
+        }
+        index += 1;
+      }
+      let deleteAdminResponse = await fetch('/rest/adminBookingsAsAdmin/' + idToCancel, {
+        method: 'DELETE'
+      });
+
+      let deleteAdminResponseInJson = await deleteAdminResponse.json();
+      idToCancel = deleteAdminResponseInJson;
+      let deleteResponse = await fetch('/rest/bookings/' + idToCancel, {
+        method: 'DELETE'
+      });
+      let deleteResponseInJson = await deleteResponse.json();
+      
+    },
     async updateUserInfo(){
       let newUserInfo = new UserInfo(
         this.user.id,
@@ -160,7 +194,6 @@ export default {
         body: JSON.stringify(newUserInfo)
       })
       let responseAsJson = await res.json();
-      console.log("The response was: " + responseAsJson);
     },
     switchHistoricalDisplay(){
       if($('.changeHistoricalDisplay').text() == "Show Past Bookings"){

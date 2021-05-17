@@ -7,6 +7,7 @@
       <div class="dateDiv">{{ futureBooking.getStartDate() + " - " + futureBooking.getEndDate() }}</div>
       <div class="priceDiv">{{ "Total price: " + futureBooking.getTotalPrice() }}</div>
     </router-link>
+    <div class="buttonDiv"><button @click="cancelBooking" class="cancelButton">Cancel Booking</button></div>
   </div>
 </template>
 <script setup="">
@@ -15,15 +16,31 @@
 <script>
 export default {
   props: ["futureBooking"],
+  emits: ["cancelBooking"],
   data() {
     return {
     }
   },
   methods: {
+    cancelBooking(){
+      this.$emit("cancelBooking",this.futureBooking.id);      
+    }
   }
 }
 </script>
 <style scoped>
+.cancelButton {
+  padding:2px;
+  font-weight:bolder;
+  font-size:20px;
+  margin-top:8px;
+  background:rgba(255, 182, 193, 0.863);
+  /*optional*/
+  font-family: arial, sans-serif;
+  /*input has OS specific font-family*/
+  color: red;
+  cursor: pointer;
+}
 .readMoreLink{
   margin-left:150px;
 }
@@ -40,9 +57,12 @@ export default {
 .mainBoxDiv{
   margin-left:auto;
   margin-right:auto;
-  width:500px;
+  width:max-content;
+  padding:10px;
   margin-top:10px;
   margin-bottom:10px;
+  border:3px solid #ccc;
+  background: #eee;
 }
 .titleDiv{
   text-align:center;

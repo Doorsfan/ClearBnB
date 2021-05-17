@@ -145,7 +145,7 @@ export default {
       filledUser.setUserInfo(filledUserInfo);*/
 
       let myBooking = new Booking(filledUser.id, 'Mt6ZUN7dYDQ1a2zuwbTYx',
-      "USA, Alaska", "2021-04-20", "2021-04-25", 1, 1000, myLease);
+      "USA, Alaska", "2021-05-18", "2021-05-22", 1, 1000, myLease);
       let secondRes = await fetch('/rest/bookings', {
         method: 'POST',
         body: JSON.stringify(myBooking)
@@ -153,13 +153,12 @@ export default {
       let secondResponseAsJson = await secondRes.json();
       
       let filledAdminBooking = new AdminBooking(secondResponseAsJson['id'], filledUser.id, 'Mt6ZUN7dYDQ1a2zuwbTYx',
-      "USA, Alaska", "2021-04-20", "2021-04-25", 1, 1000, myLease);
+      "USA, Alaska", "2021-05-18", "2021-05-22", 1, 1000, myLease);
       let adminRes = await fetch('/rest/adminBookings', {
         method: 'POST',
         body: JSON.stringify(filledAdminBooking)
       });
       let adminResponseAsJson = await adminRes.json();
-      console.log("response based on booking was: ", adminResponseAsJson)
     },
     //Can be used to populate the DB with dummy data
     /*

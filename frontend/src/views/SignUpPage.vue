@@ -93,7 +93,6 @@ export default {
       let responseAsJson = await res.json();
 
 
-      console.log(responseAsJson);
       if(responseAsJson['error'] == "User already exists"){
         document.getElementsByClassName('takenUserBox')[0].style.display = 'block';
         return;

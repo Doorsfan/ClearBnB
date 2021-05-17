@@ -49,7 +49,6 @@
 export default  {
   watch: {
     lease(){
-      console.log("loaded in");
       this.title = this.lease.title
       this.location = this.lease.location
       this.maxGuests = this.lease.maxGuests

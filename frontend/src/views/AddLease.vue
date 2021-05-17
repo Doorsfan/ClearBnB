@@ -81,11 +81,9 @@ export default {
     updateChosenHousing(chosenHousing){
       //Have in Add Residence View that it updates based on this function
       this.typeOfHousing = chosenHousing
-      console.log("new type of housing is: ", this.typeOfHousing);
     },
     updateChosenSize(chosenSize){
       this.size = chosenSize
-      console.log("new chosen size is", this.size)
     }
   }
 }

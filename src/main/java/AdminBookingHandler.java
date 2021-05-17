@@ -33,11 +33,16 @@ public class AdminBookingHandler {
             AdminBooking adminBooking = collection("AdminBooking").findOne(Filter.eq("id", relevantId));
             res.json(adminBooking);
         });
-        // delete a specific booking
+        // delete a specific booking as a normal user
         app.delete("/rest/adminBookings/:id", (req, res) -> {
-            String relevantId = req.params("id");
-            collection("AdminBooking").deleteOne(Filter.eq("id", relevantId));
+            collection("AdminBooking").deleteOne(Filter.eq("bookingId", req.params("id")));
             res.json("Deleted a Booking");
+        });
+
+        app.delete("/rest/adminBookingsAsAdmin/:id", (req, res) -> {
+            AdminBooking adminBooking = collection("AdminBooking").findOne(Filter.eq("id", req.params("id")));
+            collection("AdminBooking").deleteOne(Filter.eq("id", req.params("id")));
+            res.json(adminBooking.getBookingId());
         });
     }
 }

@@ -47,7 +47,6 @@ export default {
         body: JSON.stringify(user)
       })
       let response = await res.json()
-      console.log("Response was: ", response);
       if(response.error == "Bad credentials"){ //Failed to log in
         document.getElementsByClassName("failedLoginDiv")[0].style.display = "block";
       }

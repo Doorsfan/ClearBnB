@@ -1,5 +1,6 @@
 import express.Express;
 import models.Booking;
+import nosqlite.utilities.Filter;
 
 import static nosqlite.Database.collection;
 
@@ -31,7 +32,7 @@ public class BookingHandler {
         });
         // delete a specific booking
         app.delete("/rest/bookings/:id", (req, res) -> {
-            res.json(collection("Booking").deleteById(req.params("id")));
+            res.json(collection("Booking").deleteOne(Filter.eq("id", req.params("id"))));
         });
     }
 }
