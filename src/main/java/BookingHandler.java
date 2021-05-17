@@ -16,7 +16,7 @@ public class BookingHandler {
         // save a Booking and return the object on the server
         app.post("/rest/bookings", (req, res) -> {
             Booking Booking = req.body(Booking.class);
-            Booking.getBookedStay().setId(Booking.getBookedStay().getLeaseId());
+            Booking.getBookedStay().setId(Booking.getBookedStay().getId());
             collection("Booking").save(Booking);
             res.json(Booking);
         });
