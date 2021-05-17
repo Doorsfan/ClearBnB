@@ -15,6 +15,7 @@
 
 <script>
 export default {
+  emits: ['updateBeds', 'updateMaxPeople', 'updatePrice'],
   data() {
     return {
       Beds: '',

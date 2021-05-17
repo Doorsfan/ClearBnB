@@ -2,14 +2,15 @@
   <div class="mainDiv">
   <h3 class="addResidenceHeader">Add a residence</h3>
   <p class="myTitle">Title</p>
-  <input type="text" required placeholder="Title" v-model="myTitle" />
+  <input @change="updateMyTitle" type="text" required placeholder="Title" v-model="myTitle" />
   <p class="myLocation">Location</p>
   <LocationInputForm @updatedLocation="updateLocation" />
   <DescriptionForm @updatedDescription="updateDescription" />
-  <InputForPricingBedAndPeople @updateBeds="updateNrOfBeds" @updateMaxPeople="updateNrOfMaxPeople" @updatePrice="updatePricePerPerson" />
+  <InputForPricingBedAndPeople @updateBeds="updateNrOfBeds" @updateMaxPeople="updateNrOfMaxGuests" @updatePrice="updatePrice" />
   <HousingRadioButtons @updateChosenHousing="updateChosenHousing" @updateChosenSize="updateChosenSize"/>
-  <AddAmenities />
-  <ImageUrlInputForm @updatedImageURLs="updateImageURLs" />
+  <AddAmenities @updateWifi="updateWifi" @updateKitchen="updateKitchen" @updateWasher="updateWasher" @updateHeating="updateHeating" @updateAC="updateAC" />
+  <ImageUrlInputForm @updatedImgURLs="updateIMGUrls" />
+  <ImageBox :imageURL="imageURLs"/>
   <DatepickerForAvailableDates @updatedLeaseStartDate="updateStartDate" @updatedLeaseEndDate="updateEndDate" 
   @updatedDisabledDays="updateDisabledDays" />
   <router-link class="previewButton" to="preview">Preview</router-link>
@@ -23,72 +24,156 @@ import InputForPricingBedAndPeople from '../components/AddLeaseView/InputForPric
 import ImageUrlInputForm from '../components/AddLeaseView/ImageUrlInputForm.vue'
 import LocationInputForm from '../components/AddLeaseView/LocationInputForm.vue'
 import AddAmenities from '../components/AddLeaseView/AddAmenities.vue'
+import Lease from '../components/Lease.vue'
+import ImageBox from '../components/AddLeaseView/ImageBox.vue'
 </script>
 <script>
 export default {
   name: 'AddResidence',
-  components: ['DatepickerForAvailableDates', 'DescriptionForm', 'HousingRadioButtons', 'InputForPricingBedAndPeople',  'ImageUrlInputForm','LocationInputForm', 'AddAmenities'],
+  components: ['DatepickerForAvailableDates', 'DescriptionForm', 'HousingRadioButtons', 'InputForPricingBedAndPeople','LocationInputForm', 'AddAmenities'],
+  mounted(){
+    this.user = this.$store.getters.getCurrentUser
+    //this.lease = this.$store.getters.getLeaseToBuild
+  },
   data() {
     return {
+      user: '',
+      lease: new Lease('', this.myTitle, this.wantedLocation, this.description, this.typeOfHousing, this.entireResidence, this.startDate, this.endDate, this.price, this.maxGuests, this.beds, this.amenities, this.imageURLs),
       myTitle: '',
-      beds: '',
-      maxGuests: '',
-      price: '',
+      location: '',
+      description: '',
       typeOfHousing: '',
+      size: '',
+      startDate: '',
+      endDate: '',
+      price: '',
+      maxGuests: '',
+      beds: '',
+      amenities: [],
       hasWifi: false,
       hasKitchen: false,
       hasWasher: false,
       hasHeating: false,
       hasAirConditioner: false,
-      size: '',
-      location: '',
-      title: '',
       imageURLs: [],
-      description: '',
-      startDate: '',
-      endDate: '',
       disabledDays: []
     }
   },
   methods: {
-    updateDisabledDays(newDisabledDays){
-      this.disabledDays = newDisabledDays
+    updateIMGUrls(newImageURLs){
+      this.imageURLs.push(newImageURLs);
+      this.lease.setImageURLs(newImageURLs);
     },
-    updateStartDate(newStartDate){
-      this.startDate = newStartDate
-    },
-    updateEndDate(newEndDate){
-      this.endDate = newEndDate
-    },
-    updateDescription(newDescription){
-      this.description = newDescription
-    },
-    updateImageURLs(newImageURLs){
-      this.imageURLs = newImageURLs
+    updateMyTitle(newTitle){
+      console.log("This.myTitle was: ", this.myTitle);
+      this.lease.setTitle(this.myTitle);
     },
     updateLocation(newLocation){
       this.location = newLocation
+      this.lease.setLocation(this.location);
     },
-    updateNrOfBeds(amountOfBeds){
-      this.nrOfBeds = amountOfBeds
-    },
-    updateNrOfMaxPeople(maxPeople){
-      this.maxPeople = maxPeople
-    },
-    updatePricePerPerson(updatedPrice){
-      this.pricePerPerson = updatedPrice
+    updateDescription(newDescription){
+      this.description = newDescription
+      this.lease.setDescription(this.description)
     },
     updateChosenHousing(chosenHousing){
-      //Have in Add Residence View that it updates based on this function
       this.typeOfHousing = chosenHousing
+      this.lease.setTypeOfHousing(this.typeOfHousing);
     },
     updateChosenSize(chosenSize){
       this.size = chosenSize
+      if(this.size == "Part"){
+        this.lease.setEntireResidence(false);
+      }
+      else{
+        this.lease.setEntireResidence(true);
+      }
+    },
+    updateStartDate(newStartDate){
+      this.startDate = newStartDate
+      this.lease.setStartDate(this.startDate);
+    },
+    updateEndDate(newEndDate){
+      this.endDate = newEndDate
+      this.lease.setEndDate(this.endDate);
+    },
+    updatePrice(updatedPrice){
+      this.price = updatedPrice
+      this.lease.setPrice(this.price);
+    },
+    updateNrOfMaxGuests(maxPeople){
+      this.maxPeople = maxPeople
+      this.lease.setMaxGuests(this.maxPeople);
+    },
+    updateNrOfBeds(amountOfBeds){
+      this.nrOfBeds = amountOfBeds
+      this.lease.setBeds(this.nrOfBeds);
+    },
+    updateWifi(hasWifi){
+      this.hasWifi = hasWifi
+      this.updateAmenities()
+    },
+    updateKitchen(hasKitchen){
+      this.hasKitchen = hasKitchen;
+      this.updateAmenities()
+    },
+    updateWasher(hasWasher){
+      this.hasWasher = hasWasher;
+      this.updateAmenities()
+    },
+    updateHeating(hasHeating){
+      this.hasHeating = hasHeating;
+      this.updateAmenities()
+    },
+    updateAC(hasAirConditioner){
+      this.hasAirConditioner = hasAirConditioner;
+      this.updateAmenities()
+    },
+    updateDisabledDays(newDisabledDays){
+      this.disabledDays = newDisabledDays
+    },
+    updateAmenities(){
+      this.amenities = [];
+      if(this.hasWifi){
+        this.amenities.push("wifi: true")
+      }
+      else{
+        this.amenities.push("wifi: false")
+      }
+      if(this.hasKitchen){
+        this.amenities.push("kitchen: true")
+      }
+      else{
+        this.amenities.push("kitchen: false")
+      }
+      if(this.hasWasher){
+        this.amenities.push("washer: true")
+      }
+      else{
+        this.amenities.push("washer: false")
+      }
+      if(this.hasHeating){
+        this.amenities.push("heating: true")
+      }
+      else{
+        this.amenities.push("heating: false")
+      }
+      if(this.hasAirConditioner){
+        this.amenities.push("airConditioner: true")
+      }
+      else{
+        this.amenities.push("airConditioner: false")
+      }
+      this.lease.setAmenities(this.amenities);
+      console.log("So far, this Lease was: ", this.lease);
     }
   }
 }
 </script>
 <style scoped>
+.special{
+  height:100px;
+}
 .mainDiv{
   text-align: center;
   height: max-content;
