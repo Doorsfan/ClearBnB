@@ -8,18 +8,16 @@
     <div v-if="imageURL.length > 2" class="thirdImageURL"><button @click="removeThirdImageURL" class="xSmall" v-if="imageURL.length > 2" type="button">X</button>
       <img class="myImage thirdImageSrc" :src="imageURL[2]"/>
     </div>
-    <div v-if="imageURL.length > 3" class="fourthImageURL">
-      <button @click="removeFourthImageURL" class="xSmall" v-if="imageURL.length > 3" type="button">X</button><img class="myImage fourthImageSrc" :src="imageURL[3]"/>
+    <div v-if="imageURL.length > 3" class="fourthImageURL"><button @click="removeFourthImageURL" class="xSmall" v-if="imageURL.length > 3" type="button">X</button><img class="myImage fourthImageSrc" :src="imageURL[3]"/>
     </div>
-    <div v-if="imageURL.length > 4" class="fifthImageURL">
-      <button @click="removeFifthImageURL" class="xSmall" v-if="imageURL.length > 4" type="button">X</button><img class="myImage fifthImageSrc" :src="imageURL[4]"/>
+    <div v-if="imageURL.length > 4" class="fifthImageURL"><button @click="removeFifthImageURL" class="xSmall" v-if="imageURL.length > 4" type="button">X</button><img class="myImage fifthImageSrc" :src="imageURL[4]"/>
     </div>
   </div>
 </template>
 <script>
 export default {
   props: ["imageURL"],
-  emits: ["removedFirstImage", "removedSecondImage"],
+  emits: ["removedFirstImage", "removedSecondImage", "removedThirdImage", "removedFourthImage", "removedFifthImage"],
   data() {
     return {
     }
@@ -33,13 +31,14 @@ export default {
       this.$emit("removedSecondImage", true);
     },
     removeThirdImageURL(){
-      imageURL = imageURL.slice(0,3)
+      this.$emit("removedThirdImage", true);
     },
     removeFourthImageURL(){
-      imageURL = imageURL.slice(0,4)
+      this.$emit("removedFourthImage", true);
     },
     removeFifthImageURL(){
-      imageURL = imageURL.slice(0,5)
+      console.log("Should have emited");
+      this.$emit("removedFifthImage", true);
     }
   }
 }

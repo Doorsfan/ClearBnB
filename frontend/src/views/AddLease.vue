@@ -10,7 +10,7 @@
   <HousingRadioButtons @updateChosenHousing="updateChosenHousing" @updateChosenSize="updateChosenSize"/>
   <AddAmenities @updateWifi="updateWifi" @updateKitchen="updateKitchen" @updateWasher="updateWasher" @updateHeating="updateHeating" @updateAC="updateAC" />
   <ImageUrlInputForm @updatedImgURLs="updateIMGUrls" />
-  <ImageBox @removedFirstImage="removeFirstIMGinURLs" @removedSecondImage="removeSecondIMGinURLs" :imageURL="imageURLs"/>
+  <ImageBox @removedFirstImage="removeFirstIMGinURLs" @removedSecondImage="removeSecondIMGinURLs" @removedThirdImage="removeThirdIMGinURLs" @removedFourthImage="removeFourthIMGinURLs" @removedFifthImage="removeFifthIMGinURLs" :imageURL="imageURLs"/>
   <DatepickerForAvailableDates @updatedLeaseStartDate="updateStartDate" @updatedLeaseEndDate="updateEndDate" 
   @updatedDisabledDays="updateDisabledDays" />
   <router-link class="previewButton" to="preview">Preview</router-link>
@@ -31,10 +31,11 @@ import store from '../store.js'
 <script>
 export default {
   name: 'AddResidence',
-  components: ['DatepickerForAvailableDates', 'DescriptionForm', 'HousingRadioButtons', 'InputForPricingBedAndPeople','LocationInputForm', 'AddAmenities'],
+  components: ['DatepickerForAvailableDates', 'DescriptionForm', 'HousingRadioButtons', 'InputForPricingBedAndPeople','LocationInputForm', 'AddAmenities', 'ImageBox'],
   watch: {
     title(){
-      ;
+      this.lease.title = this.title
+      store.commit('setLeaseToBuild', this.lease)
     },
     lease(){
       console.log("lease was changed");
@@ -46,20 +47,24 @@ export default {
       this.title = latestLease.title
       this.location = latestLease.location
       this.description = latestLease.description
-    }
-  },
-  mounted(){
-    if(this.$store.getters.getLeaseToBuild != null){
-      console.log(this.$store.getters.getLeaseToBuild)
-      this.title = this.$store.getters.getLeaseToBuild.title
-      this.lease = this.$store.getters.getLeaseToBuild
+      this.typeOfHousing = latestLease.typeOfHousing
+      if(latestLease.entireResidence == true){
+        this.size = "Entire residence"
+      }
+      else{
+        this.size = "Part"
+      }
+      this.amenities = latestLease.amenities
+      this.imageURLs = latestLease.imageURLs
+      this.startDate = latestLease.startDate
+      this.endDate = latestLease.endDate
     }
   },
   data() {
     return {
       user: this.$store.getters.getCurrentUser,
       lease: this.$store.getters.getLeaseToBuild == null ? new Lease(this.$store.getters.getCurrentUser.id, '','','','','','','','','','','','') : this.$store.getters.getLeaseToBuild,
-      title: this.$store.getters.getLeaseToBuild == null ? '' : this.$store.getters.getLeaseToBuild.title,
+      title: '',
       location: this.$store.getters.getLeaseToBuild == null ? '' : this.$store.getters.getLeaseToBuild.location,
       description: this.$store.getters.getLeaseToBuild == null ? '' : this.$store.getters.getLeaseToBuild.description,
       typeOfHousing: this.$store.getters.getLeaseToBuild == null ? '' : this.$store.getters.getLeaseToBuild.typeOfHousing,
@@ -81,43 +86,55 @@ export default {
   },
   methods: {
     removeFirstIMGinURLs(){
-      this.imageURLs = emptyArray.filter(function(value, index, arr){ return index >= 1 });
-      $('.firstImageURL').remove();
-      
+      this.imageURLs = this.imageURLs.filter(function(value, index, arr){ return index != 0 });
+      this.lease.imageURLs = this.imageURLs
+      store.commit('setLeaseToBuild', this.lease)
     },
     removeSecondIMGinURLs(){
-      let emptyArray = []
-      for(let image of this.imageURLs){
-        emptyArray.push(image);
-      }
-      this.imageURLs = emptyArray.filter(function(value, index, arr){ return index >= 2 })
-      $('.secondImageURL').remove();
-      console.log("this.imageURLs is now: ", this.imageURLs);
-      
+      this.imageURLs = this.imageURLs.filter(function(value, index, arr){ return index != 1 });
+      this.lease.imageURLs = this.imageURLs
+      store.commit('setLeaseToBuild', this.lease)
+    },
+    removeThirdIMGinURLs(){
+      this.imageURLs = this.imageURLs.filter(function(value, index, arr){ return index != 2 });
+      this.lease.imageURLs = this.imageURLs;
+      store.commit('setLeaseToBuild', this.lease)
+    },
+    removeFourthIMGinURLs(){
+      this.imageURLs = this.imageURLs.filter(function(value, index, arr){ return index != 3 });
+      this.lease.imageURLs = this.imageURLs;
+      store.commit('setLeaseToBuild', this.lease)
+    },
+    removeFifthIMGinURLs(){
+      console.log("Should have removed fifth IMG url");
+      this.imageURLs = this.imageURLs.filter(function(value, index, arr){ return index != 4 });
+      this.lease.imageURLs = this.imageURLs;
+      store.commit('setLeaseToBuild', this.lease)
     },
     updateIMGUrls(newImageURLs){
       this.imageURLs.push(newImageURLs);
-      console.log("new image URLs was: ", newImageURLs)
-      
+      this.lease.imageURLs = this.imageURLs;
+      store.commit('setLeaseToBuild', this.lease)
     },
     updateTitle(newTitle){
       this.title = newTitle
-      
+      this.lease.title = this.title;
+      store.commit('setLeaseToBuild', this.lease)
     },
     updateLocation(newLocation){
       this.location = newLocation
       this.lease.setLocation(this.location);
-      
+      store.commit('setLeaseToBuild', this.lease)
     },
     updateDescription(newDescription){
       this.description = newDescription
       this.lease.setDescription(this.description)
-      
+      store.commit('setLeaseToBuild', this.lease)
     },
     updateChosenHousing(chosenHousing){
       this.typeOfHousing = chosenHousing
       this.lease.setTypeOfHousing(this.typeOfHousing);
-      
+      store.commit('setLeaseToBuild', this.lease)
     },
     updateChosenSize(chosenSize){
       console.log("UpdateChosen SIze was called with the parameter of : ", chosenSize)
@@ -128,32 +145,32 @@ export default {
       else{
         this.lease.setEntireResidence(true);
       }
-      
+      store.commit('setLeaseToBuild', this.lease)
     },
     updateStartDate(newStartDate){
       this.startDate = newStartDate
       this.lease.setStartDate(this.startDate);
-      
+      store.commit('setLeaseToBuild', this.lease)
     },
     updateEndDate(newEndDate){
       this.endDate = newEndDate
       this.lease.setEndDate(this.endDate);
-      
+      store.commit('setLeaseToBuild', this.lease)
     },
     updatePrice(updatedPrice){
       this.price = updatedPrice
       this.lease.setPrice(this.price);
-      
+      store.commit('setLeaseToBuild', this.lease)
     },
     updateNrOfMaxGuests(maxPeople){
       this.maxPeople = maxPeople
       this.lease.setMaxGuests(this.maxPeople);
-      
+      store.commit('setLeaseToBuild', this.lease)
     },
     updateNrOfBeds(amountOfBeds){
       this.nrOfBeds = amountOfBeds
       this.lease.setBeds(this.nrOfBeds);
-      
+      store.commit('setLeaseToBuild', this.lease)
     },
     updateWifi(hasWifi){
       this.hasWifi = hasWifi
@@ -216,7 +233,8 @@ export default {
       else{
         this.amenities.push("airConditioner: false")
       }
-      
+      this.lease.amenities = this.amenities
+      store.commit('setLeaseToBuild', this.lease)
     }
   }
 }
