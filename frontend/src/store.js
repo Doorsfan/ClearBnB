@@ -24,6 +24,9 @@ export default createStore({
     }
   },
   actions: {
+    async saveLease(store, myLease) {
+      store.commit('setLeaseToBuild', myLease)
+    },
     async login(store, loggedInUser) {
       store.commit('setUser', loggedInUser)
     }

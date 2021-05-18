@@ -7,6 +7,15 @@
 <script>
 export default {
   emits: ['updatedImgURLs'],
+  mounted(){
+    let myimageURLs = []
+    if(this.$store.getters.getLeaseToBuild != null){
+      for(let images of this.$store.getters.getLeaseToBuild.imageURLs){
+        myimageURLs.push(images);
+      }
+    }
+    this.imageURLs = myimageURLs
+  },
   data() {
     return {
       imageURLs: [],
@@ -16,8 +25,13 @@ export default {
   methods: {
     addImageUrl() {
       if(this.imageURL.length > 0){
-        this.imageURLs.push(this.imageURL);
-        this.$emit("updatedImgURLs", this.imageURLs);
+        let emptyArray = []
+        for(let image of this.imageURLs){
+          emptyArray.push(image);
+        }
+        emptyArray.push(this.imageURL);
+        console.log("SENDING UP: ", emptyArray);
+        this.$emit("updatedImgURLs", emptyArray);
         this.imageURL = ""
       }
     },

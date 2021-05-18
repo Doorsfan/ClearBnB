@@ -16,6 +16,13 @@
 <script>
 export default {
   emits: ['updateBeds', 'updateMaxPeople', 'updatePrice'],
+  mounted(){
+    if(this.$store.getters.getLeaseToBuild != null){
+      this.Beds = this.$store.getters.getLeaseToBuild.beds
+      this.MaxPeople = this.$store.getters.getLeaseToBuild.maxGuests
+      this.Price = this.$store.getters.getLeaseToBuild.price
+    }
+  },
   data() {
     return {
       Beds: '',

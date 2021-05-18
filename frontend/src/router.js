@@ -8,6 +8,7 @@ import Login from './views/Login.vue'
 import AddLease from './views/AddLease.vue'
 import BookingView from './views/BookingView.vue'
 import SignUpPage from './views/SignUpPage.vue'
+import PreviewPage from './views/PreviewView.vue'
 
 export default createRouter({
   history: createWebHistory(),
@@ -40,5 +41,9 @@ export default createRouter({
       path: '/BookingView',
       component: BookingView
     },
+    {
+      path: '/preview',
+      component: PreviewPage
+    }
   ]
 })

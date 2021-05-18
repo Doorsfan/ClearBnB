@@ -1,42 +1,59 @@
 <template>
-  <div v-if="imageURL.length > 0">
-    <div class="firstImageURL">
-      {{imageURL[0][0]}} <button @click="removeImageURL" class="xSmall" type="button">X</button>
+  <div>
+    <div v-if="imageURL.length > 0" class="firstImageURL"><button @click="removeFirstImageURL" class="xSmall" type="button">X</button><img class="myImage firstImageSrc" :src="imageURL[0]"/>
     </div>
-    <div class="secondImageURL">
-      {{imageURL[0][1]}} <button @click="removeImageURL" class="xSmall" v-if="imageURL[0].length > 1" type="button">X</button>
+    <div v-if="imageURL.length > 1" class="secondImageURL"><button @click="removeSecondImageURL" class="xSmall" v-if="imageURL.length > 1" type="button">X</button>
+      <img class="myImage secondImageSrc" :src="imageURL[1]"/>
     </div>
-    <div class="thirdImageURL">
-      {{imageURL[0][2]}} <button @click="removeImageURL" class="xSmall" v-if="imageURL[0].length > 2" type="button">X</button>
+    <div v-if="imageURL.length > 2" class="thirdImageURL"><button @click="removeThirdImageURL" class="xSmall" v-if="imageURL.length > 2" type="button">X</button>
+      <img class="myImage thirdImageSrc" :src="imageURL[2]"/>
     </div>
-    <div class="fourthImageURL">
-      {{imageURL[0][3]}} <button @click="removeImageURL" class="xSmall" v-if="imageURL[0].length > 3" type="button">X</button>
+    <div v-if="imageURL.length > 3" class="fourthImageURL">
+      <button @click="removeFourthImageURL" class="xSmall" v-if="imageURL.length > 3" type="button">X</button><img class="myImage fourthImageSrc" :src="imageURL[3]"/>
     </div>
-    <div class="fifthImageURL">
-      {{imageURL[0][4]}} <button @click="removeImageURL" class="xSmall" v-if="imageURL[0].length > 4" type="button">X</button>
+    <div v-if="imageURL.length > 4" class="fifthImageURL">
+      <button @click="removeFifthImageURL" class="xSmall" v-if="imageURL.length > 4" type="button">X</button><img class="myImage fifthImageSrc" :src="imageURL[4]"/>
     </div>
   </div>
 </template>
 <script>
 export default {
   props: ["imageURL"],
+  emits: ["removedFirstImage", "removedSecondImage"],
   data() {
     return {
-
     }
   },
   methods: {
-    removeImageURL(){
-      console.log("temp");
+    removeFirstImageURL(){
+      console.log("emited removedFirstImage");
+      this.$emit("removedFirstImage", true)
+    },
+    removeSecondImageURL(){
+      this.$emit("removedSecondImage", true);
+    },
+    removeThirdImageURL(){
+      imageURL = imageURL.slice(0,3)
+    },
+    removeFourthImageURL(){
+      imageURL = imageURL.slice(0,4)
+    },
+    removeFifthImageURL(){
+      imageURL = imageURL.slice(0,5)
     }
   }
 }
 </script>
 <style scoped>
+.myImage{
+  width:150px;
+  height:100px;
+}
 .xSmall {
   background:red;
   padding:2px;
   margin:2px;
   color:white;
+  position:absolute;
 }
 </style>

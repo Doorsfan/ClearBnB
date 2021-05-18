@@ -14,6 +14,11 @@
 <script>
 export default {
   emits: ['updatedLocation'],
+  mounted(){
+    if(this.$store.getters.getLeaseToBuild != null){
+      this.location = this.$store.getters.getLeaseToBuild.location
+    }
+  },
   data() {
     return {
       location: "",

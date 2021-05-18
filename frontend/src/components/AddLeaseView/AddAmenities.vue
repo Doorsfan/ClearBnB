@@ -21,6 +21,40 @@ export default {
   // Sprint 2 - Delegera annan Scrum Master, Mjukt förslag: Syftet är att en person som är aktiv men inte är lika produktiv ska kunna kan få en större förankring i projektet - vilket kan hjälpa produktiviteten av arbetet
   // 
   emits: ['updateWifi', 'updateKitchen', 'updateWasher', 'updateHeating', 'updateAC'],
+  mounted(){
+    if(this.$store.getters.getLeaseToBuild != null){
+      if(this.$store.getters.getLeaseToBuild.amenities.includes("wifi: true")){
+        this.hasWifi = true;
+      }
+      else{
+        this.hasWifi = false;
+      }
+      if(this.$store.getters.getLeaseToBuild.amenities.includes("kitchen: true")){
+        this.hasKitchen = true;
+      }
+      else{
+        this.hasKitchen = false;
+      }
+      if(this.$store.getters.getLeaseToBuild.amenities.includes("washer: true")){
+        this.hasWasher = true;
+      }
+      else{
+        this.hasWasher = false;
+      }
+      if(this.$store.getters.getLeaseToBuild.amenities.includes("heating: true")){
+        this.hasHeating = true;
+      }
+      else{
+        this.hasHeating = false;
+      }
+      if(this.$store.getters.getLeaseToBuild.amenities.includes("airConditioner: true")){
+        this.hasAirConditioner = true;
+      }
+      else{
+        this.hasAirConditioner = false;
+      }
+    }
+  },
   data() {
     return {
       hasWifi: false,

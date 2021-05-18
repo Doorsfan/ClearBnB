@@ -27,6 +27,12 @@ let startDate = ref(new Date())
 let endDate = ref(new Date())
 export default {
   emits: ['updatedLeaseEndDate', 'updatedLeaseStartDate', 'updatedDisabledDays'],
+  mounted(){
+    if(this.$store.getters.getLeaseToBuild != null){
+      this.startDate = this.$store.getters.getLeaseToBuild.startDate
+      this.endDate = this.$store.getters.getLeaseToBuild.endDate
+    }
+  },
   data() {
     return {
       thisDay: thisDay,
