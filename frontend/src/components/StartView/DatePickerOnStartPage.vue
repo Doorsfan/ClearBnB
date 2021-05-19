@@ -35,8 +35,8 @@ export default {
     return {
       minimumStartDate: new Date(),
       minimumEndDate: new Date().addDays(1),
-      startDate: startDate,
-      endDate: endDate
+      startDate: new Date("2021-05-27"),
+      endDate: new Date("2021-07-30")
     }
   },
   watch: {
