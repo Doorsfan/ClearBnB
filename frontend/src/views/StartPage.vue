@@ -132,10 +132,8 @@ export default {
     async pretendToBook(){
       //Mt6ZUN7dYDQ1a2zuwbTYx the id of the place to book
 
-      let myLease = new Lease("PakHCMRgJxBkQGJpFApbv", "Lovely cottage", "Bellevue island","Cosy 4 room cottage in central Bellevue. The cottage is located in the wonderful district, St Palmas with city nearby as well as green parks, local shops, and restaurants. Within walking distance to the heart of Bellevue. You will have the whole cottage for yourself.",
-        "House", false, "2021-05-27", "2021-07-30", 1000, 4, 4, ["wifi: false","kitchen: false","washer: true","heating: true","airConditioner: false"],["https://images.unsplash.com/photo-1588046130717-0eb0c9a3ba15?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1438&q=80",
-        "https://images.unsplash.com/photo-1598204326847-aeedbc139508?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1534&q=80"
-      ])
+      let myLease = new Lease("PakHCMRgJxBkQGJpFApbv", "Watch the Northern Lights from your lawn", "Abisko","The cottage is rather small but the scenery is grand! If your stay is during the right time, you will see the amazing Aurora Borealis right from your lawn. Other than that, this cosy cottage in the middle of the forest is the perfect place to just be yourself for a while - alone with your thoughts and with no one to disturb your visit to the outhouse.",  
+        "House", true, "2021-05-27", "2021-09-30", 45, 1, 1, ["wifi: false","kitchen: true","washer: false","heating: false","airConditioner: false"],[ "https://images.unsplash.com/photo-1610620746460-de78cf3d1705?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80", "https://images.unsplash.com/photo-1590725121839-892b458a74fe?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80", "https://images.unsplash.com/photo-1612979213608-d25b9925906f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80", "https://images.unsplash.com/photo-1475518845976-0fd87b7e4e5d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80", "https://images.unsplash.com/photo-1576253689648-7fdcbd464dff?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=762&q=80" ])
       let myUser = this.$store.getters.getCurrentUser;
       let emptyUser = new User('','');
       let filledUser = Object.assign(emptyUser,myUser);
@@ -145,7 +143,7 @@ export default {
       filledUser.setUserInfo(filledUserInfo);*/
 
       let myBooking = new Booking(filledUser.id, 'PakHCMRgJxBkQGJpFApbv',
-      "Bellevue island", "2021-05-27", "2021-05-30", 1, 1000, myLease);
+      "Abisko", "2021-05-27", "2021-05-30", 1, 1000, myLease);
       let secondRes = await fetch('/rest/bookings', {
         method: 'POST',
         body: JSON.stringify(myBooking)
