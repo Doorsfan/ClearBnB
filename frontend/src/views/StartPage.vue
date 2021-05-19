@@ -20,7 +20,7 @@ import LocationInputForm from '../components/StartView/LocationInputForm.vue'
 import BedsInputForm from '../components/StartView/BedsInputForm.vue'
 import PriceRangeForm from '../components/StartView/PriceRangeForm.vue'
 import Header from '../components/Header.vue'
-import HambugerMenu from '../components/HamburgerMenu.vue'
+import HamburgerMenu from '../components/HamburgerMenu.vue'
 import User from '../components/User'
 import Booking from '../components/Booking.js'
 import UserInfo from '../components/UserInfo.js'
@@ -96,7 +96,7 @@ export default {
     BedsInputForm,
     PriceRangeForm,
     Header,
-    HambugerMenu
+    HamburgerMenu
   },
   data() {
     return {
