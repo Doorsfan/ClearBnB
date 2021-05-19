@@ -73,7 +73,7 @@ data()  {
 },
 methods: {
   async getMyLease(){
-    let res = await fetch('/rest/leases/' + this.$route.query.leaseId)
+    let res = await fetch('/rest/leases/' + this.$route.query.id)
     let responseInJson = await res.json();
     this.lease = responseInJson
   }

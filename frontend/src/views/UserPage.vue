@@ -165,17 +165,19 @@ export default {
         }
         index += 1;
       }
+      console.log("Wanted to delete a booking based on the id of: ", idToCancel)
       let deleteAdminResponse = await fetch('/rest/adminBookingsAsAdmin/' + idToCancel, {
         method: 'DELETE'
       });
 
       let deleteAdminResponseInJson = await deleteAdminResponse.json();
+      console.log(deleteAdminResponseInJson)
       idToCancel = deleteAdminResponseInJson;
       let deleteResponse = await fetch('/rest/bookings/' + idToCancel, {
         method: 'DELETE'
       });
       let deleteResponseInJson = await deleteResponse.json();
-      
+      console.log(deleteAdminResponseInJson)
     },
     async updateUserInfo(){
       let newUserInfo = new UserInfo(

@@ -132,9 +132,9 @@ export default {
     async pretendToBook(){
       //Mt6ZUN7dYDQ1a2zuwbTYx the id of the place to book
 
-      let myLease = new Lease("Mt6ZUN7dYDQ1a2zuwbTYx", "Cozy House in Detroit", "USA, Alaska","Lorem Ipsum",
-        "House", false, "2021-04-15", "2021-05-25", 1000, 4, 4, ["wifi: false","kitchen: false","washer: true","heating: true","airConditioner: false"],["https://images.unsplash.com/photo-1618221118493-9cfa1a1c00da?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=889&q=80",
-        "https://images.unsplash.com/photo-1580202313707-46a966af5c6f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1. 2.1&auto=format&fit=crop&w=743&q=80"
+      let myLease = new Lease("PakHCMRgJxBkQGJpFApbv", "Lovely cottage", "Bellevue island","Cosy 4 room cottage in central Bellevue. The cottage is located in the wonderful district, St Palmas with city nearby as well as green parks, local shops, and restaurants. Within walking distance to the heart of Bellevue. You will have the whole cottage for yourself.",
+        "House", false, "2021-05-27", "2021-07-30", 1000, 4, 4, ["wifi: false","kitchen: false","washer: true","heating: true","airConditioner: false"],["https://images.unsplash.com/photo-1588046130717-0eb0c9a3ba15?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1438&q=80",
+        "https://images.unsplash.com/photo-1598204326847-aeedbc139508?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1534&q=80"
       ])
       let myUser = this.$store.getters.getCurrentUser;
       let emptyUser = new User('','');
@@ -144,16 +144,16 @@ export default {
       let filledUserInfo = Object.assign(emptyUserInfo,filledUser.getUserInfo())
       filledUser.setUserInfo(filledUserInfo);*/
 
-      let myBooking = new Booking(filledUser.id, 'Mt6ZUN7dYDQ1a2zuwbTYx',
-      "USA, Alaska", "2021-05-18", "2021-05-22", 1, 1000, myLease);
+      let myBooking = new Booking(filledUser.id, 'PakHCMRgJxBkQGJpFApbv',
+      "Bellevue island", "2021-05-27", "2021-05-30", 1, 1000, myLease);
       let secondRes = await fetch('/rest/bookings', {
         method: 'POST',
         body: JSON.stringify(myBooking)
       });
       let secondResponseAsJson = await secondRes.json();
       
-      let filledAdminBooking = new AdminBooking(secondResponseAsJson['id'], filledUser.id, 'Mt6ZUN7dYDQ1a2zuwbTYx',
-      "USA, Alaska", "2021-05-18", "2021-05-22", 1, 1000, myLease);
+      let filledAdminBooking = new AdminBooking(secondResponseAsJson['id'], filledUser.id, 'PakHCMRgJxBkQGJpFApbv',
+      "Bellevue island", "2021-05-27", "2021-05-30", 1, 1000, myLease);
       let adminRes = await fetch('/rest/adminBookings', {
         method: 'POST',
         body: JSON.stringify(filledAdminBooking)

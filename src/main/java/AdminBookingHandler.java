@@ -40,9 +40,11 @@ public class AdminBookingHandler {
         });
 
         app.delete("/rest/adminBookingsAsAdmin/:id", (req, res) -> {
-            AdminBooking adminBooking = collection("AdminBooking").findOne(Filter.eq("id", req.params("id")));
-            collection("AdminBooking").deleteOne(Filter.eq("id", req.params("id")));
-            res.json(adminBooking.getBookingId());
+            System.out.println("The fed in id in adminBookingsDelete was: " + req.params("id"));
+            AdminBooking adminBooking = collection("AdminBooking").findOne(Filter.eq("bookingId", req.params("id")));
+            String myBookingId = adminBooking.getBookingId();
+            collection("AdminBooking").deleteOne(Filter.eq("bookingId", req.params("id")));
+            res.json(myBookingId);
         });
     }
 }

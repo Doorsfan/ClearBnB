@@ -10,7 +10,7 @@
         <div class="pricePerNightDiv"><b>Price Per Night:</b> {{ Math.round(lease.price * 1.15) }}</div>
         <div class="descriptionDiv"><b>Description:</b> {{ lease.description }}</div>
       </div>
-      <router-link class="readMoreLink" :to="{ path: '/BookingView', query: { leaseId: lease.id }}">Read More..</router-link>
+      <router-link class="readMoreLink" :to="{ path: '/BookingView', query: { id: lease.id }}">Read More..</router-link>
     </div>
   </div>
 </template>

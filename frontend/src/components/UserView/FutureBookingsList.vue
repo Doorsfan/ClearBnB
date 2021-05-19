@@ -1,6 +1,6 @@
 <template>
   <div class="mainBoxDiv">
-    <router-link class="goToBookedItem" :to="{ path: '/BookingView', query: { leaseId: futureBooking.leaseId }}">
+    <router-link class="goToBookedItem" :to="{ path: '/BookingView', query: { id: futureBooking.leaseId }}">
       <img class="firstImage" :src="futureBooking.bookedStay.imageURLs[0]"/>
       <div class="titleDiv">{{ futureBooking.getLocation() }}</div>
       <div class="guestsDiv">{{ "Guests: " + futureBooking.getGuests() }}</div>
