@@ -133,7 +133,6 @@ div{
   margin-right:auto;
 }
 .mainDiv{
-  background-color:red;
   background-image: url("/new_user.jpg");
   background-repeat:no-repeat;
   height:60vh;
