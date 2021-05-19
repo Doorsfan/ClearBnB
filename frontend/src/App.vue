@@ -1,13 +1,13 @@
 <template>
+  <div class="mainDiv">
   <header>
     <Header @loggedOut="loggedOut" :signUp="signUp" :login="login"/>
   </header>
-
-  <main class="app-main">
-    <router-view @loggedIn="loggedIn"/>
-  </main>
-
-  <footer>
+    <main class="app-main">
+      <router-view @loggedIn="loggedIn"/>
+    </main>
+  </div>
+  <footer class="myFooter">
     <Footer />
   </footer>
 </template>

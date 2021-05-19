@@ -1,30 +1,31 @@
 <template>
-  <div>
-    <h1>User log in</h1>
-    <div class="imageDiv">
-      <img class="LoginImage" src="/Login_form_user.png" alt="Login Image" />
+  <div class="backgroundDiv">
+    <div class="innerDiv">
+      <div class="mainDiv">
+        <h1 class="UserLoginTitle">Sign In</h1>
+        <form class="LoginForm" @submit.prevent="login">
+          <div class="emailDiv">
+            <input v-model="username" type="email" placeholder="E-mail" required />
+          </div>
+          <div class="passwordDiv">
+            <input
+              v-model="password"
+              type="password"
+              placeholder="Password"
+              required
+            />
+          </div>
+          <div class="failedLoginDiv">
+            <p class="errorText">Error - Bad credentials</p>
+          </div>
+        </form>
+        <div class="ButtonsDiv">
+          <router-link class="CancelButton" to="/">Cancel</router-link>
+          <button @click.prevent="login" class="LoginButton">Login</button>
+        </div>
+        <a href="api/register">New here?</a>
+      </div>
     </div>
-    <form class="LoginForm" @submit.prevent="login">
-      <div class="emailDiv">
-        <input v-model="username" type="email" placeholder="E-mail" required />
-      </div>
-      <div class="passwordDiv">
-        <input
-          v-model="password"
-          type="password"
-          placeholder="Password"
-          required
-        />
-      </div>
-      <div class="failedLoginDiv">
-        <p class="errorText">Error - Bad credentials</p>
-      </div>
-    </form>
-    <div class="ButtonsDiv">
-      <router-link class="CancelButton" to="/">Cancel</router-link>
-      <button @click.prevent="login" class="LoginButton">Login</button>
-    </div>
-    <a href="api/register">Register</a>
   </div>
 </template>
 
@@ -67,7 +68,27 @@ export default {
 </script>
 
 <style scoped>
-
+.backgroundDiv{
+  margin-top:3vh;
+  width:79.6vw;
+  background-color:red;
+  height:61vh;
+  padding-top:10vh;
+  background-image:url("/public/nice.jpg");
+  background-repeat:no-repeat;
+  background-size:contain;
+}
+.mainDiv{
+  padding-left:3vw;
+  padding-right:3vw;
+  width:max-content;
+  background-color: rgba(218, 224, 224, 0.8);
+  padding-top:5vh;
+  padding-bottom:5vh;
+  margin-top:10vh;
+  height:max-content;
+  opacity:1;
+}
 .errorText{
   margin: 0px;
   padding: 0px;
@@ -99,11 +120,8 @@ div {
   margin-left:auto;
   margin-right:auto;
 }
-h1 {
-  margin: 3px;
-  padding: 0px;
-  margin-top: 170px;
-  margin-bottom: 30px;
+.UserLoginTitle{
+  margin-bottom:20px;
 }
 .LoginImage {
   margin: 3px;
@@ -122,11 +140,11 @@ h1 {
   text-decoration-color: black;
   -moz-text-decoration-color: black;
   margin: 0px;
-  padding: 3px;
+  padding: 4px;
   display: inline-block;
   margin-right: 10px;
   font-weight: bolder;
-  height: 14px;
+  height: 23px;
   font-size: 13px;
   width: max-content;
   margin-bottom: 8px;
@@ -135,7 +153,6 @@ h1 {
   border: none;
   background-color: lightgrey;
   margin-right: 10px;
-  padding:4px;
 }
 .LoginButton {
   border-radius: 8px;

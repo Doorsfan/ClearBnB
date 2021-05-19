@@ -1,5 +1,6 @@
 <template>
-  <div class="mainBoxDiv">
+  <router-link class="linkToDetailsPage" :to="{ path: '/BookingView', query: { id: lease.id }}">
+  <div id="foo" v-on:click="select($event)" class="mainBoxDiv">
     <div class="titleDiv">{{ lease.title }}</div>
     <Carousel :myLease="lease"/>
     <div class="divHoldingLocationAndPrice">
@@ -10,9 +11,9 @@
         <div class="pricePerNightDiv"><b>Price Per Night:</b> {{ Math.round(lease.price * 1.15) }}</div>
         <div class="descriptionDiv"><b>Description:</b> {{ lease.description }}</div>
       </div>
-      <router-link class="readMoreLink" :to="{ path: '/BookingView', query: { id: lease.id }}">Read More..</router-link>
     </div>
   </div>
+  </router-link>
 </template>
 <script setup="">
   import Carousel from '../Carousel.vue'
@@ -25,14 +26,28 @@ export default {
     }
   },
   methods: {
+    select: function(event) {
+      console.log(event.target);
+    },
+    iWasClicked(){
+
+    }
   }
 }
 </script>
 <style scoped>
-.readMoreLink{
-  margin-left:150px;
+div{
+  color:black;
 }
-.readMoreLink:visited{
+.mainBoxDiv{
+  background-color: rgba(218, 224, 224, 0.8);
+  padding:20px;
+  width:500px;
+}
+.linkToDetailsPage{
+  text-decoration:none;
+}
+.linkToDetailsPage:visited{
   color:blue;
 }
 .titleDiv{

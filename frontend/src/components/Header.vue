@@ -2,7 +2,7 @@
   <div class="navbar">
     <div v-if="!isSmall" class="pc-nav">
       <div class="left">
-        <router-link to="/">Home</router-link>
+        <router-link to="/"><img class="homeIcon" src="/public/home_icon.png"><p class="homeText">Home</p></router-link>
       </div>
       <div class="center">
         <router-link to="userPage">User Page</router-link>
@@ -18,8 +18,8 @@
     </div>
     <div v-else class="tablet-nav">
       <Hamburger />
-      <router-link to="/">Home</router-link>
-      <router-link to="login">Login</router-link>
+      <router-link class="smallLoginLink" to="login">Login</router-link>
+      <router-link class="signUpLink smallSignupLink" :to="signUp"><i class="fas fa-user-plus"></i>Sign Up</router-link>
     </div>
   </div>
 </template>
@@ -58,6 +58,24 @@ export default {
 </script>
 
 <style scoped>
+.navbar{
+  background: linear-gradient(0.25turn, #f69d3c, #ebf8e1,#ebf8e1, #f69d3c);
+  width:100vw;
+}
+.homeIcon{
+  height:30px;
+  display:inline-block;
+  width:40px;
+  margin-top:15px;
+  margin-left:5px;
+}
+.homeText{
+  margin-bottom:10px;
+  margin-left:3px;
+  font-weight:bolder;
+  font-size:16px;
+  color:black;
+}
 .navbar {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -89,15 +107,16 @@ a {
   display: flex;
   flex-direction: row;
   align-items: baseline;
+  margin-right:20px;
 }
 .right span {
   font-size: 13px;
   margin: 0 10px;
-  color: rgb(172, 172, 172);
+  color: black;
 }
 .right a {
   font-size: 13px;
-  color: rgb(172, 172, 172);
+  color: black;
   transition: color 0.3s;
 }
 .right i {

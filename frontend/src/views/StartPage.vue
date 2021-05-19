@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="mainDiv">
     <div class="startPageDateDiv">
       <LocationInputForm @updateMyLocation="updateMyLocation" />
       <DatePickerOnStartPage @updateStartDate="updateSearchStartDate" @updateEndDate="updateSearchEndDate"/>
@@ -9,7 +9,7 @@
     <LeaseDisplayBox v-for="(leaseItem, index) of relevantLeases"
       :key="index"
       :lease="leaseItem"/>
-    <button @click="pretendToBook">Pretend to Book</button>
+    <button class="pretendToBookButton" @click="pretendToBook">Pretend to Book</button>
   </div>
 </template>
 <script>
@@ -137,11 +137,6 @@ export default {
       let myUser = this.$store.getters.getCurrentUser;
       let emptyUser = new User('','');
       let filledUser = Object.assign(emptyUser,myUser);
-      /*
-      let emptyUserInfo = new UserInfo('','','','','','','','',false);
-      let filledUserInfo = Object.assign(emptyUserInfo,filledUser.getUserInfo())
-      filledUser.setUserInfo(filledUserInfo);*/
-
       let myBooking = new Booking(filledUser.id, 'PakHCMRgJxBkQGJpFApbv',
       "Abisko", "2021-05-27", "2021-05-30", 1, 1000, myLease);
       let secondRes = await fetch('/rest/bookings', {
@@ -158,30 +153,6 @@ export default {
       });
       let adminResponseAsJson = await adminRes.json();
     },
-    //Can be used to populate the DB with dummy data
-    /*
-    async populateLeases(){
-      let lease = {
-        ownerId: 1,
-        title: "House in Alaska",
-        location: "USA, Alaska",
-        description: "Lorem Ipsum",
-        typeOfHousing: "House",
-        startDate: "2021-05-15",
-        endDate: "2021-06-25",
-        price: 1200,
-        maxGuests: 5,
-        beds: 5,
-        amenities: ['wifi: true', 'kitchen: true', 'washer: true', 'heating: true', 'airConditioner: true'],
-        imageURLs: ["https://images.unsplash.com/photo-1583845112203-29329902332e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=334&q=80",
-      "https://images.unsplash.com/photo-1572120360610-d971b9d7767c?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80"]
-      } 
-      let res = await fetch('/rest/leases', {
-        method: 'POST',
-        body: JSON.stringify(lease)
-      })
-      console.log(await res.json());
-    }, */
     returnRelevantLeases(lease){
       let passedMaxPriceCheck = false;
       let passedStartDate = false;
@@ -278,10 +249,44 @@ export default {
 }
 </script>
 <style scoped>
+
+.pretendToBookButton{
+  width:max-content;
+  padding:2px;
+  margin-left:auto;
+  margin-right:auto;
+}
+.mainDiv{
+  padding-left:5vw;
+  padding-right:5vw;
+  padding-bottom:2.5vh;
+  padding-top:2.5vh;
+  background-image: url("../../airplane.jpg");
+  background-size:cover;
+  background-repeat:no-repeat;
+  opacity: 0.8;
+  height:max-content;
+  width:100vw;
+  background-attachment: fixed;
+}
 .startPageDateDiv{
   width:max-content;
   margin-left:auto;
   margin-right:auto;
   font-size:20px;
+  background-color: rgba(218, 224, 224, 0.8);
+  padding-left:20px;
+  padding-right:20px;
+}
+@media only screen and (max-width: 700px) {
+  .startPageDateDiv {
+    width: 100%;
+    padding: 5px 5px;
+    margin: 2px 0;
+    display: block;
+    border: 1px solid #ccc;
+    border-radius: 1px;
+    box-sizing: border-box;
+  }
 }
 </style>

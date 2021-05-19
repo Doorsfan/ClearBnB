@@ -1,37 +1,49 @@
 <template>
-  <form class="registerForm" @submit.prevent="registerUser">
   <div class="mainDiv">
-    <p class="userRegistrationText">User Registration</p>
-    <div class="firstDiv">
-      <input v-model="firstName" required type="text" placeholder="First Name">
-      <input v-model="lastName" required type="text" placeholder="Last Name">
+    <div class="titleDiv">
+      <h1 class="registerTitle">Register New User</h1>
     </div>
-    <div class="secondDiv">
-      <input v-model="streetAddress" required type="text" class="StreetInput" placeholder="Street address">
+    <div class="firstNameDiv">
+      <p class="nameP">First name: </p><input v-model="firstName" placeholder="First Name" class="firstNameInput">
     </div>
-    <div class="thirdDiv">
-      <input required v-model="zipCode" class="zipCodeInput" type="text" placeholder="Zip code"><input required v-model="country" class="countryInput" type="text" placeholder="Country"><input v-model="city" required class="cityInput" type="text" placeholder="City">
+    <div class="lastNameDiv">
+      <p class="lastNameP">Last name: </p><input v-model="lastName" placeholder="Last Name" class="lastNameInput">
+    </div>
+    <div class="streetDiv">
+      <p class="streetP">Street: </p><input v-model="streetAddress" placeholder="My Street" class="streetInput">
+    </div>
+    <div class="zipDiv">
+      <p class="zipP">Zip Code: </p><input v-model="zipCode" placeholder="Zip Code" class="zipInput">
+    </div>
+    <div class="countryDiv">
+      <p class="countryP">Country: </p><input v-model="country" placeholder="Country" class="countryInput">
+    </div>
+    <div class="cityDiv">
+      <p class="cityP">City: </p><input v-model="city" placeholder="City" class="cityInput">
     </div>
     <div class="emailDiv">
-      <input v-model="email" required type="email" placeholder="e-mail address"><input v-model="repeatEmail" required type="email" placeholder="Repeat e-mail">
+      <p class="emailP">Email: </p><input v-model="email" type="email" placeholder="Email" class="emailInput">
     </div>
-    <div>
-      <input v-model="password" required type="password" placeholder="Password"><input v-model="repeatPassword" required type="password" placeholder="Repeat password">
+    <div class="repeatEmailDiv">
+      <p class="repeatEmailP">Repeat Email: </p><input v-model="repeatEmail" type="email" placeholder="Repeat Email" class="repeatEmailInput">
     </div>
-    <div class="phoneDiv">
-      <input v-model="phoneNumber" required type="text" placeholder="Phone number"><input v-model="newsLetter" class="newsLetterCheckBox" type="checkbox"> Newsletter
+    <div class="passwordDiv">
+      <p class="passwordP">Password: </p><input v-model="password" type="password" placeholder="Password" class="passwordInput">
     </div>
-    <div class="errorBox">
-      <p class="errorText">Passwords do not match up</p>
+    <div class="repeatPasswordDiv">
+      <p class="repeatPasswordP">Repeat Password: </p><input v-model="repeatPassword" type="password" placeholder="Repeat Password" class="repeatPasswordInput">
     </div>
-    <div class="takenUserBox">
-      <p class="errorText">User with the email {{ email }} already exists.</p>
+    <div class="phoneNumber">
+      <p class="phoneNumberP">Phone Number: </p><input v-model="phoneNumber" placeholder="Phone Number" class="phoneNumberInput">
+    </div>
+    <div class="newsLetterDiv">
+      <p class="newsLetterP">Newsletter: </p><input v-model="newsLetter" type="checkbox" class="newsLetterBox">
+    </div>
+    <div class="buttonsDiv">
+      <router-link to="/" class="cancelButton" value="Cancel">Cancel</router-link><button class="registerButton" @click="registerUser" value="Register">Register</button>
     </div>
   </div>
-  </form>
-  <div class="buttonsDiv">
-    <router-link to="/" class="cancelButton" value="Cancel">Cancel</router-link><button class="registerButton" @click="registerUser" value="Register">Register</button>
-  </div>
+  
 </template>
 <script>
 import User from '../components/User.js'
@@ -59,17 +71,6 @@ export default {
         document.getElementsByClassName('errorBox')[0].style.display = 'block';
         return;
       }
-      /*
-      userId,
-    firstName,
-    lastName,
-    streetAddress,
-    zipCode,
-    city,
-    country,
-    phoneNumber,
-    newsLetter */
-      //Look at again when back from dinner
       let newUser = new User(this.email, this.password);
       let newUserInfo = new UserInfo(
         '',
@@ -108,13 +109,40 @@ export default {
 }
 </script>
 <style scoped>
-.errorText{
+input{
+  margin:5px;
+}
+h1{
+  margin-left:150px;
+}
+p{
+  display:inline-block;
+  width:150px;
+  text-align:right;
+  color:black;
+  font-weight:bolder;
+}
+.buttonsDiv{
+  padding-left:160px;
+  margin-top:10px;
+}
+div{
+  display:block;
   width:max-content;
+  margin-left:auto;
+  margin-right:auto;
 }
-.countryInput{
-  width:100px;
+.mainDiv{
+  background-color:red;
+  background-image: url("/public/new_user.jpg");
+  background-repeat:no-repeat;
+  height:60vh;
+  width:80vw;
+  max-width:80vw;
+  margin:0px;
+  margin-top:3vh;
+  padding-top:10vh;
 }
-
 .errorBox{
   margin-left:auto;
   margin-right:auto;
@@ -136,34 +164,17 @@ export default {
 .userRegistrationText{
   font-weight:bolder;
 }
-.mainDiv{
-  margin-top:200px;
-}
-div{
-  width:max-content;
-  text-align:center;
-  margin-top:20px;
-  margin-bottom:20px;
-}
-input{
-  width:max-content;
-  margin-left:10px;
-  margin-right:10px;
-  padding-left: 3px;
-  min-width:100px;
-}
 .newsLetterCheckBox{
   text-align: center;
   width:14px;
   min-width:14px;
   margin-right:3px;
 }
-.StreetInput{
-  width:473px;
-}
-.buttonsDiv, .mainDiv{
+
+.buttonsDiv{
   margin-left:auto;
   margin-right:auto;
+  width:max-content;
 }
 .cancelButton{
   margin-right:5px;
@@ -192,12 +203,5 @@ input{
   border-bottom: 1px solid #333333;
   border-left: 1px solid #CCCCCC;
   font-size:14px;
-}
-.zipCodeInput{
-  min-width:40px;
-  width:80px;
-}
-.cityInput{
-  width:253px;
 }
 </style>

@@ -1,7 +1,5 @@
 <template>
-  <div>
-    <LoginForm />
-  </div>
+  <LoginForm />
 </template>
 
 <script>
@@ -15,4 +13,7 @@ export default {
 </script>
 
 <style scoped>
+.backgroundImage{
+  background-image:none;
+}
 </style>

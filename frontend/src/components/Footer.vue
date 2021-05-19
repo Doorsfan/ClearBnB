@@ -1,13 +1,13 @@
 <template>
   <footer>
     <div class="icons">
-      <div>
+      <div class="faceBookIconDiv">
         <i class="fab fa-facebook-f"></i>
       </div>
-      <div>
+      <div class="instagramIconDiv">
         <i class="fab fa-instagram"></i>
       </div>
-      <div>
+      <div class="twitterIconDiv">
         <i class="fab fa-twitter"></i>
       </div>
     </div>
@@ -25,15 +25,16 @@
 <style scoped>
 footer {
   background-color: #fff;
-  background-image: url("../assets/skyline.png");
+  background-image: url("../../public/smaller_footer.png");
   background-repeat: no-repeat;
   background-position: center;
   padding: 10px;
-  padding-top: 80px;
   display: flex;
   flex-direction: column;
   align-items: center;
   width:100vw;
+  height:3vh;
+  padding-top:180px;
 }
 
 .icons {
@@ -69,8 +70,9 @@ footer {
   text-decoration: none;
   text-transform: uppercase;
   font-weight: 700;
-  font-size: 12px;
-  color: #000;
+  font-size: 1.60rem;
+  color: black;
+  -webkit-text-stroke: 0.6px white;
 }
 
 .links a:hover {
