@@ -249,7 +249,6 @@ export default {
 }
 </script>
 <style scoped>
-
 .pretendToBookButton{
   width:max-content;
   padding:2px;
@@ -268,6 +267,7 @@ export default {
   height:max-content;
   width:100vw;
   background-attachment: fixed;
+  overflow-x:hidden;
 }
 .startPageDateDiv{
   width:max-content;

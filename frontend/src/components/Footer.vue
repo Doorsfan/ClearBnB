@@ -24,6 +24,7 @@
 
 <style scoped>
 footer {
+  margin-top: 20px;
   background-color: #fff;
   background-image: url("/smaller_footer.png");
   background-repeat: no-repeat;
