@@ -17,6 +17,13 @@ export default class Lease {
     this.amenities = amenities
     this.imageURLs = imageURLs
   }
+
+  getProfitCut(){
+    return (this.getDisplayPrice() - this.price); 
+  }
+  getDisplayPrice(){
+    return Math.round(this.price * 1.15);
+  }
   getleaseId(){
     return this.leaseId;
   }

@@ -1,18 +1,21 @@
 <template>
   <div class="ImageURLSdiv">
     <p class="ImageURLStext">Image urls</p>
-    <form @submit.prevent="addImageUrl">
-      <input
-        v-model="imageURL"
-        type="text"
-        placeholder="Image URL.."
-      />
-      <button class="addImageButton" type="submit">Add</button>
-    </form>
+    <input v-model="imageURL" type="text" placeholder="Image URL.."/><button v-if="imageURLs.length <= 4" class="addImageButton" type="button" @click="addImageUrl">Add</button>
   </div>
 </template>
 <script>
 export default {
+  emits: ['updatedImgURLs'],
+  mounted(){
+    let myimageURLs = []
+    if(this.$store.getters.getLeaseToBuild != null){
+      for(let images of this.$store.getters.getLeaseToBuild.imageURLs){
+        myimageURLs.push(images);
+      }
+    }
+    this.imageURLs = myimageURLs
+  },
   data() {
     return {
       imageURLs: [],
@@ -21,9 +24,16 @@ export default {
   },
   methods: {
     addImageUrl() {
-      this.imageURLs.push(this.imageURL);
-      this.$emit("updatedImgURLs", this.imageURLs);
-      this.imageURL = "";
+      if(this.imageURL.length > 0){
+        let emptyArray = []
+        for(let image of this.imageURLs){
+          emptyArray.push(image);
+        }
+        emptyArray.push(this.imageURL);
+        console.log("SENDING UP: ", emptyArray);
+        this.$emit("updatedImgURLs", emptyArray);
+        this.imageURL = ""
+      }
     },
   },
 };

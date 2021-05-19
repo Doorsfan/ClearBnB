@@ -51,7 +51,9 @@ export default {
         document.getElementsByClassName("failedLoginDiv")[0].style.display = "block";
       }
       else{
-        user.id = response.id;
+        let currentUser = new User('','');
+        user = Object.assign(currentUser,response)
+        console.log("User is now: ", user);
         document.getElementsByClassName("failedLoginDiv")[0].style.display = "none";
         this.$store.dispatch('login', user)
         //window.location = '/'

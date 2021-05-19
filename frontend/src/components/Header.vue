@@ -8,6 +8,7 @@
         <router-link to="userPage">User Page</router-link>
         <router-link to="AddLease">Add Lease</router-link>
         <router-link to="BookingView">Booking View</router-link>
+        <router-link to="preview">Preview View</router-link>
       </div>
       <div class="right">
         <router-link class="signUpLink" :to="signUp"><i class="fas fa-user-plus"></i>Sign Up</router-link>

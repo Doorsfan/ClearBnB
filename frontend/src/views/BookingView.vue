@@ -14,8 +14,8 @@
       <!-- <div class="lease-images">
         {{lease.imageURLs[0]}} {{lease.imageURLs[1]}}
       </div> -->
-        <div class="type-pppn">
-          <p>{{ typeOfHousing }} | Per person per night: {{ PPPN }} SEK</p>
+        <div class="type-price">
+          <p>{{ typeOfHousing }} | Per person per night: {{ Math.round(price * 1.15) }} SEK</p>
         </div>
         <div class="booking-view-description">
           <p> {{ description}} </p>
@@ -54,7 +54,7 @@ export default  {
       this.maxGuests = this.lease.maxGuests
       this.imageURLs = this.lease.imageURLs
       this.typeOfHousing = this.lease.typeOfHousing
-      this.PPPN = this.lease.price
+      this.price = this.lease.price
       this.description = this.lease.description
     }
   },
@@ -65,7 +65,7 @@ data()  {
     maxGuests: '',
     imageURLs: ['',''],
     typeOfHousing: '',
-    PPPN: '',
+    price: '',
     description: '',
     lease: '',
     selectedNumberOfGuests: ''
@@ -153,7 +153,7 @@ image {
   border-radius: 4px;
 }
 
-.type-pppn{
+.type-price{
   font-weight: 700;
   padding: 10px 0 20px;
 }

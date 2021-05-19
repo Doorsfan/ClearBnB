@@ -13,6 +13,12 @@
 </template>
 <script>
 export default {
+  emits: ['updatedLocation'],
+  mounted(){
+    if(this.$store.getters.getLeaseToBuild != null){
+      this.location = this.$store.getters.getLeaseToBuild.location
+    }
+  },
   data() {
     return {
       location: "",
@@ -21,7 +27,8 @@ export default {
   methods: {
     updateLocationArea() {
       let updatedLocationArea = location;
-      this.$emit("updatedLocation", updatedLocationArea);
+      console.log("IN LOCATION IT WAS: ", this.location);
+      this.$emit("updatedLocation", this.location);
     },
   },
 };

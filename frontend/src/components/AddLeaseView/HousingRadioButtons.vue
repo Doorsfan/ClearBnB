@@ -18,6 +18,12 @@
 //Implement so that it is a seperate section in the Radio Buttons for Entire residence/part
 export default {
   emits: ['updateChosenHousing', 'updateChosenSize'],
+  mounted(){
+    if(this.$store.getters.getLeaseToBuild != null){
+      this.firstRowChoice = this.$store.getters.getLeaseToBuild.typeOfHousing
+      this.secondRowChoice = this.$store.getters.getLeaseToBuild.entireResidence == true ? 'Entire residence' : 'Part'
+    }
+  },
   data() {
     return {
       firstRowChoice: '',

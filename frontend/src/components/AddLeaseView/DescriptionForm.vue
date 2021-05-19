@@ -7,6 +7,12 @@
 </template>
 <script> //Between Components, utilize Emit - Between Views, utilize saving into the Database
   export default {
+    emits: ['updatedDescription'],
+    mounted(){
+      if(this.$store.getters.getLeaseToBuild != null){
+        this.message = this.$store.getters.getLeaseToBuild.description
+      }
+    },
     data() {
       return {
         message: ""
@@ -15,6 +21,7 @@
     methods: {
       sendUpMessage() {
         let messageToSendUp = this.message
+        console.log("Emitted: ", this.message);
         this.$emit("updatedDescription", messageToSendUp)
       }
     }

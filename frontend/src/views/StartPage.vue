@@ -111,8 +111,8 @@ export default {
       myAmountOfBeds: '',
       myMinPrice: '',
       myMaxPrice: '',
-      choseStartDate: this.getTodayInCorrectFormat(),
-      choseEndDate: new Date().addDays(7)
+      choseStartDate: this.getAnyDateInCorrectFormat("2021-05-27"),
+      choseEndDate: this.getAnyDateInCorrectFormat("2021-06-30")
     }
   },
   mounted(){
@@ -191,7 +191,7 @@ export default {
       if(this.myMaxPrice == 0){
         passedMaxPriceCheck = true;
       }
-      else if(this.myMaxPrice >= lease.PPPN){
+      else if(this.myMaxPrice >= Math.round((lease.price * 1.15))){
         passedMaxPriceCheck = true;
       }
       if(this.choseStartDate.length == 0){
@@ -207,8 +207,8 @@ export default {
         passedEndDate = true;
       }
       let passedLocation = lease.location.toLowerCase().includes(this.myLocation.toLowerCase());
-      let passedMinPrice = this.myMinPrice <= lease.PPPN;
-      let passedBeds = this.myAmountOfBeds <= lease.beds;
+      let passedMinPrice = this.myMinPrice <= Math.round((lease.price * 1.15));
+      let passedBeds = lease.beds <= this.myAmountOfBeds || this.myAmountOfBeds == 0;
       if(passedLocation && passedMinPrice && passedBeds && passedEndDate && passedStartDate && passedMaxPriceCheck){
         return lease
       }
@@ -243,6 +243,22 @@ export default {
     updateMyMaxPrice(newMaxPrice){
       this.myMaxPrice = newMaxPrice
       this.checkWhichFilterToRun()
+    },
+    getAnyDateInCorrectFormat(myDate){
+      let today = new Date(myDate)
+      let month = today.getMonth() + 1;
+      let day = today.getDate();
+      let zeroBeforeMonth = '';
+      let zeroBeforeDay = '';
+      if(month < 10){
+        zeroBeforeMonth += '0' + month
+        month = zeroBeforeMonth
+      }
+      if(day < 10){
+        zeroBeforeDay += '0' + day
+        day = zeroBeforeDay
+      }
+      return today.getFullYear() + '-' + month + '-' + day
     },
     getTodayInCorrectFormat(){
       let today = new Date()

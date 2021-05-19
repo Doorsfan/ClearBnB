@@ -2,14 +2,15 @@
   <div class="mainDiv">
   <h3 class="addResidenceHeader">Add a residence</h3>
   <p class="myTitle">Title</p>
-  <input type="text" required placeholder="Title" v-model="myTitle" />
+  <input type="text" required placeholder="Title" v-model="title" />
   <p class="myLocation">Location</p>
-  <LocationInputForm @updatedLocation="updateLocation" />
-  <DescriptionForm @updatedDescription="updateDescription" />
-  <InputForPricingBedAndPeople @updateBeds="updateNrOfBeds" @updateMaxPeople="updateNrOfMaxPeople" @updatePrice="updatePricePerPerson" />
+  <LocationInputForm v-model="location" @updatedLocation="updateLocation" />
+  <DescriptionForm v-model="description" @updatedDescription="updateDescription" />
+  <InputForPricingBedAndPeople @updateBeds="updateNrOfBeds" @updateMaxPeople="updateNrOfMaxGuests" @updatePrice="updatePrice" />
   <HousingRadioButtons @updateChosenHousing="updateChosenHousing" @updateChosenSize="updateChosenSize"/>
-  <AddAmenities />
-  <ImageUrlInputForm @updatedImageURLs="updateImageURLs" />
+  <AddAmenities @updateWifi="updateWifi" @updateKitchen="updateKitchen" @updateWasher="updateWasher" @updateHeating="updateHeating" @updateAC="updateAC" />
+  <ImageUrlInputForm @updatedImgURLs="updateIMGUrls" />
+  <ImageBox @removedFirstImage="removeFirstIMGinURLs" @removedSecondImage="removeSecondIMGinURLs" @removedThirdImage="removeThirdIMGinURLs" @removedFourthImage="removeFourthIMGinURLs" @removedFifthImage="removeFifthIMGinURLs" :imageURL="imageURLs"/>
   <DatepickerForAvailableDates @updatedLeaseStartDate="updateStartDate" @updatedLeaseEndDate="updateEndDate" 
   @updatedDisabledDays="updateDisabledDays" />
   <router-link class="previewButton" to="preview">Preview</router-link>
@@ -23,72 +24,225 @@ import InputForPricingBedAndPeople from '../components/AddLeaseView/InputForPric
 import ImageUrlInputForm from '../components/AddLeaseView/ImageUrlInputForm.vue'
 import LocationInputForm from '../components/AddLeaseView/LocationInputForm.vue'
 import AddAmenities from '../components/AddLeaseView/AddAmenities.vue'
+import Lease from '../components/Lease.vue'
+import ImageBox from '../components/AddLeaseView/ImageBox.vue'
+import store from '../store.js'
 </script>
 <script>
 export default {
   name: 'AddResidence',
-  components: ['DatepickerForAvailableDates', 'DescriptionForm', 'HousingRadioButtons', 'InputForPricingBedAndPeople',  'ImageUrlInputForm','LocationInputForm', 'AddAmenities'],
+  components: ['DatepickerForAvailableDates', 'DescriptionForm', 'HousingRadioButtons', 'InputForPricingBedAndPeople','LocationInputForm', 'AddAmenities', 'ImageBox'],
+  watch: {
+    title(){
+      this.lease.title = this.title
+      store.commit('setLeaseToBuild', this.lease)
+    },
+    lease(){
+      console.log("lease was changed");
+    }
+  },
+  beforeMount(){
+    if(this.$store.getters.getLeaseToBuild != null){
+      let latestLease = this.$store.getters.getLeaseToBuild
+      this.title = latestLease.title
+      this.location = latestLease.location
+      this.description = latestLease.description
+      this.typeOfHousing = latestLease.typeOfHousing
+      if(latestLease.entireResidence == true){
+        this.size = "Entire residence"
+      }
+      else{
+        this.size = "Part"
+      }
+      this.amenities = latestLease.amenities
+      this.imageURLs = latestLease.imageURLs
+      this.startDate = latestLease.startDate
+      this.endDate = latestLease.endDate
+    }
+  },
   data() {
     return {
-      myTitle: '',
-      beds: '',
-      maxGuests: '',
-      PPPN: '',
-      typeOfHousing: '',
+      user: this.$store.getters.getCurrentUser,
+      lease: this.$store.getters.getLeaseToBuild == null ? new Lease(this.$store.getters.getCurrentUser.id, '','','','','','','','','','','','') : this.$store.getters.getLeaseToBuild,
+      title: '',
+      location: this.$store.getters.getLeaseToBuild == null ? '' : this.$store.getters.getLeaseToBuild.location,
+      description: this.$store.getters.getLeaseToBuild == null ? '' : this.$store.getters.getLeaseToBuild.description,
+      typeOfHousing: this.$store.getters.getLeaseToBuild == null ? '' : this.$store.getters.getLeaseToBuild.typeOfHousing,
+      size: this.$store.getters.getLeaseToBuild == null ? '' : this.$store.getters.getLeaseToBuild.entireResidence,
+      startDate: this.$store.getters.getLeaseToBuild == null ? '' : this.$store.getters.getLeaseToBuild.startDate,
+      endDate: this.$store.getters.getLeaseToBuild == null ? '' : this.$store.getters.getLeaseToBuild.endDate,
+      price: this.$store.getters.getLeaseToBuild == null ? '' : this.$store.getters.getLeaseToBuild.price,
+      maxGuests: this.$store.getters.getLeaseToBuild == null ? '' : this.$store.getters.getLeaseToBuild.maxGuests,
+      beds: this.$store.getters.getLeaseToBuild == null ? '' : this.$store.getters.getLeaseToBuild.beds,
+      amenities: this.$store.getters.getLeaseToBuild == null ? '' : this.$store.getters.getLeaseToBuild.amenities,
       hasWifi: false,
       hasKitchen: false,
       hasWasher: false,
       hasHeating: false,
       hasAirConditioner: false,
-      size: '',
-      location: '',
-      title: '',
       imageURLs: [],
-      description: '',
-      startDate: '',
-      endDate: '',
       disabledDays: []
     }
   },
   methods: {
-    updateDisabledDays(newDisabledDays){
-      this.disabledDays = newDisabledDays
+    removeFirstIMGinURLs(){
+      this.imageURLs = this.imageURLs.filter(function(value, index, arr){ return index != 0 });
+      this.lease.imageURLs = this.imageURLs
+      store.commit('setLeaseToBuild', this.lease)
     },
-    updateStartDate(newStartDate){
-      this.startDate = newStartDate
+    removeSecondIMGinURLs(){
+      this.imageURLs = this.imageURLs.filter(function(value, index, arr){ return index != 1 });
+      this.lease.imageURLs = this.imageURLs
+      store.commit('setLeaseToBuild', this.lease)
     },
-    updateEndDate(newEndDate){
-      this.endDate = newEndDate
+    removeThirdIMGinURLs(){
+      this.imageURLs = this.imageURLs.filter(function(value, index, arr){ return index != 2 });
+      this.lease.imageURLs = this.imageURLs;
+      store.commit('setLeaseToBuild', this.lease)
     },
-    updateDescription(newDescription){
-      this.description = newDescription
+    removeFourthIMGinURLs(){
+      this.imageURLs = this.imageURLs.filter(function(value, index, arr){ return index != 3 });
+      this.lease.imageURLs = this.imageURLs;
+      store.commit('setLeaseToBuild', this.lease)
     },
-    updateImageURLs(newImageURLs){
-      this.imageURLs = newImageURLs
+    removeFifthIMGinURLs(){
+      console.log("Should have removed fifth IMG url");
+      this.imageURLs = this.imageURLs.filter(function(value, index, arr){ return index != 4 });
+      this.lease.imageURLs = this.imageURLs;
+      store.commit('setLeaseToBuild', this.lease)
+    },
+    updateIMGUrls(newImageURLs){
+      this.imageURLs.push(newImageURLs);
+      this.lease.imageURLs = this.imageURLs;
+      store.commit('setLeaseToBuild', this.lease)
+    },
+    updateTitle(newTitle){
+      this.title = newTitle
+      this.lease.title = this.title;
+      store.commit('setLeaseToBuild', this.lease)
     },
     updateLocation(newLocation){
       this.location = newLocation
+      this.lease.setLocation(this.location);
+      store.commit('setLeaseToBuild', this.lease)
+    },
+    updateDescription(newDescription){
+      this.description = newDescription
+      this.lease.setDescription(this.description)
+      store.commit('setLeaseToBuild', this.lease)
+    },
+    updateChosenHousing(chosenHousing){
+      this.typeOfHousing = chosenHousing
+      this.lease.setTypeOfHousing(this.typeOfHousing);
+      store.commit('setLeaseToBuild', this.lease)
+    },
+    updateChosenSize(chosenSize){
+      console.log("UpdateChosen SIze was called with the parameter of : ", chosenSize)
+      this.size = chosenSize
+      if(this.size == "Part"){
+        this.lease.setEntireResidence(false);
+      }
+      else{
+        this.lease.setEntireResidence(true);
+      }
+      store.commit('setLeaseToBuild', this.lease)
+    },
+    updateStartDate(newStartDate){
+      this.startDate = newStartDate
+      this.lease.setStartDate(this.startDate);
+      store.commit('setLeaseToBuild', this.lease)
+    },
+    updateEndDate(newEndDate){
+      this.endDate = newEndDate
+      this.lease.setEndDate(this.endDate);
+      store.commit('setLeaseToBuild', this.lease)
+    },
+    updatePrice(updatedPrice){
+      this.price = updatedPrice
+      this.lease.setPrice(this.price);
+      store.commit('setLeaseToBuild', this.lease)
+    },
+    updateNrOfMaxGuests(maxPeople){
+      this.maxPeople = maxPeople
+      this.lease.setMaxGuests(this.maxPeople);
+      store.commit('setLeaseToBuild', this.lease)
     },
     updateNrOfBeds(amountOfBeds){
       this.nrOfBeds = amountOfBeds
+      this.lease.setBeds(this.nrOfBeds);
+      store.commit('setLeaseToBuild', this.lease)
     },
-    updateNrOfMaxPeople(maxPeople){
-      this.maxPeople = maxPeople
+    updateWifi(hasWifi){
+      this.hasWifi = hasWifi
+      this.updateAmenities()
+      
     },
-    updatePricePerPerson(updatedPrice){
-      this.pricePerPerson = updatedPrice
+    updateKitchen(hasKitchen){
+      this.hasKitchen = hasKitchen;
+      this.updateAmenities()
+      
     },
-    updateChosenHousing(chosenHousing){
-      //Have in Add Residence View that it updates based on this function
-      this.typeOfHousing = chosenHousing
+    updateWasher(hasWasher){
+      this.hasWasher = hasWasher;
+      this.updateAmenities()
+      
     },
-    updateChosenSize(chosenSize){
-      this.size = chosenSize
+    updateHeating(hasHeating){
+      this.hasHeating = hasHeating;
+      this.updateAmenities()
+      
+    },
+    updateAC(hasAirConditioner){
+      this.hasAirConditioner = hasAirConditioner;
+      this.updateAmenities()
+      
+    },
+    updateDisabledDays(newDisabledDays){
+      this.disabledDays = newDisabledDays
+      
+    },
+    updateAmenities(){
+      this.amenities = [];
+      if(this.hasWifi){
+        this.amenities.push("wifi: true")
+      }
+      else{
+        this.amenities.push("wifi: false")
+      }
+      if(this.hasKitchen){
+        this.amenities.push("kitchen: true")
+      }
+      else{
+        this.amenities.push("kitchen: false")
+      }
+      if(this.hasWasher){
+        this.amenities.push("washer: true")
+      }
+      else{
+        this.amenities.push("washer: false")
+      }
+      if(this.hasHeating){
+        this.amenities.push("heating: true")
+      }
+      else{
+        this.amenities.push("heating: false")
+      }
+      if(this.hasAirConditioner){
+        this.amenities.push("airConditioner: true")
+      }
+      else{
+        this.amenities.push("airConditioner: false")
+      }
+      this.lease.amenities = this.amenities
+      store.commit('setLeaseToBuild', this.lease)
     }
   }
 }
 </script>
 <style scoped>
+.special{
+  height:100px;
+}
 .mainDiv{
   text-align: center;
   height: max-content;
