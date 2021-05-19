@@ -24,7 +24,6 @@ export default {
   },
   methods: {
     removeFirstImageURL(){
-      console.log("emited removedFirstImage");
       this.$emit("removedFirstImage", true)
     },
     removeSecondImageURL(){
@@ -37,7 +36,6 @@ export default {
       this.$emit("removedFourthImage", true);
     },
     removeFifthImageURL(){
-      console.log("Should have emited");
       this.$emit("removedFifthImage", true);
     }
   }

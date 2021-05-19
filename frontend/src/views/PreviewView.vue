@@ -78,7 +78,6 @@ export default {
   },
   mounted() {
     this.myLease = this.$store.getters.getLeaseToBuild
-    console.log("this.myLease was: ", this.myLease);
     if(this.myLease.entireResidence == true){
       $('.EntireOrPart').text("Entire Residence")
     }

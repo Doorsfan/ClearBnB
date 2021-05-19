@@ -2,7 +2,7 @@
   <div class="navbar">
     <div v-if="!isSmall" class="pc-nav">
       <div class="left">
-        <router-link to="/"><img class="homeIcon" src="/public/home_icon.png"><p class="homeText">Home</p></router-link>
+        <router-link to="/"><img class="homeIcon" src="/home_icon.png"><p class="homeText">Home</p></router-link>
       </div>
       <div class="center">
         <router-link to="userPage">User Page</router-link>

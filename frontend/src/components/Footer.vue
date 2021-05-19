@@ -25,7 +25,7 @@
 <style scoped>
 footer {
   background-color: #fff;
-  background-image: url("../../public/smaller_footer.png");
+  background-image: url("/smaller_footer.png");
   background-repeat: no-repeat;
   background-position: center;
   padding: 10px;

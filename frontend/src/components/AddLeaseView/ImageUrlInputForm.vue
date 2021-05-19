@@ -30,7 +30,6 @@ export default {
           emptyArray.push(image);
         }
         emptyArray.push(this.imageURL);
-        console.log("SENDING UP: ", emptyArray);
         this.$emit("updatedImgURLs", emptyArray);
         this.imageURL = ""
       }

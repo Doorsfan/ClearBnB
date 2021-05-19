@@ -27,7 +27,6 @@ export default {
   methods: {
     updateLocationArea() {
       let updatedLocationArea = location;
-      console.log("IN LOCATION IT WAS: ", this.location);
       this.$emit("updatedLocation", this.location);
     },
   },

@@ -54,7 +54,6 @@ export default {
       else{
         let currentUser = new User('','');
         user = Object.assign(currentUser,response)
-        console.log("User is now: ", user);
         document.getElementsByClassName("failedLoginDiv")[0].style.display = "none";
         this.$store.dispatch('login', user)
         //window.location = '/'
@@ -71,10 +70,9 @@ export default {
 .backgroundDiv{
   margin-top:3vh;
   width:79.6vw;
-  background-color:red;
   height:61vh;
   padding-top:10vh;
-  background-image:url("/public/nice.jpg");
+  background-image:url("/nice.jpg");
   background-repeat:no-repeat;
   background-size:contain;
 }

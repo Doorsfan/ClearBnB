@@ -19,7 +19,6 @@
 export default {
   methods: {
     operateHamburger() {
-      console.log("Activate hamburger menu");
       var x = document.getElementById("router-links");
       if (x.style.display === "block") {
         x.style.display = "none";

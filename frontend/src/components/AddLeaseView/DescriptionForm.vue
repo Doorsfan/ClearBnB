@@ -21,7 +21,6 @@
     methods: {
       sendUpMessage() {
         let messageToSendUp = this.message
-        console.log("Emitted: ", this.message);
         this.$emit("updatedDescription", messageToSendUp)
       }
     }

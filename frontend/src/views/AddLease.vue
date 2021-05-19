@@ -38,7 +38,6 @@ export default {
       store.commit('setLeaseToBuild', this.lease)
     },
     lease(){
-      console.log("lease was changed");
     }
   },
   beforeMount(){
@@ -106,7 +105,6 @@ export default {
       store.commit('setLeaseToBuild', this.lease)
     },
     removeFifthIMGinURLs(){
-      console.log("Should have removed fifth IMG url");
       this.imageURLs = this.imageURLs.filter(function(value, index, arr){ return index != 4 });
       this.lease.imageURLs = this.imageURLs;
       store.commit('setLeaseToBuild', this.lease)
@@ -137,7 +135,6 @@ export default {
       store.commit('setLeaseToBuild', this.lease)
     },
     updateChosenSize(chosenSize){
-      console.log("UpdateChosen SIze was called with the parameter of : ", chosenSize)
       this.size = chosenSize
       if(this.size == "Part"){
         this.lease.setEntireResidence(false);

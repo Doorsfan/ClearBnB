@@ -66,7 +66,6 @@ export default {
   },
   methods: {
     updateWifi(){
-      console.log("Sent an update about wifi")
       this.$emit("updateWifi", this.hasWifi);
     },
     updateKitchen(){

@@ -134,7 +134,7 @@ div{
 }
 .mainDiv{
   background-color:red;
-  background-image: url("/public/new_user.jpg");
+  background-image: url("/new_user.jpg");
   background-repeat:no-repeat;
   height:60vh;
   width:80vw;

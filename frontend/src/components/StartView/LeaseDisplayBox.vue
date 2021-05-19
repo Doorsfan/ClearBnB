@@ -28,9 +28,6 @@ export default {
   methods: {
     select: function(event) {
       console.log(event.target);
-    },
-    iWasClicked(){
-
     }
   }
 }
