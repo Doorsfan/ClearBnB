@@ -151,6 +151,9 @@ select  {
   box-shadow: 5px 5px 5px 0 rgb(136, 154, 160);
   border-radius: 4px;
 }
+.booking-view-image-1:hover {
+  transform: scale(1.08);
+}
 .booking-view-image-2{
   width: 30%;
   height: 300px;
@@ -159,6 +162,9 @@ select  {
   margin: 0 10px 10px 10px;
   box-shadow: 5px 5px 5px 0 rgb(136, 154, 160);
   border-radius: 4px;
+}
+.booking-view-image-2:hover {
+  transform: scale(1.08);
 }
 .booking-view-image-3{
   width: 30%;
@@ -169,6 +175,9 @@ select  {
   box-shadow: 5px 5px 5px 0 rgb(136, 154, 160);
   border-radius: 4px;
 }
+.booking-view-image-3:hover {
+  transform: scale(1.08);
+}
 .booking-view-image-4{
   width: 50%;
   height: 300px;
@@ -177,6 +186,9 @@ select  {
   margin: 0 10px 10px 10px;
   box-shadow: 5px 5px 5px 0 rgb(136, 154, 160);
   border-radius: 4px;
+}
+.booking-view-image-4:hover {
+  transform: scale(1.08);
 }
 
 .type-price{
