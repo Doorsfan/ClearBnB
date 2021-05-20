@@ -5,7 +5,7 @@
       <div class="titleDiv">{{ pastBooking.getLocation() }}</div>
       <div class="guestsDiv">{{ "Guests: " + pastBooking.getGuests() }}</div>
       <div class="dateDiv">{{ pastBooking.getStartDate() + " - " + pastBooking.getEndDate() }}</div>
-      <div class="priceDiv">{{ "Total price: " + pastBooking.getTotalPrice() }}</div>
+      <div class="priceDiv">{{ "Total price: " + Math.round(pastBooking.getTotalPrice() * 1.15) }}</div>
     </router-link>
   </div>
 </template>

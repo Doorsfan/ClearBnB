@@ -5,7 +5,7 @@
       <div class="titleDiv">{{ futureBooking.getLocation() }}</div>
       <div class="guestsDiv">{{ "Guests: " + futureBooking.getGuests() }}</div>
       <div class="dateDiv">{{ futureBooking.getStartDate() + " - " + futureBooking.getEndDate() }}</div>
-      <div class="priceDiv">{{ "Total price: " + futureBooking.getTotalPrice() }}</div>
+      <div class="priceDiv">{{ "Total price: " + Math.round(futureBooking.getTotalPrice() * 1.15) }}</div>
     </router-link>
     <div class="buttonDiv"><button @click="cancelBooking" class="cancelButton">Cancel Booking</button></div>
   </div>

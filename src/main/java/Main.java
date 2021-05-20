@@ -21,6 +21,7 @@ public class Main {
     new BookingHandler(app);
     new UserInfoHandler(app);
     new AdminBookingHandler(app);
+    new ProfitHandler(app);
 
     //app.get("/rest/hello", (req, res) -> {
     //  res.json(Map.of("message", "Hello from express"));

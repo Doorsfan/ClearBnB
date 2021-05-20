@@ -85,6 +85,7 @@ export default {
       myBookings: [],
       futureBookings: [],
       pastBookings: [],
+      profits: 0,
       myFirstName: '',
       myLastName: '',
       myPhoneNumber:'',
@@ -102,6 +103,7 @@ export default {
       });
     let result = await secondRes.json()
     this.currentUserInfo = result;
+    this.profits = 0;
 
     //Load from the DB all the Bookings that are tied to this users userId based on the userInfo
     if(this.user.username == 'admin@ClearBnB.se'){
@@ -115,8 +117,14 @@ export default {
         let emptyBooking = new AdminBooking('','','','','','','','');
         let filledBooking = Object.assign(emptyBooking, eachBooking);
         filledBooking.id = eachBooking.id;
-        this.myBookings.push(filledBooking); 
+        this.myBookings.push(filledBooking);
       }
+      let profitRes = await fetch('/rest/profit/', {
+        method: 'GET'
+      });
+      let myProfit = await profitRes.json();
+      let extractedProfit = myProfit[0].totalProfit;
+      console.log("my profit was: ", extractedProfit);
     }
     else{
       let secondRes = await fetch('/rest/bookings', {
