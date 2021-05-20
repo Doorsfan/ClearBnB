@@ -21,16 +21,16 @@ public class ProfitHandler {
     private void initProfitHandler() {
         app.post("/rest/profit/", (req,res) -> {
             Profit myProfit = req.body(Profit.class);
-            List<Booking> allBookingsInAList = collection("Booking").find();
-            ArrayList<Booking> allBookingsInAnArrayList = new ArrayList<Booking>(allBookingsInAList);
+            List<Profit> allProfitsAsList = collection("Profit").find();
+            ArrayList<Profit> allProfitsInAnArrayList = new ArrayList<Profit>(allProfitsAsList);
             double totalProfit = 0.0;
-            for(int i = 0; i < allBookingsInAnArrayList.size() ; i++){
-                totalProfit += (allBookingsInAnArrayList.get(i).getTotalPrice() * 1.15) - allBookingsInAnArrayList.get(i).getTotalPrice();
+            for(int i = 0; i < allProfitsInAnArrayList.size() ; i++){
+                totalProfit += allProfitsInAnArrayList.get(i).getTotalProfit();
             }
-            totalProfit = Math.round(totalProfit * 100.0) / 100.0;
-            myProfit.setTotalProfit(totalProfit);
+            totalProfit += myProfit.getTotalProfit();
+            Profit profitToSave = new Profit(totalProfit);
             collection("Profit").delete();
-            collection("Profit").save(myProfit);
+            collection("Profit").save(profitToSave);
             res.json("Updated the Total Profit");
         });
 

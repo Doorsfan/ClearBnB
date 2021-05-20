@@ -14,7 +14,7 @@
           <img v-if="imageURLs.length > 4" class="booking-view-image-5" :src="imageURLs[4]" />
         </div>
         <div class="type-price">
-          <p>{{ typeOfHousing }} | Per person per night: {{ Math.round(price * 1.15) }} Euro</p>
+          <p>{{ typeOfHousing }} | Per person per night: {{ Math.round(price * 1.15 * 100) / 100 }} Euro</p>
         </div>
         <div class="booking-view-description">
           <p> {{ description}} </p>
@@ -66,12 +66,17 @@
           <DatepickerForBookingView @updatedChosenStartDate="newStartDate" @updatedChosenEndDate="newEndDate" v-if="lease" :myLease="lease"/>
         </div>
       </div>
+      <div class="PriceToPayInTotal">
+        <p v-if="selectedNumberOfGuests > 0">Total Price to pay for {{ amountOfDays }} days for {{ selectedNumberOfGuests }} person: {{ Math.round(1.15 * (price * selectedNumberOfGuests * amountOfDays)) }} Euros</p>
+        <p v-if="selectedNumberOfGuests == 0">Please select amount of Guests attending to see the total price.</p>
+      </div>
       <div class="BookingButtonDiv">
         <button @click="book" v-if="selectedNumberOfGuests > 0 && user != null && (!(chosenStartDate.length == 0) && !(chosenEndDate.length == 0))" class="bookingButton" type="button" value="Book">Book Now!</button>
         <div class="SpecialErrorBox" v-if="(chosenStartDate.length == 0 || chosenEndDate.length == 0 || selectedNumberOfGuests == 0) && user != null">Before you can book, you must</div>
         <div class="errorBox" v-if="(chosenStartDate.length == 0 || chosenStartDate.length == 0) && user != null" value="Choose a From Date and a To Date First!">Choose a From Date and a To Date</div>
-        <div v-if="selectedNumberOfGuests == 0 && user != null" class="errorBox" value="Choose Amount of Guests first!">Choose amount of Guests</div>
-        <button @click="goToLogin" v-if="user == null" class="bookingButton" type="button" value="You have to log in to Book!">Log in to Book!</button>
+        <div v-if="selectedNumberOfGuests == 0 && user != null && amountOfDays > 0" class="errorBox" value="Choose Amount of Guests first!">Choose amount of Guests</div>
+        <div v-if="amountOfDays < 0" class="errorBox" Value="Cannot choose a negative amount of days!">You cannot choose a negative amount of days.</div>
+        <button @click="goToLogin" v-if="user == null && amountOfDays > 0" class="bookingButton" type="button" value="You have to log in to Book!">Log in to Book!</button>
       </div>
     </div>
   </div>
@@ -88,21 +93,10 @@ import User from '../components/User.js'
 import Booking from '../components/Booking'
 import AdminBooking from '../components/AdminBooking'
 import Lease from '../components/Lease.vue'
+import PPPN from '../components/PPPN.js'
+import Profit from '../components/Profit.js'
 export default {
   mounted(){
-    Date.prototype.getCorrectDateFormat = function() {
-      let year = this.getFullYear();
-      let month = this.getMonth() + 1;
-      let day = this.getDate();
-      if(month < 10){
-        month = '0' + month;
-      }
-      if(day < 10){
-        day = '0' + day;
-      }
-      return year + '-' + month + '-' + day;
-    };
-
     if(document.getElementsByClassName("sunIconInHeader").length > 0){
       document.getElementsByClassName("sunIconInHeader")[0].src = '/public/home_icon.png'
       document.getElementsByClassName("sunIconInHeader")[0].className = 'house_icon'
@@ -111,6 +105,33 @@ export default {
     }
   },
   watch: {
+    selectedNumberOfGuests(){
+      let formattedStartDate = this.priceHelper.getCorrectDateFormat(this.chosenStartDate);
+      let formattedEndDate = this.priceHelper.getCorrectDateFormat(this.chosenEndDate);
+      let amountOfDays = this.priceHelper.computeDateRange(this.chosenStartDate, this.chosenEndDate);
+      this.amountOfDays = amountOfDays
+      if(this.amountOfDays == 0){
+        this.amountOfDays = 1;
+      }
+    },
+    chosenStartDate(){
+      let formattedStartDate = this.priceHelper.getCorrectDateFormat(this.chosenStartDate);
+      let formattedEndDate = this.priceHelper.getCorrectDateFormat(this.chosenEndDate);
+      let amountOfDays = this.priceHelper.computeDateRange(this.chosenStartDate, this.chosenEndDate);
+      this.amountOfDays = amountOfDays
+      if(this.amountOfDays == 0){
+        this.amountOfDays = 1;
+      }
+    },
+    chosenEndDate(){
+      let formattedStartDate = this.priceHelper.getCorrectDateFormat(this.chosenStartDate);
+      let formattedEndDate = this.priceHelper.getCorrectDateFormat(this.chosenEndDate);
+      let amountOfDays = this.priceHelper.computeDateRange(this.chosenStartDate, this.chosenEndDate);
+      this.amountOfDays = amountOfDays
+      if(this.amountOfDays == 0){
+        this.amountOfDays = 1;
+      }
+    },
     lease(){
       console.log("Lease is now: ", this.lease);
       this.title = this.lease.title
@@ -137,7 +158,11 @@ data()  {
     amenities: '',
     chosenStartDate: '',
     chosenEndDate: '',
-    user: this.$store.getters.getCurrentUser
+    amountOfDays: '',
+    startDateInBasicFormat: '',
+    endDateInBasicFormat: '',
+    user: this.$store.getters.getCurrentUser,
+    priceHelper: new PPPN()
   }
 },
 methods: {
@@ -146,27 +171,42 @@ methods: {
   },
   newStartDate(myNewStartDate){
     this.chosenStartDate = myNewStartDate;
-    console.log("my new chosen startDate was: ", this.chosenStartDate)
+    this.startDateInBasicFormat = this.priceHelper.getCorrectDateFormat(myNewStartDate)
+    if(this.startDateInBasicFormat == this.endDateInBasicFormat){
+      this.amountOfDays = 1;
+    }
   },
   newEndDate(myNewEndDate){
     console.log("my new chosen endDate was: ", this.chosenEndDate)
     this.chosenEndDate = myNewEndDate;
+    this.endDateInBasicFormat = this.priceHelper.getCorrectDateFormat(myNewEndDate)
+    if(this.startDateInBasicFormat == this.endDateInBasicFormat){
+      this.amountOfDays = 1;
+    }
   },
   async book(){
     //Mt6ZUN7dYDQ1a2zuwbTYx the id of the place to book
+      let myPriceHelper = new PPPN();
       let emptyUser = new User('','');
       let filledUser = Object.assign(emptyUser,this.user);
-      let formattedStartDate = this.chosenStartDate.getCorrectDateFormat();
-      let formattedEndDate = this.chosenEndDate.getCorrectDateFormat();
-      return
+      let formattedStartDate = myPriceHelper.getCorrectDateFormat(this.chosenStartDate);
+      let formattedEndDate = myPriceHelper.getCorrectDateFormat(this.chosenEndDate);
+      if(this.amountOfDays != 1){
+        let newAmountOfDays = myPriceHelper.computeDateRange(this.chosenStartDate, this.chosenEndDate);
+        this.amountOfDays = newAmountOfDays
+      }
+      let basePrice = (this.amountOfDays * this.selectedNumberOfGuests * this.price);
+      let toPay = Math.round(1.15 * (this.amountOfDays * this.selectedNumberOfGuests * this.price));
+      let profit = toPay - basePrice;
+
       let myBooking = new Booking(filledUser.id, this.lease.id,
-      this.location, formattedStartDate, formattedEndDate, this.selectedNumberOfGuests, this.price, this.lease);
+      this.location, formattedStartDate, formattedEndDate, this.selectedNumberOfGuests, toPay, this.lease);
 
       let secondRes = await fetch('/rest/bookings', {
         method: 'POST',
         body: JSON.stringify(myBooking)
       });
-      let myProfit = new Profit(myBooking.getTotalPrice());
+      let myProfit = new Profit(profit);
       
       let thirdRes = await fetch('/rest/profit/', {
         method: 'POST',
@@ -175,8 +215,8 @@ methods: {
 
       let secondResponseAsJson = await secondRes.json();
       
-      let filledAdminBooking = new AdminBooking(secondResponseAsJson['id'], filledUser.id, lease.id,
-      lease.location, this.chosenStartDate, this.chosenEndDate, this.maxGuests, lease.getTotalPrice(), myLease);
+      let filledAdminBooking = new AdminBooking(secondResponseAsJson['id'], filledUser.id, this.lease.id,
+      this.lease.location, formattedStartDate, formattedEndDate, this.selectedNumberOfGuests, toPay, this.lease);
       let adminRes = await fetch('/rest/adminBookings', {
         method: 'POST',
         body: JSON.stringify(filledAdminBooking)
@@ -199,6 +239,9 @@ async created() {
 
 @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Lobster&family=Merriweather+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Raleway:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
 
+  .PriceToPayInTotal{
+    margin-top:10px;
+  }
   .SpecialErrorBox{
     margin-bottom:5px;
     text-decoration:underline;

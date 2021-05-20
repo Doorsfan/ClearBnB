@@ -16,17 +16,14 @@
 </script>
 <script>
 import { ref } from 'vue' //Ref transmutes a value to become part of a reactive Object
+import PPPN from '../../components/PPPN.js';
   
 const minimumDate = ref(new Date()) //The earliest date a user can pick is Today
 const startDate = ref(new Date()) //The date for the From datePicker - the start Date
 
 //To make the Date be able to just add 1 day, we can define a function on it's Prototype
-Date.prototype.addDays = function(days) {
-  var date = new Date(this.valueOf());
-  date.setDate(date.getDate() + days);
-  return date;
-}
-let endDateSevenDaysAhead = new Date().addDays(7);
+let myDateHelper = new PPPN();
+let endDateSevenDaysAhead = myDateHelper.addDays(new Date(),7);
 const endDate = ref(endDateSevenDaysAhead) //The date for the To datePicker - the end date
 
 export default {
@@ -34,7 +31,7 @@ export default {
   data() {
     return {
       minimumStartDate: new Date(),
-      minimumEndDate: new Date().addDays(1),
+      minimumEndDate: myDateHelper.addDays(new Date(),1),
       startDate: new Date("2021-05-27"),
       endDate: new Date("2021-07-30")
     }
