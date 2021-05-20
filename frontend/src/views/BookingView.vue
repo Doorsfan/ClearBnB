@@ -199,7 +199,7 @@ select  {
 .booking-view-description{
   text-align: justify;
   padding: 0 90px;
-  line-height: 140%;
+  line-height: 160%;
   font-size: 110%;
 }
 .myDatePickerDiv{
