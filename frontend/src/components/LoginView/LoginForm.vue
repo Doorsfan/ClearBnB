@@ -1,9 +1,6 @@
 <template>
-  <div>
-    <h1>User log in</h1>
-    <div class="imageDiv">
-      <img class="LoginImage" src="/Login_form_user.png" alt="Login Image" />
-    </div>
+  <div class="LogInPage">
+    <h1>Log in</h1>
     <form class="LoginForm" @submit.prevent="login">
       <div class="emailDiv">
         <input v-model="username" type="email" placeholder="E-mail" required />
@@ -21,10 +18,13 @@
       </div>
     </form>
     <div class="ButtonsDiv">
-      <router-link class="CancelButton" to="/">Cancel</router-link>
+      <button><router-link class="CancelButton" to="/">Cancel</router-link></button>
       <button @click.prevent="login" class="LoginButton">Login</button>
     </div>
-    <a href="api/register">Register</a>
+    <div class="SignUpFromLogIn">
+    <p>New to ClearBnB?</p>
+    <router-link to="signUp" class="signUpLink">Sign up</router-link>
+    </div>
   </div>
 </template>
 
@@ -84,70 +84,77 @@ export default {
   text-align: center;
   display: none;
 }
-.LoginForm{
-  margin-left: 15px;
+h1 {
+  color: rgb(14, 12, 12);
+  margin-bottom: 40px;
+  margin-top: 50px;
+  font-size: 35px;
 }
-div {
-  margin-left: auto;
-  margin-right: auto;
-  width: max-content;
+.LogInPage{
   text-align: center;
+  height: 600px;
+  width: 500px;
+  margin: 180px auto;
+  border-radius: 2px ;
+  border: 2px solid grey
+}
+form{
+  padding-top: 50px;
+}
+form input{
+  padding: 0.7rem 1.4rem;
+  font-size: 18px;
+  border-radius: 5px;
+  border:1px solid black ;
+  text-align:initial;
+  margin-bottom: 15px;
+}
+button{
+  width: 120px;
+  height: 50px;
+  padding: 10px 20px;
+  background-color: #029ebb;
+  color: white;
+  border: 0;
+  border-radius: 2px ;
+  cursor: pointer;
+  margin-top: 10px;
+  font-size: 18px;
+  margin-right: 10px;
+  margin-left: 10px;
+  
 }
 .ButtonsDiv{
-  width:max-content;
-  margin:0px;
-  margin-left:auto;
-  margin-right:auto;
+  display:flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 10px;
+  
 }
-h1 {
-  margin: 3px;
-  padding: 0px;
-  margin-top: 170px;
-  margin-bottom: 30px;
+.SignUpFromLogIn{
+  margin-top:120px;
+  display:flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
-.LoginImage {
-  margin: 3px;
-}
-.emailDiv {
-  margin: 3px;
-  margin-bottom: 10px;
-}
-.passwordDiv {
-  margin: 3px;
-  margin-bottom: 7px;
-}
-.CancelButton {
+a{
   text-decoration: none;
-  color: black;
-  text-decoration-color: black;
-  -moz-text-decoration-color: black;
-  margin: 0px;
-  padding: 3px;
-  display: inline-block;
-  margin-right: 10px;
-  font-weight: bolder;
-  height: 14px;
-  font-size: 13px;
-  width: max-content;
-  margin-bottom: 8px;
-  border-radius: 8px;
-  outline: none;
-  border: none;
-  background-color: lightgrey;
-  margin-right: 10px;
-  padding:4px;
+  color: white;
 }
-.LoginButton {
-  border-radius: 8px;
-  outline: none;
-  border: none;
-  background-color: #32a83a;
-  padding:4px;
+.signUpLink{
+  color:#029ebb;
+  margin-left: 5px;
+  text-decoration: underline;
+  font-size: 16px;
+  font-weight: bold;
 }
-a {
-  font-weight: bolder;
+p{
+  font-size: 16;
+  font-weight: bold;
 }
-a:visited {
-  color: blue;
+
+button:hover {
+  transform: scale(1.1);
 }
 </style>
