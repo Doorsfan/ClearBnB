@@ -9,7 +9,6 @@
         <div class="startsFromDiv"><b>Available from:</b> {{ lease.startDate }}</div>
         <div clas="endsOnDiv"><b>Available to:</b> {{ lease.endDate }}</div>
         <div class="pricePerNightDiv"><b>Price Per Night:</b> {{ Math.round(lease.price * 1.15) }}</div>
-        <div class="descriptionDiv"><b>Description:</b> {{ lease.description }}</div>
       </div>
     </div>
   </div>

@@ -131,33 +131,7 @@ export default {
   },
   methods:{
     async pretendToBook(){
-      //Mt6ZUN7dYDQ1a2zuwbTYx the id of the place to book
-      let myLease = new Lease("PakHCMRgJxBkQGJpFApbv", "Watch the Northern Lights from your lawn", "Abisko","The cottage is rather small but the scenery is grand! If your stay is during the right time, you will see the amazing Aurora Borealis right from your lawn. Other than that, this cosy cottage in the middle of the forest is the perfect place to just be yourself for a while - alone with your thoughts and with no one to disturb your visit to the outhouse.",  
-        "House", true, "2021-05-27", "2021-09-30", 45 , 1, 1, ["wifi: false","kitchen: true","washer: false","heating: false","airConditioner: false"],[ "https://images.unsplash.com/photo-1610620746460-de78cf3d1705?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80", "https://images.unsplash.com/photo-1590725121839-892b458a74fe?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80", "https://images.unsplash.com/photo-1612979213608-d25b9925906f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80", "https://images.unsplash.com/photo-1475518845976-0fd87b7e4e5d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80", "https://images.unsplash.com/photo-1576253689648-7fdcbd464dff?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=762&q=80" ])
-      let myUser = this.$store.getters.getCurrentUser;
-      let emptyUser = new User('','');
-      let filledUser = Object.assign(emptyUser,myUser);
-      let myBooking = new Booking(filledUser.id, 'PakHCMRgJxBkQGJpFApbv',
-      "Abisko", "2021-05-27", "2021-05-30", 1, 45, myLease);
-      let secondRes = await fetch('/rest/bookings', {
-        method: 'POST',
-        body: JSON.stringify(myBooking)
-      });
-      let myProfit = new Profit(myBooking.getTotalPrice());
-      let thirdRes = await fetch('/rest/profit/', {
-        method: 'POST',
-        body: JSON.stringify(myProfit)
-      });
-
-      let secondResponseAsJson = await secondRes.json();
-      
-      let filledAdminBooking = new AdminBooking(secondResponseAsJson['id'], filledUser.id, 'PakHCMRgJxBkQGJpFApbv',
-      "Bellevue island", "2021-05-27", "2021-05-30", 1, 1000, myLease);
-      let adminRes = await fetch('/rest/adminBookings', {
-        method: 'POST',
-        body: JSON.stringify(filledAdminBooking)
-      });
-      let adminResponseAsJson = await adminRes.json();
+      console.log("Moved to bookingView");
     },
     returnRelevantLeases(lease){
       let passedMaxPriceCheck = false;
