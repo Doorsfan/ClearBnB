@@ -1,4 +1,5 @@
 <template>
+  <div class="primaryDiv">
   <div class="mainDiv">
     <p class="userPageTitle">User Page</p>
     <p class="welcomeMessage"></p>
@@ -27,7 +28,9 @@
       <button class="changeUserInfoButton" @click="changeUserInfo">Change user info</button>
     </div>
   </div>
-  <div class="changeUserInfoDiv">
+  </div>
+  <div class="changeUserInfoDiv primaryDiv">
+    <div class="mainDiv">
     <form class="userInfoForm">
       <p class="changeUserInfoTitle">Change User Info</p>
       <div class="mainFormDiv">
@@ -59,10 +62,12 @@
           </div>
         </div>
       </div>
+      
     </form>
     <div class="buttonsDiv">
       <button @click="redisplayUserPage" class="cancelButton" value="Cancel">Cancel</button><button class="saveChangesButton" @click="updateUserInfo" value="Save Changes">Save Changes</button>
     </div>
+  </div>
   </div>
 </template>
 
@@ -247,16 +252,31 @@ export default {
 }
 </script>
 <style scoped>
-
+.primaryDiv{
+  padding-left:5vw;
+  padding-right:5vw;
+  padding-bottom:2.5vh;
+  padding-top:2.5vh;
+  background-image: url('/public/nice.jpg');
+  background-size:cover;
+  background-repeat:no-repeat;
+  opacity: 0.8;
+  height:max-content;
+  width:100vw;
+  background-attachment: fixed;
+  overflow-x:hidden;
+}
 .changeHistoricalDisplay, .changeHistoricalDisplay:active{
-  background: none!important;
-  background-color:none;
-  border: none;
-  padding: 0!important;
+  border: outset 5px #029ebb;;
+  outline:1px solid black;
+  opacity:1;
+  background-color: #029ebb;
+  padding:5px;
   /*optional*/
   font-family: arial, sans-serif;
   /*input has OS specific font-family*/
-  color: #069;
+  color: black;
+  font-weight:bolder;
   text-decoration: none;
   width:max-content;
   font-size:20px;
@@ -281,18 +301,22 @@ export default {
     margin-top:20px;
   }
   .changeUserInfoButton{
-    background: none!important;
-    border: none;
-    padding: 0!important;
+    border: outset 5px #029ebb;;
+    outline:1px solid black;
+    opacity:1;
+    background-color: #029ebb;
+    padding:3px;
     /*optional*/
     font-family: arial, sans-serif;
     /*input has OS specific font-family*/
-    color: #069;
+    color: black;
+    font-weight:bolder;
     text-decoration: none;
     cursor: pointer;
     width:max-content;
     font-size:20px;
     margin-top:25px;
+    background-color: #029ebb;
   }
   .changeUserInfoDiv{
     display:none;
@@ -302,6 +326,22 @@ export default {
     margin-right:2.5px;
     padding:2px;
     margin-top: 5px;
+  }
+  .cancelButton{
+    margin-right:5px;
+    margin-left:50px;
+    background-color: #029ebb;
+    font-size: 12px;
+    font:arial;
+    text-decoration: none;
+    border: solid 1px black;
+    color:black;
+    padding:3px;
+    padding-right:5px;
+    padding-left:5px;
+    padding-top:4.5px;
+    padding-bottom:4.5px;
+    border-radius:2px;
   }
   .buttonsDiv{
     width:max-content;
@@ -355,6 +395,8 @@ export default {
     margin-right:auto;
     margin-top:20px;
     text-align:center;
+    background-color:rgba(218, 224, 224, 0.8);
+    padding:50px;
   }
   .userPageTitle{
     margin-bottom:20px;
@@ -362,12 +404,19 @@ export default {
   }
   .welcomeMessage{
     margin-bottom:20px;
+    border: outset 2px;
+    opacity:1;
+    background-color: rgba(218, 224, 224, 0.8);
+    padding:3px;
   }
   .residencesLink:visited{
     color:blue;
   }
   .yourFutureBookingsText, .yourPastBookingsText{
     margin-bottom:20px;
+    background: rgba(218, 224, 224, 0.8);
+    padding:3px;
+    border:outset 2px;
   }
   .residencesOutBox{
     margin-top:15px;

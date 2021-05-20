@@ -1,5 +1,6 @@
 <template>
   <div class="mainDiv">
+    <div class="greyBoxDiv">
     <div class="titleDiv">
       <h1 class="registerTitle">Register New User</h1>
     </div>
@@ -41,6 +42,7 @@
     </div>
     <div class="buttonsDiv">
       <router-link to="/" class="cancelButton" value="Cancel">Cancel</router-link><button class="registerButton" @click="registerUser" value="Register">Register</button>
+    </div>
     </div>
   </div>
   
@@ -118,98 +120,67 @@ export default {
 }
 </script>
 <style scoped>
-input{
-  margin:5px;
-}
-h1{
-  margin-left:150px;
-}
-p{
-  display:inline-block;
-  width:150px;
-  text-align:right;
-  color:black;
-  font-weight:bolder;
-}
-.buttonsDiv{
-  padding-left:160px;
-  margin-top:10px;
-}
-div{
-  display:block;
-  width:max-content;
-  margin-left:auto;
-  margin-right:auto;
-}
-.mainDiv{
-  background-image: url("/new_user.jpg");
-  background-repeat:no-repeat;
-  height:60vh;
-  width:80vw;
-  max-width:80vw;
-  margin:0px;
-  margin-top:3vh;
-  padding-top:10vh;
-}
-.errorBox{
-  margin-left:auto;
-  margin-right:auto;
-  background-color:rgb(199, 25, 25);
-  padding:5px;
-  border:1px solid black;
-  color:white;
-  display:none;
-}
-.takenUserBox{
-  margin-left:auto;
-  margin-right:auto;
-  background-color:rgb(199, 25, 25);
-  padding:5px;
-  border:1px solid black;
-  color:white;
-  display:none;
-}
-.userRegistrationText{
-  font-weight:bolder;
-}
-.newsLetterCheckBox{
-  text-align: center;
-  width:14px;
-  min-width:14px;
-  margin-right:3px;
-}
-
-.buttonsDiv{
-  margin-left:auto;
-  margin-right:auto;
-  width:max-content;
-}
 .cancelButton{
   margin-right:5px;
-  font: bold 11px Arial;
+  margin-left:50px;
+  background-color: #029ebb;
+  font-size: 12px;
+  font:arial;
   text-decoration: none;
-  background-color: #EEEEEE;
-  color: #333333;
-  padding: 2px 6px 2px 6px;
-  border-radius:10px;
-  border-top: 1px solid #CCCCCC;
-  border-right: 1px solid #333333;
-  border-bottom: 1px solid #333333;
-  border-left: 1px solid #CCCCCC;
-  font-size:14px;
+  border: solid 1px black;
+  color:black;
+  padding:3px;
+  padding-right:5px;
+  padding-left:5px;
+  padding-top:4.5px;
+  padding-bottom:4.5px;
+  border-radius:2px;
 }
 .registerButton{
+  margin-left:5px;
+  padding:3px;
+  width:60px;
+  height:25px;
+}
+.registerTitle{
+  margin-left: 100px;
+}
+p{
+  font-weight:bolder;
+  display:inline-block;
+  width:140px;
+  text-align:right;
   margin-right:5px;
-  font: bold 11px Arial;
-  text-decoration: none;
-  background-color: rgb(24, 173, 24);
-  color: #333333;
-  padding: 2px 6px 2px 6px;
-  border-radius:10px;
-  border-top: 1px solid #CCCCCC;
-  border-right: 1px solid #333333;
-  border-bottom: 1px solid #333333;
-  border-left: 1px solid #CCCCCC;
-  font-size:14px;
+}
+.greyBoxDiv{
+  margin-top:20vh;
+  background-color: rgba(218, 224, 224, 0.8);
+  padding-right:140px;
+  padding-left:60px;
+  padding-bottom:2vh;
+  padding-top:2vh;
+  width:max-content;
+  margin-left:auto;
+  margin-right:auto;
+  text-align:center;
+}
+.mainDiv{
+  margin:0px;
+  text-align:center;
+  padding-left:5vw;
+  padding-right:5vw;
+  padding-bottom:10vh;
+  padding-top:2.5vh;
+  background-image: url("../../public/nice.jpg");
+  background-size:cover;
+  background-repeat:no-repeat;
+  opacity: 0.8;
+  height:max-content;
+  width:100vw;
+  background-attachment: fixed;
+  overflow-x:hidden;
+}
+div{
+  margin:8px;
 }
 </style>

@@ -42,8 +42,10 @@ export default {
   margin-left:auto;
   margin-right:auto;
   width:500px;
+  padding:20px;
   margin-top:10px;
   margin-bottom:10px;
+  border:1px solid black;
 }
 .titleDiv{
   text-align:center;

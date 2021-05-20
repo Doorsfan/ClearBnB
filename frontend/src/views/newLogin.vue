@@ -1,13 +1,17 @@
 <template>
-  <LoginForm />
+  <div class="mainDiv">
+    <LoginForm />
+  </div>
 </template>
-
 <script>
 import LoginForm from '../components/LoginView/LoginForm.vue'
 export default {
-  name: 'Login',
   components: {
     LoginForm
+  },
+  data() {
+    return {
+    }
   },
   mounted(){
     if(document.getElementsByClassName("sunIconInHeader").length > 0){
@@ -16,12 +20,26 @@ export default {
       document.getElementsByClassName("homeText")[0].style.display = 'block';
       document.getElementsByClassName("center")[0].style.height = '70px';
     }
+    this.$store.dispatch('saveLatestRoute', this.$route.path);
+    console.log(this.$store.getters.getLatestRoute);
+  },
+  methods:{
   }
 }
 </script>
-
 <style scoped>
-.backgroundImage{
-  background-image:none;
+.mainDiv{
+  padding-left:5vw;
+  padding-right:5vw;
+  padding-bottom:2.5vh;
+  padding-top:2.5vh;
+  background-image: url("../../public/nice.jpg");
+  background-size:cover;
+  background-repeat:no-repeat;
+  opacity: 0.8;
+  height:max-content;
+  width:100vw;
+  background-attachment: fixed;
+  overflow-x:hidden;
 }
 </style>

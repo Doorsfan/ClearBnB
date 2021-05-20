@@ -58,10 +58,10 @@ export default {
   margin-left:auto;
   margin-right:auto;
   width:max-content;
-  padding:10px;
+  padding:20px;
   margin-top:10px;
   margin-bottom:10px;
-  border:3px solid #ccc;
+  border:1px solid black;
   background: #eee;
 }
 .titleDiv{
