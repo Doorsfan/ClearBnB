@@ -2,7 +2,7 @@ export default class Profit {
   constructor(totalProfit) {
     this.totalProfit = totalProfit;
   }
-  getUsername() {
+  getTotalProfit() {
     return this.totalProfit;
   }
   setTotalProfit(newTotalProfit) {

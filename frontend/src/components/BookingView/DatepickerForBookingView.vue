@@ -1,19 +1,17 @@
 <template>
-  <div class="myDatePickerDiv">
-  <p class="AvailableFromP">Book From:</p>
+  <div class="firstDatePickerDiv">
+  <p class="AvailableFromP">Book From The:</p>
   <datepicker
     v-model="startDate"
-    :placeholder="myLease.startDate"
-    :selected="startDate"
     :lowerLimit="originalStartDate"
     :upper-limit="originalEndDate"
     :disabledDates="{ dates: disabledDays.dates }"
   />
-  <p class="AvailableToP">Book To:</p>
+  </div>
+  <div class="secondDatePickerDiv">
+  <p class="AvailableToP">Book To The:</p>
   <datepicker
     v-model="endDate"
-    :selected="endDate"
-    :placeholder="myLease.endDate"
     :lower-limit="startDate"
     :upper-limit="originalEndDate"
     :disabledDates="{ dates: disabledDays.dates }"
@@ -32,7 +30,7 @@ import { add } from 'date-fns'
 const disabledDate = ref(add(new Date(), { days: 5 }))
 export default {
   props: ['myLease'],
-  emits: ['updatedLeaseEndDate', 'updatedLeaseStartDate', 'updatedDisabledDays'],
+  emits: ['updatedChosenStartDate','updatedChosenEndDate', 'updatedDisabledDays'],
   async mounted(){
     let splitMyStartDate = this.myLease.startDate.split('-');
     let myStartYear = splitMyStartDate[0];
@@ -50,10 +48,8 @@ export default {
 
     let res = await fetch('/rest/bookings')
     let responseInJson = await res.json();
-    console.log("my leases attributes were: ", this.myLease);
     for(let booking of responseInJson){
       if(booking.leaseId == this.myLease.id){
-        console.log("This lease had bookings on it: ", booking);
         let bookingStartDate = booking.startDate;
         let mySplitStartDate = bookingStartDate.split('-')
         let myStartYear = Number(mySplitStartDate[0]);
@@ -61,25 +57,16 @@ export default {
         let myStartDay = Number(mySplitStartDate[2]);
 
         let bookingEndDate = booking.endDate;
-        console.log("The startdate was: ", bookingStartDate);
-        console.log("the enddate was: ", bookingEndDate)
         let mySplitEndDate = bookingEndDate.split("-")
         let myEndYear = Number(mySplitEndDate[0]);
         let myEndMonth = Number(mySplitEndDate[1]);
         let myEndDay = Number(mySplitEndDate[2]);
         let takenDay = ''
-        console.log(myEndYear >= myStartYear);
-        console.log(myStartMonth >= myEndMonth);
-        console.log(myStartDay <= myEndDay);
         let differenceInYears = myEndYear - myStartYear;
         let differenceInMonths = myEndMonth - myStartMonth;
         let differenceInDays = myEndDay - myStartDay;
-        console.log("The difference in years was: ", differenceInYears)
-        console.log("The difference in months was: ", differenceInMonths)
-        console.log("The difference in days was: ", differenceInDays)
         while(differenceInDays > 0){
           differenceInDays -= 1;
-          console.log("hi");
           this.addDisabledDate(myEndYear, myEndMonth, myEndDay);
           if(myEndDay == 0){
             myEndMonth -= 1;
@@ -100,12 +87,11 @@ export default {
         }
       }
     }
-    console.log("the response i got was : ", responseInJson);
   },
   data() {
     return {
-      startDate: new Date(),
-      endDate: new Date(),
+      startDate: ref(new Date()),
+      endDate: ref(new Date()),
       originalEndDate: new Date(),
       originalStartDate: new Date(),
       disabledDate: new Date(),
@@ -116,10 +102,12 @@ export default {
   },
   watch: {
     endDate(){
-      this.$emit("updatedLeaseEndDate", this.endDate);
+      console.log("Emitted new end date: ", this.endDate);
+      this.$emit("updatedChosenEndDate", this.endDate);
     },
     startDate(){
-      this.$emit("updatedLeaseStartDate", this.startDate)
+      console.log("Emitted new start date: ", this.startDate);
+      this.$emit("updatedChosenStartDate", this.startDate)
     },
     disabledDays(){
       this.$emit("updatedDisabledDays", this.disabledDays);
@@ -137,15 +125,17 @@ export default {
 }
 </script>
 <style scoped>
-  .myDatePickerDiv{
-    width:210px;
-
-  }
-  p{
-    margin:2px;
-    font-weight:bolder;
-  }
-  *{
-    padding-left: 2px;
-  }
+div{
+  width:max-content;
+  display:inline-block;
+}
+p{
+  padding-bottom: 5px;
+}
+.firstDatePickerDiv{
+  margin-right:20px;
+}
+.secondDatePickerDiv{
+  margin-left:20px;
+}
 </style>

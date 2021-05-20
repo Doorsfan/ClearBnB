@@ -13,7 +13,6 @@
           <img v-if="imageURLs.length > 3" class="booking-view-image-4" :src="imageURLs[3]" />
           <img v-if="imageURLs.length > 4" class="booking-view-image-5" :src="imageURLs[4]" />
         </div>
-        <BookingViewCarousel v-if="lease" :myLease="lease" />
         <div class="type-price">
           <p>{{ typeOfHousing }} | Per person per night: {{ Math.round(price * 1.15) }} Euro</p>
         </div>
@@ -38,12 +37,16 @@
             <div v-if="amenities[1] == 'airConditioner: true'" class="hasKitchen">Air Conditioning</div>
           </div>
         </div>
-      <!-- 
-        Insert component for Amenities
-       -->
-        
-       <!-- Edit with data from leases.json --> 
-        <div class="guestsTitle">Guests</div>
+        <div class="amountOfBeds">
+          <p class="bedsText">
+            Available Beds
+          </p>
+          {{ lease.beds }}
+        </div>
+        <div class="DivForGuests">
+          <div class="guestsTitle">
+            Guests
+          </div>
           <select class="myGuests" v-model="selectedNumberOfGuests">
             <option value="" disabled>Guests</option>
             <option v-if="maxGuests > 0">1</option>
@@ -51,13 +54,28 @@
             <option v-if="maxGuests > 2">3</option>
             <option v-if="maxGuests > 3">4</option>
             <option v-if="maxGuests > 4">5</option>
-          </select><p v-if="maxGuests == 1" class="singularGuest">guest</p><p v-if="maxGuests > 1" class="manyGuests">guests</p>
-      <div class="myDatePickerDiv">
-        <DatepickerForBookingView v-if="lease" :myLease="lease"/>
+          </select>
+          <p v-if="maxGuests == 1" class="singularGuest">guest</p>
+          <p v-if="maxGuests > 1" class="manyGuests">guests</p>
+        </div>
+        <div class="wholeOrPartialDiv">
+          <p class="wholeOrPartialText">You get Access to:</p>
+          <p v-if="lease.entireResidence" class="wholeResidenceText">The Whole Residence</p><p v-if="!lease.entireResidence" class="partResidenceText">A Part of The Residence</p>
+        </div>
+        <div class="myDatePickerDiv">
+          <DatepickerForBookingView @updatedChosenStartDate="newStartDate" @updatedChosenEndDate="newEndDate" v-if="lease" :myLease="lease"/>
+        </div>
       </div>
+      <div class="BookingButtonDiv">
+        <button @click="book" v-if="selectedNumberOfGuests > 0 && user != null && (!(chosenStartDate.length == 0) && !(chosenEndDate.length == 0))" class="bookingButton" type="button" value="Book">Book Now!</button>
+        <div class="SpecialErrorBox" v-if="(chosenStartDate.length == 0 || chosenEndDate.length == 0 || selectedNumberOfGuests == 0) && user != null">Before you can book, you must</div>
+        <div class="errorBox" v-if="(chosenStartDate.length == 0 || chosenStartDate.length == 0) && user != null" value="Choose a From Date and a To Date First!">Choose a From Date and a To Date</div>
+        <div v-if="selectedNumberOfGuests == 0 && user != null" class="errorBox" value="Choose Amount of Guests first!">Choose amount of Guests</div>
+        <button @click="goToLogin" v-if="user == null" class="bookingButton" type="button" value="You have to log in to Book!">Log in to Book!</button>
       </div>
     </div>
   </div>
+  <router-link class="hiddenLink" to="login"></router-link>
 </template>
 
 <script setup="">
@@ -66,8 +84,25 @@
   import DatepickerForBookingView from '../components/BookingView/DatepickerForBookingView.vue'
 </script>
 <script>
+import User from '../components/User.js'
+import Booking from '../components/Booking'
+import AdminBooking from '../components/AdminBooking'
+import Lease from '../components/Lease.vue'
 export default {
   mounted(){
+    Date.prototype.getCorrectDateFormat = function() {
+      let year = this.getFullYear();
+      let month = this.getMonth() + 1;
+      let day = this.getDate();
+      if(month < 10){
+        month = '0' + month;
+      }
+      if(day < 10){
+        day = '0' + day;
+      }
+      return year + '-' + month + '-' + day;
+    };
+
     if(document.getElementsByClassName("sunIconInHeader").length > 0){
       document.getElementsByClassName("sunIconInHeader")[0].src = '/public/home_icon.png'
       document.getElementsByClassName("sunIconInHeader")[0].className = 'house_icon'
@@ -77,6 +112,7 @@ export default {
   },
   watch: {
     lease(){
+      console.log("Lease is now: ", this.lease);
       this.title = this.lease.title
       this.location = this.lease.location
       this.maxGuests = this.lease.maxGuests
@@ -100,22 +136,38 @@ data()  {
     selectedNumberOfGuests: '',
     amenities: '',
     chosenStartDate: '',
-    chosenEndDate: ''
+    chosenEndDate: '',
+    user: this.$store.getters.getCurrentUser
   }
 },
 methods: {
+  goToLogin(){
+    document.getElementsByClassName("hiddenLink")[0].click();
+  },
+  newStartDate(myNewStartDate){
+    this.chosenStartDate = myNewStartDate;
+    console.log("my new chosen startDate was: ", this.chosenStartDate)
+  },
+  newEndDate(myNewEndDate){
+    console.log("my new chosen endDate was: ", this.chosenEndDate)
+    this.chosenEndDate = myNewEndDate;
+  },
   async book(){
     //Mt6ZUN7dYDQ1a2zuwbTYx the id of the place to book
-      let myUser = this.$store.getters.getCurrentUser;
       let emptyUser = new User('','');
-      let filledUser = Object.assign(emptyUser,myUser);
-      let myBooking = new Booking(filledUser.id, lease.id,
-      "Abisko", "2021-05-27", "2021-05-30", 1, 45, lease);
+      let filledUser = Object.assign(emptyUser,this.user);
+      let formattedStartDate = this.chosenStartDate.getCorrectDateFormat();
+      let formattedEndDate = this.chosenEndDate.getCorrectDateFormat();
+      return
+      let myBooking = new Booking(filledUser.id, this.lease.id,
+      this.location, formattedStartDate, formattedEndDate, this.selectedNumberOfGuests, this.price, this.lease);
+
       let secondRes = await fetch('/rest/bookings', {
         method: 'POST',
         body: JSON.stringify(myBooking)
       });
       let myProfit = new Profit(myBooking.getTotalPrice());
+      
       let thirdRes = await fetch('/rest/profit/', {
         method: 'POST',
         body: JSON.stringify(myProfit)
@@ -138,7 +190,7 @@ methods: {
   }
 },
 async created() {
-  await this.getMyLease();
+    await this.getMyLease();
   }
 }
 </script>
@@ -146,6 +198,42 @@ async created() {
 <style scoped>
 
 @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Lobster&family=Merriweather+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Raleway:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
+
+  .SpecialErrorBox{
+    margin-bottom:5px;
+    text-decoration:underline;
+  }
+  .errorBox{
+    background-color:red;
+    color:white;
+    padding:7px;
+    outline: 1px solid black;
+    margin-top: 8px;
+    margin-bottom: 10px;
+  }
+  .hiddenLink{
+    display:none;
+  }
+  .BookingButtonDiv{
+    padding-top:20px;
+  }
+  .wholeOrPartialText{
+    width:max-content;
+    display:inline-block;
+    margin-right:5px;
+    margin-bottom:8px;
+  }
+  .wholeResidenceText{
+    width:max-content;
+    display:inline-block;
+  }
+  .partResidenceText{
+    width:max-content;
+    display:inline-block;
+  }
+  .bedsText{
+    font-weight:bolder;
+  }
   .myAmenities{
     margin-top: 3px;
     margin-bottom:10px;
@@ -161,6 +249,10 @@ async created() {
   .myGuests{
     width:max-content;
   }
+  .bookingButton{
+    padding: 5px;
+    border-radius:5px;
+  }
   .booking-view-app-main  {
   background-image: url(https://images.unsplash.com/photo-1573088870079-67b4526aa950?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=667&q=80);
   background-size: cover;
@@ -170,7 +262,9 @@ async created() {
   flex-direction: column;
   min-height: 100vh;
 }
-
+.DivForGuests{
+  margin-bottom:20px;
+}
 select  {
   border-radius: 4px;
   width: 50px;
@@ -257,6 +351,19 @@ select  {
   transform: scale(1.08);
 }
 
+.booking-view-image-5{
+  width: 50%;
+  height: 300px;
+  object-fit: cover;
+  object-position: center;
+  margin: 0 10px 10px 10px;
+  box-shadow: 5px 5px 5px 0 rgb(136, 154, 160);
+  border-radius: 4px;
+}
+
+.booking-view-image-5:hover {
+  transform: scale(1.08);
+}
 .type-price{
   font-weight: 700;
   padding: 10px 0 20px;
