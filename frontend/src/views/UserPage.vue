@@ -93,10 +93,22 @@ export default {
       myCity: '',
       myZipCode: '',
       myCountry: '',
-      myNewsLetter: false
+      myNewsLetter: false,
+      myRoute: this.$route.fullPath
+    }
+  },
+  watch: {
+    myRoute(){
+      console.log("my route changed!");
     }
   },
   async mounted(){
+    if(document.getElementsByClassName("sunIconInHeader").length > 0){
+      document.getElementsByClassName("sunIconInHeader")[0].src = '/public/home_icon.png'
+      document.getElementsByClassName("sunIconInHeader")[0].className = 'house_icon'
+      document.getElementsByClassName("homeText")[0].style.display = 'block';
+      document.getElementsByClassName("center")[0].style.height = '70px';
+    }
     this.user = this.$store.getters.getCurrentUser
     let secondRes = await fetch('/rest/userinfos/' + this.user.id, {
         method: 'GET'

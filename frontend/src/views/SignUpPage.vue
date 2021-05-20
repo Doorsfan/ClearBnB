@@ -65,6 +65,15 @@ export default {
       newsLetter: false
     }
   },
+  mounted(){
+    this.$store.dispatch('saveLatestRoute', this.$route.path);
+    if(document.getElementsByClassName("sunIconInHeader").length > 0){
+      document.getElementsByClassName("sunIconInHeader")[0].src = '/public/home_icon.png'
+      document.getElementsByClassName("sunIconInHeader")[0].className = 'house_icon'
+      document.getElementsByClassName("homeText")[0].style.display = 'block';
+      document.getElementsByClassName("center")[0].style.height = '70px';
+    }
+  },
   methods: {
     async registerUser(){
       if(this.password != this.repeatPassword){

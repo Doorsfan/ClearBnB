@@ -2,10 +2,13 @@
   <div class="navbar">
     <div v-if="!isSmall" class="pc-nav">
       <div class="left">
-        <router-link to="/"><img class="homeIcon" src="/home_icon.png"><p class="homeText">Home</p></router-link>
+        <router-link to="/">
+          <img class="sunIconInHeader" src="src/assets/clearbnb-logo.png">
+          <p class="homeText">Home</p>
+        </router-link>
       </div>
       <div class="center">
-        <img src="/src/assets/clearbnb-logo.png">
+
       </div>
       <div class="right">
         <router-link class="signUpLink" :to="signUp"><i class="fas fa-user-plus"></i>Sign Up</router-link>
@@ -32,7 +35,7 @@ export default {
   data() {
     return {
       isSmall: false,
-      big: window.matchMedia("(min-width:750px)"),
+      big: window.matchMedia("(min-width:750px)")
     };
   },
   mounted() {
@@ -55,19 +58,23 @@ export default {
 </script>
 
 <style scoped>
+.homeText{
+  display:none;
+}
 .left{
   margin:0px;
   padding:0px;
   position:absolute;
-  left: 10px;
-  top: 10px;
+  left: 0px;
+  top: 0px;
 }
 .navbar{
   background: linear-gradient(0.25turn, #f69d3c, #ebf8e1,#ebf8e1, #f69d3c);
   width:100vw;
+  
 }
 .homeIcon{
-  height:30px;
+
   display:inline-block;
   width:40px;
   margin-top:10px;
@@ -85,12 +92,10 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   border-bottom: 1px solid #00200c;
-  height: max-content;
   padding: 0 20px;
 }
 .pc-nav,
 .tablet-nav {
-  height: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -107,6 +112,7 @@ a {
   width:max-content;
   margin-left:auto;
   margin-right:auto;
+  height:210px;
 }
 .right {
   align-self: flex-start;

@@ -3,7 +3,18 @@
     padding: 0;
     box-sizing: border-box;
 }
-
+.house_icon{
+  width:30px;
+  height:30px;
+  position:absolute;
+  left: 15px;
+  top: 10px;
+}
+.homeText{
+  position:absolute;
+  left: 5px;
+  top: 45px;
+}
 #app {
     font-family: Avenir, Helvetica, Arial, sans-serif;
     display:flex;

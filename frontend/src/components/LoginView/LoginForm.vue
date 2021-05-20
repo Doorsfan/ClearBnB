@@ -34,10 +34,19 @@ import store from '../../store.js'
 import User from '../../components/User.js'
 import UserInfo from '../UserInfo.js'
 export default {
+  mounted(){
+    this.$store.dispatch('saveLatestRoute', this.$route.path);
+    if(this.$store.getters.getLatestRoute != '/'){
+      document.getElementsByClassName("sunIconInHeader")[0].src = '/public/home_icon.png'
+      document.getElementsByClassName("sunIconInHeader")[0].className = 'house_icon'
+      document.getElementsByClassName("homeText")[0].style.display = 'block';
+      document.getElementsByClassName("center")[0].style.height = '70px';
+    }
+  },
   data() {
     return {
       username: "",
-      password: "",
+      password: ""
     };
   },
   methods: {

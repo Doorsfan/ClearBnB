@@ -117,6 +117,14 @@ export default {
     }
   },
   mounted(){
+    if(document.getElementsByClassName("house_icon").length > 0){
+      document.getElementsByClassName("house_icon")[0].src = '/src/assets/clearbnb-logo.png'
+      document.getElementsByClassName("house_icon")[0].className = 'sunIconInHeader'
+      document.getElementsByClassName("homeText")[0].style.display = 'none';
+      document.getElementsByClassName("center")[0].style.height = '210px';
+    }
+    this.$store.dispatch('saveLatestRoute', this.$route.path);
+    console.log(this.$store.getters.getLatestRoute);
     if(this.$store.getters.getCurrentUser != null){
       $('.signUpLink').text("My Page")
       $('.loginLink').text("Log Out")

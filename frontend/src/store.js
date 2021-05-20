@@ -8,6 +8,9 @@ export default createStore({
 
   // this.$store.commit('mutationName')
   mutations: {
+    setRoute(state, newRoute) {
+      state.route = newRoute
+    },
     setLeaseToBuild(state, lease) {
       state.latestLease = lease
     },
@@ -16,6 +19,9 @@ export default createStore({
     }
   },
   getters: {
+    getLatestRoute: state => {
+      return state.route
+    },
     getLeaseToBuild: state => {
       return state.latestLease
     },
@@ -24,6 +30,9 @@ export default createStore({
     }
   },
   actions: {
+    async saveLatestRoute(store, latestRoute) {
+      store.commit('setRoute', latestRoute);
+    },
     async saveLease(store, myLease) {
       store.commit('setLeaseToBuild', myLease)
     },
