@@ -5,10 +5,7 @@
         <router-link to="/"><img class="homeIcon" src="/home_icon.png"><p class="homeText">Home</p></router-link>
       </div>
       <div class="center">
-        <router-link to="userPage">User Page</router-link>
-        <router-link to="AddLease">Add Lease</router-link>
-        <router-link to="BookingView">Booking View</router-link>
-        <router-link to="preview">Preview View</router-link>
+        <img src="/src/assets/clearbnb-logo.png">
       </div>
       <div class="right">
         <router-link class="signUpLink" :to="signUp"><i class="fas fa-user-plus"></i>Sign Up</router-link>
@@ -58,6 +55,13 @@ export default {
 </script>
 
 <style scoped>
+.left{
+  margin:0px;
+  padding:0px;
+  position:absolute;
+  left: 10px;
+  top: 10px;
+}
 .navbar{
   background: linear-gradient(0.25turn, #f69d3c, #ebf8e1,#ebf8e1, #f69d3c);
   width:100vw;
@@ -66,7 +70,7 @@ export default {
   height:30px;
   display:inline-block;
   width:40px;
-  margin-top:15px;
+  margin-top:10px;
   margin-left:5px;
 }
 .homeText{
@@ -81,7 +85,7 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   border-bottom: 1px solid #00200c;
-  height: 70px;
+  height: max-content;
   padding: 0 20px;
 }
 .pc-nav,
@@ -97,9 +101,12 @@ a {
   text-decoration: none;
   color: rgb(63, 63, 63);
 }
-.center a {
+.center {
   margin: 0 10px;
   font-weight: bold;
+  width:max-content;
+  margin-left:auto;
+  margin-right:auto;
 }
 .right {
   align-self: flex-start;
