@@ -1,7 +1,7 @@
 <template>
   <div>
     <p class="myDescriptionP">Description:</p>
-    <textarea @change="sendUpMessage" class="myInput" v-model="message" placeholder="Add a description to your Lease..">
+    <textarea required @change="sendUpMessage" class="myInput" v-model="message" placeholder="Add a description to your Lease..">
     </textarea>
   </div>
 </template>

@@ -11,15 +11,25 @@
 
       </div>
       <div class="right">
-        <router-link class="signUpLink" :to="signUp"><i class="fas fa-user-plus"></i>Sign Up</router-link>
+        <router-link class="signUpLink" v-if="!$store.getters.getCurrentUser" to="signUp"><i class="fas fa-user-plus"></i>Sign Up</router-link><router-link class="signUpLink" v-if="$store.getters.getCurrentUser" to="/userPage"><i class="fas fa-user-plus"></i>My Page</router-link>
         <span>|</span>
-        <router-link @click="seeIfLoggingOut" class="loginLink" :to="login"><i class="fas fa-sign-in-alt"></i>Login</router-link>
+        <router-link v-if="!$store.getters.getCurrentUser" class="loginLink" to="login"><i class="fas fa-sign-in-alt"></i>Login</router-link><router-link class="logOutLink" v-if="$store.getters.getCurrentUser" to="/"><i class="fas fa-sign-in-alt logOutIcon"></i><button @click="logOut" type="button" class="logOutLink">Log Out</button></router-link>
       </div>
     </div>
     <div v-else class="tablet-nav">
       <Hamburger />
-      <router-link class="smallLoginLink" to="login">Login</router-link>
-      <router-link class="signUpLink smallSignupLink" :to="signUp"><i class="fas fa-user-plus"></i>Sign Up</router-link>
+      <div class="smallMyPageDiv" v-if="$store.getters.getCurrentUser">
+        <router-link class="smallMyPagesLink" v-if="$store.getters.getCurrentUser" to="/userPage"><i class="fas fa-user-plus smallMyPageIcon"></i>My Page</router-link>
+      </div>
+      <div class="smallLogOutDiv" v-if="$store.getters.getCurrentUser">
+        <router-link class="smallLogOutLink" v-if="$store.getters.getCurrentUser" to="/"><i class="fas fa-sign-in-alt smallLogOutIcon"></i><button @click="logOut" type="button" class="smallLogOutLink">Log Out</button></router-link>
+      </div>
+      <div class="smallSignUpDiv" v-if="!$store.getters.getCurrentUser">
+        <router-link v-if="!$store.getters.getCurrentUser" class="signUpLink smallSignupLink" to="signUp"><i class="fas fa-user-plus smallSignUpIcon"></i>Sign Up</router-link>
+      </div>
+      <div class="smallLoginDiv" v-if="!$store.getters.getCurrentUser">
+        <i class="fas fa-sign-in-alt smallLogInIcon"></i><router-link v-if="!$store.getters.getCurrentUser" class="smallLoginLink" to="login">Login</router-link>
+      </div>
     </div>
   </div>
 </template>
@@ -35,7 +45,8 @@ export default {
   data() {
     return {
       isSmall: false,
-      big: window.matchMedia("(min-width:750px)")
+      big: window.matchMedia("(min-width:750px)"),
+      currentUser: this.$store.getters.getCurrentUser
     };
   },
   mounted() {
@@ -43,11 +54,9 @@ export default {
     this.big.addEventListener("change", this.watchMedia);
   },
   methods: {
-    seeIfLoggingOut(){
-      if($('.loginLink').text() == 'Log Out'){
-        this.$store.commit('setUser', null)
-        this.$emit("loggedOut", true)
-      }
+    logOut(){
+      this.$store.commit('setUser', null)
+      this.currentUser = null;
     },
     watchMedia: function (x) {
       if (x.matches) this.isSmall = false;
@@ -58,6 +67,36 @@ export default {
 </script>
 
 <style scoped>
+.smallLogOutDiv{
+  width:max-content;
+}
+.smallLogOutIcon{
+  margin-right:5px;
+  display:flex;
+  width:max-content;
+  top:9px;
+  right: 65px;
+}
+.smallLogInIcon{
+  display: flex;
+  top: 22px;
+  right: 72px;
+  margin-left:10px;
+}
+.smallLogOutLink{
+  display:flex;
+  width:max-content;
+  top:10px;
+  right: 15px;
+  background:none;
+  border:none;
+}
+.logOutLink{
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  background:none;
+  border:none;
+  font-size: 13px;
+}
 .homeText{
   display:none;
 }
@@ -141,5 +180,8 @@ a {
 }
 .tablet-nav a {
   font-weight: bold;
+}
+.logOutIcon{
+  color: black;
 }
 </style>

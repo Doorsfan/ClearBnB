@@ -31,6 +31,9 @@ export default {
 </script>
 
 <style scoped>
+a, a:visited{
+  color:black;
+}
 #router-links {
   display: none;
 }

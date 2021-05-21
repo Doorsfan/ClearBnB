@@ -1,18 +1,22 @@
 <template>
-  <div class="myDatePickerDiv">
-  <p class="AvailableFromP">Available from:</p>
-  <datepicker
-    v-model="startDate"
-    placeholder="Lease starts at"    
-    :lowerLimit="thisDay"
-    :disabledDates="disabledDays"
-  />
-  <p class="AvailableToP">Available To:</p>
-  <datepicker
-    v-model="endDate"
-    placeholder="Lease ends at"
-    :lower-limit="startDate"
-  />
+  <div class="firstDatePickerDiv">
+    <p class="AvailableFromP">Available from:</p>
+    <datepicker
+      v-model="startDate"
+      placeholder="Lease starts at"    
+      :lowerLimit="originalStartDate"
+      :upper-limit="originalEndDate"
+      :disabledDates="disabledDays"
+    />
+  </div>
+  <div class="secondDatePickerDiv">
+    <p class="AvailableToP">Available To:</p>
+    <datepicker
+      v-model="endDate"
+      placeholder="Lease ends at"
+      :lower-limit="originalStartDate"
+      :upper-limit="originalEndDate"
+    />
   </div>
 </template>
 <script setup="">
@@ -26,8 +30,13 @@ let thisDay = ref(new Date())
 let startDate = ref(new Date())
 let endDate = ref(new Date())
 export default {
+  props: ['leaseStartDate', 'leaseEndDate'],
   emits: ['updatedLeaseEndDate', 'updatedLeaseStartDate', 'updatedDisabledDays'],
   mounted(){
+    this.startDate = ref(new Date(this.leaseStartDate))
+    this.endDate = ref(new Date(this.leaseEndDate))
+    this.originalStartDate = new Date(this.leaseStartDate);
+    this.originalEndDate = new Date(this.leaseEndDate);
     if(this.$store.getters.getLeaseToBuild != null){
       this.startDate = this.$store.getters.getLeaseToBuild.startDate
       if(this.startDate == ''){
@@ -44,6 +53,8 @@ export default {
       thisDay: thisDay,
       startDate: startDate,
       endDate: endDate,
+      originalStartDate: new Date(),
+      originalEndDate: new Date(),
       disabledDays: { //Can integrate so that there are disabled days, just leaving this open as a possibility
         dates: []
       }

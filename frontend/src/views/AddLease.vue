@@ -1,19 +1,29 @@
 <template>
   <div class="mainDiv">
-  <h3 class="addResidenceHeader">Add a residence</h3>
-  <p class="myTitle">Title</p>
-  <input type="text" required placeholder="Title" v-model="title" />
-  <p class="myLocation">Location</p>
-  <LocationInputForm v-model="location" @updatedLocation="updateLocation" />
-  <DescriptionForm v-model="description" @updatedDescription="updateDescription" />
-  <InputForPricingBedAndPeople @updateBeds="updateNrOfBeds" @updateMaxPeople="updateNrOfMaxGuests" @updatePrice="updatePrice" />
-  <HousingRadioButtons @updateChosenHousing="updateChosenHousing" @updateChosenSize="updateChosenSize"/>
-  <AddAmenities @updateWifi="updateWifi" @updateKitchen="updateKitchen" @updateWasher="updateWasher" @updateHeating="updateHeating" @updateAC="updateAC" />
-  <ImageUrlInputForm @updatedImgURLs="updateIMGUrls" />
-  <ImageBox @removedFirstImage="removeFirstIMGinURLs" @removedSecondImage="removeSecondIMGinURLs" @removedThirdImage="removeThirdIMGinURLs" @removedFourthImage="removeFourthIMGinURLs" @removedFifthImage="removeFifthIMGinURLs" :imageURL="imageURLs"/>
-  <DatepickerForAvailableDates @updatedLeaseStartDate="updateStartDate" @updatedLeaseEndDate="updateEndDate" 
-  @updatedDisabledDays="updateDisabledDays" />
-  <router-link class="previewButton" to="preview">Preview</router-link>
+    <div class="greyBackgroundDiv">
+      <h3 class="addResidenceHeader">Add a residence</h3>
+      <p class="myTitle">Title</p>
+      <input type="text" required placeholder="Title" v-model="title" />
+      <p class="myLocation">Location</p>
+      <LocationInputForm v-model="location" @updatedLocation="updateLocation" />
+      <DescriptionForm v-model="description" @updatedDescription="updateDescription" />
+      <div class="inputForBedsDiv">
+        <InputForPricingBedAndPeople @updateBeds="updateNrOfBeds" @updateMaxPeople="updateNrOfMaxGuests" @updatePrice="updatePrice" />
+      </div>
+      <HousingRadioButtons @updateChosenHousing="updateChosenHousing" @updateChosenSize="updateChosenSize"/>
+      <AddAmenities @updateWifi="updateWifi" @updateKitchen="updateKitchen" @updateWasher="updateWasher" @updateHeating="updateHeating" @updateAC="updateAC" />
+      <div class="imageURLInputDiv">
+        <ImageUrlInputForm @updatedImgURLs="updateIMGUrls" />
+      </div>
+      <ImageBox @removedFirstImage="removeFirstIMGinURLs" @removedSecondImage="removeSecondIMGinURLs" @removedThirdImage="removeThirdIMGinURLs" @removedFourthImage="removeFourthIMGinURLs" @removedFifthImage="removeFifthIMGinURLs" :imageURL="imageURLs"/>
+      <div class="datePickerDiv">
+        <DatepickerForAvailableDates @updatedLeaseStartDate="updateStartDate" @updatedLeaseEndDate="updateEndDate" 
+        @updatedDisabledDays="updateDisabledDays" />
+      </div>
+      <div class="buttonDiv">
+        <router-link class="previewButton" to="preview">Preview</router-link>
+      </div>
+    </div>
   </div>
 </template>
 <script setup="">
@@ -55,8 +65,13 @@ export default {
       }
       this.amenities = latestLease.amenities
       this.imageURLs = latestLease.imageURLs
+
       this.startDate = latestLease.startDate
+      if(this.startDate.length == 0){
+        this.startDate = new Date();
+      }
       this.endDate = latestLease.endDate
+      store.commit('setLeaseToBuild', this.lease)
     }
   },
   data() {
@@ -96,6 +111,7 @@ export default {
       this.imageURLs = this.imageURLs.filter(function(value, index, arr){ return index != 0 });
       this.lease.imageURLs = this.imageURLs
       store.commit('setLeaseToBuild', this.lease)
+      document.getElementsByClassName("mainDiv")[0].style.backgroundImage = 'url(' + '/public/house.jpg' + ')';
     },
     removeSecondIMGinURLs(){
       this.imageURLs = this.imageURLs.filter(function(value, index, arr){ return index != 1 });
@@ -118,9 +134,11 @@ export default {
       store.commit('setLeaseToBuild', this.lease)
     },
     updateIMGUrls(newImageURLs){
+      console.log("This imageURLs was: ", this.imageURLs);
       this.imageURLs.push(newImageURLs);
       this.lease.imageURLs = this.imageURLs;
       store.commit('setLeaseToBuild', this.lease)
+      document.getElementsByClassName("mainDiv")[0].style.backgroundImage = 'url(' + this.imageURLs[0][0] +')';
     },
     updateTitle(newTitle){
       this.title = newTitle
@@ -245,56 +263,68 @@ export default {
 }
 </script>
 <style scoped>
-.special{
-  height:100px;
+.imageURLInputDiv{
+  margin-bottom:10px;
+}
+.buttonDiv{
+  margin:5px;
+}
+.previewButton{
+  border: outset 5px green;
+  outline:1px solid black;
+  opacity:1;
+  background-color: green;
+  padding:5px;
+  /*optional*/
+  font-family: arial, sans-serif;
+  /*input has OS specific font-family*/
+  color: black;
+  font-weight:bolder;
+  text-decoration: none;
+  width:max-content;
+  font-size:15px;
+  margin-bottom:15px;
+}
+.datePickerDiv{
+  margin:10px;
+  padding-right:18px;
+  padding-bottom:10px;
+}
+p {
+  font-weight:bolder;
+  margin:3px;
+}
+.greyBackgroundDiv{
+  background-color: rgba(218, 224, 224, 0.8);
+  width:max-content;
+  margin-left:auto;
+  margin-right:auto;
+  padding:20px;
 }
 .mainDiv{
-  text-align: center;
-  height: max-content;
-}
-.addResidenceHeader{
-  margin: 8px;
-}
-div{
-  margin:5px;
-  width: 210px;
-  padding: 0px;
-  margin-left: auto;
-  margin-right: auto;
-}
-textarea{
-  width:210px;
-}
-.addResidenceDiv{
-  width: 210px;
-}
-.myTitle, .myLocation{
-  width: 210px;
-  margin: 0px;
-  padding: 0px;
-  font-weight: bolder;
-  margin-top: 3px;
-  margin-bottom: 3px;
-}
-.myTitle{
+  padding-left:5vw;
+  padding-right:5vw;
+  padding-bottom:2.5vh;
+  padding-top:2.5vh;
+  background-image: url('/public/house.jpg');
+  background-size:cover;
+  background-repeat:no-repeat;
+  opacity: 0.8;
+  height:max-content;
+  width:100vw;
+  background-attachment: fixed;
+  overflow-x:hidden;
+  min-height:900px;
+  align-items:center;
+  align-self:center;
   text-align:center;
-  width:200px;
+  background-position:center;
 }
-.previewButton, .previewButton:visited{
-  display: block;
-  width: max-content;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 20px;
-  background-color:rgb(243, 189, 10);
-  color:black;
-  border: 2px solid rgb(200, 159, 23);
-  border-radius: 25px;
-  text-decoration: none;
-  font-weight: bolder;
-  padding: 5px;
-  padding-top: 3px;
-  font-size: 13px;
+.inputForBedsDiv{
+  width:max-content;
+  margin-left:auto;
+  margin-right:auto;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
-
 </style>

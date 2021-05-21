@@ -12,7 +12,8 @@ export default class PPPN {
     date.setDate(date.getDate() + days);
     return date;
   }
-  getCorrectDateFormat(wantedDate){
+  getCorrectDateFormat(wantedDate) {
+    console.log("got in the value of: ", wantedDate);
       let year = wantedDate.getFullYear();
       let month = wantedDate.getMonth() + 1;
       let day = wantedDate.getDate();

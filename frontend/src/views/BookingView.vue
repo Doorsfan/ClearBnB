@@ -34,7 +34,7 @@
             <div v-if="amenities[3] == 'heating: true'" class="hasHeating">Heating</div>
           </div>
           <div class="acDiv">
-            <div v-if="amenities[1] == 'airConditioner: true'" class="hasKitchen">Air Conditioning</div>
+            <div v-if="amenities[4] == 'airConditioner: true'" class="hasKitchen">Air Conditioning</div>
           </div>
         </div>
         <div class="amountOfBeds">

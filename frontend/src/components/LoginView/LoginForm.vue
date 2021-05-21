@@ -52,7 +52,6 @@ export default {
   },
   methods: {
     async login(){
-      console.log("tried to login")
       let user = new User(this.username, this.password);
       let res = await fetch('/api/login', {
         method: 'POST',

@@ -21,7 +21,6 @@ export default {
       document.getElementsByClassName("center")[0].style.height = '70px';
     }
     this.$store.dispatch('saveLatestRoute', this.$route.path);
-    console.log(this.$store.getters.getLatestRoute);
   },
   methods:{
   }
@@ -34,6 +33,7 @@ export default {
   padding-bottom:2.5vh;
   padding-top:2.5vh;
   background-image: url("../../public/nice.jpg");
+  background-position:center;
   background-size:cover;
   background-repeat:no-repeat;
   opacity: 0.8;

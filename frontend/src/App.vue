@@ -1,9 +1,9 @@
 <template>
   <header>
-    <Header @loggedOut="loggedOut" :signUp="signUp" :login="login"/>
+    <Header />
   </header>
     <main class="app-main">
-      <router-view @loggedIn="loggedIn"/>
+      <router-view />
     </main>
   <footer class="myFooter">
     <Footer />
@@ -21,10 +21,16 @@ export default {
     Header,
     Footer
   },
+  watch: {
+    currentUser(){
+      console.log("There was a change in teh current user");
+    }
+  },
   data() {
     return {
       signUp: 'signUp',
-      login: 'login'
+      login: 'login',
+      currentUser: this.$store.getters.getCurrentUser
     }
   },
   methods:{

@@ -1,9 +1,17 @@
 <template>
   <div class="primaryDiv">
-  <div class="mainDiv">
+  <div v-if="$store.getters.getCurrentUser != null" class="mainDiv userPageMainDiv">
     <p class="userPageTitle">User Page</p>
-    <p class="welcomeMessage"></p>
-    <button @click="switchHistoricalDisplay" class="changeHistoricalDisplay">Show Past Bookings</button>
+    <p v-if="$store.getters.getCurrentUser.username == 'admin@ClearBnB.se'" class="welcomeMessage">Welcome Admin!</p>
+    <p v-else class="welcomeMessage">Welcome {{ $store.getters.getCurrentUser.username }}!</p>
+    <div class="addNewLeaseDiv">
+      <router-link to="/addLease">
+        <button @click="addNewLease" class="addNewLeaseButton">Add New Lease</button>
+      </router-link>
+    </div>
+    <div class="historicalButtonDiv">
+      <button @click="switchHistoricalDisplay" class="changeHistoricalDisplay">Show Past Bookings</button>
+    </div>
     <div class="currentBookingsDiv">
       <p class="yourFutureBookingsText">Your <b>CURRENT</b> bookings so far:</p>
       <div class="bookings">
@@ -30,7 +38,7 @@
   </div>
   </div>
   <div class="changeUserInfoDiv primaryDiv">
-    <div class="mainDiv">
+    <div class="mainDiv changeUserInfoMainDiv">
     <form class="userInfoForm">
       <p class="changeUserInfoTitle">Change User Info</p>
       <div class="mainFormDiv">
@@ -141,7 +149,6 @@ export default {
       });
       let myProfit = await profitRes.json();
       let extractedProfit = myProfit[0].totalProfit;
-      console.log("my profit was: ", extractedProfit);
     }
     else{
       let secondRes = await fetch('/rest/bookings', {
@@ -159,11 +166,11 @@ export default {
     }
     
     for(let booking of this.myBookings){
-      if(booking.isInTheFuture(booking.endDate)){
-        this.futureBookings.push(booking)
-      }
-      else if(!booking.isInTheFuture(booking.endDate)){
+      if(booking.isInThePast(booking.endDate)){
         this.pastBookings.push(booking)
+      }
+      else if(!booking.isInThePast(booking.endDate)){
+        this.futureBookings.push(booking)
       }
     }
     if(this.currentUserInfo.firstName == "admin" && this.currentUserInfo.lastName == "admin"){
@@ -252,16 +259,34 @@ export default {
 }
 </script>
 <style scoped>
+.addNewLeaseButton{
+  border: outset 5px green;
+  outline:1px solid black;
+  opacity:1;
+  background-color: green;
+  padding:5px;
+  /*optional*/
+  font-family: arial, sans-serif;
+  /*input has OS specific font-family*/
+  color: black;
+  font-weight:bolder;
+  text-decoration: none;
+  width:max-content;
+  font-size:20px;
+  margin-bottom:15px;
+}
 .primaryDiv{
   padding-left:5vw;
   padding-right:5vw;
   padding-bottom:2.5vh;
   padding-top:2.5vh;
   background-image: url('/public/nice.jpg');
+  background-position:center;
   background-size:cover;
   background-repeat:no-repeat;
   opacity: 0.8;
   height:max-content;
+  padding-bottom: 20vh;
   width:100vw;
   background-attachment: fixed;
   overflow-x:hidden;
@@ -274,6 +299,7 @@ export default {
   padding:5px;
   /*optional*/
   font-family: arial, sans-serif;
+  
   /*input has OS specific font-family*/
   color: black;
   font-weight:bolder;
@@ -423,6 +449,102 @@ export default {
   }
   .residencesLink{
     font-weight:bolder;
+  }
+
+  @media only screen and (max-width: 450px) {
+    .mainDiv{
+      margin:0px;
+      padding:0px;
+      margin-left:auto;
+      margin-right:auto;
+      padding: 10px;
+    }
+  }
+  @media only screen and (max-width: 400px) {
+    .mainDiv{
+      margin:0px;
+      padding:0px;
+      margin-left:auto;
+      margin-right:auto;
+      padding: 10px;
+    }
+    .changeUserInfoMainDiv{
+      transform:scale(0.8);
+      padding:10px;
+      margin:0px;
+    }
+  }
+
+  @media only screen and (max-width: 330px) {
+    * {
+      text-align:center;
+      width:max-content;
+      margin-left:auto;
+      margin-right:auto;
+    }
+    .changeUserInfoDiv{
+      margin:0px;
+    }
+    .changeUserInfoTitle{
+      padding-left:0px;
+    }
+    .userPageMainDiv{
+      margin-top: 50px;
+      padding-top: 10px;
+      padding-bottom: 10px;
+    }
+    .changeUserInfoMainDiv{
+      transform:scale(0.8);
+      padding:5px;
+      margin-left:auto;
+      margin-right:auto;
+      width:240px;
+    }
+    p {
+      display:block;
+      width:max-content;
+      text-align:center;
+      margin-left:auto;
+      margin-right:auto;
+    }
+    input {
+      display: block;
+      width: max-content;
+      margin-left:auto;
+      margin-right:auto;
+    }
+    .mainFormDiv, .divForInputs, .InputDiv{
+      width: 220px;
+      text-align:center;
+      margin:0px;
+      margin-top: 2px;
+      margin-bottom: 4px;
+    }
+    .buttonsDiv{
+      padding:0px;
+      margin:0px;
+    }
+    .cancelButton{
+      margin-left:40px;
+    }
+  }
+
+  @media only screen and (max-width: 290px) {
+    *{
+      padding:0px;
+      margin:0px;
+      text-align:center;
+      align-content:center;
+      width:max-content;
+      margin-left:auto;
+      margin-right: auto;
+    }
+    .mainDiv{
+      transform:scale(0.75);
+      margin:0px;
+      padding:0px;
+      padding: 10px;
+    }
   }
 </style>
 

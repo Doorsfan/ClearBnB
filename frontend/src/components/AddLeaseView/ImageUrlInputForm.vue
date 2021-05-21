@@ -51,7 +51,7 @@ export default {
   width:205px;
 }
 .addImageButton {
-  background-color: lightgreen;
+  background-color: green;
   margin-left: 10px;
 }
 input {

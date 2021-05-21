@@ -1,11 +1,11 @@
 <template>
 <div class="datePickersMainDiv">
   <div class="firstDiv">
-    <label for="fromDatePicker">From the:</label>
+    <p class="fromTheText">From The</p>
     <Datepicker id="fromDatePicker" class="fromDatePicker" v-model="startDate" :lower-limit="minimumStartDate" :upper-limit="endDate"/>
   </div>
   <div class="secondDiv">
-    <label for="toDatePicker">To the:</label>
+    <p class="toTheText">To The</p>
     <Datepicker id="toDatePicker" class="toDatePicker" v-model="endDate" :lower-limit="minimumEndDate"/>
   </div>
 </div>
@@ -71,9 +71,30 @@ export default {
 * {
   font-size: 20px;
 }
-div{
+p {
   width:max-content;
-  display:inline-block;
-  margin: 10px;
+  margin-left:auto;
+  margin-right:auto;
+  padding-bottom: 8px;
+}
+@media only screen and (max-width: 300px) {
+  div {
+    width:max-content;
+    padding:0px;
+    margin: 0px;
+  }
+}
+@media only screen and (min-width: 1330px) {
+  .firstDiv, .secondDiv{
+    display:inline-block;
+  }
+  .firstDiv{
+    margin-left: 10px;
+    margin-right: 15px;
+  }
+  .secondDiv{
+    margin-right:15px;
+  }
+
 }
 </style>

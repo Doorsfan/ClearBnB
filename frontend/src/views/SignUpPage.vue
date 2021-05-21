@@ -43,6 +43,9 @@
     <div class="buttonsDiv">
       <router-link to="/" class="cancelButton" value="Cancel">Cancel</router-link><button class="registerButton" @click="registerUser" value="Register">Register</button>
     </div>
+    <div class="takenUserBox">
+      <p class="errorBox">A user with that Email already exists.</p>
+    </div>
     </div>
   </div>
   
@@ -106,7 +109,7 @@ export default {
 
 
       if(responseAsJson['error'] == "User already exists"){
-        document.getElementsByClassName('takenUserBox')[0].style.display = 'block';
+        document.getElementsByClassName('errorBox')[0].style.display = 'block';
         return;
       }
       newUserInfo.userId = responseAsJson['id']
@@ -172,6 +175,7 @@ p{
   padding-bottom:10vh;
   padding-top:2.5vh;
   background-image: url("../../public/nice.jpg");
+  background-position:center;
   background-size:cover;
   background-repeat:no-repeat;
   opacity: 0.8;
@@ -182,5 +186,21 @@ p{
 }
 div{
   margin:8px;
+}
+.takenUserBox{
+  margin:0px;
+  margin-top:10px;
+  margin-left:5.5vw;
+  margin-right:auto;
+}
+.errorBox{
+  display:none;
+  width:max-content;
+  margin-left:auto;
+  margin-right:auto;
+  background-color: red;
+  color:white;
+  padding:3px;
+  outline: 1px solid black;
 }
 </style>

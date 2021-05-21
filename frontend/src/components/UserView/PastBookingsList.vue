@@ -41,11 +41,12 @@ export default {
 .mainBoxDiv{
   margin-left:auto;
   margin-right:auto;
-  width:500px;
+  width:max-content;
   padding:20px;
   margin-top:10px;
   margin-bottom:10px;
   border:1px solid black;
+  background: #eee;
 }
 .titleDiv{
   text-align:center;

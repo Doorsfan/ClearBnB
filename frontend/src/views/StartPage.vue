@@ -1,15 +1,25 @@
 <template>
   <div class="mainDiv">
     <div class="startPageDateDiv">
-      <LocationInputForm @updateMyLocation="updateMyLocation" />
-      <DatePickerOnStartPage @updateStartDate="updateSearchStartDate" @updateEndDate="updateSearchEndDate"/>
-      <BedsInputForm @updateMyAmountOfBeds="updateMyAmountOfBeds"/>
-      <PriceRangeForm @updateMyMinPrice="updateMyMinPrice" @updateMyMaxPrice="updateMyMaxPrice"/>
+      <div class="locationDiv">
+        <LocationInputForm @updateMyLocation="updateMyLocation" />
+      </div>
+      <div class="datePickerDiv">
+        <DatePickerOnStartPage @updateStartDate="updateSearchStartDate" @updateEndDate="updateSearchEndDate"/>
+      </div>
+      <div class="bedsInputDiv">
+        <BedsInputForm @updateMyAmountOfBeds="updateMyAmountOfBeds"/>
+      </div>
+      <div class="minAndMaxPriceDiv">
+        <PriceRangeForm @updateMyMinPrice="updateMyMinPrice" @updateMyMaxPrice="updateMyMaxPrice"/>
+      </div>
     </div>
-    <LeaseDisplayBox v-for="(leaseItem, index) of relevantLeases"
-      :key="index"
-      :lease="leaseItem"/>
-    <button class="pretendToBookButton" @click="pretendToBook">Pretend to Book</button>
+    <div class="leasesDiv">
+      <LeaseDisplayBox v-for="(leaseItem, index) of relevantLeases"
+        :key="index"
+        :lease="leaseItem"/>
+    </div>
+
   </div>
 </template>
 <script>
@@ -116,7 +126,13 @@ export default {
       choseEndDate: this.getAnyDateInCorrectFormat("2021-06-30")
     }
   },
-  mounted(){
+  async mounted(){
+    let res = await fetch('/rest/leases', {
+        method: 'GET'
+      })
+    let response = await res.json()
+    this.allLeases = response;
+    this.relevantLeases = this.allLeases;
     if(document.getElementsByClassName("house_icon").length > 0){
       document.getElementsByClassName("house_icon")[0].src = '/src/assets/clearbnb-logo.png'
       document.getElementsByClassName("house_icon")[0].className = 'sunIconInHeader'
@@ -124,23 +140,15 @@ export default {
       document.getElementsByClassName("center")[0].style.height = '210px';
     }
     this.$store.dispatch('saveLatestRoute', this.$route.path);
-    console.log(this.$store.getters.getLatestRoute);
     if(this.$store.getters.getCurrentUser != null){
-      $('.signUpLink').text("My Page")
-      $('.loginLink').text("Log Out")
       this.$emit("loggedIn", true)
     }
     else{
-      $('.signUpLink').text("Sign Up")
-      $('.loginLink').text("Log In")
       this.$emit("loggedOut", true)
       this.$store.commit('setUser', null)
     }
   },
   methods:{
-    async pretendToBook(){
-      console.log("Moved to bookingView");
-    },
     returnRelevantLeases(lease){
       let passedMaxPriceCheck = false;
       let passedStartDate = false;
@@ -165,7 +173,7 @@ export default {
       }
       let passedLocation = lease.location.toLowerCase().includes(this.myLocation.toLowerCase());
       let passedMinPrice = this.myMinPrice <= Math.round((lease.price * 1.15));
-      let passedBeds = lease.beds <= this.myAmountOfBeds || this.myAmountOfBeds == 0;
+      let passedBeds = this.myAmountOfBeds <= lease.beds || this.myAmountOfBeds == 0;
       if(passedLocation && passedMinPrice && passedBeds && passedEndDate && passedStartDate && passedMaxPriceCheck){
         return lease
       }
@@ -237,11 +245,17 @@ export default {
 }
 </script>
 <style scoped>
-.pretendToBookButton{
+.leasesDiv{
+  text-align:center;
+}
+.locationDiv, .datePickerDiv, .bedsInputDiv, .minAndMaxPriceDiv{
   width:max-content;
-  padding:2px;
+  display:block;
   margin-left:auto;
   margin-right:auto;
+}
+.locationDiv{
+  padding-top:20px;
 }
 .mainDiv{
   padding-left:5vw;
@@ -252,29 +266,56 @@ export default {
   background-size:cover;
   background-repeat:no-repeat;
   opacity: 0.8;
-  height:max-content;
   width:100vw;
+  min-width:100vw;
   background-attachment: fixed;
-  overflow-x:hidden;
+  background-position: center;
 }
 .startPageDateDiv{
-  width:max-content;
   margin-left:auto;
   margin-right:auto;
   font-size:20px;
   background-color: rgba(218, 224, 224, 0.8);
-  padding-left:20px;
-  padding-right:20px;
+  padding-bottom: 15px;
 }
-@media only screen and (max-width: 700px) {
+
+@media only screen and (max-width: 300px) {
+  .startPageDateDiv{
+    margin:0px;
+    padding:0px;
+  }
+  .minAndMaxPriceDiv{
+    padding-bottom:20px;
+  }
+}
+@media only screen and (min-width: 1330px) {
+  div {
+    margin:0px;
+    padding:0px;
+    display:inline-block;
+  }
+  .locationDiv, .datePickerDiv, .bedsInputDiv, .minAndMaxPriceDiv{
+    display:inline-block;
+    width:max-content;
+  }
+  
+  .locationDiv{
+    padding-left:20px;
+  }
+  .minAndMaxPriceDiv{
+    padding-left:10px;
+    padding-right:20px;
+  }
   .startPageDateDiv {
-    width: 100%;
+    width: max-content;
     padding: 5px 5px;
     margin: 2px 0;
     display: block;
     border: 1px solid #ccc;
     border-radius: 1px;
     box-sizing: border-box;
+    margin-left:auto;
+    margin-right:auto;
   }
 }
 </style>

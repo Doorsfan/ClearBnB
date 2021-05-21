@@ -1,7 +1,10 @@
 <template>
-  <div class="priceRangeFormDiv">
-    Min Price: <input class="minPriceInputForm" type="text" v-model="minPriceWanted" placeholder="Min Price"> Max Price: <input class="maxPriceInputForm" type="text" v-model="maxPriceWanted" placeholder="Max Price">
-  </div>
+    <div class="firstPriceDiv">
+      <p class="minPriceText">Min Price</p><input class="minPriceInputForm" type="text" v-model="minPriceWanted" placeholder="Min Price">
+    </div>
+    <div class="secondPriceDiv">
+      <p class="maxPriceText">Max Price</p><input class="maxPriceInputForm" type="text" v-model="maxPriceWanted" placeholder="Max Price">
+    </div>
 </template>
 <script>
 export default {
@@ -23,6 +26,24 @@ export default {
 }
 </script>
 <style scoped>
+@media only screen and (min-width: 1330px) {
+  p{
+    margin-bottom: 6px;
+  }
+  .minPriceText, .maxPriceText{
+    padding-left:3px;
+  }
+  .firstPriceDiv, .secondPriceDiv{
+    width:max-content;
+    display:inline-block;
+  }
+  .firstPriceDiv{
+    padding-left: 10px;
+  }
+  .secondPriceDiv{
+    padding-left: 10px;
+  }
+}
 input{
   width:60px;
   margin:3px;
@@ -39,5 +60,8 @@ input{
 .minPriceInputForm{
   width:83px;
   padding:1px;
+}
+.firstPriceDiv{
+  margin-left:5px;
 }
 </style>

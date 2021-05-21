@@ -23,19 +23,11 @@ public class Lease {
     private int maxGuests;
     private int beds;
     private String[] amenities; // Or should I be using a map?
-    private List<String> imageURLs;
+    private String[] imageURLs;
 
     public Lease() {}
 
-    /*public String getLeaseId() {
-        return leaseId;
-    }
-
-    public void setLeaseId(String leaseId) {
-        this.leaseId = leaseId;
-    }*/
-
-    public void setImageURLs(List<String> imageURLs) {
+    public void setImageURLs(String[] imageURLs) {
         this.imageURLs = imageURLs;
     }
 
@@ -143,7 +135,7 @@ public class Lease {
         this.amenities = amenities;
     }
 
-    public List<String> getImageURLs() {
+    public String[] getImageURLs() {
         return imageURLs;
     }
 

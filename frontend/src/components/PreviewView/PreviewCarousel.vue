@@ -1,12 +1,9 @@
 <template>
-  <div class="mainDiv">
-    <i @click="previousPicture" class="arrow left"></i>
-    <div class="imageCarousel">
-      <img class="firstImage" :src="lease.imageURLs[0]"/>
-      <img class="secondImage" :src="lease.imageURLs[1]"/>
-    </div>
-    <i @click="nextPicture" class="arrow right"></i>
-  </div>
+  <img class="firstImage" :src="lease.imageURLs[0]">
+  <img v-if="lease.imageURLs.length > 1" class="secondImage" :src="lease.imageURLs[1]">
+  <img v-if="lease.imageURLs.length > 2" class="thirdImage" :src="lease.imageURLs[2]">
+  <img v-if="lease.imageURLs.length > 3" class="fourthImage" :src="lease.imageURLs[3]">
+  <img v-if="lease.imageURLs.length > 4" class="fifthImage" :src="lease.imageURLs[4]">
 </template>
 <script>
 //Implement Interaction with Arrow Buttons again in regards to Carousel Component
@@ -34,26 +31,19 @@ export default {
 }
 </script>
 <style scoped>
-.imageCarousel{
-  position:relative;
-  height:300px;
-  width:300px;
-  margin:5px;
-  display:inline-block;
-}
 .mainDiv{
   margin-top:10px;
   margin-bottom:10px;
+  background-color:red;
 }
 img{
-  height: 300px;
-  width:300px;
-  position:absolute;
   left:0;
   -webkit-transition: opacity 0.7s ease-in-out;
   -moz-transition: opacity 0.7s ease-in-out;
   -o-transition: opacity 0.7s ease-in-out;
   transition: opacity 0.7s ease-in-out;
+  width:300px;
+  height:200px;
 }
 @keyframes cyclingOpacity {
   0% {
@@ -74,6 +64,27 @@ img{
   animation-timing-function: ease-in-out;
   animation-iteration-count: infinite;
   animation-duration: 15s;
+  animation-direction: alternate;
+}
+.thirdImage {
+  animation-name: cyclingOpacity;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-duration: 30s;
+  animation-direction: alternate;
+}
+.fourthImage {
+  animation-name: cyclingOpacity;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-duration: 45s;
+  animation-direction: alternate;
+}
+.fifthImage {
+  animation-name: cyclingOpacity;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-duration: 60s;
   animation-direction: alternate;
 }
 .arrow {

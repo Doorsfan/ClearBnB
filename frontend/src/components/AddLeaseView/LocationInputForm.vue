@@ -2,6 +2,7 @@
   <div class="addResidenceDiv">
     <div class="innerDiv">
       <input
+        required
         type="text"
         placeholder="Location"
         @change="updateLocationArea"

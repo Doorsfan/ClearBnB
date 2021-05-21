@@ -93,4 +93,40 @@ footer {
   margin-top: 10px;
   font-size: 10px;
 }
+@media only screen and (max-width: 600px) {
+  *{
+    transform: scale(0.9);
+  }
+  .last{
+    font-size: 14px;
+    padding-bottom:20px;
+  }
+}
+@media only screen and (max-width: 475px) {
+  footer{
+    transform: scale(0.8);
+  }
+  .last{
+    font-size: 14px;
+    padding-bottom:20px;
+  }
+}
+@media only screen and (max-width: 375px) {
+  footer{
+    transform: scale(0.7);
+  }
+  .last{
+    font-size: 14px;
+    padding-bottom:20px;
+  }
+}
+@media only screen and (max-width: 270px) {
+  footer{
+    transform: scale(0.7);
+  }
+  .last{
+    font-size: 14px;
+    padding-bottom:20px;
+  }
+}
 </style>
