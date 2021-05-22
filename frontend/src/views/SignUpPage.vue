@@ -10,17 +10,11 @@
     <div class="lastNameDiv">
       <p class="lastNameP">Last name: </p><input v-model="lastName" placeholder="Last Name" class="lastNameInput">
     </div>
-    <div class="streetDiv">
-      <p class="streetP">Street: </p><input v-model="streetAddress" placeholder="My Street" class="streetInput">
+    <div class="passwordDiv">
+      <p class="passwordP">Password: </p><input v-model="password" type="password" placeholder="Password" class="passwordInput">
     </div>
-    <div class="zipDiv">
-      <p class="zipP">Zip Code: </p><input v-model="zipCode" placeholder="Zip Code" class="zipInput">
-    </div>
-    <div class="countryDiv">
-      <p class="countryP">Country: </p><input v-model="country" placeholder="Country" class="countryInput">
-    </div>
-    <div class="cityDiv">
-      <p class="cityP">City: </p><input v-model="city" placeholder="City" class="cityInput">
+    <div class="repeatPasswordDiv">
+      <p class="repeatPasswordP">Repeat Password: </p><input v-model="repeatPassword" type="password" placeholder="Repeat Password" class="repeatPasswordInput">
     </div>
     <div class="emailDiv">
       <p class="emailP">Email: </p><input v-model="email" type="email" placeholder="Email" class="emailInput">
@@ -28,11 +22,17 @@
     <div class="repeatEmailDiv">
       <p class="repeatEmailP">Repeat Email: </p><input v-model="repeatEmail" type="email" placeholder="Repeat Email" class="repeatEmailInput">
     </div>
-    <div class="passwordDiv">
-      <p class="passwordP">Password: </p><input v-model="password" type="password" placeholder="Password" class="passwordInput">
+    <div class="countryDiv">
+      <p class="countryP">Country: </p><input v-model="country" placeholder="Country" class="countryInput">
     </div>
-    <div class="repeatPasswordDiv">
-      <p class="repeatPasswordP">Repeat Password: </p><input v-model="repeatPassword" type="password" placeholder="Repeat Password" class="repeatPasswordInput">
+    <div class="cityDiv">
+      <p class="cityP">City: </p><input v-model="city" placeholder="City" class="cityInput">
+    </div>
+    <div class="streetDiv">
+      <p class="streetP">Street: </p><input v-model="streetAddress" placeholder="My Street" class="streetInput">
+    </div>
+    <div class="zipDiv">
+      <p class="zipP">Zip Code: </p><input v-model="zipCode" placeholder="Zip Code" class="zipInput">
     </div>
     <div class="phoneNumber">
       <p class="phoneNumberP">Phone Number: </p><input v-model="phoneNumber" placeholder="Phone Number" class="phoneNumberInput">
@@ -145,9 +145,6 @@ export default {
   width:60px;
   height:25px;
 }
-.registerTitle{
-  margin-left: 100px;
-}
 p{
   font-weight:bolder;
   display:inline-block;
@@ -158,10 +155,7 @@ p{
 .greyBoxDiv{
   margin-top:20vh;
   background-color: rgba(218, 224, 224, 0.8);
-  padding-right:140px;
-  padding-left:60px;
-  padding-bottom:2vh;
-  padding-top:2vh;
+  padding:30px;
   width:max-content;
   margin-left:auto;
   margin-right:auto;
@@ -202,5 +196,51 @@ div{
   color:white;
   padding:3px;
   outline: 1px solid black;
+}
+ *{
+    text-align:center;
+  }
+@media only screen and (max-width: 650px) {
+  .greyBoxDiv{
+    padding:20px;
+  }
+  h1{
+    margin:0px;
+  }
+}
+@media only screen and (max-width: 500px) {
+  .registerTitle{
+    width:250px;
+    margin:0px;
+    text-align:center;
+    font-size: 20px;
+  }
+  h1{
+    padding:0px;
+    margin:0px;
+    margin-left:auto;
+    margin-right:auto;
+    width:max-content;
+  }
+  p{
+    margin:0px;
+    padding:0px;
+    width:max-content;
+    margin-bottom:3px;
+  }
+  div{
+    width:250px;
+    margin:0px;
+    padding:0px;
+    text-align:center;
+    margin-top:5px;
+    margin-bottom:5px;
+  }
+  .greyBoxDiv{
+    width:250px;
+    padding:0px;
+    padding-top: 10px;
+    padding-bottom:10px;
+  }
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <div class="booking-view-app-main">
     <div class="booking-view-container">
-      <div v-if="!myLease">
+      <div class="mainDiv" v-if="!myLease">
         <div class="location-maxguests">
           <h1>Your Title Goes Here</h1>
           <p> Your Location Goes Here | Maximum guests go here</p>
@@ -17,7 +17,7 @@
             <p>Type of Housing Goes Here | Per person per night: Your Price in Euros</p>
           </div>
           <div class="booking-view-description">
-            <p> Your Description goes here </p>
+            <p class="descriptionP"> Your Description goes here </p>
           </div>
           <div class="amenitiesTitle">Your Amenities shows up below</div>
           <div class="myAmenities">
@@ -74,7 +74,7 @@
             <p>{{ myLease.typeOfHousing }} | Per person per night: {{ Math.round(myLease.price * 1.15 * 100) / 100 }} Euro</p>
           </div>
           <div class="booking-view-description">
-            <p> {{ myLease.description}} </p>
+            <p class="descriptionP"> {{ myLease.description}} </p>
           </div>
           <div class="amenitiesTitle">Amenities</div>
           <div class="myAmenities">
@@ -239,6 +239,10 @@ export default {
 
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Lobster&family=Merriweather+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Raleway:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
+
+  *{
+    text-align:center;
+  }
   .cancelButtonDiv, .publishButtonDiv{
     width:max-content;
     display:inline-block;
@@ -373,6 +377,8 @@ select  {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: rgb(10, 10, 10);
+  margin-top: 30px;
+  margin-bottom: 30px;
 }
 
 .location-maxguests{
@@ -474,4 +480,54 @@ select  {
   padding: 10px 0 20px;
 }
 
+@media only screen and (min-width: 900px) {
+  .booking-view-image-1, .booking-view-image-2, .booking-view-image-3, .booking-view-image-4, .booking-view-image-5
+  {
+    height:150px;
+    width:350px;
+  }
+}
+@media only screen and (max-width: 900px) {
+  .booking-view-image-1, .booking-view-image-2, .booking-view-image-3, .booking-view-image-4, .booking-view-image-5
+  {
+    height:150px;
+    width:350px;
+  }
+}
+@media only screen and (max-width: 700px) {
+  .booking-view-image-1, .booking-view-image-2, .booking-view-image-3, .booking-view-image-4, .booking-view-image-5
+  {
+    height:150px;
+    width:300px;
+  }
+}
+@media only screen and (max-width: 550px) {
+  .booking-view-image-1, .booking-view-image-2, .booking-view-image-3, .booking-view-image-4, .booking-view-image-5
+  {
+    height:150px;
+    width:200px;
+  }
+}
+@media only screen and (max-width: 300px) {
+  .booking-view-image-1, .booking-view-image-2, .booking-view-image-3, .booking-view-image-4, .booking-view-image-5
+  {
+    height:100px;
+    width:130px;
+  }
+  *{
+    font-size:14px;
+    text-align:center;
+  }
+  #app > main > div > div > div > div.location-maxguests{
+    padding-left:10px;
+    padding-right:10px;
+  }
+  .descriptionP{
+    margin:0px;
+    padding:0px;
+  }
+  .mainDiv > * {
+    padding:10px;
+  }
+}
 </style>

@@ -330,6 +330,8 @@ select  {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: rgb(10, 10, 10);
+  margin-top:10px;
+  margin-bottom:10px;
 }
 
 .location-maxguests{
@@ -431,5 +433,103 @@ select  {
   padding: 10px 0 20px;
 }
 
+*{
+  max-width:100vw;
+}
+
+@media only screen and (max-width: 550px) {
+  *{
+    margin:0px;
+    padding:0px;
+  }
+  #app > main > div > div > div:nth-child(1) > div.booking-view-images-container{
+    max-width:90vw;
+  }
+  #app > main > div > div{
+    padding-top:10px;
+    margin-top:10px;
+    padding-right:10px;
+    padding-left:10px;
+    margin-bottom:10px;
+  }
+  #app > main > div > div > div:nth-child(1) > div.booking-view-description{
+    margin:0px;
+    padding:0px;
+    text-align:center;
+  }
+  h1{
+    width: 200px;
+    margin-left:auto;
+    margin-right:auto;
+  }
+  p{
+    width: 200px;
+    margin-left:auto;
+    margin-right:auto;
+  }
+  #app > main > div > div > div:nth-child(1) > div.booking-view-images-container > img.booking-view-image-1{
+    height:100px;
+  }
+  #app > main > div > div > div:nth-child(1) > div.booking-view-images-container > img.booking-view-image-2{
+    height:100px;
+  }
+  #app > main > div > div > div:nth-child(1) > div.booking-view-images-container > img.booking-view-image-3{
+    height:100px;
+  }
+  #app > main > div > div > div:nth-child(1) > div.booking-view-images-container > img.booking-view-image-4{
+    height:100px;
+  }
+  #app > main > div > div > div:nth-child(1) > div.booking-view-images-container > img.booking-view-image-5{
+    height:100px;
+  }
+
+}
+
+@media only screen and (max-width: 300px) {
+  *{
+    margin:0px;
+    padding:0px;
+  }
+  #app > main > div > div > div:nth-child(1) > div.booking-view-images-container{
+    max-width:90vw;
+  }
+  #app > main > div > div{
+    padding-top:10px;
+    margin-top:10px;
+    padding-right:10px;
+    padding-left:10px;
+    margin-bottom:10px;
+  }
+  #app > main > div > div > div:nth-child(1) > div.booking-view-description{
+    margin:0px;
+    padding:0px;
+    text-align:center;
+  }
+  h1{
+    width: 200px;
+    margin-left:auto;
+    margin-right:auto;
+  }
+  p{
+    width: 200px;
+    margin-left:auto;
+    margin-right:auto;
+  }
+  #app > main > div > div > div:nth-child(1) > div.booking-view-images-container > img.booking-view-image-1{
+    height:100px;
+  }
+  #app > main > div > div > div:nth-child(1) > div.booking-view-images-container > img.booking-view-image-2{
+    height:100px;
+  }
+  #app > main > div > div > div:nth-child(1) > div.booking-view-images-container > img.booking-view-image-3{
+    height:100px;
+  }
+  #app > main > div > div > div:nth-child(1) > div.booking-view-images-container > img.booking-view-image-4{
+    height:100px;
+  }
+  #app > main > div > div > div:nth-child(1) > div.booking-view-images-container > img.booking-view-image-5{
+    height:100px;
+  }
+}
 </style>
 

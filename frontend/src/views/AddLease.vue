@@ -327,4 +327,12 @@ p {
   margin-top: 5px;
   margin-bottom: 5px;
 }
+@media only screen and (max-width: 300px) {
+  .greyBackgroundDiv{
+    margin:0px;
+    padding:5px;
+    padding-top:20px;
+    padding-bottom:20px;
+  }
+}
 </style>

@@ -138,4 +138,15 @@ p{
 .secondDatePickerDiv{
   margin-left:20px;
 }
+@media only screen and (max-width: 550px) {
+  .firstDatePickerDiv, .secondDatePickerDiv{
+    display:block;
+    margin:0px;
+  }
+}
+@media only screen and (max-width: 300px) {
+  .firstDatePickerDiv, .secondDatePickerDiv{
+    margin:0px;
+  }
+}
 </style>
