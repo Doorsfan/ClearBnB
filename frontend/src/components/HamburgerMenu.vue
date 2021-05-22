@@ -1,52 +1,74 @@
 <template>
   <div class="hamburger">
-    <!--Get icon-->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
-    <em @click="operateHamburger" class="fa fa-bars"></em>
-    <div id="router-links">
-      <p><router-link to="/">Home</router-link></p>
-      <p><router-link to="/userPage">User Page</router-link></p>
-      <p><router-link to="/login">Log in</router-link></p>
-      <p><router-link to="/signUp">Sign up</router-link></p>
-    </div>
+    <i @click="openMenu" class="fa fa-bars"></i>
+  </div>
+  <div v-bind:class="[open ? 'active' : null, 'router-links']">
+    <i @click="openMenu" class="fas fa-times"></i>
+    <p><router-link to="/">Home</router-link></p>
+    <p><router-link to="/userPage">User Page</router-link></p>
+    <p><router-link to="/login">Log in</router-link></p>
+    <p><router-link to="/signUp">Sign up</router-link></p>
   </div>
 </template>
 
 <script>
 export default {
+  data() {
+    return {
+      open: false,
+    };
+  },
   methods: {
-    operateHamburger() {
-      var x = document.getElementById("router-links");
-      if (x.style.display === "block") {
-        x.style.display = "none";
-      } else {
-        x.style.display = "block";
-      }
+    openMenu() {
+      this.open = !this.open;
     },
   },
 };
 </script>
 
 <style scoped>
-a, a:visited{
-  color:black;
+.router-links {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  background-color: white;
+  min-height: 100vh;
+  transform: translateX(-100%);
+  transition: all 0.3s;
+  display: flex;
+  flex-direction: column;
+  border-right: 2px solid #00200c;
 }
-#router-links {
-  display: none;
+.router-links p {
+  width: 180px;
 }
-.hamburger {
-  overflow: hidden;
-  position: relative;
+.router-links p a {
+  display: inline-block;
+  text-decoration: none;
+  color: rgb(63, 63, 63);
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: bold;
+  width: 100%;
+  padding: 20px 0 20px 20px;
 }
 .fa {
+  font-size: 40px;
+  cursor: pointer;
+}
+.active {
+  transform: translateX(0);
+}
+.fas {
+  align-self: flex-end;
+  padding: 10px 10px 0 0;
   display: inline-block;
-  left: 0;
-  top: 0;
-  height: max-content;
-  width: max-content;
-  font-size:60px;
+  color: rgb(63, 63, 63);
+  font-size: 20px;
+  cursor: pointer;
+}
+.router-links p .router-link-active {
+  color: blueviolet;
 }
 </style>
