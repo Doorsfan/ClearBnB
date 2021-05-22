@@ -1,8 +1,9 @@
 <template>
 <div class="mainDiv">
     <form class="SignUpForm">
+      <div class="UserInputFirstAndLastName">
     <div class="titleDiv">
-      <h1 class="registerTitle">Register New User</h1>
+      <h1 class="registerTitle">Create new account</h1>
     </div>
     <div class="firstNameDiv">
       <p class="nameP">First name: </p><input v-model="firstName" placeholder="First Name" class="firstNameInput">
@@ -10,16 +11,19 @@
     <div class="lastNameDiv">
       <p class="lastNameP">Last name: </p><input v-model="lastName" placeholder="Last Name" class="lastNameInput">
     </div>
+    </div>
     <div class="emailDiv">
       <p class="emailP">Email: </p><input v-model="email" type="email" placeholder="Email" class="emailInput">
     </div>
+    <div class="userInputPassword">
     <div class="passwordDiv">
       <p class="passwordP">Password: </p><input v-model="password" type="password" placeholder="Password" class="passwordInput">
     </div>
     <div class="repeatPasswordDiv">
       <p class="repeatPasswordP">Repeat Password: </p><input v-model="repeatPassword" type="password" placeholder="Repeat Password" class="repeatPasswordInput">
     </div>
-    
+    </div>
+    <div class="userInputAdressInfo">
     <div class="countryDiv">
       <p class="countryP">Country: </p><input v-model="country" placeholder="Country" class="countryInput">
     </div>
@@ -32,15 +36,17 @@
     <div class="zipDiv">
       <p class="zipP">Zip Code: </p><input v-model="zipCode" placeholder="Zip Code" class="zipInput">
     </div>
+    </div>
     <div class="phoneNumber">
       <p class="phoneNumberP">Phone Number: </p><input v-model="phoneNumber" placeholder="Phone Number" class="phoneNumberInput">
     </div>
+    <div class="newsletterAndRegister">
     <div class="newsLetterDiv">
       <p class="newsLetterP">Newsletter: </p><input v-model="newsLetter" type="checkbox" class="newsLetterBox">
     </div>
-    <div class="buttonsDiv">
+    
      <button class="registerButton" @click="registerUser" value="Register">Register</button>
-    </div>
+     </div>
     <div class="takenUserBox">
       <p class="errorBox">A user with that Email already exists.</p>
     </div>
@@ -117,8 +123,9 @@ export default {
       document.getElementsByClassName('cancelButton')[0].click();
     }
   }
-}
+};
 </script>
+
 <style scoped>
 
 .mainDiv{
@@ -135,7 +142,7 @@ export default {
 .SignUpForm{
   text-align: center;
   height: 750px;
-  width: 500px;
+  width: 1200px;
   margin: 180px auto;
   border-radius: 2px ;
   border: 2px solid grey;
@@ -145,7 +152,7 @@ form input{
   padding: 2px 15px;
   font-size: 18px;
   border-radius: 5px;
-  border:1px solid black ;
+  border:1px solid grey ;
   text-align:initial;
   margin-bottom: 15px;
   color: black;
@@ -167,8 +174,8 @@ button{
 }
 h1 {
   color: black;
-  margin-bottom: 40px;
-  margin-top: 50px;
+  margin-bottom: 50px;
+  margin-top: 35px;
   font-size: 45px;
   font-weight: bold;
 }
@@ -198,50 +205,9 @@ p{
   padding:3px;
   outline: 1px solid black;
 }
- *{
-    text-align:center;
-  }
-@media only screen and (max-width: 650px) {
-  .greyBoxDiv{
-    padding:20px;
-  }
-  h1{
-    margin:0px;
-  }
-}
-@media only screen and (max-width: 500px) {
-  .registerTitle{
-    width:250px;
-    margin:0px;
-    text-align:center;
-    font-size: 20px;
-  }
-  h1{
-    padding:0px;
-    margin:0px;
-    margin-left:auto;
-    margin-right:auto;
-    width:max-content;
-  }
-  p{
-    margin:0px;
-    padding:0px;
-    width:max-content;
-    margin-bottom:3px;
-  }
-  div{
-    width:250px;
-    margin:0px;
-    padding:0px;
-    text-align:center;
-    margin-top:5px;
-    margin-bottom:5px;
-  }
-  .greyBoxDiv{
-    width:250px;
-    padding:0px;
-    padding-top: 10px;
-    padding-bottom:10px;
-  }
+.newsletterAndRegister{
+  display:flex;
+  justify-content: center;
+  align-content: space-between;
 }
 </style>
