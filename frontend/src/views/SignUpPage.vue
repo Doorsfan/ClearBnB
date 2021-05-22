@@ -1,6 +1,6 @@
 <template>
-  <div class="mainDiv">
-    <div class="greyBoxDiv">
+<div class="mainDiv">
+    <form class="SignUpForm">
     <div class="titleDiv">
       <h1 class="registerTitle">Register New User</h1>
     </div>
@@ -10,18 +10,16 @@
     <div class="lastNameDiv">
       <p class="lastNameP">Last name: </p><input v-model="lastName" placeholder="Last Name" class="lastNameInput">
     </div>
+    <div class="emailDiv">
+      <p class="emailP">Email: </p><input v-model="email" type="email" placeholder="Email" class="emailInput">
+    </div>
     <div class="passwordDiv">
       <p class="passwordP">Password: </p><input v-model="password" type="password" placeholder="Password" class="passwordInput">
     </div>
     <div class="repeatPasswordDiv">
       <p class="repeatPasswordP">Repeat Password: </p><input v-model="repeatPassword" type="password" placeholder="Repeat Password" class="repeatPasswordInput">
     </div>
-    <div class="emailDiv">
-      <p class="emailP">Email: </p><input v-model="email" type="email" placeholder="Email" class="emailInput">
-    </div>
-    <div class="repeatEmailDiv">
-      <p class="repeatEmailP">Repeat Email: </p><input v-model="repeatEmail" type="email" placeholder="Repeat Email" class="repeatEmailInput">
-    </div>
+    
     <div class="countryDiv">
       <p class="countryP">Country: </p><input v-model="country" placeholder="Country" class="countryInput">
     </div>
@@ -41,14 +39,13 @@
       <p class="newsLetterP">Newsletter: </p><input v-model="newsLetter" type="checkbox" class="newsLetterBox">
     </div>
     <div class="buttonsDiv">
-      <router-link to="/" class="cancelButton" value="Cancel">Cancel</router-link><button class="registerButton" @click="registerUser" value="Register">Register</button>
+     <button class="registerButton" @click="registerUser" value="Register">Register</button>
     </div>
     <div class="takenUserBox">
       <p class="errorBox">A user with that Email already exists.</p>
     </div>
-    </div>
+    </form>
   </div>
-  
 </template>
 <script>
 import User from '../components/User.js'
@@ -123,64 +120,68 @@ export default {
 }
 </script>
 <style scoped>
-.cancelButton{
-  margin-right:5px;
-  margin-left:50px;
-  background-color: #029ebb;
-  font-size: 12px;
-  font:arial;
-  text-decoration: none;
-  border: solid 1px black;
-  color:black;
-  padding:3px;
-  padding-right:5px;
-  padding-left:5px;
-  padding-top:4.5px;
-  padding-bottom:4.5px;
-  border-radius:2px;
-}
-.registerButton{
-  margin-left:5px;
-  padding:3px;
-  width:60px;
-  height:25px;
-}
-p{
-  font-weight:bolder;
-  display:inline-block;
-  width:140px;
-  text-align:right;
-  margin-right:5px;
-}
-.greyBoxDiv{
-  margin-top:20vh;
-  background-color: rgba(218, 224, 224, 0.8);
-  padding:30px;
-  width:max-content;
-  margin-left:auto;
-  margin-right:auto;
-  text-align:center;
-}
+
 .mainDiv{
-  margin:0px;
-  text-align:center;
-  padding-left:5vw;
-  padding-right:5vw;
-  padding-bottom:10vh;
-  padding-top:2.5vh;
   background-image: url("../../public/nice.jpg");
   background-position:center;
   background-size:cover;
   background-repeat:no-repeat;
-  opacity: 0.8;
   height:max-content;
   width:100vw;
   background-attachment: fixed;
   overflow-x:hidden;
 }
-div{
-  margin:8px;
+
+.SignUpForm{
+  text-align: center;
+  height: 750px;
+  width: 500px;
+  margin: 180px auto;
+  border-radius: 2px ;
+  border: 2px solid grey;
+  background-color: rgb(255, 255, 255, 0.8);
 }
+form input{
+  padding: 2px 15px;
+  font-size: 18px;
+  border-radius: 5px;
+  border:1px solid black ;
+  text-align:initial;
+  margin-bottom: 15px;
+  color: black;
+}
+button{
+  width: 120px;
+  height: 50px;
+  padding: 10px 20px;
+  background-color: #029ebb;
+  color: white;
+  border: 0;
+  border-radius: 2px ;
+  cursor: pointer;
+  margin-top: 10px;
+  font-size: 18px;
+  margin-right: 10px;
+  margin-left: 10px;
+  
+}
+h1 {
+  color: black;
+  margin-bottom: 40px;
+  margin-top: 50px;
+  font-size: 45px;
+  font-weight: bold;
+}
+p{
+  display:inline-block;
+  width:140px;
+  text-align:right;
+  margin-right:5px;
+  font-size: 16;
+  font-weight: bold;
+
+}
+
 .takenUserBox{
   margin:0px;
   margin-top:10px;

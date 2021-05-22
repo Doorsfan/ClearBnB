@@ -28,15 +28,10 @@ export default {
 </script>
 <style scoped>
 .mainDiv{
-  padding-left:5vw;
-  padding-right:5vw;
-  padding-bottom:2.5vh;
-  padding-top:2.5vh;
   background-image: url("../../public/nice.jpg");
   background-position:center;
   background-size:cover;
   background-repeat:no-repeat;
-  opacity: 0.8;
   height:max-content;
   width:100vw;
   background-attachment: fixed;

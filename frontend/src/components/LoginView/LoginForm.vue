@@ -94,10 +94,11 @@ export default {
   display: none;
 }
 h1 {
-  color: rgb(14, 12, 12);
+  color: black;
   margin-bottom: 40px;
   margin-top: 50px;
-  font-size: 35px;
+  font-size: 45px;
+  font-weight: bold;
 }
 .LogInPage{
   text-align: center;
@@ -106,7 +107,7 @@ h1 {
   margin: 180px auto;
   border-radius: 2px ;
   border: 2px solid grey;
-  background-color: rgb(255, 255, 255, 0.6);
+  background-color: rgb(255, 255, 255, 0.8);
 
 
 }
@@ -114,7 +115,7 @@ form{
   padding-top: 50px;
 }
 form input{
-  padding: 0.7rem 1.4rem;
+  padding: 11.2px 22.4px;
   font-size: 18px;
   border-radius: 5px;
   border:1px solid black ;
@@ -144,7 +145,7 @@ button{
   
 }
 .SignUpFromLogIn{
-  margin-top:120px;
+  margin-top:170px;
   display:flex;
   flex-direction: row;
   justify-content: center;
