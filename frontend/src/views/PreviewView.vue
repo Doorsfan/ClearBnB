@@ -48,7 +48,7 @@
             <p class="exampleSize">Whole/Part of Residence goes here</p>
           </div>
           <div class="myDatePickerDiv">
-            <PreviewDatePicker :leaseStartDate="new Date()" :leaseEndDate="new Date()" />
+            <PreviewDatePicker :leaseStartDate="myLease.startDate" :leaseEndDate="myLease.endDate" />
           </div>
           <div class="buttonsDiv">
             <div class="cancelButtonDiv">
@@ -150,8 +150,11 @@ export default {
   name: 'Login',
   components: ['PreviewCarousel', 'DatepickerForAvailableDates'],
   methods: {
+    
     async PublishLease(){
       let leaseToPublish = this.$store.getters.getLeaseToBuild;
+      console.log("leaseToPublish was: ", leaseToPublish);
+      console.log(this.myLease);
       let myURLs = [];
       for(let image of leaseToPublish.imageURLs[0]){
         myURLs.push(image)
@@ -185,7 +188,11 @@ export default {
       document.getElementsByClassName("homeText")[0].style.display = 'block';
       document.getElementsByClassName("center")[0].style.height = '70px';
     }
+    
     this.myLease = this.$store.getters.getLeaseToBuild
+    this.previewStartDate = this.myLease.startDate;
+    this.previewEndDate = this.myLease.endDate;
+    console.log("myLease was: ", this.myLease);
     if(this.myLease != null){
       if(this.myLease.entireResidence == true){
         $('.EntireOrPart').text("Entire Residence")
@@ -227,11 +234,10 @@ export default {
   },
   data(){
     return {
-      myStartDate: new Date(),
-      myEndDate: new Date(),
-      thisDay: new Date(),
       myLease: this.$store.getters.getLeaseToBuild,
-      selectedNumberOfGuests: ''
+      selectedNumberOfGuests: '',
+      previewStartDate: '',
+      previewEndDate: ''
     } 
   }
 }

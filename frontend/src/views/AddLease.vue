@@ -66,10 +66,7 @@ export default {
       this.amenities = latestLease.amenities
       this.imageURLs = latestLease.imageURLs
 
-      this.startDate = latestLease.startDate
-      if(this.startDate.length == 0){
-        this.startDate = new Date();
-      }
+      console.log("The latest startDate was: ", latestLease.startDate);
       this.endDate = latestLease.endDate
       store.commit('setLeaseToBuild', this.lease)
     }
@@ -83,8 +80,8 @@ export default {
       description: this.$store.getters.getLeaseToBuild == null ? '' : this.$store.getters.getLeaseToBuild.description,
       typeOfHousing: this.$store.getters.getLeaseToBuild == null ? '' : this.$store.getters.getLeaseToBuild.typeOfHousing,
       size: this.$store.getters.getLeaseToBuild == null ? '' : this.$store.getters.getLeaseToBuild.entireResidence,
-      startDate: this.$store.getters.getLeaseToBuild == null ? '' : this.$store.getters.getLeaseToBuild.startDate,
-      endDate: this.$store.getters.getLeaseToBuild == null ? '' : this.$store.getters.getLeaseToBuild.endDate,
+      startDate: this.$store.getters.getLeaseToBuild == null ? 1 : 4,
+      endDate: this.$store.getters.getLeaseToBuild == null ? 2 : 5,
       price: this.$store.getters.getLeaseToBuild == null ? '' : this.$store.getters.getLeaseToBuild.price,
       maxGuests: this.$store.getters.getLeaseToBuild == null ? '' : this.$store.getters.getLeaseToBuild.maxGuests,
       beds: this.$store.getters.getLeaseToBuild == null ? '' : this.$store.getters.getLeaseToBuild.beds,
@@ -106,11 +103,17 @@ export default {
         document.getElementsByClassName("homeText")[0].style.display = 'block';
         document.getElementsByClassName("center")[0].style.height = '70px';
       }
+      console.log("This startDate was: ", this.startDate);
+      store.commit('setLeaseToBuild', this.lease)
+      console.log("The lease after saving it was: ");
+      console.log(this.$store.getters.getLeaseToBuild);
     },
     removeFirstIMGinURLs(){
+      console.log("MY LEASE WAS: ", this.lease);
       this.imageURLs = this.imageURLs.filter(function(value, index, arr){ return index != 0 });
       this.lease.imageURLs = this.imageURLs
       store.commit('setLeaseToBuild', this.lease)
+      console.log("AFTER COMMITTING TO THE STORE, IT WAS: ", this.$store.getters.getLeaseToBuild);
       document.getElementsByClassName("mainDiv")[0].style.backgroundImage = 'url(' + '/public/house.jpg' + ')';
     },
     removeSecondIMGinURLs(){
@@ -171,13 +174,16 @@ export default {
       store.commit('setLeaseToBuild', this.lease)
     },
     updateStartDate(newStartDate){
+      console.log("The new startDate was: ", newStartDate);
+      
       this.startDate = newStartDate
-      this.lease.setStartDate(this.startDate);
+      this.lease.startDate = this.startDate;
       store.commit('setLeaseToBuild', this.lease)
+      console.log(this.lease);
     },
     updateEndDate(newEndDate){
       this.endDate = newEndDate
-      this.lease.setEndDate(this.endDate);
+      this.lease.endDate = this.endDate;
       store.commit('setLeaseToBuild', this.lease)
     },
     updatePrice(updatedPrice){
@@ -198,27 +204,22 @@ export default {
     updateWifi(hasWifi){
       this.hasWifi = hasWifi
       this.updateAmenities()
-      
     },
     updateKitchen(hasKitchen){
       this.hasKitchen = hasKitchen;
       this.updateAmenities()
-      
     },
     updateWasher(hasWasher){
       this.hasWasher = hasWasher;
       this.updateAmenities()
-      
     },
     updateHeating(hasHeating){
       this.hasHeating = hasHeating;
       this.updateAmenities()
-      
     },
     updateAC(hasAirConditioner){
       this.hasAirConditioner = hasAirConditioner;
       this.updateAmenities()
-      
     },
     updateDisabledDays(newDisabledDays){
       this.disabledDays = newDisabledDays

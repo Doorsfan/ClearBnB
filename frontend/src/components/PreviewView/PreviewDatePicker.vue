@@ -2,20 +2,20 @@
   <div class="firstDatePickerDiv">
     <p class="AvailableFromP">Available from:</p>
     <datepicker
-      v-model="startDate"
+      v-model="leaseStartDate"
       placeholder="Lease starts at"    
-      :lowerLimit="originalStartDate"
-      :upper-limit="originalEndDate"
+      :lowerLimit="leaseStartDate"
+      :upper-limit="leaseEndDate"
       :disabledDates="disabledDays"
     />
   </div>
   <div class="secondDatePickerDiv">
     <p class="AvailableToP">Available To:</p>
     <datepicker
-      v-model="endDate"
+      v-model="leaseEndDate"
       placeholder="Lease ends at"
-      :lower-limit="originalStartDate"
-      :upper-limit="originalEndDate"
+      :lower-limit="leaseStartDate"
+      :upper-limit="leaseEndDate"
     />
   </div>
 </template>
@@ -31,44 +31,17 @@ let startDate = ref(new Date())
 let endDate = ref(new Date())
 export default {
   props: ['leaseStartDate', 'leaseEndDate'],
-  emits: ['updatedLeaseEndDate', 'updatedLeaseStartDate', 'updatedDisabledDays'],
   mounted(){
-    this.startDate = ref(new Date(this.leaseStartDate))
-    this.endDate = ref(new Date(this.leaseEndDate))
-    this.originalStartDate = new Date(this.leaseStartDate);
-    this.originalEndDate = new Date(this.leaseEndDate);
-    if(this.$store.getters.getLeaseToBuild != null){
-      this.startDate = this.$store.getters.getLeaseToBuild.startDate
-      if(this.startDate == ''){
-        this.startDate = new Date();
-      }
-      this.endDate = this.$store.getters.getLeaseToBuild.endDate
-      if(this.endDate == ''){
-        this.endDate = new Date();
-      }
-    }
+    
   },
   data() {
     return {
       thisDay: thisDay,
-      startDate: startDate,
-      endDate: endDate,
-      originalStartDate: new Date(),
-      originalEndDate: new Date(),
+      startDate: this.startDate,
+      endDate: this.endDate,
       disabledDays: { //Can integrate so that there are disabled days, just leaving this open as a possibility
         dates: []
       }
-    }
-  },
-  watch: {
-    endDate(){
-      this.$emit("updatedLeaseEndDate", this.endDate);
-    },
-    startDate(){
-      this.$emit("updatedLeaseStartDate", this.startDate)
-    },
-    disabledDays(){
-      this.$emit("updatedDisabledDays", this.disabledDays);
     }
   },
   methods: {
