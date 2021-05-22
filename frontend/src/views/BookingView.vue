@@ -63,20 +63,24 @@
           <p v-if="lease.entireResidence" class="wholeResidenceText">The Whole Residence</p><p v-if="!lease.entireResidence" class="partResidenceText">A Part of The Residence</p>
         </div>
         <div class="myDatePickerDiv">
-          <DatepickerForBookingView @updatedChosenStartDate="newStartDate" @updatedChosenEndDate="newEndDate" v-if="lease" :myLease="lease"/>
+          <DatepickerForBookingView @updatedBookingHelper="checkNewHelper" @updatedChosenStartDate="newStartDate" @updatedChosenEndDate="newEndDate" v-if="lease" :myLease="lease"/>
         </div>
       </div>
       <div class="PriceToPayInTotal">
-        <p v-if="selectedNumberOfGuests > 0">Total Price to pay for {{ amountOfDays }} days for {{ selectedNumberOfGuests }} person: {{ Math.round(1.15 * (price * selectedNumberOfGuests * amountOfDays)) }} Euros</p>
+        <p v-if="selectedNumberOfGuests > 0">Total Price to pay for {{ amountOfDays }} days for {{ selectedNumberOfGuests }} {{ selectedNumberOfGuests > 1 ? "people" : "person"}}: {{ Math.round(1.15 * (price * selectedNumberOfGuests * amountOfDays)) }} Euros</p>
         <p v-if="selectedNumberOfGuests == 0">Please select amount of Guests attending to see the total price.</p>
       </div>
       <div class="BookingButtonDiv">
-        <button @click="book" v-if="selectedNumberOfGuests > 0 && user != null && (!(chosenStartDate.length == 0) && !(chosenEndDate.length == 0))" class="bookingButton" type="button" value="Book">Book Now!</button>
-        <div class="SpecialErrorBox" v-if="(chosenStartDate.length == 0 || chosenEndDate.length == 0 || selectedNumberOfGuests == 0) && user != null">Before you can book, you must</div>
+        <button @click="book" v-if="!invalidStartDate && !invalidEndDate && selectedNumberOfGuests > 0" class="bookingButton" type="button" value="Book">Book Now!</button>
+        <div class="SpecialErrorBox" v-if="(chosenStartDate.length == 0 || chosenEndDate.length == 0 || selectedNumberOfGuests == 0) && user != null">Before you can book, you must address:</div>
         <div class="errorBox" v-if="(chosenStartDate.length == 0 || chosenStartDate.length == 0) && user != null" value="Choose a From Date and a To Date First!">Choose a From Date and a To Date</div>
         <div v-if="selectedNumberOfGuests == 0 && user != null && amountOfDays > 0" class="errorBox" value="Choose Amount of Guests first!">Choose amount of Guests</div>
         <div v-if="amountOfDays < 0" class="errorBox" Value="Cannot choose a negative amount of days!">You cannot choose a negative amount of days.</div>
-        <button @click="goToLogin" v-if="user == null && amountOfDays > 0" class="bookingButton" type="button" value="You have to log in to Book!">Log in to Book!</button>
+        <div class="errorBox" v-if="invalidStartDate && invalidEndDate">
+          You cannot book across already occupied bookings!
+        </div>
+        <button @click="goToLogin" v-else-if="amountOfDays > 0 && selectedNumberOfGuests > 0 && user == null" class="bookingButton" type="button" value="You have to log in to Book!">Log in to Book!</button>
+        
       </div>
     </div>
   </div>
@@ -95,6 +99,8 @@ import AdminBooking from '../components/AdminBooking'
 import Lease from '../components/Lease.vue'
 import PPPN from '../components/PPPN.js'
 import Profit from '../components/Profit.js'
+import BookingHelper from '../components/BookingHelper.js'
+import store from '../components/../store.js';
 export default {
   mounted(){
     if(document.getElementsByClassName("sunIconInHeader").length > 0){
@@ -122,6 +128,8 @@ export default {
       if(this.amountOfDays == 0){
         this.amountOfDays = 1;
       }
+      let splitFormattedStartDate = formattedStartDate.split('-');
+      let splitFormattedEndDate = formattedEndDate.split('-');
     },
     chosenEndDate(){
       let formattedStartDate = this.priceHelper.getCorrectDateFormat(this.chosenStartDate);
@@ -131,6 +139,7 @@ export default {
       if(this.amountOfDays == 0){
         this.amountOfDays = 1;
       }
+      
     },
     lease(){
       this.title = this.lease.title
@@ -161,10 +170,31 @@ data()  {
     startDateInBasicFormat: '',
     endDateInBasicFormat: '',
     user: this.$store.getters.getCurrentUser,
-    priceHelper: new PPPN()
+    priceHelper: new PPPN(),
+    allTakenDates: '',
+    invalidStartDate: false,
+    invalidEndDate: false
   }
 },
 methods: {
+  checkNewHelper(newHelper){
+    this.allTakenDates = newHelper.takenBookings;
+    this.invalidStartDate = false;
+    this.invalidEndDate = false;
+    for(let takenDates of newHelper.takenBookings){
+      if(this.chosenStartDate <= takenDates){
+        this.invalidStartDate = true;
+      }
+      if(this.chosenEndDate >= takenDates){
+        this.invalidEndDate = true;
+      }
+      if(this.invalidStartDate && this.invalidEndDate){
+        return;
+      }
+    }
+    this.invalidStartDate = false;
+    this.invalidEndDate = false;
+  },
   goToLogin(){
     document.getElementsByClassName("hiddenLink")[0].click();
   },
@@ -174,6 +204,21 @@ methods: {
     if(this.startDateInBasicFormat == this.endDateInBasicFormat){
       this.amountOfDays = 1;
     }
+    this.invalidStartDate = false;
+    this.invalidEndDate = false;
+    for(let takenDates of this.allTakenDates){
+      if(this.chosenStartDate < takenDates){
+        this.invalidStartDate = true;
+      }
+      if(this.chosenEndDate > takenDates){
+        this.invalidEndDate = true;
+      }
+      if(this.invalidStartDate && this.invalidEndDate){
+        return;
+      }
+    }
+    this.invalidStartDate = false;
+    this.invalidEndDate = false;
   },
   newEndDate(myNewEndDate){
     this.chosenEndDate = myNewEndDate;
@@ -181,6 +226,21 @@ methods: {
     if(this.startDateInBasicFormat == this.endDateInBasicFormat){
       this.amountOfDays = 1;
     }
+    this.invalidStartDate = false;
+    this.invalidEndDate = false;
+    for(let takenDates of this.allTakenDates){
+      if(this.chosenStartDate < takenDates){
+        this.invalidStartDate = true;
+      }
+      if(this.chosenEndDate > takenDates){
+        this.invalidEndDate = true;
+      }
+      if(this.invalidStartDate && this.invalidEndDate){
+        return;
+      }
+    }
+    this.invalidStartDate = false;
+    this.invalidEndDate = false;
   },
   async book(){
     //Mt6ZUN7dYDQ1a2zuwbTYx the id of the place to book
@@ -225,6 +285,8 @@ methods: {
     let res = await fetch('/rest/leases/' + this.$route.query.id)
     let responseInJson = await res.json();
     this.lease = responseInJson
+    let myHelper = new BookingHelper();
+    store.commit('setBookingHelper', myHelper);
   }
 },
 async created() {
