@@ -3,9 +3,9 @@ import { createStore } from 'vuex'
 export default createStore({
   state: {
     currentUser: null,
-    latestLease: null
+    latestLease: null,
+    bookingHelper: null
   },
-
   // this.$store.commit('mutationName')
   mutations: {
     setRoute(state, newRoute) {
@@ -16,6 +16,9 @@ export default createStore({
     },
     setUser(state, user) {
       state.currentUser = user
+    },
+    setBookingHelper(state, bookingHelper) {
+      state.bookingHelper = bookingHelper
     }
   },
   getters: {
@@ -27,6 +30,9 @@ export default createStore({
     },
     getCurrentUser: state => {
       return state.currentUser
+    },
+    getBookingHelper: state => {
+      return state.bookingHelper
     }
   },
   actions: {
@@ -38,6 +44,9 @@ export default createStore({
     },
     async login(store, loggedInUser) {
       store.commit('setUser', loggedInUser)
+    },
+    async saveBookingHelper(store, bookingHelper) {
+      store.commit('setBookingHelper', bookingHelper);
     }
   }
 })

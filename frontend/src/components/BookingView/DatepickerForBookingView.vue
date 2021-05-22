@@ -24,13 +24,15 @@ import Datepicker from 'vue3-datepicker'
 <script>
 import { ref } from 'vue'
 import { add } from 'date-fns'
+import BookingHelper from '../../components/BookingHelper.js'
+import store from '../../store.js'
 //NOTE: Datepickers are Readonly in properties, meaning you cannot directly attach CSS to them outside of built in
 // API - which only affects the input field in terms of selection of Date
 
 const disabledDate = ref(add(new Date(), { days: 5 }))
 export default {
   props: ['myLease'],
-  emits: ['updatedChosenStartDate','updatedChosenEndDate', 'updatedDisabledDays'],
+  emits: ['updatedChosenStartDate','updatedChosenEndDate', 'updatedDisabledDays', 'updatedBookingHelper'],
   async mounted(){
     let splitMyStartDate = this.myLease.startDate.split('-');
     let myStartYear = splitMyStartDate[0];
@@ -87,6 +89,10 @@ export default {
         }
       }
     }
+    let emptyBookingHelper = new BookingHelper();
+    emptyBookingHelper.setTakenBookings(this.disabledDays.dates);
+    store.commit('setBookingHelper', emptyBookingHelper);
+    this.newBookingHelper = emptyBookingHelper;
   },
   data() {
     return {
@@ -97,10 +103,14 @@ export default {
       disabledDate: new Date(),
       disabledDays: { //Can integrate so that there are disabled days, just leaving this open as a possibility
         dates: []
-      }
+      },
+      newBookingHelper: ''
     }
   },
   watch: {
+    newBookingHelper(){
+      this.$emit("updatedBookingHelper", this.newBookingHelper);
+    },
     endDate(){
       this.$emit("updatedChosenEndDate", this.endDate);
     },
