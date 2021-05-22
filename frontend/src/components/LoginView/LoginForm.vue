@@ -1,31 +1,29 @@
 <template>
-  <div class="mainLoginDiv">
-    <div class="innerDiv">
-      <div class="greyColorBox">
-        <h1 class="UserLoginTitle">Sign In</h1>
-        <form class="LoginForm" @submit.prevent="login">
-          <div class="emailDiv">
-            <input class="emailInput" v-model="username" type="email" placeholder="E-mail" required />
-          </div>
-          <div class="passwordDiv">
-            <input
-              class="passwordInput"
-              v-model="password"
-              type="password"
-              placeholder="Password"
-              required
-            />
-          </div>
-          <div class="failedLoginDiv">
-            <p class="errorText">Error - Bad credentials</p>
-          </div>
-        </form>
-        <div class="ButtonsDiv">
-          <router-link class="CancelButton" to="/">Cancel</router-link>
-          <button @click.prevent="login" class="LoginButton">Login</button>
-        </div>
-        <a href="api/register">New here?</a>
+  <div class="LogInPage">
+    <h1>Log in</h1>
+    <form class="LoginForm" @submit.prevent="login">
+      <div class="emailDiv">
+        <input v-model="username" type="email" placeholder="E-mail" required />
       </div>
+      <div class="passwordDiv">
+        <input
+          v-model="password"
+          type="password"
+          placeholder="Password"
+          required
+        />
+      </div>
+      <div class="failedLoginDiv">
+        <p class="errorText">Error - Bad credentials</p>
+      </div>
+    </form>
+    <div class="ButtonsDiv">
+      <button><router-link class="CancelButton" to="/">Cancel</router-link></button>
+      <button @click.prevent="login" class="LoginButton">Login</button>
+    </div>
+    <div class="SignUpFromLogIn">
+    <p>New to ClearBnB?</p>
+    <router-link to="signUp" class="signUpLink">Sign up</router-link>
     </div>
   </div>
 </template>
@@ -78,69 +76,94 @@ export default {
 </script>
 
 <style scoped>
-.ButtonsDiv{
-  margin-top:5px;
-  margin-bottom:5px;
-}
-.CancelButton{
-  background-color: #029ebb;
-  font-size: 12px;
-  font:arial;
-  text-decoration: none;
-  border: solid 1px black;
-  color:black;
-  padding:3px;
-  padding-right:5px;
-  padding-left:5px;
-  padding-top:4.5px;
-  padding-bottom:4.5px;
-}
-.UserLoginTitle{
-  margin-bottom:10px;
-}
+
 .errorText{
-  background-color:red;
-  padding:2px;
-  margin:5px;
-  color:white;
-  outline:solid 1px black;
-  display:none;
+  margin: 0px;
+  padding: 0px;
 }
-.emailInput, .passwordInput, .errorText{
-  opacity:1;
-  margin:5px;
+.failedLoginDiv{
+  margin: 0px;
+  margin-left: 12px;
+  background-color: red;
+  color: white;
+  padding: 3px;
+  height: 16px;
+  width: 148px;
+  border: 1px solid darkred;
+  text-align: center;
+  display: none;
 }
-.CancelButton{
-  margin-right:10px;
+h1 {
+  color: rgb(14, 12, 12);
+  margin-bottom: 40px;
+  margin-top: 50px;
+  font-size: 35px;
 }
-.LoginButton{
-  margin-left:10px;
-  padding:3px;
-  width:50px;
-  height:25px;
+.LogInPage{
+  text-align: center;
+  height: 600px;
+  width: 500px;
+  margin: 180px auto;
+  border-radius: 2px ;
+  border: 2px solid grey
 }
-.greyColorBox{
-  background-color: rgba(218, 224, 224, 0.8);
-  padding-left:2.5vw;
-  padding-right:2.5vw;
-  padding-bottom:2vh;
-  padding-top:2vh;
+form{
+  padding-top: 50px;
 }
-.mainLoginDiv{
-  height:65vh;
-  width:max-content;
-  padding-left:3vw;
-  padding-right:3vw;
-  padding-top:2vh;
-  padding-bottom:2vh;
-  margin-left:auto;
-  margin-right:auto;
-  text-align:center;
+form input{
+  padding: 0.7rem 1.4rem;
+  font-size: 18px;
+  border-radius: 5px;
+  border:1px solid black ;
+  text-align:initial;
+  margin-bottom: 15px;
 }
-.innerDiv{
-  margin-top: 20vh;
+button{
+  width: 120px;
+  height: 50px;
+  padding: 10px 20px;
+  background-color: #029ebb;
+  color: white;
+  border: 0;
+  border-radius: 2px ;
+  cursor: pointer;
+  margin-top: 10px;
+  font-size: 18px;
+  margin-right: 10px;
+  margin-left: 10px;
+  
 }
-a:visited{
-  color:blue;
+.ButtonsDiv{
+  display:flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 10px;
+  
+}
+.SignUpFromLogIn{
+  margin-top:120px;
+  display:flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+a{
+  text-decoration: none;
+  color: white;
+}
+.signUpLink{
+  color:#029ebb;
+  margin-left: 5px;
+  text-decoration: underline;
+  font-size: 16px;
+  font-weight: bold;
+}
+p{
+  font-size: 16;
+  font-weight: bold;
+}
+
+button:hover {
+  transform: scale(1.1);
 }
 </style>
