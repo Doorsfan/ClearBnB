@@ -26,19 +26,6 @@ let thisDay = ref(new Date())
 let startDate = ref(new Date())
 let endDate = ref(new Date())
 export default {
-  emits: ['updatedLeaseEndDate', 'updatedLeaseStartDate', 'updatedDisabledDays'],
-  mounted(){
-    if(this.$store.getters.getLeaseToBuild != null){
-      this.startDate = this.$store.getters.getLeaseToBuild.startDate
-      if(this.startDate == ''){
-        this.startDate = new Date();
-      }
-      this.endDate = this.$store.getters.getLeaseToBuild.endDate
-      if(this.endDate == ''){
-        this.endDate = new Date();
-      }
-    }
-  },
   data() {
     return {
       thisDay: thisDay,
@@ -51,10 +38,16 @@ export default {
   },
   watch: {
     endDate(){
-      this.$emit("updatedLeaseEndDate", this.endDate);
+      let latestLease = this.$store.getters.getLeaseToBuild
+      latestLease.endDate = this.endDate;
+      this.$store.commit('setLeaseToBuild', latestLease)
+      console.log("IN THE STORE, FROM DATEPICKERFORAVAILABLE DATES; THE ENDDATE WAS NOW: ", this.$store.getters.getLeaseToBuild)
     },
     startDate(){
-      this.$emit("updatedLeaseStartDate", this.startDate)
+      let latestLease = this.$store.getters.getLeaseToBuild
+      latestLease.startDate = this.startDate;
+      this.$store.commit('setLeaseToBuild', latestLease)
+      console.log("IN THE STORE, FROM DATEPICKERFORAVAILABLE DATES; THE STARTDATE WAS NOW: ", this.$store.getters.getLeaseToBuild)
     },
     disabledDays(){
       this.$emit("updatedDisabledDays", this.disabledDays);

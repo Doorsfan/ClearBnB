@@ -120,7 +120,7 @@
             <p v-if="myLease.entireResidence" class="wholeResidenceText">The Whole Residence</p><p v-if="!myLease.entireResidence" class="partResidenceText">A Part of The Residence</p>
           </div>
           <div class="myDatePickerDiv">
-            <PreviewDatePicker :leaseStartDate="myLease.startDate" :leaseEndDate="myLease.endDate" />
+            <PreviewDatePicker :leaseStartDate="previewStartDate" :leaseEndDate="previewEndDate" />
           </div>
           <div class="buttonsDiv">
             <div class="cancelButtonDiv">
@@ -181,6 +181,9 @@ export default {
       let response = await res.json()
     }
   },
+  beforeMounted(){
+    console.log("IN PREVIEWVIEW, MYLEASE WAS: ", this.myLease);
+  },
   mounted() {
     if(document.getElementsByClassName("sunIconInHeader").length > 0){
       document.getElementsByClassName("sunIconInHeader")[0].src = '/public/home_icon.png'
@@ -192,7 +195,7 @@ export default {
     this.myLease = this.$store.getters.getLeaseToBuild
     this.previewStartDate = this.myLease.startDate;
     this.previewEndDate = this.myLease.endDate;
-    console.log("myLease was: ", this.myLease);
+    console.log("THIS.MYLEASE IN PREVIEW IN MOUNTING WAS: ", this.myLease);
     if(this.myLease != null){
       if(this.myLease.entireResidence == true){
         $('.EntireOrPart').text("Entire Residence")
@@ -200,36 +203,39 @@ export default {
       else{
         $('.EntireOrPart').text("Part")
       }
-      if(this.myLease.amenities[0].includes("true")){
-        $('.wifiText').text("Wifi: Yes")
+      if(this.myLease.amenities != ''){
+        if(this.myLease.amenities[0].includes("true")){
+          $('.wifiText').text("Wifi: Yes")
+        }
+        else{
+          $('.wifiText').text("Wifi: No")
+        }
+        if(this.myLease.amenities[1].includes("true")){
+          $('.kitchenText').text("Kitchen: Yes")
+        }
+        else{
+          $('.kitchenText').text("Kitchen: No")
+        }
+        if(this.myLease.amenities[2].includes("true")){
+          $('.washerText').text("Washer: Yes")
+        }
+        else{
+          $('.washerText').text("Washer: No")
+        }
+        if(this.myLease.amenities[3].includes("true")){
+          $('.heatingText').text("Heating: Yes")
+        }
+        else{
+          $('.heatingText').text("Heating: No")
+        }
+        if(this.myLease.amenities[4].includes("true")){
+          $('.AirConditionerText').text("Air Conditioning: Yes")
+        }
+        else{
+          $('.AirConditionerText').text("Air Conditioning: No")
+        }
       }
-      else{
-        $('.wifiText').text("Wifi: No")
-      }
-      if(this.myLease.amenities[1].includes("true")){
-        $('.kitchenText').text("Kitchen: Yes")
-      }
-      else{
-        $('.kitchenText').text("Kitchen: No")
-      }
-      if(this.myLease.amenities[2].includes("true")){
-        $('.washerText').text("Washer: Yes")
-      }
-      else{
-        $('.washerText').text("Washer: No")
-      }
-      if(this.myLease.amenities[3].includes("true")){
-        $('.heatingText').text("Heating: Yes")
-      }
-      else{
-        $('.heatingText').text("Heating: No")
-      }
-      if(this.myLease.amenities[4].includes("true")){
-        $('.AirConditionerText').text("Air Conditioning: Yes")
-      }
-      else{
-        $('.AirConditionerText').text("Air Conditioning: No")
-      }
+      
     } 
   },
   data(){
