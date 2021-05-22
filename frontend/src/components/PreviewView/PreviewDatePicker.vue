@@ -2,22 +2,23 @@
   <div v-if="relevantLease" class="firstDatePickerDiv">
     <p class="AvailableFromP">Available from:</p>
     <datepicker v-if="relevantLease"
-      v-model="leaseStartDate"
+      v-model="relevantLease.startDate"
       placeholder="Lease starts at"    
-      :lowerLimit="leaseStartDate"
-      :upper-limit="leaseEndDate"
+      :lowerLimit="$store.getters.getLeaseToBuild.startDate"
+      :upper-limit="$store.getters.getLeaseToBuild.endDate"
       :disabledDates="disabledDays"
+      :selected="$store.getters.getLeaseToBuild.startDate"
     />
   </div>
   <div v-if="relevantLease" class="secondDatePickerDiv">
     <p class="AvailableToP">Available To:</p>
     <datepicker v-if="relevantLease"
-      v-model="leaseEndDate"
+      v-model="relevantLease.endDate"
       placeholder="Lease ends at"
-      :lower-limit="leaseStartDate"
-      :upper-limit="leaseEndDate"
+      :lower-limit="$store.getters.getLeaseToBuild.startDate"
+      :upper-limit="$store.getters.getLeaseToBuild.endDate"
       :disabledDates="disabledDays"
-      :selected="leaseEndDate"
+      :selected="$store.getters.getLeaseToBuild.endDate"
     />
   </div>
 </template>
@@ -35,16 +36,12 @@ export default {
     this.endDate = this.relevantLease.endDate;
   },
   created(){
-    console.log("RELEVANTLEASSE WAS: ", this.relevantLease);
     if(this.relevantLease.startDate == ''){
       this.relevantLease.startDate = new Date();
     }
     if(this.relevantLease.endDate == ''){
       this.relevantLease.endDate = new Date();
     }
-  },
-  mounted(){
-    console.log("THE RELEVANT LEASE WHEN MOUNTED WAS: ", this.relevantLease);
   },
   data() {
     return {

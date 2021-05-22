@@ -133,7 +133,6 @@ export default {
       }
     },
     lease(){
-      console.log("Lease is now: ", this.lease);
       this.title = this.lease.title
       this.location = this.lease.location
       this.maxGuests = this.lease.maxGuests
@@ -177,7 +176,6 @@ methods: {
     }
   },
   newEndDate(myNewEndDate){
-    console.log("my new chosen endDate was: ", this.chosenEndDate)
     this.chosenEndDate = myNewEndDate;
     this.endDateInBasicFormat = this.priceHelper.getCorrectDateFormat(myNewEndDate)
     if(this.startDateInBasicFormat == this.endDateInBasicFormat){

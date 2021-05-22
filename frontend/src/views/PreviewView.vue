@@ -129,8 +129,9 @@
               </router-link>
             </div>
             <div class="publishButtonDiv">
-              <button @click="PublishLease" class="publishButton" type="button" value="Publish">Publish</button>
+              <button v-if="$store.getters.getLeaseToBuild.imageURLs.length > 0" @click="PublishLease" class="publishButton" type="button" value="Publish">Publish</button>
             </div>
+            <div v-if="$store.getters.getLeaseToBuild.imageURLs.length == 0" class="errorBox">Cannot Publish a Lease without a image URL added!</div>
         </div>
       </div>
     </div>
@@ -153,8 +154,6 @@ export default {
     
     async PublishLease(){
       let leaseToPublish = this.$store.getters.getLeaseToBuild;
-      console.log("leaseToPublish was: ", leaseToPublish);
-      console.log(this.myLease);
       let myURLs = [];
       for(let image of leaseToPublish.imageURLs[0]){
         myURLs.push(image)
@@ -165,7 +164,6 @@ export default {
         newURLs.push(newImage);
       }
       let myDateHelper = new PPPN();
-      console.log("the start date was: ", leaseToPublish.startDate);
       let correctStartDate = myDateHelper.getCorrectDateFormat(leaseToPublish.startDate);
       let correctEndDate = myDateHelper.getCorrectDateFormat(leaseToPublish.endDate);
       let myAmenities = [];
@@ -173,16 +171,12 @@ export default {
         myAmenities.push(amenity);
       }
       let completeLeash = new Lease(this.$store.getters.getCurrentUser.id, leaseToPublish.title, leaseToPublish.location, leaseToPublish.description, leaseToPublish.typeOfHousing, leaseToPublish.entireResidence, correctStartDate, correctEndDate, leaseToPublish.price, leaseToPublish.maxGuests, leaseToPublish.beds, myAmenities, newURLs)
-      console.log("The lease to publish was: ", completeLeash);
       let res = await fetch('/rest/leases', {
         method: 'POST',
         body: JSON.stringify(completeLeash)
       })
       let response = await res.json()
     }
-  },
-  beforeMounted(){
-    console.log("IN PREVIEWVIEW, MYLEASE WAS: ", this.myLease);
   },
   mounted() {
     if(document.getElementsByClassName("sunIconInHeader").length > 0){
@@ -195,7 +189,6 @@ export default {
     this.myLease = this.$store.getters.getLeaseToBuild
     this.previewStartDate = this.myLease.startDate;
     this.previewEndDate = this.myLease.endDate;
-    console.log("THIS.MYLEASE IN PREVIEW IN MOUNTING WAS: ", this.myLease);
     if(this.myLease != null){
       if(this.myLease.entireResidence == true){
         $('.EntireOrPart').text("Entire Residence")

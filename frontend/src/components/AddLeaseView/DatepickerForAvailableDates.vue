@@ -41,13 +41,11 @@ export default {
       let latestLease = this.$store.getters.getLeaseToBuild
       latestLease.endDate = this.endDate;
       this.$store.commit('setLeaseToBuild', latestLease)
-      console.log("IN THE STORE, FROM DATEPICKERFORAVAILABLE DATES; THE ENDDATE WAS NOW: ", this.$store.getters.getLeaseToBuild)
     },
     startDate(){
       let latestLease = this.$store.getters.getLeaseToBuild
       latestLease.startDate = this.startDate;
       this.$store.commit('setLeaseToBuild', latestLease)
-      console.log("IN THE STORE, FROM DATEPICKERFORAVAILABLE DATES; THE STARTDATE WAS NOW: ", this.$store.getters.getLeaseToBuild)
     },
     disabledDays(){
       this.$emit("updatedDisabledDays", this.disabledDays);

@@ -13,7 +13,6 @@ export default class PPPN {
     return date;
   }
   getCorrectDateFormat(wantedDate) {
-    console.log("got in the value of: ", wantedDate);
       let year = wantedDate.getFullYear();
       let month = wantedDate.getMonth() + 1;
       let day = wantedDate.getDate();
@@ -28,15 +27,10 @@ export default class PPPN {
 
   convertToDate(isoDate) {
     isoDate = isoDate.toString();
-    console.log("The iso String was: ", isoDate);
     let day = isoDate.substring(0, 4);
     let month = isoDate.substring(6, 8);
     let year = isoDate.substring(9, 11);
-    console.log("year was: ", year);
-    console.log("month was: ", month);
-    console.log("day was : ", day);
     let date = new Date(year, month, day);
-    console.log("At the end, date was: ", date);
     return date;
   }
   computeCost(days, price) {

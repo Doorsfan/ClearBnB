@@ -104,7 +104,6 @@ export default {
         document.getElementsByClassName("center")[0].style.height = '70px';
       }
       this.$store.commit('setLeaseToBuild', this.lease)
-      console.log("IN ADD LEASE - WHEN MOUNTED - THE LEASE IN THE STORE WAS: ", this.$store.getters.getLeaseToBuild)
     },
     removeFirstIMGinURLs(){
 
@@ -134,7 +133,7 @@ export default {
       store.commit('setLeaseToBuild', this.lease)
     },
     updateIMGUrls(newImageURLs){
-
+      console.log("this imageURLs was: ", this.imageURLs);
       this.imageURLs.push(newImageURLs);
       this.lease.imageURLs = this.imageURLs;
       store.commit('setLeaseToBuild', this.lease)

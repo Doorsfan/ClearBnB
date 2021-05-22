@@ -102,11 +102,9 @@ export default {
   },
   watch: {
     endDate(){
-      console.log("Emitted new end date: ", this.endDate);
       this.$emit("updatedChosenEndDate", this.endDate);
     },
     startDate(){
-      console.log("Emitted new start date: ", this.startDate);
       this.$emit("updatedChosenStartDate", this.startDate)
     },
     disabledDays(){
@@ -115,11 +113,7 @@ export default {
   },
   methods: {
     addDisabledDate(year, month, day){ //"2021-05-20"
-      console.log("Was called with year: ", year);
-      console.log("Was called with month: ", month);
-      console.log("Was called with day: ", day);
       this.disabledDays.dates.push(new Date(year + '-' + month + '-' + day))
-      console.log(this.disabledDays.dates);
     }
   }
 }
