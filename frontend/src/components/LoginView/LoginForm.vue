@@ -105,7 +105,10 @@ h1 {
   width: 500px;
   margin: 180px auto;
   border-radius: 2px ;
-  border: 2px solid grey
+  border: 2px solid grey;
+  background-color: rgb(255, 255, 255, 0.6);
+
+
 }
 form{
   padding-top: 50px;
