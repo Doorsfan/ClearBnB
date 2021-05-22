@@ -93,6 +93,7 @@ export default {
     emptyBookingHelper.setTakenBookings(this.disabledDays.dates);
     store.commit('setBookingHelper', emptyBookingHelper);
     this.newBookingHelper = emptyBookingHelper;
+    this.periodicallyUpdateLeases();
   },
   data() {
     return {
@@ -108,6 +109,9 @@ export default {
     }
   },
   watch: {
+    myLease(){
+      console.log("My lease changed!");
+    },
     newBookingHelper(){
       this.$emit("updatedBookingHelper", this.newBookingHelper);
     },
@@ -122,6 +126,15 @@ export default {
     }
   },
   methods: {
+    async periodicallyUpdateLeases(){
+      console.log("hi");
+      let local = this.disabledDays.dates;
+      let store = this.$store;
+      setInterval(function(){ 
+         store.commit('updateBookedDates', local)
+      },
+      5000);
+    },
     addDisabledDate(year, month, day){ //"2021-05-20"
       this.disabledDays.dates.push(new Date(year + '-' + month + '-' + day))
     }

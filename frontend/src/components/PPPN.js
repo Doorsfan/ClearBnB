@@ -13,16 +13,19 @@ export default class PPPN {
     return date;
   }
   getCorrectDateFormat(wantedDate) {
-      let year = wantedDate.getFullYear();
-      let month = wantedDate.getMonth() + 1;
-      let day = wantedDate.getDate();
-      if(month < 10){
-        month = '0' + month;
-      }
-      if(day < 10){
-        day = '0' + day;
-      }
-      return year + '-' + month + '-' + day;
+    if (!wantedDate) {
+      wantedDate = new Date();
+    }
+    let year = wantedDate.getFullYear();
+    let month = wantedDate.getMonth() + 1;
+    let day = wantedDate.getDate();
+    if(month < 10){
+      month = '0' + month;
+    }
+    if(day < 10){
+      day = '0' + day;
+    }
+    return year + '-' + month + '-' + day;
   }
 
   convertToDate(isoDate) {
