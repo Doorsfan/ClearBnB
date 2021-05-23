@@ -1,5 +1,5 @@
 <template>
-  <div class="booking-view-app-main">
+  <div @click="mainWasClicked" class="booking-view-app-main">
     <div class="booking-view-container">
       <div>
         <div class="location-maxguests">
@@ -43,7 +43,7 @@
           </p>
           {{ lease.beds }}
         </div>
-        <div class="DivForGuests">
+        <div v-if="!shouldShowModal" class="DivForGuests">
           <div class="guestsTitle">
             Guests
           </div>
@@ -62,8 +62,8 @@
           <p class="wholeOrPartialText">You get Access to:</p>
           <p v-if="lease.entireResidence" class="wholeResidenceText">The Whole Residence</p><p v-if="!lease.entireResidence" class="partResidenceText">A Part of The Residence</p>
         </div>
-        <div class="myDatePickerDiv">
-          <DatepickerForBookingView @updatedBookingHelper="checkNewHelper" @updatedChosenStartDate="newStartDate" @updatedChosenEndDate="newEndDate" v-if="lease" :myLease="lease"/>
+        <div v-if="!shouldShowModal" class="myDatePickerDiv">
+          <DatepickerForBookingView @updatedBookingHelper="checkNewHelper" @updatedChosenStartDate="newStartDate" @updatedChosenEndDate="newEndDate" @updatedDisabledDays="hi" v-if="lease" :myLease="lease"/>
         </div>
       </div>
       <div class="PriceToPayInTotal">
@@ -71,7 +71,7 @@
         <p v-if="selectedNumberOfGuests == 0">Please select amount of Guests attending to see the total price.</p>
       </div>
       <div class="BookingButtonDiv">
-        <button @click="book" v-if="!invalidStartDate && !invalidEndDate && selectedNumberOfGuests > 0" class="bookingButton" type="button" value="Book">Book Now!</button>
+        <button @click="book" v-if="!shouldShowModal && user && !invalidStartDate && !invalidEndDate && selectedNumberOfGuests > 0" class="bookingButton" type="button" value="Book">Book Now!</button>
         <div class="SpecialErrorBox" v-if="(chosenStartDate.length == 0 || chosenEndDate.length == 0 || selectedNumberOfGuests == 0) && user != null">Before you can book, you must address:</div>
         <div class="errorBox" v-if="(chosenStartDate.length == 0 || chosenStartDate.length == 0) && user != null" value="Choose a From Date and a To Date First!">Choose a From Date and a To Date</div>
         <div v-if="selectedNumberOfGuests == 0 && user != null && amountOfDays > 0" class="errorBox" value="Choose Amount of Guests first!">Choose amount of Guests</div>
@@ -80,11 +80,25 @@
           You cannot book across already occupied bookings!
         </div>
         <button @click="goToLogin" v-else-if="amountOfDays > 0 && selectedNumberOfGuests > 0 && user == null" class="bookingButton" type="button" value="You have to log in to Book!">Log in to Book!</button>
-        
       </div>
     </div>
   </div>
-  <router-link class="hiddenLink" to="login"></router-link>
+  <div v-if="shouldShowModal" class="confirmationModal">
+    <div class="thanksTextDiv modalDiv">
+      <p class="thanksTextP">Thank you for making a booking at ClearBnB!</p>
+    </div>
+    <div class="locationText">
+      <div class="modalTitle modalDiv">You booked a stay at a {{ typeOfHousing }} in {{ location }}!</div>
+      <div class="fromModalDiv modalDiv"><p class="fromModalP">From the: </p>{{priceHelper.getCorrectDateFormat(chosenStartDate)}}</div>
+      <div class="toModalDiv modalDiv"><p class="toModalP">To the: </p>{{priceHelper.getCorrectDateFormat(chosenEndDate)}}</div>
+      <div class="amountOfDaysModalDiv modalDiv">For a total of {{ amountOfDays }} {{ amountOfDays > 1 ? 'days' : 'day'}}</div>
+      <div class="peopleModalDiv modalDiv"><p class="peopleModalP">For</p> {{selectedNumberOfGuests}} {{selectedNumberOfGuests > 1 ? 'people' : 'person'}}</div>
+      <div class="priceModalDiv modalDiv"><p class="priceModalP">For a grand total of: {{ Math.round(1.15 * (price * selectedNumberOfGuests * amountOfDays))}} Euros</p></div>
+      <button @click="goBackToStartPage" class="confirmModalButton">Back to Start Page</button>
+    </div>
+  </div>
+  <router-link class="hiddenLinkToLoginPage" to="/login">login</router-link>
+  <router-link class="hiddenLinkToStartPage" to="/">start</router-link>
 </template>
 
 <script setup="">
@@ -101,6 +115,7 @@ import PPPN from '../components/PPPN.js'
 import Profit from '../components/Profit.js'
 import BookingHelper from '../components/BookingHelper.js'
 import store from '../components/../store.js';
+
 export default {
   mounted(){
     if(document.getElementsByClassName("sunIconInHeader").length > 0){
@@ -109,6 +124,12 @@ export default {
       document.getElementsByClassName("homeText")[0].style.display = 'block';
       document.getElementsByClassName("center")[0].style.height = '70px';
     }
+    let functionToCall = this.hi
+    setInterval(function(){ 
+         let myThing = store.getters.getBookedDates;
+         functionToCall(myThing)
+      },
+      5000);
   },
   watch: {
     selectedNumberOfGuests(){
@@ -173,10 +194,35 @@ data()  {
     priceHelper: new PPPN(),
     allTakenDates: '',
     invalidStartDate: false,
-    invalidEndDate: false
+    invalidEndDate: false,
+    didNotBookYet: true,
+    ignoredFirstClick: false,
+    shouldShowModal: false
   }
 },
 methods: {
+  hi(myInput){
+    if(myInput){
+      for(let date of myInput){
+        console.log(this.priceHelper.getCorrectDateFormat(date));
+      }
+    }
+    //Integrate so that it updates if the chosen date is valid or not based on store interaction
+  },
+  mainWasClicked(event){
+    if(this.ignoredFirstClick){
+      if(this.shouldShowModal && event.target.className != 'confirmationModal'){
+        console.log("Should close modal");
+        document.getElementsByClassName('booking-view-app-main')[0].style.opacity = 1;
+        this.shouldShowModal = false;
+        this.ignoredFirstClick = false;
+      }
+    }
+    if(this.shouldShowModal && event.target.className != 'confirmationModal'){
+      this.ignoredFirstClick = true;
+    }
+    console.log(event.target.className);
+  },
   checkNewHelper(newHelper){
     this.allTakenDates = newHelper.takenBookings;
     this.invalidStartDate = false;
@@ -196,7 +242,10 @@ methods: {
     this.invalidEndDate = false;
   },
   goToLogin(){
-    document.getElementsByClassName("hiddenLink")[0].click();
+    document.getElementsByClassName("hiddenLinkToLoginPage")[0].click();
+  },
+  goBackToStartPage(){
+    document.getElementsByClassName("hiddenLinkToStartPage")[0].click();
   },
   newStartDate(myNewStartDate){
     this.chosenStartDate = myNewStartDate;
@@ -243,7 +292,8 @@ methods: {
     this.invalidEndDate = false;
   },
   async book(){
-    //Mt6ZUN7dYDQ1a2zuwbTYx the id of the place to book
+      this.shouldShowModal = true;
+      document.getElementsByClassName('booking-view-app-main')[0].style.opacity = 0.4;
       let myPriceHelper = new PPPN();
       let emptyUser = new User('','');
       let filledUser = Object.assign(emptyUser,this.user);
@@ -280,6 +330,7 @@ methods: {
         body: JSON.stringify(filledAdminBooking)
       });
       let adminResponseAsJson = await adminRes.json();
+      this.getMyLease();
   },
   async getMyLease(){
     let res = await fetch('/rest/leases/' + this.$route.query.id)
@@ -299,6 +350,50 @@ async created() {
 
 @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Lobster&family=Merriweather+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Raleway:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
 
+  .thanksTextP{
+    font-size: 26px;
+    margin-bottom: 10px;
+  }
+  .priceModalDiv{
+    padding-bottom:20px;
+  }
+  .confirmModalButton{
+    width:max-content;
+    padding:5px;
+    height: 50px;
+    font-size:25px;
+    background-color: rgb(40, 182, 40);
+    border-radius:15px;
+  }
+  .modalDiv{
+    margin:5px;
+    font-size: 18px;
+  }
+  .fromModalP, .toModalP{
+    width:max-content;
+    display:inline-block;
+    text-align:right;
+    margin-right: 5px;
+  }
+  .peopleModalP{
+    display:inline-block;
+  }
+  .confirmationModal{
+    position:fixed;
+    left: 30%;
+    z-index:5;
+    color:white;
+    background-color:rgba(0,0,0,0.95);
+    top: 100px;
+    width: 40%;
+    text-align:center;
+    min-height:70vh;
+    margin-left:auto;
+    margin-right:auto;
+    padding-top: 23vh;
+    display:block;
+    border-radius:50px;
+  }
   .PriceToPayInTotal{
     margin-top:10px;
   }

@@ -4,7 +4,8 @@ export default createStore({
   state: {
     currentUser: null,
     latestLease: null,
-    bookingHelper: null
+    bookingHelper: null,
+    bookedDates: null
   },
   // this.$store.commit('mutationName')
   mutations: {
@@ -19,6 +20,12 @@ export default createStore({
     },
     setBookingHelper(state, bookingHelper) {
       state.bookingHelper = bookingHelper
+    },
+    setTakenDays(state, takenDays) {
+      state.takenDays = takenDays;
+    },
+    updateBookedDates(state, bookedDates) {
+      state.bookedDates = bookedDates
     }
   },
   getters: {
@@ -33,6 +40,12 @@ export default createStore({
     },
     getBookingHelper: state => {
       return state.bookingHelper
+    },
+    getTakenDays: state => {
+      return state.takenDays
+    },
+    getBookedDates: state => {
+      return state.bookedDates
     }
   },
   actions: {
@@ -47,6 +60,12 @@ export default createStore({
     },
     async saveBookingHelper(store, bookingHelper) {
       store.commit('setBookingHelper', bookingHelper);
+    },
+    async updateTakenDays(store, takenDays) {
+      store.commit('setTakenDays', takenDays);
+    },
+    async updateBookedDates(store, bookedDates) {
+      store.commit('setBookedDates', bookedDates);
     }
   }
 })
