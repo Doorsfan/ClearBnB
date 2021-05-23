@@ -33,8 +33,7 @@ footer {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width:100vw;
-  height:3vh;
+  width:100%;
   padding-top:180px;
 }
 

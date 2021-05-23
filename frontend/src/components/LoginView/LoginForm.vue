@@ -105,9 +105,9 @@ h1 {
   height: 600px;
   width: 500px;
   margin: 180px auto;
-  border-radius: 2px ;
-  border: 2px solid grey;
-  background-color: rgb(255, 255, 255, 0.8);
+  border-radius: 5px ;
+  border: 1px solid grey;
+  background-color: rgb(255, 255, 255, 0.9);
 
 
 }

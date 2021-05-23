@@ -28,12 +28,11 @@ export default {
 </script>
 <style scoped>
 .mainDiv{
-  background-image: url("../../public/nice.jpg");
+  background-image: url("../../public/Login-signup.jpg");
   background-position:center;
   background-size:cover;
   background-repeat:no-repeat;
   height:max-content;
-  width:100vw;
   background-attachment: fixed;
   overflow-x:hidden;
 }

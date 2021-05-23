@@ -5,47 +5,55 @@
     <div class="titleDiv">
       <h1 class="registerTitle">Create new account</h1>
     </div>
-    <div class="firstNameDiv">
+    <div class="firstLast">
+    <div class="firstNameDiv formhandler">
       <p class="nameP">First name: </p><input v-model="firstName" placeholder="First Name" class="firstNameInput">
     </div>
-    <div class="lastNameDiv">
+    <div class="lastNameDiv formhandler">
       <p class="lastNameP">Last name: </p><input v-model="lastName" placeholder="Last Name" class="lastNameInput">
     </div>
     </div>
-    <div class="emailDiv">
+    </div>
+    <div class="emailDiv formhandler">
       <p class="emailP">Email: </p><input v-model="email" type="email" placeholder="Email" class="emailInput">
     </div>
-    <div class="userInputPassword">
-    <div class="passwordDiv">
+    <div class="passwordsDiv">
+    <div class="passwordDiv formhandler">
       <p class="passwordP">Password: </p><input v-model="password" type="password" placeholder="Password" class="passwordInput">
     </div>
-    <div class="repeatPasswordDiv">
+    <div class="repeatPasswordDiv formhandler">
       <p class="repeatPasswordP">Repeat Password: </p><input v-model="repeatPassword" type="password" placeholder="Repeat Password" class="repeatPasswordInput">
     </div>
     </div>
-    <div class="userInputAdressInfo">
-    <div class="countryDiv">
-      <p class="countryP">Country: </p><input v-model="country" placeholder="Country" class="countryInput">
+    <div class="phoneNumber formhandler">
+      <p class="phoneNumberP">Phone Number: </p><input v-model="phoneNumber" placeholder="Phone Number" class="phoneNumberInput">
     </div>
-    <div class="cityDiv">
-      <p class="cityP">City: </p><input v-model="city" placeholder="City" class="cityInput">
-    </div>
-    <div class="streetDiv">
+    <div class="streetZip">
+    <div class="streetDiv formhandler">
       <p class="streetP">Street: </p><input v-model="streetAddress" placeholder="My Street" class="streetInput">
     </div>
-    <div class="zipDiv">
+    <div class="zipDiv formhandler">
       <p class="zipP">Zip Code: </p><input v-model="zipCode" placeholder="Zip Code" class="zipInput">
     </div>
     </div>
-    <div class="phoneNumber">
-      <p class="phoneNumberP">Phone Number: </p><input v-model="phoneNumber" placeholder="Phone Number" class="phoneNumberInput">
+    <div class="countryCity">
+    <div class="countryDiv formhandler">
+      <p class="countryP">Country: </p><input v-model="country" placeholder="Country" class="countryInput">
     </div>
-    <div class="newsletterAndRegister">
+    <div class="cityDiv formhandler">
+      <p class="cityP">City: </p><input v-model="city" placeholder="City" class="cityInput">
+    </div>
+    </div>
+    
+    
+    <div class="letterRegister">
+
     <div class="newsLetterDiv">
-      <p class="newsLetterP">Newsletter: </p><input v-model="newsLetter" type="checkbox" class="newsLetterBox">
+      <input v-model="newsLetter" type="checkbox" class="newsLetterBox"><p class="newsLetterP">Newsletter </p>
     </div>
     
      <button class="registerButton" @click="registerUser" value="Register">Register</button>
+     
      </div>
     <div class="takenUserBox">
       <p class="errorBox">A user with that Email already exists.</p>
@@ -128,13 +136,89 @@ export default {
 
 <style scoped>
 
+.firstLast{
+  display:flex;
+  flex-direction: row;
+}
+
+.firstNameDiv{
+  flex-grow: 1;
+  padding-right: 5px;
+}
+.lastNameDiv{
+  flex-grow:1;
+  padding-left: 5px;
+
+}
+.passwordsDiv{
+  display:flex;
+  flex-direction: row;
+}
+.emailDiv{
+  padding-top:25px;
+  width: 50%;
+  padding-right: 5px;
+}
+.passwordDiv{
+  flex-grow: 1;
+  padding-right: 5px;
+}
+.repeatPasswordDiv{
+  flex-grow:1;
+  padding-left: 5px;
+}
+.countryCity{
+  display:flex;
+  flex-direction: row;
+  
+}
+
+.countryDiv{
+ flex-grow: 1;
+  padding-right: 5px;
+}
+.cityDiv{
+  flex-grow:1;
+  padding-left: 5px;
+}
+.streetZip{
+   display:flex;
+  flex-direction: row;
+  padding-top:25px;
+
+}
+.streetDiv{
+  flex-grow:1;
+}
+.zipDiv{
+  flex-grow:0.2;
+}
+.phoneNumber{
+  padding-top:25px;
+  width: 50%;
+  padding-right:5px;
+}
+.letterRegister{
+  margin-top: 50px;
+   display:flex;
+   flex-direction: row;
+   justify-content:space-between;
+}
+.newsLetterP{
+  margin: 0;
+  padding-left: 4px;
+}
+.newsLetterBox{
+  padding-top:5px;
+  margin-top:1px;
+}
+
 .mainDiv{
-  background-image: url("../../public/nice.jpg");
+  background-image: url("../../public/Login-signup.jpg");
   background-position:center;
   background-size:cover;
   background-repeat:no-repeat;
   height:max-content;
-  width:100vw;
   background-attachment: fixed;
   overflow-x:hidden;
 }
@@ -142,11 +226,12 @@ export default {
 .SignUpForm{
   text-align: center;
   height: 750px;
-  width: 1200px;
+  width: clamp(600px, 80vw, 1200px);
   margin: 180px auto;
-  border-radius: 2px ;
-  border: 2px solid grey;
-  background-color: rgb(255, 255, 255, 0.8);
+  border-radius: 5px ;
+  border: 1px solid grey;
+  background-color: rgb(255, 255, 255, 0.9);
+  padding: 0 50px;
 }
 form input{
   padding: 2px 15px;
@@ -166,10 +251,8 @@ button{
   border: 0;
   border-radius: 2px ;
   cursor: pointer;
-  margin-top: 10px;
   font-size: 18px;
-  margin-right: 10px;
-  margin-left: 10px;
+
   
 }
 h1 {
@@ -181,9 +264,10 @@ h1 {
 }
 p{
   display:inline-block;
-  width:140px;
-  text-align:right;
+  text-align:left;
   margin-right:5px;
+
+  margin-bottom: 3px;
   font-size: 16;
   font-weight: bold;
 
@@ -205,9 +289,10 @@ p{
   padding:3px;
   outline: 1px solid black;
 }
-.newsletterAndRegister{
-  display:flex;
-  justify-content: center;
-  align-content: space-between;
+.formhandler{
+display:flex;
+flex-direction: column;
 }
+
+
 </style>

@@ -68,7 +68,7 @@ export default {
 
 <style scoped>
 .smallLogOutDiv{
-  width:max-content;
+  width: max-content;
 }
 .smallLogOutIcon{
   margin-right:5px;
@@ -109,7 +109,7 @@ export default {
 }
 .navbar{
   background: linear-gradient(0.25turn, #f69d3c, #ebf8e1,#ebf8e1, #f69d3c);
-  width:100vw;
+  width:100%;
   
 }
 .homeIcon{
