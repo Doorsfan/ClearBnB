@@ -202,7 +202,11 @@ data()  {
 },
 methods: {
   hi(myInput){
-    console.log(myInput);
+    if(myInput){
+      for(let date of myInput){
+        console.log(this.priceHelper.getCorrectDateFormat(date));
+      }
+    }
     //Integrate so that it updates if the chosen date is valid or not based on store interaction
   },
   mainWasClicked(event){
