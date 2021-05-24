@@ -99,7 +99,7 @@ export default {
          getDisabledDatesFunction()
          thisContext.$emit("newDisabledDates", thisContext.disabledDays.dates);
       },
-      5000);
+      100);
     },
     async getDisabledDates(){
       let res = await fetch('/rest/bookings')
@@ -122,7 +122,7 @@ export default {
           let differenceInYears = myEndYear - myStartYear;
           let differenceInMonths = myEndMonth - myStartMonth;
           let differenceInDays = myEndDay - myStartDay;
-          while(differenceInDays > 0){
+          while(differenceInDays >= 0){
             differenceInDays -= 1;
             this.addDisabledDate(myEndYear, myEndMonth, myEndDay);
             if(myEndDay == 0){

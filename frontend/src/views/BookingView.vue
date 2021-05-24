@@ -63,20 +63,21 @@
           <p v-if="lease.entireResidence" class="wholeResidenceText">The Whole Residence</p><p v-if="!lease.entireResidence" class="partResidenceText">A Part of The Residence</p>
         </div>
         <div v-if="!shouldShowModal" class="myDatePickerDiv">
-          <DatepickerForBookingView @newDisabledDates="checkDisabledDates" @updatedBookingHelper="checkNewHelper" @updatedChosenStartDate="newStartDate" @updatedChosenEndDate="newEndDate" @updatedDisabledDays="updateDates" v-if="lease" :myLease="lease"/>
+          <DatepickerForBookingView @newDisabledDates="checkDisabledDates" @updatedChosenStartDate="newStartDate" @updatedChosenEndDate="newEndDate" 
+          @updatedDisabledDays="updateDates" v-if="lease" :myLease="lease"/>
         </div>
       </div>
       <div class="PriceToPayInTotal">
-        <p v-if="selectedNumberOfGuests > 0">Total Price to pay for {{ amountOfDays }} days for {{ selectedNumberOfGuests }} {{ selectedNumberOfGuests > 1 ? "people" : "person"}}: {{ Math.round(1.15 * (price * selectedNumberOfGuests * amountOfDays)) }} Euros</p>
-        <p v-if="selectedNumberOfGuests == 0">Please select amount of Guests attending to see the total price.</p>
+        <p v-if="selectedNumberOfGuests > 0 && amountOfDays > 0">Total Price to pay for {{ amountOfDays }} days for {{ selectedNumberOfGuests }} {{ selectedNumberOfGuests > 1 ? "people" : "person"}}: {{ Math.round(1.15 * (price * selectedNumberOfGuests * amountOfDays)) }} Euros</p>
+        <p v-if="selectedNumberOfGuests == 0 && !dateIsTaken">Please select amount of Guests attending to see the total price.</p>
       </div>
       <div class="BookingButtonDiv">
-        <button @click="book" v-if="!shouldShowModal && user && !invalidStartDate && !invalidEndDate && selectedNumberOfGuests > 0" class="bookingButton" type="button" value="Book">Book Now!</button>
+        <button @click="book" v-if="!shouldShowModal && user &&selectedNumberOfGuests > 0 && !dateIsTaken" class="bookingButton" type="button" value="Book">Book Now!</button>
         <div class="SpecialErrorBox" v-if="(chosenStartDate.length == 0 || chosenEndDate.length == 0 || selectedNumberOfGuests == 0) && user != null">Before you can book, you must address:</div>
         <div class="errorBox" v-if="(chosenStartDate.length == 0 || chosenStartDate.length == 0) && user != null" value="Choose a From Date and a To Date First!">Choose a From Date and a To Date</div>
         <div v-if="selectedNumberOfGuests == 0 && user != null && amountOfDays > 0" class="errorBox" value="Choose Amount of Guests first!">Choose amount of Guests</div>
         <div v-if="amountOfDays < 0" class="errorBox" Value="Cannot choose a negative amount of days!">You cannot choose a negative amount of days.</div>
-        <div class="errorBox" v-if="invalidStartDate && invalidEndDate">
+        <div v-if="dateIsTaken" class="errorBox">
           You cannot book across already occupied bookings!
         </div>
         <button @click="goToLogin" v-else-if="amountOfDays > 0 && selectedNumberOfGuests > 0 && user == null" class="bookingButton" type="button" value="You have to log in to Book!">Log in to Book!</button>
@@ -97,6 +98,8 @@
       <button @click="goBackToStartPage" class="confirmModalButton">Back to Start Page</button>
     </div>
   </div>
+  <router-link class="hiddenLoginPage hiddenLink" to="/login">Login</router-link>
+  <router-link class="hiddenStartPage hiddenLink" to="/">Start</router-link>
 </template>
 
 <script setup="">
@@ -191,8 +194,7 @@ data()  {
     user: this.$store.getters.getCurrentUser,
     priceHelper: new PPPN(),
     allTakenDates: '',
-    invalidStartDate: false,
-    invalidEndDate: false,
+    dateIsTaken: false,
     didNotBookYet: true,
     ignoredFirstClick: false,
     shouldShowModal: false
@@ -200,12 +202,13 @@ data()  {
 },
 methods: {
   checkDisabledDates(bookedDates){
-    console.log("the new dates that were to be checked, were: ", bookedDates);
-
     for (let date of bookedDates) {
-      if (date.getTime() >= this.chosenStartDate.getTime() && date.getTime() <= this.chosenEndDate.getTime())
-        console.log("The date that was taken, was: ", date);
+      if (date.getTime() >= this.chosenStartDate.getTime() && date.getTime() <= this.chosenEndDate.getTime()){
+        this.dateIsTaken = true;
+        return;
+      }
     }
+    this.dateIsTaken = false;
   },
   updateDates(dates){
     if(dates){
@@ -230,29 +233,11 @@ methods: {
     }
     console.log(event.target.className);
   },
-  checkNewHelper(newHelper){
-    this.allTakenDates = newHelper.takenBookings;
-    this.invalidStartDate = false;
-    this.invalidEndDate = false;
-    for(let takenDates of newHelper.takenBookings){
-      if(this.chosenStartDate <= takenDates){
-        this.invalidStartDate = true;
-      }
-      if(this.chosenEndDate >= takenDates){
-        this.invalidEndDate = true;
-      }
-      if(this.invalidStartDate && this.invalidEndDate){
-        return;
-      }
-    }
-    this.invalidStartDate = false;
-    this.invalidEndDate = false;
-  },
   goToLogin(){
-    document.getElementsByClassName("hiddenLinkToLoginPage")[0].click();
+    document.getElementsByClassName("hiddenLoginPage")[0].click();
   },
   goBackToStartPage(){
-    document.getElementsByClassName("hiddenLinkToStartPage")[0].click();
+    document.getElementsByClassName("hiddenStartPage")[0].click();
   },
   newStartDate(myNewStartDate){
     this.chosenStartDate = myNewStartDate;
@@ -260,21 +245,6 @@ methods: {
     if(this.startDateInBasicFormat == this.endDateInBasicFormat){
       this.amountOfDays = 1;
     }
-    this.invalidStartDate = false;
-    this.invalidEndDate = false;
-    for(let takenDates of this.allTakenDates){
-      if(this.chosenStartDate < takenDates){
-        this.invalidStartDate = true;
-      }
-      if(this.chosenEndDate > takenDates){
-        this.invalidEndDate = true;
-      }
-      if(this.invalidStartDate && this.invalidEndDate){
-        return;
-      }
-    }
-    this.invalidStartDate = false;
-    this.invalidEndDate = false;
   },
   newEndDate(myNewEndDate){
     this.chosenEndDate = myNewEndDate;
@@ -282,21 +252,6 @@ methods: {
     if(this.startDateInBasicFormat == this.endDateInBasicFormat){
       this.amountOfDays = 1;
     }
-    this.invalidStartDate = false;
-    this.invalidEndDate = false;
-    for(let takenDates of this.allTakenDates){
-      if(this.chosenStartDate < takenDates){
-        this.invalidStartDate = true;
-      }
-      if(this.chosenEndDate > takenDates){
-        this.invalidEndDate = true;
-      }
-      if(this.invalidStartDate && this.invalidEndDate){
-        return;
-      }
-    }
-    this.invalidStartDate = false;
-    this.invalidEndDate = false;
   },
   async book(){
       this.shouldShowModal = true;
@@ -357,6 +312,9 @@ async created() {
 
 @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Lobster&family=Merriweather+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Raleway:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
 
+  .hiddenLink{
+    display:hidden;
+  }
   .thanksTextP{
     font-size: 26px;
     margin-bottom: 10px;
