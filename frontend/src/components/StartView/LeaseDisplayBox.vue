@@ -30,8 +30,12 @@ export default {
 }
 </script>
 <style scoped>
+a {
+  color:black;
+  text-decoration:none;
+}
 a:visited{
-  color:blue;
+  color:black;
 }
 .leaseBox{
   background-color:rgba(218, 224, 224, 0.8);
