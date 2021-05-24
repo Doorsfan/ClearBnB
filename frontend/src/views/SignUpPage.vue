@@ -298,7 +298,7 @@ flex-direction: column;
   height: 950px;
   width: clamp(280px, 100vw, 600px);
   margin: auto;
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(255, 255, 255, 0.9);
   border-radius: 0px ;
   }
 
@@ -447,17 +447,7 @@ h1{
   justify-content:center;
 }
 button{
-  width: 120px;
-  height: 50px;
-  padding: 10px 20px;
-  background-color: #029ebb;
-  color: white;
-  border: 0;
-  border-radius: 2px ;
-  cursor: pointer;
-  font-size: 18px;
   align-self: center;
-  margin-top:20px;
 }
 }
 

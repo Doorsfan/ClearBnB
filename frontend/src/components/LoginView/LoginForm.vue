@@ -17,8 +17,11 @@
         <p class="errorText">Error - Bad credentials</p>
       </div>
     </form>
+  
     <div class="ButtonsDiv">
-      <button><router-link class="CancelButton" to="/">Cancel</router-link></button>
+      
+      <button><router-link class="CancelButton" to="/">Cancel</router-link></button> 
+      <p class="hiddenptag">or</p>
       <button @click.prevent="login" class="LoginButton">Login</button>
     </div>
     <div class="SignUpFromLogIn">
@@ -77,6 +80,11 @@ export default {
 
 <style scoped>
 
+.hiddenptag{
+  display:none;
+}
+
+
 .errorText{
   margin: 0px;
   padding: 0px;
@@ -97,7 +105,7 @@ h1 {
   color: black;
   margin-bottom: 40px;
   margin-top: 50px;
-  font-size: 45px;
+  font-size: 50px;
   font-weight: bold;
 }
 .LogInPage{
@@ -128,7 +136,7 @@ button{
   padding: 10px 20px;
   background-color: #029ebb;
   color: white;
-  border: 0;
+  border: 1px solid grey;
   border-radius: 2px ;
   cursor: pointer;
   margin-top: 10px;
@@ -169,5 +177,87 @@ p{
 
 button:hover {
   transform: scale(1.1);
+}
+@media only screen and (max-width: 540px) {
+.LogInPage{
+  width: clamp(280px, 100vw, 500px);
+  margin: 80px auto;
+ 
+}
+}
+@media only screen and (max-width: 500px) {
+.LogInPage{
+  width: clamp(280px, 100vw, 500px);
+  margin: auto auto;
+  border-radius: 0px ;
+ 
+}
+
+form{
+  padding-top: 20px;
+
+ 
+}
+.LogInPage{
+  height: 570px;
+}
+h1{
+  margin-top:50px;
+  
+}
+.SignUpFromLogIn{
+  margin-top:80px;
+}
+.ButtonsDiv{
+  display:flex;
+  flex-direction: column-reverse;
+  justify-content: center;
+  align-items: center;
+}
+button{
+  width: 270px;
+  height: 50px;
+  
+  border-radius: 40px ;
+  
+}
+.hiddenptag{
+  display:inline;
+  margin-top:5px;
+  font-weight: normal;
+}
+}
+@media only screen and (max-width: 374px) {
+
+ 
+
+input{
+  width: 70%;
+}
+button{
+  width: 70%;
+}
+p{
+  font-size: 16px;
+}
+}
+@media only screen and (max-width: 324px) {
+
+.SignUpFromLogIn{
+  margin-top:55px;
+  display:flex;
+  flex-direction: column;
+}
+p{
+  font-size: 17px;
+}
+.signUpLink{
+  font-size: 18px;
+  text-decoration: none;;
+}
+.hiddenptag{
+  font-size: 16px;
+}
+
 }
 </style>
