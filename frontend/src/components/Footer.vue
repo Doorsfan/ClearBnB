@@ -26,7 +26,7 @@
 <style scoped>
 footer {
   margin-top: 0;
-  background-color: rgba(0, 0, 0, 0);
+  background-color: #fdbf81;
   background-image: url("../assets/skyline_sunset.png");
   background-repeat: no-repeat;
   background-position: center;
@@ -91,9 +91,10 @@ footer {
 }
 
 .last {
-  color: black;
+  color: white;
   margin-top: 10px;
-  font-size: 12px;
+  font-size: 18px;
+  -webkit-text-stroke: 0.4px black;
 }
 @media only screen and (max-width: 600px) {
   * {
