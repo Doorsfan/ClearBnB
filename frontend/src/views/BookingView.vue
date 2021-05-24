@@ -64,7 +64,7 @@
         </div>
         <div v-if="!shouldShowModal" class="myDatePickerDiv">
           <DatepickerForBookingView @newDisabledDates="checkDisabledDates" @updatedChosenStartDate="newStartDate" @updatedChosenEndDate="newEndDate" 
-          @updatedDisabledDays="updateDates" v-if="lease" :myLease="lease"/>
+          v-if="lease" :myLease="lease"/>
         </div>
       </div>
       <div class="PriceToPayInTotal">
@@ -199,10 +199,11 @@ methods: {
     for (let date of bookedDates) {
       if (date.getTime() >= this.chosenStartDate.getTime() && date.getTime() <= this.chosenEndDate.getTime()){
         this.dateIsTaken = true;
-        return;
+        return true;
       }
     }
     this.dateIsTaken = false;
+    return false
   },
   mainWasClicked(event){
     if(this.ignoredFirstClick){
@@ -237,45 +238,92 @@ methods: {
     }
   },
   async book(){
-      this.shouldShowModal = true;
-      document.getElementsByClassName('booking-view-app-main')[0].style.opacity = 0.4;
-      let myPriceHelper = new PPPN();
-      let emptyUser = new User('','');
-      let filledUser = Object.assign(emptyUser,this.user);
-      let formattedStartDate = myPriceHelper.getCorrectDateFormat(this.chosenStartDate);
-      let formattedEndDate = myPriceHelper.getCorrectDateFormat(this.chosenEndDate);
-      if(this.amountOfDays != 1){
-        let newAmountOfDays = myPriceHelper.computeDateRange(this.chosenStartDate, this.chosenEndDate);
-        this.amountOfDays = newAmountOfDays
+    let myPriceHelper = new PPPN();
+    let emptyUser = new User('','');
+    let filledUser = Object.assign(emptyUser,this.user);
+    let formattedStartDate = myPriceHelper.getCorrectDateFormat(this.chosenStartDate);
+    let formattedEndDate = myPriceHelper.getCorrectDateFormat(this.chosenEndDate);
+    if(this.amountOfDays != 1){
+      let newAmountOfDays = myPriceHelper.computeDateRange(this.chosenStartDate, this.chosenEndDate);
+      this.amountOfDays = newAmountOfDays
+    }
+    let basePrice = (this.amountOfDays * this.selectedNumberOfGuests * this.price);
+    let toPay = Math.round(1.15 * (this.amountOfDays * this.selectedNumberOfGuests * this.price));
+    let profit = toPay - basePrice;
+
+    let myBooking = new Booking(filledUser.id, this.lease.id,
+    this.location, formattedStartDate, formattedEndDate, this.selectedNumberOfGuests, toPay, this.lease);
+    let checkIfBookedRes = await fetch('/rest/bookings');
+    let bookedResAsJson = await checkIfBookedRes.json();
+    console.log(bookedResAsJson);
+    console.log("Lease is: ", this.lease);
+    let currentTakenBookings = []
+    for(let booking of bookedResAsJson){
+      if(booking.leaseId == this.lease.id){
+        let bookingStartDate = booking.startDate;
+        let mySplitStartDate = bookingStartDate.split('-')
+        let myStartYear = Number(mySplitStartDate[0]);
+        let myStartMonth = Number(mySplitStartDate[1]) - 1;
+        let myStartDay = Number(mySplitStartDate[2]);
+
+        let bookingEndDate = booking.endDate;
+        let mySplitEndDate = bookingEndDate.split("-")
+        let myEndYear = Number(mySplitEndDate[0]);
+        let myEndMonth = Number(mySplitEndDate[1]) - 1;
+        let myEndDay = Number(mySplitEndDate[2]);
+        let takenDay = ''
+        let differenceInYears = myEndYear - myStartYear;
+        let differenceInMonths = myEndMonth - myStartMonth;
+        let differenceInDays = myEndDay - myStartDay;
+        while(differenceInDays >= 0){
+          differenceInDays -= 1;
+          currentTakenBookings.push(new Date(myEndYear, myEndMonth, myEndDay));
+          if(myEndDay == 0){
+            myEndMonth -= 1;
+            if(myEndMonth == 0){
+              myEndYear -= 1;
+              myEndMonth = 12;
+            }
+            if(myEndMonth == 11 || myEndMonth == 9 || myEndMonth == 6 || myEndMonth == 4){
+              myEndDay = 30
+            }
+            else if(myEndMonth == 12 || myEndMonth == 10 || myEndMonth == 8 || myEndMonth == 7 || myEndMonth == 5 || myEndMonth == 3 || myEndMonth == 1){
+              myEndDay = 31
+            }
+          }
+          else{
+            myEndDay -= 1;
+          }
+        }
       }
-      let basePrice = (this.amountOfDays * this.selectedNumberOfGuests * this.price);
-      let toPay = Math.round(1.15 * (this.amountOfDays * this.selectedNumberOfGuests * this.price));
-      let profit = toPay - basePrice;
+    }
+    if(this.checkDisabledDates(currentTakenBookings)){
+      alert("Sadly, across the dates you chose - Someone else beat you to book it. Sorry!");
+      return;
+    }
+    this.shouldShowModal = true;
+    document.getElementsByClassName('booking-view-app-main')[0].style.opacity = 0.4;
+    let secondRes = await fetch('/rest/bookings', {
+      method: 'POST',
+      body: JSON.stringify(myBooking)
+    });
+    let myProfit = new Profit(profit);
+    
+    let thirdRes = await fetch('/rest/profit/', {
+      method: 'POST',
+      body: JSON.stringify(myProfit)
+    });
 
-      let myBooking = new Booking(filledUser.id, this.lease.id,
-      this.location, formattedStartDate, formattedEndDate, this.selectedNumberOfGuests, toPay, this.lease);
-
-      let secondRes = await fetch('/rest/bookings', {
-        method: 'POST',
-        body: JSON.stringify(myBooking)
-      });
-      let myProfit = new Profit(profit);
-      
-      let thirdRes = await fetch('/rest/profit/', {
-        method: 'POST',
-        body: JSON.stringify(myProfit)
-      });
-
-      let secondResponseAsJson = await secondRes.json();
-      
-      let filledAdminBooking = new AdminBooking(secondResponseAsJson['id'], filledUser.id, this.lease.id,
-      this.lease.location, formattedStartDate, formattedEndDate, this.selectedNumberOfGuests, toPay, this.lease);
-      let adminRes = await fetch('/rest/adminBookings', {
-        method: 'POST',
-        body: JSON.stringify(filledAdminBooking)
-      });
-      let adminResponseAsJson = await adminRes.json();
-      this.getMyLease();
+    let secondResponseAsJson = await secondRes.json();
+    
+    let filledAdminBooking = new AdminBooking(secondResponseAsJson['id'], filledUser.id, this.lease.id,
+    this.lease.location, formattedStartDate, formattedEndDate, this.selectedNumberOfGuests, toPay, this.lease);
+    let adminRes = await fetch('/rest/adminBookings', {
+      method: 'POST',
+      body: JSON.stringify(filledAdminBooking)
+    });
+    let adminResponseAsJson = await adminRes.json();
+    this.getMyLease();
   },
   async getMyLease(){
     let res = await fetch('/rest/leases/' + this.$route.query.id)
