@@ -1,5 +1,6 @@
 <template>
   <footer>
+    <div class="overlay"></div>
     <div class="icons">
       <div class="faceBookIconDiv">
         <i class="fab fa-facebook-f"></i>
@@ -24,17 +25,19 @@
 
 <style scoped>
 footer {
-  margin-top: 20px;
-  background-color: #fff;
-  background-image: url("/smaller_footer.png");
+  margin-top: 0;
+  background-color: rgba(0, 0, 0, 0);
+  background-image: url("../assets/skyline_sunset.png");
   background-repeat: no-repeat;
   background-position: center;
   padding: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  width:100%;
-  padding-top:180px;
+  width: 100%;
+  padding-top: 140px;
+  position: absolute;
+  z-index: 1;
 }
 
 .icons {
@@ -70,7 +73,7 @@ footer {
   text-decoration: none;
   text-transform: uppercase;
   font-weight: 700;
-  font-size: 1.60rem;
+  font-size: 1.6rem;
   color: black;
   -webkit-text-stroke: 0.6px white;
 }
@@ -84,48 +87,48 @@ footer {
   height: 5px;
   border-radius: 50%;
   margin: 0rem 10px;
-  background-color: rgb(153, 153, 153);
+  background-color: white;
 }
 
 .last {
-  color: rgb(153, 153, 153);
+  color: black;
   margin-top: 10px;
-  font-size: 10px;
+  font-size: 12px;
 }
 @media only screen and (max-width: 600px) {
-  *{
+  * {
     transform: scale(0.9);
   }
-  .last{
+  .last {
     font-size: 14px;
-    padding-bottom:20px;
+    padding-bottom: 20px;
   }
 }
 @media only screen and (max-width: 475px) {
-  footer{
+  footer {
     transform: scale(0.8);
   }
-  .last{
+  .last {
     font-size: 14px;
-    padding-bottom:20px;
+    padding-bottom: 20px;
   }
 }
 @media only screen and (max-width: 375px) {
-  footer{
+  footer {
     transform: scale(0.7);
   }
-  .last{
+  .last {
     font-size: 14px;
-    padding-bottom:20px;
+    padding-bottom: 20px;
   }
 }
 @media only screen and (max-width: 270px) {
-  footer{
+  footer {
     transform: scale(0.7);
   }
-  .last{
+  .last {
     font-size: 14px;
-    padding-bottom:20px;
+    padding-bottom: 20px;
   }
 }
 </style>
