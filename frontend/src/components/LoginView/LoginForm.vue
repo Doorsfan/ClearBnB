@@ -189,7 +189,7 @@ button:hover {
 @media only screen and (max-width: 540px) {
 .LogInPage{
   width: clamp(280px, 100vw, 500px);
-  margin: auto auto;
+  margin: 20px auto;
  
 }
 }
