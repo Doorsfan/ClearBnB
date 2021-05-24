@@ -148,7 +148,6 @@ export default {
 .lastNameDiv{
   flex-grow:1;
   padding-left: 5px;
-
 }
 .passwordsDiv{
   display:flex;
@@ -170,28 +169,27 @@ export default {
 .countryCity{
   display:flex;
   flex-direction: row;
-  
 }
-
 .countryDiv{
  flex-grow: 1;
-  padding-right: 5px;
+ padding-right: 5px;
 }
 .cityDiv{
   flex-grow:1;
   padding-left: 5px;
 }
 .streetZip{
-   display:flex;
+  display:flex;
   flex-direction: row;
   padding-top:25px;
-
 }
 .streetDiv{
-  flex-grow:1;
+  flex-grow:0.8;
+  padding-right: 5px;
 }
 .zipDiv{
   flex-grow:0.2;
+  padding-left: 5px;
 }
 .phoneNumber{
   padding-top:25px;
@@ -199,7 +197,7 @@ export default {
   padding-right:5px;
 }
 .letterRegister{
-  margin-top: 50px;
+  margin-top: 65px;
    display:flex;
    flex-direction: row;
    justify-content:space-between;
@@ -293,6 +291,176 @@ p{
 display:flex;
 flex-direction: column;
 }
+
+@media only screen and (max-width: 600px) {
+
+  .SignUpForm{
+  height: 950px;
+  width: clamp(280px, 100vw, 600px);
+  margin: auto;
+  background-color: rgb(255, 255, 255);
+  border-radius: 0px ;
+  }
+
+  .firstLast{
+  display:flex;
+  flex-direction: column;
+}
+
+.firstNameDiv{
+  flex-grow: 1;
+  padding-left: 2px;
+ padding-right:2px;
+}
+.lastNameDiv{
+  flex-grow:1;
+padding-left: 2px;
+ padding-right:2px;
+}
+.passwordsDiv{
+  display:flex;
+  flex-direction: column;
+}
+.emailDiv{
+  padding-top:15px;
+  width: 100%;
+  padding-left: 2px;
+ padding-right:2px;
+}
+.passwordDiv{
+  flex-grow: 1;
+  padding-left: 2px;
+ padding-right:2px;
+}
+.repeatPasswordDiv{
+  flex-grow:1;
+  padding-left: 2px;
+ padding-right:2px;
+}
+.countryCity{
+  display:flex;
+  flex-direction: column;
+}
+.countryDiv{
+ flex-grow: 1;
+ padding-left: 2px;
+ padding-right:2px;
+
+}
+.cityDiv{
+  flex-grow:1;
+  padding-left: 2px;
+ padding-right:2px;
+}
+.streetZip{
+  display:flex;
+  flex-direction: column;
+  padding-top:15px;
+}
+.streetDiv{
+  flex-grow:1;
+  padding-left: 2px;
+ padding-right:2px;
+}
+.zipDiv{
+  flex-grow:1;
+  padding-left: 2px;
+ padding-right:2px;
+}
+.phoneNumber{
+  padding-top:15px;
+  width: 100%;
+  padding-left: 2px;
+ padding-right:2px;
+  
+}
+.letterRegister{
+  margin-top: 50px;
+   display:flex;
+   flex-direction: row;
+   justify-content:space-between;
+}
+.newsLetterP{
+  margin: 0;
+  padding-left: 4px;
+}
+.newsLetterBox{
+  padding-top:5px;
+  margin-top:1px;
+}
+h1{
+    font-size: 40px;
+}
+}
+@media only screen and (max-width: 527px) {
+.SignUpForm{
+  height:930px;
+  }
+  h1{
+    font-size: 35px;
+    margin-bottom:40px;
+  }
+}
+@media only screen and (max-width: 481px) {
+h1{
+    font-size: 30px;
+    margin-bottom:35px;
+  }
+  .SignUpForm{
+  height:920px;
+  }
+}
+@media only screen and (max-width: 387px) {
+h1{
+    font-size: 29px;
+    margin-bottom:35px;
+  }
+  .SignUpForm{
+  height:915px;
+  padding: 0 30px;
+  }
+}
+@media only screen and (max-width: 339px) {
+h1{
+    font-size: 25px;
+    margin-bottom:35px;
+  }
+  .SignUpForm{
+  height:910px;
+  }
+}@media only screen and (max-width: 301px) {
+h1{
+    font-size: 22px;
+    margin-bottom:35px;
+  }
+  .SignUpForm{
+  height:925px;
+  }
+  .letterRegister{
+  margin-top: 10px;
+   display:flex;
+   flex-direction: column;  
+}
+
+.newsLetterDiv{
+  display:flex;
+  justify-content:center;
+}
+button{
+  width: 120px;
+  height: 50px;
+  padding: 10px 20px;
+  background-color: #029ebb;
+  color: white;
+  border: 0;
+  border-radius: 2px ;
+  cursor: pointer;
+  font-size: 18px;
+  align-self: center;
+  margin-top:20px;
+}
+}
+
 
 
 </style>

@@ -265,9 +265,6 @@ export default {
   background-image: url("../../airplane.jpg");
   background-size:cover;
   background-repeat:no-repeat;
-  opacity: 0.8;
-  width:100vw;
-  min-width:100vw;
   background-attachment: fixed;
   background-position: center;
 }
