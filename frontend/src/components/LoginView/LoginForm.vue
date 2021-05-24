@@ -181,14 +181,13 @@ button:hover {
 @media only screen and (max-width: 540px) {
 .LogInPage{
   width: clamp(280px, 100vw, 500px);
-  margin: 80px auto;
+  margin: auto auto;
  
 }
 }
 @media only screen and (max-width: 500px) {
 .LogInPage{
   width: clamp(280px, 100vw, 500px);
-  margin: auto auto;
   border-radius: 0px ;
  
 }

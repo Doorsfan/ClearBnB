@@ -298,7 +298,6 @@ flex-direction: column;
   height: 950px;
   width: clamp(280px, 100vw, 600px);
   margin: auto;
-  background-color: rgb(255, 255, 255, 0.9);
   border-radius: 0px ;
   }
 
@@ -434,7 +433,7 @@ h1{
     margin-bottom:35px;
   }
   .SignUpForm{
-  height:925px;
+  height:905px;
   }
   .letterRegister{
   margin-top: 10px;
