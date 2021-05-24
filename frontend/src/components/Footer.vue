@@ -1,5 +1,6 @@
 <template>
   <footer>
+    <div class="overlay"></div>
     <div class="icons">
       <div class="faceBookIconDiv">
         <i class="fab fa-facebook-f"></i>
@@ -24,9 +25,9 @@
 
 <style scoped>
 footer {
-  margin-top: 16px;
-  background-color: rgba(255, 0, 255, 1);
-  background-image: url("../assets/skyline.png");
+  margin-top: 0;
+  background-color: rgba(0, 0, 0, 0);
+  background-image: url("../assets/skyline_sunset.png");
   background-repeat: no-repeat;
   background-position: center;
   padding: 10px;
@@ -34,7 +35,9 @@ footer {
   flex-direction: column;
   align-items: center;
   width: 100%;
-  padding-top: 180px;
+  padding-top: 140px;
+  position: absolute;
+  z-index: 1;
 }
 
 .icons {
