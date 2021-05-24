@@ -63,7 +63,7 @@
           <p v-if="lease.entireResidence" class="wholeResidenceText">The Whole Residence</p><p v-if="!lease.entireResidence" class="partResidenceText">A Part of The Residence</p>
         </div>
         <div v-if="!shouldShowModal" class="myDatePickerDiv">
-          <DatepickerForBookingView @updatedBookingHelper="checkNewHelper" @updatedChosenStartDate="newStartDate" @updatedChosenEndDate="newEndDate" @updatedDisabledDays="hi" v-if="lease" :myLease="lease"/>
+          <DatepickerForBookingView @updatedBookingHelper="checkNewHelper" @updatedChosenStartDate="newStartDate" @updatedChosenEndDate="newEndDate" @updatedDisabledDays="updateDates" v-if="lease" :myLease="lease"/>
         </div>
       </div>
       <div class="PriceToPayInTotal">
@@ -124,7 +124,7 @@ export default {
       document.getElementsByClassName("homeText")[0].style.display = 'block';
       document.getElementsByClassName("center")[0].style.height = '70px';
     }
-    let functionToCall = this.hi
+    let functionToCall = this.updateDates
     setInterval(function(){ 
          let myThing = store.getters.getBookedDates;
          functionToCall(myThing)
@@ -201,12 +201,13 @@ data()  {
   }
 },
 methods: {
-  hi(myInput){
-    if(myInput){
-      for(let date of myInput){
-        console.log(this.priceHelper.getCorrectDateFormat(date));
+  updateDates(dates){
+    if(dates){
+      for(let date of dates){
       }
     }
+    //27-28:e Augusti är bokade -> i datePickern är dem disabled, baserat på att den har laddat in från Databasen vilka datum som är redan bokade i grunden
+    //
     //Integrate so that it updates if the chosen date is valid or not based on store interaction
   },
   mainWasClicked(event){
