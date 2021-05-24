@@ -26,5 +26,4 @@ input {
 .app-main {
     flex-grow: 1;
     background-color: white;
-    opacity: 0.8;
 }
