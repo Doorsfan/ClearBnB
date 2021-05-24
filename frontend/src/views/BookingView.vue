@@ -222,7 +222,6 @@ methods: {
   mainWasClicked(event){
     if(this.ignoredFirstClick){
       if(this.shouldShowModal && event.target.className != 'confirmationModal'){
-        console.log("Should close modal");
         document.getElementsByClassName('booking-view-app-main')[0].style.opacity = 1;
         this.shouldShowModal = false;
         this.ignoredFirstClick = false;
@@ -231,7 +230,6 @@ methods: {
     if(this.shouldShowModal && event.target.className != 'confirmationModal'){
       this.ignoredFirstClick = true;
     }
-    console.log(event.target.className);
   },
   goToLogin(){
     document.getElementsByClassName("hiddenLoginPage")[0].click();
