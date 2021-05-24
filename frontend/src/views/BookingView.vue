@@ -63,7 +63,7 @@
           <p v-if="lease.entireResidence" class="wholeResidenceText">The Whole Residence</p><p v-if="!lease.entireResidence" class="partResidenceText">A Part of The Residence</p>
         </div>
         <div v-if="!shouldShowModal" class="myDatePickerDiv">
-          <DatepickerForBookingView @updatedBookingHelper="checkNewHelper" @updatedChosenStartDate="newStartDate" @updatedChosenEndDate="newEndDate" @updatedDisabledDays="updateDates" v-if="lease" :myLease="lease"/>
+          <DatepickerForBookingView @newDisabledDates="checkDisabledDates" @updatedBookingHelper="checkNewHelper" @updatedChosenStartDate="newStartDate" @updatedChosenEndDate="newEndDate" @updatedDisabledDays="updateDates" v-if="lease" :myLease="lease"/>
         </div>
       </div>
       <div class="PriceToPayInTotal">
@@ -97,8 +97,6 @@
       <button @click="goBackToStartPage" class="confirmModalButton">Back to Start Page</button>
     </div>
   </div>
-  <router-link class="hiddenLinkToLoginPage" to="/login">login</router-link>
-  <router-link class="hiddenLinkToStartPage" to="/">start</router-link>
 </template>
 
 <script setup="">
@@ -201,6 +199,14 @@ data()  {
   }
 },
 methods: {
+  checkDisabledDates(bookedDates){
+    console.log("the new dates that were to be checked, were: ", bookedDates);
+
+    for (let date of bookedDates) {
+      if (date.getTime() >= this.chosenStartDate.getTime() && date.getTime() <= this.chosenEndDate.getTime())
+        console.log("The date that was taken, was: ", date);
+    }
+  },
   updateDates(dates){
     if(dates){
       for(let date of dates){

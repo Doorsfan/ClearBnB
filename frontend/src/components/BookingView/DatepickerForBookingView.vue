@@ -32,7 +32,7 @@ import store from '../../store.js'
 const disabledDate = ref(add(new Date(), { days: 5 }))
 export default {
   props: ['myLease'],
-  emits: ['updatedChosenStartDate','updatedChosenEndDate', 'updatedDisabledDays', 'updatedBookingHelper'],
+  emits: ['updatedChosenStartDate','updatedChosenEndDate', 'updatedDisabledDays', 'updatedBookingHelper', 'newDisabledDates'],
   async mounted(){
     this.convertDate();
     this.getDisabledDates();
@@ -89,26 +89,22 @@ export default {
       this.originalEndDate = new Date(splitMyEndDate[0], Number(splitMyEndDate[1])-1, splitMyEndDate[2])
     },
     async periodicallyUpdateLeases(){
-      console.log("hi");
       let local = this.disabledDays.dates;
       let store = this.$store;
       let getDisabledDatesFunction = this.getDisabledDates
       let myDisabledDays = this.disabledDays.dates;
-      setInterval(function(){ 
+      let thisContext = this
+      setInterval(function() { 
          store.commit('updateBookedDates', local)
          getDisabledDatesFunction()
-         console.log("After updating the DisabledDates were: ", myDisabledDays);
+         thisContext.$emit("newDisabledDates", thisContext.disabledDays.dates);
       },
       5000);
     },
     async getDisabledDates(){
       let res = await fetch('/rest/bookings')
       let responseInJson = await res.json();
-      console.log("The disabled dates in GetDisabledDates was: ", this.disabledDays.dates);
       this.disabledDays.dates = []
-      // BOKNING 1 : Augusti 15-20
-      // BOKNING 2 : September 10-30
-      //
       for(let booking of responseInJson){
         if(booking.leaseId == this.myLease.id){
           let bookingStartDate = booking.startDate;
