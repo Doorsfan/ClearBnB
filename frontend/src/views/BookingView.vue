@@ -72,7 +72,7 @@
         <p v-if="selectedNumberOfGuests == 0 && !dateIsTaken">Please select amount of Guests attending to see the total price.</p>
       </div>
       <div class="BookingButtonDiv">
-        <button @click="book" v-if="!shouldShowModal && user &&selectedNumberOfGuests > 0 && !dateIsTaken" class="bookingButton" type="button" value="Book">Book Now!</button>
+        <button @click="book" v-if="!shouldShowModal && user && selectedNumberOfGuests > 0 && !dateIsTaken && amountOfDays > 0" class="bookingButton" type="button" value="Book">Book Now!</button>
         <div class="SpecialErrorBox" v-if="(chosenStartDate.length == 0 || chosenEndDate.length == 0 || selectedNumberOfGuests == 0) && user != null">Before you can book, you must address:</div>
         <div class="errorBox" v-if="(chosenStartDate.length == 0 || chosenStartDate.length == 0) && user != null" value="Choose a From Date and a To Date First!">Choose a From Date and a To Date</div>
         <div v-if="selectedNumberOfGuests == 0 && user != null && amountOfDays > 0" class="errorBox" value="Choose Amount of Guests first!">Choose amount of Guests</div>
@@ -125,12 +125,6 @@ export default {
       document.getElementsByClassName("homeText")[0].style.display = 'block';
       document.getElementsByClassName("center")[0].style.height = '70px';
     }
-    let functionToCall = this.updateDates
-    setInterval(function(){ 
-         let myThing = store.getters.getBookedDates;
-         functionToCall(myThing)
-      },
-      5000);
   },
   watch: {
     selectedNumberOfGuests(){
@@ -209,15 +203,6 @@ methods: {
       }
     }
     this.dateIsTaken = false;
-  },
-  updateDates(dates){
-    if(dates){
-      for(let date of dates){
-      }
-    }
-    //27-28:e Augusti är bokade -> i datePickern är dem disabled, baserat på att den har laddat in från Databasen vilka datum som är redan bokade i grunden
-    //
-    //Integrate so that it updates if the chosen date is valid or not based on store interaction
   },
   mainWasClicked(event){
     if(this.ignoredFirstClick){

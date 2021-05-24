@@ -35,11 +35,6 @@ export default {
   emits: ['updatedChosenStartDate','updatedChosenEndDate', 'updatedDisabledDays', 'updatedBookingHelper', 'newDisabledDates'],
   async mounted(){
     this.convertDate();
-    this.getDisabledDates();
-    let emptyBookingHelper = new BookingHelper();
-    emptyBookingHelper.setTakenBookings(this.disabledDays.dates);
-    store.commit('setBookingHelper', emptyBookingHelper);
-    this.newBookingHelper = emptyBookingHelper;
     this.periodicallyUpdateLeases();
   },
   data() {
@@ -92,7 +87,6 @@ export default {
       let local = this.disabledDays.dates;
       let store = this.$store;
       let getDisabledDatesFunction = this.getDisabledDates
-      let myDisabledDays = this.disabledDays.dates;
       let thisContext = this
       setInterval(function() { 
          store.commit('updateBookedDates', local)
