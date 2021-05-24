@@ -291,7 +291,18 @@ p{
 display:flex;
 flex-direction: column;
 }
-
+@media only screen and (max-width: 1800px) {
+  .SignUpForm{
+  text-align: center;
+  height: 750px;
+  width: clamp(600px, 80vw, 1200px);
+  margin: 50px auto;
+  border-radius: 5px ;
+  border: 1px solid grey;
+  background-color: rgb(255, 255, 255, 0.9);
+  padding: 0 50px;
+  }
+}
 @media only screen and (max-width: 600px) {
 
   .SignUpForm{

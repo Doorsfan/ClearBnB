@@ -83,8 +83,6 @@ export default {
 .hiddenptag{
   display:none;
 }
-
-
 .errorText{
   margin: 0px;
   padding: 0px;
@@ -178,6 +176,16 @@ p{
 button:hover {
   transform: scale(1.1);
 }
+@media only screen and (max-width: 1800px) {
+.LogInPage{
+  text-align: center;
+  height: 600px;
+  width: 500px;
+  margin: 50px auto;
+  border-radius: 5px ;
+  border: 1px solid grey;
+  background-color: rgb(255, 255, 255, 0.9);
+}}
 @media only screen and (max-width: 540px) {
 .LogInPage{
   width: clamp(280px, 100vw, 500px);
