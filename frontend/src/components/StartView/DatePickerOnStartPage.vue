@@ -1,11 +1,11 @@
 <template>
 <div class="datePickersMainDiv">
   <div class="firstDiv">
-    <label for="fromDatePicker">From the:</label>
+    <p class="fromTheText">From The</p>
     <Datepicker id="fromDatePicker" class="fromDatePicker" v-model="startDate" :lower-limit="minimumStartDate" :upper-limit="endDate"/>
   </div>
   <div class="secondDiv">
-    <label for="toDatePicker">To the:</label>
+    <p class="toTheText">To The</p>
     <Datepicker id="toDatePicker" class="toDatePicker" v-model="endDate" :lower-limit="minimumEndDate"/>
   </div>
 </div>
@@ -16,27 +16,24 @@
 </script>
 <script>
 import { ref } from 'vue' //Ref transmutes a value to become part of a reactive Object
+import PPPN from '../../components/PPPN.js';
   
 const minimumDate = ref(new Date()) //The earliest date a user can pick is Today
 const startDate = ref(new Date()) //The date for the From datePicker - the start Date
 
 //To make the Date be able to just add 1 day, we can define a function on it's Prototype
-Date.prototype.addDays = function(days) {
-  var date = new Date(this.valueOf());
-  date.setDate(date.getDate() + days);
-  return date;
-}
-let endDateOneDayAhead = new Date().addDays(1);
-const endDate = ref(endDateOneDayAhead) //The date for the To datePicker - the end date
+let myDateHelper = new PPPN();
+let endDateSevenDaysAhead = myDateHelper.addDays(new Date(),7);
+const endDate = ref(endDateSevenDaysAhead) //The date for the To datePicker - the end date
 
 export default {
   //emits: ['updateEndDate', 'updateStartDate'],
   data() {
     return {
       minimumStartDate: new Date(),
-      minimumEndDate: new Date().addDays(1),
-      startDate: startDate,
-      endDate: endDate
+      minimumEndDate: myDateHelper.addDays(new Date(),1),
+      startDate: new Date("2021-05-27"),
+      endDate: new Date("2021-07-30")
     }
   },
   watch: {
@@ -74,9 +71,30 @@ export default {
 * {
   font-size: 20px;
 }
-div{
+p {
   width:max-content;
-  display:inline-block;
-  margin: 10px;
+  margin-left:auto;
+  margin-right:auto;
+  padding-bottom: 8px;
+}
+@media only screen and (max-width: 300px) {
+  div {
+    width:max-content;
+    padding:0px;
+    margin: 0px;
+  }
+}
+@media only screen and (min-width: 1330px) {
+  .firstDiv, .secondDiv{
+    display:inline-block;
+  }
+  .firstDiv{
+    margin-left: 10px;
+    margin-right: 15px;
+  }
+  .secondDiv{
+    margin-right:15px;
+  }
+
 }
 </style>

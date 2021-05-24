@@ -88,7 +88,7 @@ export default {
         typeOfHousing: "House",
         startDate: "2021-04-05",
         endDate: "2021-05-05",
-        pricePerNight: 1000,
+        price: 1000,
         maxGuests: 1,
         beds: 1,
         amenities: amenitiesAsJson,

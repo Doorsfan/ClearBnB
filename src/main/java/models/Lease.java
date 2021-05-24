@@ -3,12 +3,14 @@ package models;
 import nosqlite.annotations.Document;
 import nosqlite.annotations.Id;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Document
 public class Lease {
     @Id
     private String id;
+    //private String leaseId;
     private String ownerId;
     private String title;
     private String location;
@@ -17,13 +19,17 @@ public class Lease {
     private boolean entireResidence;
     private String startDate;
     private String endDate;
-    private double PPPN;
+    private double price;
     private int maxGuests;
     private int beds;
-    private Amenity amenities; // Or should I be using a map?
-    private List<String> imageURLs;
+    private String[] amenities; // Or should I be using a map?
+    private String[] imageURLs;
 
     public Lease() {}
+
+    public void setImageURLs(String[] imageURLs) {
+        this.imageURLs = imageURLs;
+    }
 
     public String getId() {
         return id;
@@ -97,12 +103,12 @@ public class Lease {
         this.endDate = endDate;
     }
 
-    public double getPPPN() {
-        return PPPN;
+    public double getPrice() {
+        return price;
     }
 
-    public void setPPPN(double PPPN) {
-        this.PPPN = PPPN;
+    public void setPrice(double price) {
+        this.price = price;
     }
 
     public int getMaxGuests() {
@@ -121,37 +127,35 @@ public class Lease {
         this.beds = beds;
     }
 
-    public Amenity getAmenities() {
+    public String[] getAmenities() {
         return amenities;
     }
 
-    public void setAmenities(Amenity amenities) {
+    public void setAmenities(String[] amenities) {
         this.amenities = amenities;
     }
 
-    public List<String> getImageURLs() {
+    public String[] getImageURLs() {
         return imageURLs;
-    }
-
-    public void setImageURLs(List<String> imageURLs) {
-        this.imageURLs = imageURLs;
     }
 
     @Override
     public String toString() {
         return "Lease{" +
                 "id='" + id + '\'' +
+                //", leaseId='" + leaseId + '\'' +
                 ", ownerId='" + ownerId + '\'' +
                 ", title='" + title + '\'' +
                 ", location='" + location + '\'' +
                 ", description='" + description + '\'' +
                 ", typeOfHousing='" + typeOfHousing + '\'' +
+                ", entireResidence=" + entireResidence +
                 ", startDate='" + startDate + '\'' +
                 ", endDate='" + endDate + '\'' +
-                ", PPPN=" + PPPN +
+                ", price=" + price +
                 ", maxGuests=" + maxGuests +
                 ", beds=" + beds +
-                ", amenities=" + amenities +
+                ", amenities=" + Arrays.toString(amenities) +
                 ", imageURLs=" + imageURLs +
                 '}';
     }

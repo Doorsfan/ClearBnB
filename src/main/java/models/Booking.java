@@ -15,8 +15,33 @@ public class Booking {
     private String endDate;
     private int guests;
     private double totalPrice;
+    private Lease bookedStay;
 
     public Booking() {}
+    public Booking(String userId, String leaseId, String location, String startDate, String endDate, int guests, double totalPrice, Lease bookedStay) {
+        this.userId = userId;
+        this.leaseId = leaseId;
+        this.location = location;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.guests = guests;
+        this.totalPrice = totalPrice;
+        this.bookedStay = bookedStay;
+    }
+
+    @Override
+    public String toString() {
+        return "Booking{" +
+                "id='" + id + '\'' +
+                ", userId='" + userId + '\'' +
+                ", leaseId='" + leaseId + '\'' +
+                ", location='" + location + '\'' +
+                ", startDate='" + startDate + '\'' +
+                ", endDate='" + endDate + '\'' +
+                ", guests=" + guests +
+                ", totalPrice=" + totalPrice +
+                '}';
+    }
 
     public String getId() {
         return id;
@@ -82,17 +107,11 @@ public class Booking {
         this.totalPrice = totalPrice;
     }
 
-    @Override
-    public String toString() {
-        return "Booking{" +
-                "id='" + id + '\'' +
-                ", userId='" + userId + '\'' +
-                ", leaseId='" + leaseId + '\'' +
-                ", location='" + location + '\'' +
-                ", startDate='" + startDate + '\'' +
-                ", endDate='" + endDate + '\'' +
-                ", guests=" + guests +
-                ", totalPrice=" + totalPrice +
-                '}';
+    public Lease getBookedStay() {
+        return bookedStay;
+    }
+
+    public void setBookedStay(Lease bookedStay) {
+        this.bookedStay = bookedStay;
     }
 }

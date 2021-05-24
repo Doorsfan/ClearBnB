@@ -2,7 +2,6 @@
   <div class="myDatePickerDiv">
   <p class="AvailableFromP">Available from:</p>
   <datepicker
-    @change="updateLeaseStartDate"
     v-model="startDate"
     placeholder="Lease starts at"    
     :lowerLimit="thisDay"
@@ -10,7 +9,6 @@
   />
   <p class="AvailableToP">Available To:</p>
   <datepicker
-    @change="updateLeaseEndDate"
     v-model="endDate"
     placeholder="Lease ends at"
     :lower-limit="startDate"
@@ -38,21 +36,24 @@ export default {
       }
     }
   },
+  watch: {
+    endDate(){
+      let latestLease = this.$store.getters.getLeaseToBuild
+      latestLease.endDate = this.endDate;
+      this.$store.commit('setLeaseToBuild', latestLease)
+    },
+    startDate(){
+      let latestLease = this.$store.getters.getLeaseToBuild
+      latestLease.startDate = this.startDate;
+      this.$store.commit('setLeaseToBuild', latestLease)
+    },
+    disabledDays(){
+      this.$emit("updatedDisabledDays", this.disabledDays);
+    }
+  },
   methods: {
     addDisabledDate(dateString){ //"2021-05-20"
       this.disabledDays.dates.push(new Date(dateString))
-    },
-    updateDisabledLeaseDays(){
-      let updatedDisabledDays = this.disabledDays.dates
-      $emit("updatedDisabledDays", updatedDisabledDays)
-    },
-    updateLeaseStartDate(){
-      let updatedLeaseStartDate = this.startDate
-      $emit("updatedLeaseStartDate", updatedLeaseStartDate)
-    },
-    updateLeaseEndDate(){
-      let updatedLeaseEndDate = this.endDate
-      $emit("updatedLeaseEndDate", updatedLeaseEndDate)
     }
   }
 }

@@ -1,5 +1,6 @@
 <template>
-    Beds: <input class="bedsInputForm" type="text" v-model="wantedBeds" placeholder="Beds">
+    <p class="bedsInputText">Beds</p>
+    <input class="bedsInputForm" type="text" v-model="wantedBeds" placeholder="Beds">
 </template>
 <script>
 export default {
@@ -20,5 +21,9 @@ export default {
 .bedsInputForm{
   width:48px;
   padding:1px;
+}
+.bedsInputText{
+  margin-bottom: 8px;
+  padding-left:2px;
 }
 </style>

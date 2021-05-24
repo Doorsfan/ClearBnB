@@ -1,5 +1,7 @@
 import express.Express;
+import models.User;
 import models.UserInfo;
+import nosqlite.utilities.Filter;
 
 import static nosqlite.Database.collection;
 
@@ -13,12 +15,22 @@ public class UserInfoHandler {
     }
 
     private void initUserInfoHandler() {
-        // save a userInfo and return the object on the server
-        app.post("/rest/userinfos", (req,res) -> {
+        // Updated a UserInfo - if it already exists, delete it - and save it anew
+        app.post("/rest/userinfos/:id", (req,res) -> {
             UserInfo userInfo = req.body(UserInfo.class);
+            UserInfo userInfoToDelete = collection("UserInfo").findOne(Filter.eq("userId", req.params("id")));
+            if(userInfoToDelete != null){
+                collection("UserInfo").deleteOne(Filter.eq("userId", req.params("id")));
+            }
             collection("UserInfo").save(userInfo);
-            res.json(userInfo);
+            res.json("Updated User info");
         });
+
+        app.post("/rest/userinfos", (req,res) -> {
+            UserInfo newUserInfo = req.body(UserInfo.class);
+            collection("UserInfo").save(newUserInfo);
+        });
+
         // get all userInfos
         app.get("/rest/userinfos", (req,res) -> {
             //res.json(req.session("current-userInfo")); //???
@@ -26,11 +38,13 @@ public class UserInfoHandler {
         });
         // get a specific userInfo
         app.get("/rest/userinfos/:id", (req,res) -> {
-            res.json(collection("UserInfo").findById(req.params("id")));
+            UserInfo relevantInfo = collection("UserInfo").findOne(Filter.eq("userId", req.params("id")));
+            System.out.println("Found info in backend: " + relevantInfo);
+            res.json(relevantInfo);
         });
         // delete a specific userInfo
         app.delete("/rest/userinfos/:id", (req,res) -> {
-            res.json(collection("UserInfo").deleteById(req.params("id")));
+            collection("UserInfo").deleteOne(Filter.eq("userId", req.params("id")));
         });
     }
 }

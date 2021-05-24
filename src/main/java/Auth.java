@@ -1,5 +1,6 @@
 import express.Express;
 import models.User;
+import models.UserInfo;
 import nosqlite.utilities.Filter;
 import utilities.HashPassword;
 
@@ -18,6 +19,19 @@ public class Auth {
     }
 
     private void initAuth() {
+
+        app.post("/api/updateUser", (req, res) -> {
+            User user = req.body(User.class);
+            User existingUser = collection("User").findOne(Filter.eq("username", user.getUsername()));
+            if(existingUser != null){
+                collection("User").save(existingUser);
+            }
+            else{
+                collection("User").save(user);
+            }
+            res.json("The new user info was: " + existingUser);
+        });
+
         // register user
         app.post("/api/register", (req,res) -> {
             User user = req.body(User.class);
@@ -47,20 +61,16 @@ public class Auth {
             User userInColl = collection("User").findOne("username==" + user.getUsername());
 
             if(userInColl == null) {
-                System.out.println("Did not find user");
                 res.json(Map.of("error", "Bad credentials"));
                 return;
             }
 
             // Validate password
             if(HashPassword.match(user.getPassword(), userInColl.getPassword())){
-                System.out.println("Found password");
                 // Save user in session, to remember logged in state
                 req.session("current-user", userInColl);
-
                 res.json(userInColl);
             }else {
-                System.out.println("Failed in password check");
                 res.json(Map.of("error", "Bad credentials"));
             }
         });

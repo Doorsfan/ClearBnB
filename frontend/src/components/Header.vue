@@ -2,27 +2,34 @@
   <div class="navbar">
     <div v-if="!isSmall" class="pc-nav">
       <div class="left">
-        <router-link to="/">Home</router-link>
+        <router-link to="/">
+          <img class="sunIconInHeader" src="src/assets/clearbnb-logo.png">
+          <p class="homeText">Home</p>
+        </router-link>
       </div>
       <div class="center">
-        <router-link to="userPage">User Page</router-link>
-        <router-link to="AddLease">Add Lease</router-link>
-        <router-link to="BookingView">Booking View</router-link>
+
       </div>
       <div class="right">
-        <router-link to="signUp"
-          ><i class="fas fa-user-plus"></i>Sign Up</router-link
-        >
+        <router-link class="signUpLink" v-if="!$store.getters.getCurrentUser" to="signUp"><i class="fas fa-user-plus"></i>Sign Up</router-link><router-link class="signUpLink" v-if="$store.getters.getCurrentUser" to="/userPage"><i class="fas fa-user-plus"></i>My Page</router-link>
         <span>|</span>
-        <router-link to="login"
-          ><i class="fas fa-sign-in-alt"></i>Login</router-link
-        >
+        <router-link v-if="!$store.getters.getCurrentUser" class="loginLink" to="login"><i class="fas fa-sign-in-alt"></i>Login</router-link><router-link class="logOutLink" v-if="$store.getters.getCurrentUser" to="/"><i class="fas fa-sign-in-alt logOutIcon"></i><button @click="logOut" type="button" class="logOutLink">Log Out</button></router-link>
       </div>
     </div>
     <div v-else class="tablet-nav">
       <Hamburger />
-      <router-link to="/">Home</router-link>
-      <router-link to="login">Login</router-link>
+      <div class="smallMyPageDiv" v-if="$store.getters.getCurrentUser">
+        <router-link class="smallMyPagesLink" v-if="$store.getters.getCurrentUser" to="/userPage"><i class="fas fa-user-plus smallMyPageIcon"></i>My Page</router-link>
+      </div>
+      <div class="smallLogOutDiv" v-if="$store.getters.getCurrentUser">
+        <router-link class="smallLogOutLink" v-if="$store.getters.getCurrentUser" to="/"><i class="fas fa-sign-in-alt smallLogOutIcon"></i><button @click="logOut" type="button" class="smallLogOutLink">Log Out</button></router-link>
+      </div>
+      <div class="smallSignUpDiv" v-if="!$store.getters.getCurrentUser">
+        <router-link v-if="!$store.getters.getCurrentUser" class="signUpLink smallSignupLink" to="signUp"><i class="fas fa-user-plus smallSignUpIcon"></i>Sign Up</router-link>
+      </div>
+      <div class="smallLoginDiv" v-if="!$store.getters.getCurrentUser">
+        <i class="fas fa-sign-in-alt smallLogInIcon"></i><router-link v-if="!$store.getters.getCurrentUser" class="smallLoginLink" to="login">Login</router-link>
+      </div>
     </div>
   </div>
 </template>
@@ -30,6 +37,8 @@
 <script>
 import Hamburger from "./HamburgerMenu.vue";
 export default {
+  props:['signUp', 'login'],
+  emits: ['loggedOut'],
   components: {
     Hamburger,
   },
@@ -37,6 +46,7 @@ export default {
     return {
       isSmall: false,
       big: window.matchMedia("(min-width:750px)"),
+      currentUser: this.$store.getters.getCurrentUser
     };
   },
   mounted() {
@@ -44,6 +54,10 @@ export default {
     this.big.addEventListener("change", this.watchMedia);
   },
   methods: {
+    logOut(){
+      this.$store.commit('setUser', null)
+      this.currentUser = null;
+    },
     watchMedia: function (x) {
       if (x.matches) this.isSmall = false;
       else this.isSmall = true;
@@ -53,17 +67,74 @@ export default {
 </script>
 
 <style scoped>
+.smallLogOutDiv{
+  width: max-content;
+}
+.smallLogOutIcon{
+  margin-right:5px;
+  display:flex;
+  width:max-content;
+  top:9px;
+  right: 65px;
+}
+.smallLogInIcon{
+  display: flex;
+  top: 22px;
+  right: 72px;
+  margin-left:10px;
+}
+.smallLogOutLink{
+  display:flex;
+  width:max-content;
+  top:10px;
+  right: 15px;
+  background:none;
+  border:none;
+}
+.logOutLink{
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  background:none;
+  border:none;
+  font-size: 13px;
+}
+.homeText{
+  display:none;
+}
+.left{
+  margin:0px;
+  padding:0px;
+  position:absolute;
+  left: 0px;
+  top: 0px;
+}
+.navbar{
+  background: linear-gradient(0.25turn, #f69d3c, #ebf8e1,#ebf8e1, #f69d3c);
+  width:100%;
+  
+}
+.homeIcon{
+
+  display:inline-block;
+  width:40px;
+  margin-top:10px;
+  margin-left:5px;
+}
+.homeText{
+  margin-bottom:10px;
+  margin-left:3px;
+  font-weight:bolder;
+  font-size:16px;
+  color:black;
+}
 .navbar {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   border-bottom: 1px solid #00200c;
-  height: 70px;
   padding: 0 20px;
 }
 .pc-nav,
 .tablet-nav {
-  height: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -74,9 +145,13 @@ a {
   text-decoration: none;
   color: rgb(63, 63, 63);
 }
-.center a {
+.center {
   margin: 0 10px;
   font-weight: bold;
+  width:max-content;
+  margin-left:auto;
+  margin-right:auto;
+  height:210px;
 }
 .right {
   align-self: flex-start;
@@ -84,15 +159,16 @@ a {
   display: flex;
   flex-direction: row;
   align-items: baseline;
+  margin-right:20px;
 }
 .right span {
   font-size: 13px;
   margin: 0 10px;
-  color: rgb(172, 172, 172);
+  color: black;
 }
 .right a {
   font-size: 13px;
-  color: rgb(172, 172, 172);
+  color: black;
   transition: color 0.3s;
 }
 .right i {
@@ -104,5 +180,8 @@ a {
 }
 .tablet-nav a {
   font-weight: bold;
+}
+.logOutIcon{
+  color: black;
 }
 </style>

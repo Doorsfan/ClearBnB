@@ -1,18 +1,29 @@
 <template>
   <div class="mainDiv">
-  <h3 class="addResidenceHeader">Add a residence</h3>
-  <p class="myTitle">Title</p>
-  <input type="text" required placeholder="Title" v-model="myTitle" />
-  <p class="myLocation">Location</p>
-  <LocationInputForm @updatedLocation="updateLocation" />
-  <DescriptionForm @updatedDescription="updateDescription" />
-  <InputForPricingBedAndPeople @updateBeds="updateNrOfBeds" @updateMaxPeople="updateNrOfMaxPeople" @updatePrice="updatePricePerPerson" />
-  <HousingRadioButtons @updateChosenHousing="updateChosenHousing" @updateChosenSize="updateChosenSize"/>
-  <AddAmenities />
-  <ImageUrlInputForm @updatedImageURLs="updateImageURLs" />
-  <DatepickerForAvailableDates @updatedLeaseStartDate="updateStartDate" @updatedLeaseEndDate="updateEndDate" 
-  @updatedDisabledDays="updateDisabledDays" />
-  <router-link class="previewButton" to="preview">Preview</router-link>
+    <div class="greyBackgroundDiv">
+      <h3 class="addResidenceHeader">Add a residence</h3>
+      <p class="myTitle">Title</p>
+      <input type="text" required placeholder="Title" v-model="title" />
+      <p class="myLocation">Location</p>
+      <LocationInputForm v-model="location" @updatedLocation="updateLocation" />
+      <DescriptionForm v-model="description" @updatedDescription="updateDescription" />
+      <div class="inputForBedsDiv">
+        <InputForPricingBedAndPeople @updateBeds="updateNrOfBeds" @updateMaxPeople="updateNrOfMaxGuests" @updatePrice="updatePrice" />
+      </div>
+      <HousingRadioButtons @updateChosenHousing="updateChosenHousing" @updateChosenSize="updateChosenSize"/>
+      <AddAmenities @updateWifi="updateWifi" @updateKitchen="updateKitchen" @updateWasher="updateWasher" @updateHeating="updateHeating" @updateAC="updateAC" />
+      <div class="imageURLInputDiv">
+        <ImageUrlInputForm @updatedImgURLs="updateIMGUrls" />
+      </div>
+      <ImageBox @removedFirstImage="removeFirstIMGinURLs" @removedSecondImage="removeSecondIMGinURLs" @removedThirdImage="removeThirdIMGinURLs" @removedFourthImage="removeFourthIMGinURLs" @removedFifthImage="removeFifthIMGinURLs" :imageURL="imageURLs"/>
+      <div class="datePickerDiv">
+        <DatepickerForAvailableDates
+        @updatedDisabledDays="updateDisabledDays"/>
+      </div>
+      <div class="buttonDiv">
+        <router-link class="previewButton" to="preview">Preview</router-link>
+      </div>
+    </div>
   </div>
 </template>
 <script setup="">
@@ -23,121 +34,289 @@ import InputForPricingBedAndPeople from '../components/AddLeaseView/InputForPric
 import ImageUrlInputForm from '../components/AddLeaseView/ImageUrlInputForm.vue'
 import LocationInputForm from '../components/AddLeaseView/LocationInputForm.vue'
 import AddAmenities from '../components/AddLeaseView/AddAmenities.vue'
+import Lease from '../components/Lease.vue'
+import ImageBox from '../components/AddLeaseView/ImageBox.vue'
+import store from '../store.js'
 </script>
 <script>
 export default {
   name: 'AddResidence',
-  components: ['DatepickerForAvailableDates', 'DescriptionForm', 'HousingRadioButtons', 'InputForPricingBedAndPeople',  'ImageUrlInputForm','LocationInputForm', 'AddAmenities'],
+  components: ['DatepickerForAvailableDates', 'DescriptionForm', 'HousingRadioButtons', 'InputForPricingBedAndPeople','LocationInputForm', 'AddAmenities', 'ImageBox'],
+  watch: {
+    title(){
+      this.lease.title = this.title
+      store.commit('setLeaseToBuild', this.lease)
+    },
+    lease(){
+    }
+  },
+  beforeMount(){
+    if(this.$store.getters.getLeaseToBuild != null){
+      let latestLease = this.$store.getters.getLeaseToBuild
+      this.title = latestLease.title
+      this.location = latestLease.location
+      this.description = latestLease.description
+      this.typeOfHousing = latestLease.typeOfHousing
+      if(latestLease.entireResidence == true){
+        this.size = "Entire residence"
+      }
+      else{
+        this.size = "Part"
+      }
+      this.amenities = latestLease.amenities
+      this.imageURLs = latestLease.imageURLs
+    }
+    else{
+      this.lease.startDate = new Date();
+      this.lease.endDate = new Date();
+    }
+  },
   data() {
     return {
-      myTitle: '',
-      beds: '',
-      maxGuests: '',
-      PPPN: '',
-      typeOfHousing: '',
+      user: this.$store.getters.getCurrentUser,
+      lease: this.$store.getters.getLeaseToBuild == null ? new Lease(this.$store.getters.getCurrentUser.id, '','','','','','','','','','','','') : this.$store.getters.getLeaseToBuild,
+      title: '',
+      location: this.$store.getters.getLeaseToBuild == null ? '' : this.$store.getters.getLeaseToBuild.location,
+      description: this.$store.getters.getLeaseToBuild == null ? '' : this.$store.getters.getLeaseToBuild.description,
+      typeOfHousing: this.$store.getters.getLeaseToBuild == null ? '' : this.$store.getters.getLeaseToBuild.typeOfHousing,
+      size: this.$store.getters.getLeaseToBuild == null ? '' : this.$store.getters.getLeaseToBuild.entireResidence,
+      startDate: new Date(),
+      endDate: new Date(),
+      price: this.$store.getters.getLeaseToBuild == null ? '' : this.$store.getters.getLeaseToBuild.price,
+      maxGuests: this.$store.getters.getLeaseToBuild == null ? '' : this.$store.getters.getLeaseToBuild.maxGuests,
+      beds: this.$store.getters.getLeaseToBuild == null ? '' : this.$store.getters.getLeaseToBuild.beds,
+      amenities: this.$store.getters.getLeaseToBuild == null ? '' : this.$store.getters.getLeaseToBuild.amenities,
       hasWifi: false,
       hasKitchen: false,
       hasWasher: false,
       hasHeating: false,
       hasAirConditioner: false,
-      size: '',
-      location: '',
-      title: '',
       imageURLs: [],
-      description: '',
-      startDate: '',
-      endDate: '',
       disabledDays: []
     }
   },
   methods: {
-    updateDisabledDays(newDisabledDays){
-      this.disabledDays = newDisabledDays
+    mounted(){
+      if(document.getElementsByClassName("sunIconInHeader").length > 0){
+        document.getElementsByClassName("sunIconInHeader")[0].src = '/public/home_icon.png'
+        document.getElementsByClassName("sunIconInHeader")[0].className = 'house_icon'
+        document.getElementsByClassName("homeText")[0].style.display = 'block';
+        document.getElementsByClassName("center")[0].style.height = '70px';
+      }
+      this.$store.commit('setLeaseToBuild', this.lease)
     },
-    updateStartDate(newStartDate){
-      this.startDate = newStartDate
+    removeFirstIMGinURLs(){
+
+      this.imageURLs = this.imageURLs.filter(function(value, index, arr){ return index != 0 });
+      this.lease.imageURLs = this.imageURLs
+      store.commit('setLeaseToBuild', this.lease)
+      document.getElementsByClassName("mainDiv")[0].style.backgroundImage = 'url(' + '/public/house.jpg' + ')';
     },
-    updateEndDate(newEndDate){
-      this.endDate = newEndDate
+    removeSecondIMGinURLs(){
+      this.imageURLs = this.imageURLs.filter(function(value, index, arr){ return index != 1 });
+      this.lease.imageURLs = this.imageURLs
+      store.commit('setLeaseToBuild', this.lease)
     },
-    updateDescription(newDescription){
-      this.description = newDescription
+    removeThirdIMGinURLs(){
+      this.imageURLs = this.imageURLs.filter(function(value, index, arr){ return index != 2 });
+      this.lease.imageURLs = this.imageURLs;
+      store.commit('setLeaseToBuild', this.lease)
     },
-    updateImageURLs(newImageURLs){
-      this.imageURLs = newImageURLs
+    removeFourthIMGinURLs(){
+      this.imageURLs = this.imageURLs.filter(function(value, index, arr){ return index != 3 });
+      this.lease.imageURLs = this.imageURLs;
+      store.commit('setLeaseToBuild', this.lease)
+    },
+    removeFifthIMGinURLs(){
+      this.imageURLs = this.imageURLs.filter(function(value, index, arr){ return index != 4 });
+      this.lease.imageURLs = this.imageURLs;
+      store.commit('setLeaseToBuild', this.lease)
+    },
+    updateIMGUrls(newImageURLs){
+      console.log("this imageURLs was: ", this.imageURLs);
+      this.imageURLs.push(newImageURLs);
+      this.lease.imageURLs = this.imageURLs;
+      store.commit('setLeaseToBuild', this.lease)
+      document.getElementsByClassName("mainDiv")[0].style.backgroundImage = 'url(' + this.imageURLs[0][0] +')';
+    },
+    updateTitle(newTitle){
+      this.title = newTitle
+      this.lease.title = this.title;
+      store.commit('setLeaseToBuild', this.lease)
     },
     updateLocation(newLocation){
       this.location = newLocation
+      this.lease.setLocation(this.location);
+      store.commit('setLeaseToBuild', this.lease)
     },
-    updateNrOfBeds(amountOfBeds){
-      this.nrOfBeds = amountOfBeds
-    },
-    updateNrOfMaxPeople(maxPeople){
-      this.maxPeople = maxPeople
-    },
-    updatePricePerPerson(updatedPrice){
-      this.pricePerPerson = updatedPrice
+    updateDescription(newDescription){
+      this.description = newDescription
+      this.lease.setDescription(this.description)
+      store.commit('setLeaseToBuild', this.lease)
     },
     updateChosenHousing(chosenHousing){
-      //Have in Add Residence View that it updates based on this function
       this.typeOfHousing = chosenHousing
-      console.log("new type of housing is: ", this.typeOfHousing);
+      this.lease.setTypeOfHousing(this.typeOfHousing);
+      store.commit('setLeaseToBuild', this.lease)
     },
     updateChosenSize(chosenSize){
       this.size = chosenSize
-      console.log("new chosen size is", this.size)
+      if(this.size == "Part"){
+        this.lease.setEntireResidence(false);
+      }
+      else{
+        this.lease.setEntireResidence(true);
+      }
+      store.commit('setLeaseToBuild', this.lease)
+    },
+    updatePrice(updatedPrice){
+      this.price = updatedPrice
+      this.lease.setPrice(this.price);
+      store.commit('setLeaseToBuild', this.lease)
+    },
+    updateNrOfMaxGuests(maxPeople){
+      this.maxPeople = maxPeople
+      this.lease.setMaxGuests(this.maxPeople);
+      store.commit('setLeaseToBuild', this.lease)
+    },
+    updateNrOfBeds(amountOfBeds){
+      this.nrOfBeds = amountOfBeds
+      this.lease.setBeds(this.nrOfBeds);
+      store.commit('setLeaseToBuild', this.lease)
+    },
+    updateWifi(hasWifi){
+      this.hasWifi = hasWifi
+      this.updateAmenities()
+    },
+    updateKitchen(hasKitchen){
+      this.hasKitchen = hasKitchen;
+      this.updateAmenities()
+    },
+    updateWasher(hasWasher){
+      this.hasWasher = hasWasher;
+      this.updateAmenities()
+    },
+    updateHeating(hasHeating){
+      this.hasHeating = hasHeating;
+      this.updateAmenities()
+    },
+    updateAC(hasAirConditioner){
+      this.hasAirConditioner = hasAirConditioner;
+      this.updateAmenities()
+    },
+    updateDisabledDays(newDisabledDays){
+      this.disabledDays = newDisabledDays
+      
+    },
+    updateAmenities(){
+      this.amenities = [];
+      if(this.hasWifi){
+        this.amenities.push("wifi: true")
+      }
+      else{
+        this.amenities.push("wifi: false")
+      }
+      if(this.hasKitchen){
+        this.amenities.push("kitchen: true")
+      }
+      else{
+        this.amenities.push("kitchen: false")
+      }
+      if(this.hasWasher){
+        this.amenities.push("washer: true")
+      }
+      else{
+        this.amenities.push("washer: false")
+      }
+      if(this.hasHeating){
+        this.amenities.push("heating: true")
+      }
+      else{
+        this.amenities.push("heating: false")
+      }
+      if(this.hasAirConditioner){
+        this.amenities.push("airConditioner: true")
+      }
+      else{
+        this.amenities.push("airConditioner: false")
+      }
+      this.lease.amenities = this.amenities
+      store.commit('setLeaseToBuild', this.lease)
     }
   }
 }
 </script>
 <style scoped>
-.mainDiv{
-  text-align: center;
-  height: max-content;
+.imageURLInputDiv{
+  margin-bottom:10px;
 }
-.addResidenceHeader{
-  margin: 8px;
-}
-div{
+.buttonDiv{
   margin:5px;
-  width: 210px;
-  padding: 0px;
-  margin-left: auto;
-  margin-right: auto;
 }
-textarea{
-  width:210px;
-}
-.addResidenceDiv{
-  width: 210px;
-}
-.myTitle, .myLocation{
-  width: 210px;
-  margin: 0px;
-  padding: 0px;
-  font-weight: bolder;
-  margin-top: 3px;
-  margin-bottom: 3px;
-}
-.myTitle{
-  text-align:center;
-  width:200px;
-}
-.previewButton, .previewButton:visited{
-  display: block;
-  width: max-content;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 20px;
-  background-color:rgb(243, 189, 10);
-  color:black;
-  border: 2px solid rgb(200, 159, 23);
-  border-radius: 25px;
+.previewButton{
+  border: outset 5px green;
+  outline:1px solid black;
+  opacity:1;
+  background-color: green;
+  padding:5px;
+  /*optional*/
+  font-family: arial, sans-serif;
+  /*input has OS specific font-family*/
+  color: black;
+  font-weight:bolder;
   text-decoration: none;
-  font-weight: bolder;
-  padding: 5px;
-  padding-top: 3px;
-  font-size: 13px;
+  width:max-content;
+  font-size:15px;
+  margin-bottom:15px;
 }
-
+.datePickerDiv{
+  margin:10px;
+  padding-right:18px;
+  padding-bottom:10px;
+}
+p {
+  font-weight:bolder;
+  margin:3px;
+}
+.greyBackgroundDiv{
+  background-color: rgba(218, 224, 224, 0.8);
+  width:max-content;
+  margin-left:auto;
+  margin-right:auto;
+  padding:20px;
+}
+.mainDiv{
+  padding-left:5vw;
+  padding-right:5vw;
+  padding-bottom:2.5vh;
+  padding-top:2.5vh;
+  background-image: url('/public/house.jpg');
+  background-size:cover;
+  background-repeat:no-repeat;
+  opacity: 0.8;
+  height:max-content;
+  width:100vw;
+  background-attachment: fixed;
+  overflow-x:hidden;
+  min-height:900px;
+  align-items:center;
+  align-self:center;
+  text-align:center;
+  background-position:center;
+}
+.inputForBedsDiv{
+  width:max-content;
+  margin-left:auto;
+  margin-right:auto;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+@media only screen and (max-width: 300px) {
+  .greyBackgroundDiv{
+    margin:0px;
+    padding:5px;
+    padding-top:20px;
+    padding-bottom:20px;
+  }
+}
 </style>

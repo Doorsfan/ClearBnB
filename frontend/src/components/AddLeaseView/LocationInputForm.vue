@@ -2,6 +2,7 @@
   <div class="addResidenceDiv">
     <div class="innerDiv">
       <input
+        required
         type="text"
         placeholder="Location"
         @change="updateLocationArea"
@@ -13,6 +14,12 @@
 </template>
 <script>
 export default {
+  emits: ['updatedLocation'],
+  mounted(){
+    if(this.$store.getters.getLeaseToBuild != null){
+      this.location = this.$store.getters.getLeaseToBuild.location
+    }
+  },
   data() {
     return {
       location: "",
@@ -21,7 +28,7 @@ export default {
   methods: {
     updateLocationArea() {
       let updatedLocationArea = location;
-      this.$emit("updatedLocation", updatedLocationArea);
+      this.$emit("updatedLocation", this.location);
     },
   },
 };
