@@ -56,6 +56,7 @@ export default {
 .fa {
   font-size: 40px;
   cursor: pointer;
+  margin-top: 10px;
 }
 .active {
   transform: translateX(0);
@@ -67,6 +68,7 @@ export default {
   color: rgb(63, 63, 63);
   font-size: 20px;
   cursor: pointer;
+  
 }
 .router-links p .router-link-active {
   color: blueviolet;
