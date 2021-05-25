@@ -1,6 +1,6 @@
 <template>
 <div class="mainDiv">
-    <form class="SignUpForm">
+    <form @submit.prevent class="SignUpForm">
       <div class="UserInputFirstAndLastName">
     <div class="titleDiv">
       <h1 class="registerTitle">Create new account</h1>
@@ -93,7 +93,7 @@ export default {
   methods: {
     async registerUser(){
       if(this.password != this.repeatPassword){
-        document.getElementsByClassName('errorBox')[0].style.display = 'block';
+        alert("The passwords do not match up!");
         return;
       }
       let newUser = new User(this.email, this.password);
@@ -120,7 +120,7 @@ export default {
 
 
       if(responseAsJson['error'] == "User already exists"){
-        document.getElementsByClassName('errorBox')[0].style.display = 'block';
+        alert("A user with that username already exists!");
         return;
       }
       newUserInfo.userId = responseAsJson['id']
@@ -290,6 +290,9 @@ p{
 .formhandler{
 display:flex;
 flex-direction: column;
+}
+.mainDiv{
+  min-height:75vh;
 }
 @media only screen and (max-width: 1920px) {
   .SignUpForm{
