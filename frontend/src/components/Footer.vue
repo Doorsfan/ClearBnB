@@ -54,12 +54,13 @@ footer {
   display: grid;
   place-content: center;
   background-color: white;
+  border:black solid 1px;
   border-radius: 50%;
 }
 
 .icons div i {
   font-size: 20px;
-  color: black;
+  color: #029ebb;;
 }
 
 .links {
