@@ -121,7 +121,7 @@ footer {
   border:none;
   margin-top: 0px;
   font-size: 28px;
-  -webkit-text-stroke: 0.4px white;
+  -webkit-text-stroke: 0.6px white;
   font-weight:bold;
 }
 
