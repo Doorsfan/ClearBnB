@@ -2,18 +2,28 @@
   <div class="primaryDiv">
   <div v-if="$store.getters.getCurrentUser != null" class="mainDiv userPageMainDiv">
     <p class="userPageTitle">User Page</p>
+    <hr class="hrDiv">
     <p v-if="$store.getters.getCurrentUser.username == 'admin@ClearBnB.se'" class="welcomeMessage">Welcome Admin!</p>
-    <p v-else class="welcomeMessage">Welcome {{ $store.getters.getCurrentUser.username }}!</p>
+    
+    
     <div class="addNewLeaseDiv">
+      <p class="pApartment" style="none"> Add new apartment for renting:</p>
+      <hr>
       <router-link to="/addLease">
         <button @click="addNewLease" class="addNewLeaseButton">Add New Lease</button>
       </router-link>
     </div>
+    <hr>
     <div class="historicalButtonDiv">
-      <button @click="switchHistoricalDisplay" class="changeHistoricalDisplay">Show Past Bookings</button>
+      <p class="pApartment">Booking history</p>
+      <hr>
+      <button @click="switchHistoricalDisplay" class="addNewLeaseButton">Show Past Bookings</button>
     </div>
+    <hr>
     <div class="currentBookingsDiv">
-      <p class="yourFutureBookingsText">Your <b>CURRENT</b> bookings so far:</p>
+      <p class="pApartment">Current bookings:</p>
+      <hr>
+      <p class="pDiv">No bookings at the moment</p>
       <div class="bookings">
         <FutureBookingsList @cancelBooking="cancelABooking" v-for="(futureBooking, futureIndex) of futureBookings"
         :key="futureIndex"
@@ -28,8 +38,11 @@
         :pastBooking="pastBooking" />
       </div>
     </div>
-    <p class="showAdventure">Show me my next adventure!</p>
+    <hr>
+
     <div class="residencesOutBox">
+      <p class="otherDiv">Other</p>
+      <hr class="hrDiv">
       <router-link class="residencesLink" to="/">Your residences out for rent</router-link>
     </div>
     <div class="changeUserInfoButtonDiv">
@@ -259,6 +272,45 @@ export default {
 }
 </script>
 <style scoped>
+.hrDiv{
+  margin-top: 5px;
+}
+.otherDiv{
+  margin-bottom: 5px;
+  font-family: 'mukta';
+  font-weight: bold
+  ;
+}
+.residencesLink{
+    margin-top: 50px;
+    border: outset 5px #029ebb;;
+    outline:1px solid black;
+    opacity:1;
+    background-color: #029ebb;
+    padding:3px;
+    /*optional*/
+    font-family: arial, sans-serif;
+    /*input has OS specific font-family*/
+    color: black;
+    font-weight:bolder;
+    text-decoration: none;
+    cursor: pointer;
+    width:max-content;
+    font-size:10px;
+    background-color: #029ebb;
+    
+}
+.pDiv{
+  font-size: 10px;
+  font-family: 'mukta';
+  color: red;
+}
+
+.pApartment{
+  font-family: 'mukta';
+  text-decoration: none;
+  font-weight: bold;
+}
 .addNewLeaseButton{
   border: outset 5px green;
   outline:1px solid black;
@@ -272,8 +324,9 @@ export default {
   font-weight:bolder;
   text-decoration: none;
   width:max-content;
-  font-size:20px;
+  font-size:10px;
   margin-bottom:15px;
+  margin-top: 10px;
 }
 .primaryDiv{
   padding-left:5vw;
@@ -305,13 +358,15 @@ export default {
   font-weight:bolder;
   text-decoration: none;
   width:max-content;
-  font-size:20px;
+  font-size:10px;
   margin-bottom:15px;
+  margin-top: 10px;
 }
 .pastBookingsDiv{
   display:none;
 }
 .userPageTitle{
+  margin-top: -40px;
   text-align:center;
 }
   .bookingBox{
@@ -340,8 +395,8 @@ export default {
     text-decoration: none;
     cursor: pointer;
     width:max-content;
-    font-size:20px;
-    margin-top:25px;
+    font-size:10px;
+    margin-top: 10px;
     background-color: #029ebb;
   }
   .changeUserInfoDiv{
@@ -429,19 +484,16 @@ export default {
     font-weight:bolder;
   }
   .welcomeMessage{
+    font-family: 'mukta';
     margin-bottom:20px;
-    border: outset 2px;
     opacity:1;
-    background-color: rgba(218, 224, 224, 0.8);
     padding:3px;
-  }
-  .residencesLink:visited{
-    color:blue;
+  
   }
   .yourFutureBookingsText, .yourPastBookingsText{
     margin-bottom:20px;
-    background: rgba(218, 224, 224, 0.8);
-    padding:3px;
+    
+  
     border:outset 2px;
   }
   .residencesOutBox{
