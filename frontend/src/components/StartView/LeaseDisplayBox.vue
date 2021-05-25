@@ -3,7 +3,7 @@
     <router-link class="linkToDetailsPage" :to="{ path: '/BookingView', query: { id: lease.id }}">
       <div id="foo" v-on:click="select($event)" class="mainBoxDiv">
         <div class="titleDiv"><p class="leaseTitleText">{{ lease.title }}</p></div>
-        <Carousel :myLease="lease"/>
+        <Carousel  :myLease="lease"/>
         <div class="locationDiv"><b>Location:</b> {{ lease.location }}</div>
         <div class="startsFromDiv"><b>Available from:</b> {{ lease.startDate }}</div>
         <div clas="endsOnDiv"><b>Available to:</b> {{ lease.endDate }}</div>
@@ -31,11 +31,16 @@ export default {
 </script>
 <style scoped>
 a {
+  font-family: 'mukta';
   color:black;
   text-decoration:none;
 }
 a:visited{
   color:black;
+}
+.titleDiv{
+  font-weight: bold;
+
 }
 .leaseBox{
   background-color:rgba(218, 224, 224, 0.8);
