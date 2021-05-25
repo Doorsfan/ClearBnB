@@ -35,7 +35,7 @@ footer {
   flex-direction: column;
   align-items: center;
   width: 100%;
-  padding-top: 60px;
+  padding-top: 50px;
   position: absolute;
   z-index: 1;
 }
@@ -44,23 +44,23 @@ footer {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
 }
 
 .icons div {
   width: 45px;
   height: 45px;
-  margin: 0rem 10px;
+  margin: 0px 10px;
   display: grid;
   place-content: center;
-  background-color: white;
+  background-color: rgb(255, 255, 255, 0.6);
   border:black solid 1px;
   border-radius: 50%;
 }
 
 .icons div i {
   font-size: 20px;
-  color: #029ebb;;
+  color: black;
 }
 
 .links {
@@ -73,10 +73,10 @@ footer {
 .links a {
   text-decoration: none;
   text-transform: uppercase;
-  font-weight: 700;
-  font-size: 1.6rem;
+  font-weight: bolder;
+  font-size: 16px;
   color: black;
-  -webkit-text-stroke: 0.6px white;
+  -webkit-text-stroke: 0.0px white;
 }
 
 .links a:hover {
@@ -87,15 +87,14 @@ footer {
   width: 5px;
   height: 5px;
   border-radius: 50%;
-  margin: 0rem 10px;
+  margin: 0 10px;
   background-color: white;
 }
 
 .last {
   color: white;
-  margin-top: 25px;
-  font-size: 18px;
-  -webkit-text-stroke: 0.4px black;
+  margin-top: 35px;
+  font-size: 14px;
 }
 
   @media only screen and (max-width: 600px) {
