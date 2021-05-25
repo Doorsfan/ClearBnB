@@ -292,6 +292,8 @@ export default {
   background-repeat:no-repeat;
   background-attachment: fixed;
   background-position: center;
+  min-width:100vw;
+  min-height:68vh;
 }
 .startPageDateDiv {
   margin-left: auto;

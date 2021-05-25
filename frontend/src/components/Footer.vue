@@ -17,20 +17,26 @@
       <div></div>
       <router-link v-if="!$store.getters.getCurrentUser" to="/Login">login</router-link>
       <router-link v-if="$store.getters.getCurrentUser" to="/userPage">My Pages</router-link>
-      <div v-if="!$store.getters.getCurrentUser"></div>
+      <div></div>
       <router-link v-if="!$store.getters.getCurrentUser" to="/signUp">signup</router-link>
-      <router-link class="logOutLink" v-if="$store.getters.getCurrentUser" to="/"><button @click="logOut" type="button" class="logOutLink">Log Out</button></router-link>
+      <router-link class="logOutLinkInFooter" v-if="$store.getters.getCurrentUser" to="/"><button @click="logOut" type="button" class="logOutLink">Log Out</button></router-link>
     </div>
     <div class="last">&copy; 2021 ClearBNB</div>
   </footer>
 </template>
 <script>
 export default {
-  
+  methods:{
+    logOut(){
+      this.$store.commit('setUser', null)
+      this.currentUser = null;
+    }
+  }
 }
 </script>
 
 <style scoped>
+
 footer {
   margin-top: 0;
   background-color: #fdbf81;
@@ -103,6 +109,22 @@ footer {
   font-size: 18px;
   -webkit-text-stroke: 0.4px black;
 }
+
+.logOutLink{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  color: black;
+  background-color:transparent;
+  outline:none;
+  border:none;
+  margin-top: 0px;
+  font-size: 28px;
+  -webkit-text-stroke: 0.4px white;
+  font-weight:bold;
+}
+
 @media only screen and (max-width: 600px) {
   * {
     transform: scale(0.9);

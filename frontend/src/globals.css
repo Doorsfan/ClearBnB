@@ -26,4 +26,6 @@ input {
 .app-main {
     flex-grow: 1;
     background-color: white;
+    overflow-x:hidden;
+    
 }
