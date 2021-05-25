@@ -36,16 +36,20 @@ export default {
   },
   methods: {
     previousPicture(event){
-      let oldImage = this.lease.imageURLs[0];
-      let newImage = this.lease.imageURLs[1];
-      this.lease.imageURLs[0] = newImage;
-      this.lease.imageURLs[1] = oldImage;
+      if(this.lease.imageURLs.length > 1){
+        let oldImage = this.lease.imageURLs[0];
+        let newImage = this.lease.imageURLs[1];
+        this.lease.imageURLs[0] = newImage;
+        this.lease.imageURLs[1] = oldImage;
+      }
     },
     nextPicture(event){
-      let oldImage = this.lease.imageURLs[0];
-      let newImage = this.lease.imageURLs[1];
-      this.lease.imageURLs[0] = newImage;
-      this.lease.imageURLs[1] = oldImage;
+      if(this.lease.imageURLs.length > 1){
+        let oldImage = this.lease.imageURLs[0];
+        let newImage = this.lease.imageURLs[1];
+        this.lease.imageURLs[0] = newImage;
+        this.lease.imageURLs[1] = oldImage;
+      }
     }
   }
 }
@@ -100,7 +104,10 @@ a:visited{
   transform:rotate(90deg);
   padding-top:5px;
 }
-
+.rightArrowBox:hover, .leftArrowBox:hover, .arrow:hover, .leftUpper:hover, .rightUpper:hover,
+.leftBottom:hover, .rightBottom:hover{
+  cursor:pointer;
+}
 .arrow {
   border: solid black;
   border-width: 6.1px 6.1px 6.1px 0;
