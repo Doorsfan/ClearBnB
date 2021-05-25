@@ -96,16 +96,5 @@ footer {
   margin-top: 35px;
   font-size: 14px;
 }
-
-  @media only screen and (max-width: 600px) {
-  .last {
-    font-size: 14px;
-    }
-    .links a {
-  font-size: 20px;
-  -webkit-text-stroke: 0.3px white;
- 
-}
-  }
   
 </style>
