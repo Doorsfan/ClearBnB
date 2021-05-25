@@ -6,7 +6,7 @@
       <input type="text" required placeholder="Title" v-model="title" />
       <p class="myLocation">Location</p>
       <LocationInputForm v-model="location" @updatedLocation="updateLocation" />
-      <DescriptionForm v-model="description" @updatedDescription="updateDescription" />
+      <DescriptionForm  class="descriptionTitle" v-model="description" @updatedDescription="updateDescription" />
       <div class="inputForBedsDiv">
         <InputForPricingBedAndPeople @updateBeds="updateNrOfBeds" @updateMaxPeople="updateNrOfMaxGuests" @updatePrice="updatePrice" />
       </div>
@@ -247,6 +247,19 @@ export default {
 }
 </script>
 <style scoped>
+.descriptionTitle{
+  font-family: 'mukta';
+}
+.myLocation{
+  font-family: 'mukta';
+}
+.myTitle{
+  font-family: 'mukta';
+}
+.addResidenceHeader{
+  font-size: 50px;
+    
+}
 .imageURLInputDiv{
   margin-bottom:10px;
 }
@@ -260,7 +273,7 @@ export default {
   background-color: green;
   padding:5px;
   /*optional*/
-  font-family: arial, sans-serif;
+  font-family: 'mukta';
   /*input has OS specific font-family*/
   color: black;
   font-weight:bolder;
@@ -284,6 +297,7 @@ p {
   margin-left:auto;
   margin-right:auto;
   padding:20px;
+  width: 450px;
 }
 .mainDiv{
   padding-left:5vw;
@@ -303,6 +317,7 @@ p {
   align-self:center;
   text-align:center;
   background-position:center;
+  font-family: 'mukta';
 }
 .inputForBedsDiv{
   width:max-content;
