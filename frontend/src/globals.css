@@ -4,9 +4,9 @@
     box-sizing: border-box;
 }
 .house_icon{
-  width:30px;
-  height:30px;
-  position:absolute;
+  width: 30px;
+  height: 30px;
+  position: absolute;
   left: 15px;
   top: 10px;
 }
@@ -16,8 +16,8 @@
   top: 45px;
 }
 #app {
-    font-family: Avenir, Helvetica, Arial, sans-serif;
-    display:flex;
+    font-family: 'mukta', sans-serif;
+    display: flex;
     flex-direction: column;
 }
 input {
