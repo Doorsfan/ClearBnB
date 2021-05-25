@@ -226,7 +226,6 @@ h1{
 button{
   width: 200px;
   height: 50px;
-  
   border-radius: 40px ;
   
 }
@@ -241,9 +240,6 @@ button{
  
 
 input{
-  width: 70%;
-}
-button{
   width: 70%;
 }
 p{
