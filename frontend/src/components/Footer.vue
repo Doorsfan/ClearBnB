@@ -35,7 +35,7 @@ footer {
   flex-direction: column;
   align-items: center;
   width: 100%;
-  padding-top: 140px;
+  padding-top: 80px;
   position: absolute;
   z-index: 1;
 }
@@ -92,44 +92,20 @@ footer {
 
 .last {
   color: white;
-  margin-top: 10px;
+  margin-top: 20px;
   font-size: 18px;
   -webkit-text-stroke: 0.4px black;
 }
-@media only screen and (max-width: 600px) {
-  * {
-    transform: scale(0.9);
-  }
+
+  @media only screen and (max-width: 600px) {
   .last {
     font-size: 14px;
-    padding-bottom: 20px;
-  }
+    }
+    .links a {
+  font-size: 20px;
+  -webkit-text-stroke: 0.3px white;
+ 
 }
-@media only screen and (max-width: 475px) {
-  footer {
-    transform: scale(0.8);
   }
-  .last {
-    font-size: 14px;
-    padding-bottom: 20px;
-  }
-}
-@media only screen and (max-width: 375px) {
-  footer {
-    transform: scale(0.7);
-  }
-  .last {
-    font-size: 14px;
-    padding-bottom: 20px;
-  }
-}
-@media only screen and (max-width: 270px) {
-  footer {
-    transform: scale(0.7);
-  }
-  .last {
-    font-size: 14px;
-    padding-bottom: 20px;
-  }
-}
+  
 </style>

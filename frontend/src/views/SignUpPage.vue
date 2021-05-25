@@ -154,7 +154,7 @@ export default {
   flex-direction: row;
 }
 .emailDiv{
-  padding-top:25px;
+  padding-top: 25px;
   width: 50%;
   padding-right: 5px;
 }
@@ -175,20 +175,20 @@ export default {
  padding-right: 5px;
 }
 .cityDiv{
-  flex-grow:1;
+  flex-grow: 1;
   padding-left: 5px;
 }
 .streetZip{
   display:flex;
   flex-direction: row;
-  padding-top:25px;
+  padding-top: 25px;
 }
 .streetDiv{
-  flex-grow:0.8;
+  flex-grow: 0.8;
   padding-right: 5px;
 }
 .zipDiv{
-  flex-grow:0.2;
+  flex-grow: 0.2;
   padding-left: 5px;
 }
 .phoneNumber{
@@ -207,8 +207,8 @@ export default {
   padding-left: 4px;
 }
 .newsLetterBox{
-  padding-top:5px;
-  margin-top:1px;
+  padding-top: 5px;
+  margin-top: 1px;
 }
 
 .mainDiv{
@@ -431,6 +431,17 @@ h1{
   height:915px;
   padding: 0 30px;
   }
+  .errorBox{
+  display:none;
+  width:300px;
+  margin-right:auto;
+  background-color: red;
+  color:white;
+  padding:3px;
+  outline: 1px solid black;
+
+
+}
 }
 @media only screen and (max-width: 339px) {
 h1{
