@@ -24,9 +24,9 @@ export default {
 <style scoped>
 p {
   width:max-content;
-  margin-left:auto;
-  margin-right:auto;
   margin-bottom: 10px;
+  font-weight: 700;
+  color: #007b8e
 }
 * {
   font-size:20px;
@@ -34,5 +34,7 @@ p {
 .locationInput{
   width:150px;
   padding-left:2px;
+  border-radius: 5px;
+  border: 1px solid rgb(241, 232, 148);
 }
 </style>

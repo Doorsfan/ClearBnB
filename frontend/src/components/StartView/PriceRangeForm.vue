@@ -1,9 +1,9 @@
 <template>
     <div class="firstPriceDiv">
-      <p class="minPriceText">Min Price</p><input class="minPriceInputForm" type="text" v-model="minPriceWanted" placeholder="Min Price">
+      <p class="minPriceText">Min €</p><input class="minPriceInputForm" type="text" v-model="minPriceWanted" placeholder="From €">
     </div>
     <div class="secondPriceDiv">
-      <p class="maxPriceText">Max Price</p><input class="maxPriceInputForm" type="text" v-model="maxPriceWanted" placeholder="Max Price">
+      <p class="maxPriceText">Max €</p><input class="maxPriceInputForm" type="text" v-model="maxPriceWanted" placeholder="To €">
     </div>
 </template>
 <script>
@@ -36,6 +36,8 @@ export default {
   .firstPriceDiv, .secondPriceDiv{
     width:max-content;
     display:inline-block;
+    color: #007b8e;
+    font-weight: 700;
   }
   .firstPriceDiv{
     padding-left: 10px;
@@ -48,20 +50,28 @@ input{
   width:60px;
   margin:3px;
 }
+/*
 .priceRangeFormDiv{
   display:inline;
   width:max-content;
   margin-left:20px;
 }
+*/
 .maxPriceInputForm{
   width:90px;
   padding:1px;
+  border-radius: 5px;
+  border: 1px solid rgb(241, 232, 148);
 }
 .minPriceInputForm{
-  width:83px;
+  width:90px;
   padding:1px;
+  border-radius: 5px;
+  border: 1px solid rgb(241, 232, 148);
 }
+/*
 .firstPriceDiv{
   margin-left:5px;
 }
+*/
 </style>

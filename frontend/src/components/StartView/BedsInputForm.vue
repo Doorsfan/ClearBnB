@@ -21,9 +21,13 @@ export default {
 .bedsInputForm{
   width:48px;
   padding:1px;
+  border-radius: 5px;
+  border: 1px solid rgb(241, 232, 148);
 }
 .bedsInputText{
   margin-bottom: 8px;
   padding-left:2px;
+  color: #007b8e;
+  font-weight: 700;
 }
 </style>

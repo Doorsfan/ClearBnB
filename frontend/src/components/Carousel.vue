@@ -33,14 +33,17 @@ export default {
 <style scoped>
 .imageCarousel{
   position:relative;
-  height:180px;
-  width:150px;
-  margin:5px;
+  height:222px;
+  width:185px;
+  margin:20px 5px 10px;
   display:inline-block;
 }
+.imageCarousel :hover {
+  transform: scale(1.08);
+}
 img{
-  height: 180px;
-  width:150px;
+  height: 222px;
+  width: 185px;
   position:absolute;
   left:0;
   -webkit-transition: opacity 0.7s ease-in-out;

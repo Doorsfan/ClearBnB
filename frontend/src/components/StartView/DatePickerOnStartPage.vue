@@ -1,11 +1,11 @@
 <template>
 <div class="datePickersMainDiv">
   <div class="firstDiv">
-    <p class="fromTheText">From The</p>
+    <p class="fromTheText">Check in</p>
     <Datepicker id="fromDatePicker" class="fromDatePicker" v-model="startDate" :lower-limit="minimumStartDate" :upper-limit="endDate"/>
   </div>
   <div class="secondDiv">
-    <p class="toTheText">To The</p>
+    <p class="toTheText">Check out</p>
     <Datepicker id="toDatePicker" class="toDatePicker" v-model="endDate" :lower-limit="minimumEndDate"/>
   </div>
 </div>
@@ -71,11 +71,19 @@ export default {
 * {
   font-size: 20px;
 }
+.v3dp__datepicker{
+  --text-color: 
+  var(--vdp-text-color, #007b8e);
+  --elem-hover-bg-color: 
+  var(--vdp-hover-bg-color, #009bd5);
+  --elem-selected-bg-color: 
+  var(--vdp-hover-bg-color, #009bd5);
+}
 p {
   width:max-content;
-  margin-left:auto;
-  margin-right:auto;
   padding-bottom: 8px;
+  color: #007b8e;
+  font-weight: 700;
 }
 @media only screen and (max-width: 300px) {
   div {

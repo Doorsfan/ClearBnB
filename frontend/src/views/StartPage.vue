@@ -146,7 +146,7 @@ export default {
       document.getElementsByClassName("house_icon")[0].className =
         "sunIconInHeader";
       document.getElementsByClassName("homeText")[0].style.display = "none";
-      document.getElementsByClassName("center")[0].style.height = "210px";
+      document.getElementsByClassName("center")[0].style.height = "200px";
     }
     this.$store.dispatch("saveLatestRoute", this.$route.path);
     if (this.$store.getters.getCurrentUser != null) {
@@ -288,16 +288,23 @@ export default {
   background-image: url("../../airplane.jpg");
   background-size: cover;
   background-repeat: no-repeat;
-  opacity: 0.8;
   background-attachment: fixed;
   background-position: center;
 }
 .startPageDateDiv {
   margin-left: auto;
   margin-right: auto;
+  margin-bottom: 20px;
+  height: 120px;
   font-size: 20px;
-  background-color: rgba(218, 224, 224, 0.8);
-  padding-bottom: 15px;
+  background-color: rgba(241, 232, 148, 0.8);
+  box-shadow: 5px 5px 5px 0 rgb(148, 141, 119);
+  border-radius: 10px;
+  width: max-content;
+  padding: 5px 5px;
+  display: block;
+  border: 1px solid rgb(241, 232, 148);
+  box-sizing: border-box;
 }
 
 @media only screen and (max-width: 300px) {
@@ -330,16 +337,18 @@ export default {
     padding-left: 10px;
     padding-right: 20px;
   }
+
+  /*
   .startPageDateDiv {
     width: max-content;
     padding: 5px 5px;
     margin: 2px 0;
     display: block;
     border: 1px solid #ccc;
-    border-radius: 1px;
     box-sizing: border-box;
-    margin-left: auto;
-    margin-right: auto;
+    margin-left:auto;
+    margin-right:auto;
   }
+  */
 }
 </style>
