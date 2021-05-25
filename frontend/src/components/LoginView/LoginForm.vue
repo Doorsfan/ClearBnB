@@ -83,21 +83,14 @@ export default {
 .hiddenptag{
   display:none;
 }
-.errorText{
-  margin: 0px;
-  padding: 0px;
-}
 .failedLoginDiv{
-  margin: 0px;
-  margin-left: 12px;
-  background-color: red;
-  color: white;
-  padding: 3px;
-  height: 16px;
-  width: 148px;
-  border: 1px solid darkred;
-  text-align: center;
-  display: none;
+  
+  display:flex;
+  align-items: center;
+  color: red;
+  justify-content: center;
+  display:none;
+  
 }
 h1 {
   color: black;
@@ -172,6 +165,7 @@ p{
   font-size: 16;
   font-weight: bold;
 }
+
 
 button:hover {
   transform: scale(1.1);
