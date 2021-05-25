@@ -265,6 +265,9 @@ export default {
 };
 </script>
 <style scoped>
+*{
+  font-family: 'mukta';
+}
 .leasesDiv {
   text-align: center;
 }
@@ -288,12 +291,12 @@ export default {
   padding-bottom: 2.5vh;
   padding-top: 2.5vh;
   background-image: url("../../airplane.jpg");
-  background-size:cover;
-  background-repeat:no-repeat;
+  background-size: cover;
+  background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: center;
-  min-width:100vw;
-  min-height:68vh;
+  min-width: 100vw;
+  min-height: 68vh;
 }
 .startPageDateDiv {
   margin-left: auto;
