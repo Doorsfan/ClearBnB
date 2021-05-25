@@ -218,12 +218,12 @@ export default {
   background-repeat:no-repeat;
   height:max-content;
   background-attachment: fixed;
-  overflow-x:hidden;
+  overflow-x: hidden;
 }
 
 .SignUpForm{
   text-align: center;
-  height: 750px;
+  height: 860px;
   width: clamp(600px, 80vw, 1200px);
   margin: 180px auto;
   border-radius: 5px ;
@@ -232,26 +232,29 @@ export default {
   padding: 0 50px;
 }
 form input{
-  padding: 2px 15px;
+  padding: 11.2px 22.4px;
   font-size: 18px;
   border-radius: 5px;
   border:1px solid grey ;
   text-align:initial;
   margin-bottom: 15px;
-  color: black;
 }
+
 button{
   width: 120px;
   height: 50px;
   padding: 10px 20px;
   background-color: #029ebb;
   color: white;
-  border: 0;
-  border-radius: 2px ;
+  border: none;
+  border-radius: 2px;
   cursor: pointer;
   font-size: 18px;
 
   
+}
+button:hover {
+  transform: scale(1.1);
 }
 h1 {
   color: black;
@@ -308,7 +311,7 @@ flex-direction: column;
 @media only screen and (max-width: 600px) {
 
   .SignUpForm{
-  height: 950px;
+  height: 1140px;
   width: clamp(280px, 100vw, 600px);
   margin: auto;
   border-radius: 0px ;
@@ -406,7 +409,7 @@ h1{
 }
 @media only screen and (max-width: 527px) {
 .SignUpForm{
-  height:930px;
+  height:1125px;
   }
   h1{
     font-size: 35px;
@@ -419,7 +422,7 @@ h1{
     margin-bottom:35px;
   }
   .SignUpForm{
-  height:920px;
+  height:1115px;
   }
 }
 @media only screen and (max-width: 387px) {
@@ -428,7 +431,7 @@ h1{
     margin-bottom:35px;
   }
   .SignUpForm{
-  height:915px;
+  height:1110px;
   padding: 0 30px;
   }
   .errorBox{
@@ -449,7 +452,7 @@ h1{
     margin-bottom:35px;
   }
   .SignUpForm{
-  height:910px;
+  height: 1105px;
   }
 }@media only screen and (max-width: 301px) {
 h1{
@@ -457,7 +460,7 @@ h1{
     margin-bottom:35px;
   }
   .SignUpForm{
-  height:905px;
+  height: 1095px;
   }
   .letterRegister{
   margin-top: 10px;
