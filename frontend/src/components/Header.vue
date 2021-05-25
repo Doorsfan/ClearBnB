@@ -91,6 +91,11 @@ export default {
   background:none;
   border:none;
 }
+.sunIconInHeader{
+  height: 68px;
+  width: 150px;
+  
+}
 .logOutLink{
   font-family: Avenir, Helvetica, Arial, sans-serif;
   background:none;
@@ -110,6 +115,7 @@ export default {
 .navbar{
   background: linear-gradient(0.25turn, #f69d3c, #ebf8e1,#ebf8e1, #f69d3c);
   width:100%;
+  height: 70px;
   
 }
 .homeIcon{
@@ -118,6 +124,7 @@ export default {
   width:40px;
   margin-top:10px;
   margin-left:5px;
+  
 }
 .homeText{
   margin-bottom:10px;

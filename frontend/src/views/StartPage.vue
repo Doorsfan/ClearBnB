@@ -281,14 +281,15 @@ export default {
   padding-top: 20px;
 }
 .mainDiv {
+  font-family: 'mukta';
+  font-weight: bold;
   padding-left: 5vw;
   padding-right: 5vw;
   padding-bottom: 2.5vh;
   padding-top: 2.5vh;
   background-image: url("../../airplane.jpg");
-  background-size: cover;
-  background-repeat: no-repeat;
-  opacity: 0.8;
+  background-size:cover;
+  background-repeat:no-repeat;
   background-attachment: fixed;
   background-position: center;
 }
