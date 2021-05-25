@@ -15,13 +15,20 @@
     <div class="links">
       <router-link to="/">home</router-link>
       <div></div>
-      <router-link to="/Login">login</router-link>
-      <div></div>
-      <router-link to="/signUp">signup</router-link>
+      <router-link v-if="!$store.getters.getCurrentUser" to="/Login">login</router-link>
+      <router-link v-if="$store.getters.getCurrentUser" to="/userPage">My Pages</router-link>
+      <div v-if="!$store.getters.getCurrentUser"></div>
+      <router-link v-if="!$store.getters.getCurrentUser" to="/signUp">signup</router-link>
+      <router-link class="logOutLink" v-if="$store.getters.getCurrentUser" to="/"><button @click="logOut" type="button" class="logOutLink">Log Out</button></router-link>
     </div>
     <div class="last">&copy; 2021 ClearBNB</div>
   </footer>
 </template>
+<script>
+export default {
+  
+}
+</script>
 
 <style scoped>
 footer {
