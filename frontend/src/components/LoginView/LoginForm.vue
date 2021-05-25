@@ -176,6 +176,13 @@ p{
 button:hover {
   transform: scale(1.1);
 }
+@media only screen and (max-width: 1920px) {
+  .LogInPage{
+ 
+  margin: 80px auto;
+ 
+  }
+}
 @media only screen and (max-width: 1800px) {
 .LogInPage{
   text-align: center;
@@ -197,6 +204,7 @@ button:hover {
 .LogInPage{
   width: clamp(280px, 100vw, 500px);
   border-radius: 0px ;
+  margin: auto;
  
 }
 
