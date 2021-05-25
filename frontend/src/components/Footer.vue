@@ -53,8 +53,7 @@ footer {
   margin: 0px 10px;
   display: grid;
   place-content: center;
-  background-color: rgb(255, 255, 255, 0.6);
-  border:black solid 1px;
+  background-color: rgb(255, 255, 255, 0.7);
   border-radius: 50%;
 }
 
