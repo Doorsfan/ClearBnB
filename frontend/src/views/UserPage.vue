@@ -388,7 +388,7 @@ export default {
     background-color: #007b8e;
     padding:3px;
     /*optional*/
-    font-family: arial, sans-serif;
+    font-family: 'mukta';
     /*input has OS specific font-family*/
     color: black;
     font-weight:bolder;
@@ -414,7 +414,7 @@ export default {
     margin-left:50px;
     background-color: #007b8e;
     font-size: 12px;
-    font:arial;
+    font:'mukta';
     text-decoration: none;
     border: solid 1px black;
     color:black;
