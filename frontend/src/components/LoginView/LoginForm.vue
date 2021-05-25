@@ -117,7 +117,7 @@ form input{
   padding: 11.2px 22.4px;
   font-size: 18px;
   border-radius: 5px;
-  border:1px solid black ;
+  border:1px solid grey ;
   text-align:initial;
   margin-bottom: 15px;
 }
@@ -224,9 +224,8 @@ h1{
   align-items: center;
 }
 button{
-  width: 270px;
+  width: 200px;
   height: 50px;
-  
   border-radius: 40px ;
   
 }
@@ -241,9 +240,6 @@ button{
  
 
 input{
-  width: 70%;
-}
-button{
   width: 70%;
 }
 p{

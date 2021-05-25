@@ -1,10 +1,8 @@
 <template>
-  <i @click="previousPicture" class="arrow left"></i>
   <div class="imageCarousel">
     <img class="firstImage" :src="myLease.imageURLs[0]"/>
     <img class="secondImage" :src="myLease.imageURLs[1]"/>
   </div>
-  <i @click="nextPicture" class="arrow right"></i>
 </template>
 <script>
 //Implement Interaction with Arrow Buttons again in regards to Carousel Component
