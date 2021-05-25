@@ -291,7 +291,20 @@ p{
 display:flex;
 flex-direction: column;
 }
-
+@media only screen and (max-width: 1920px) {
+  .SignUpForm{
+ 
+  margin: 80px auto;
+ 
+  }
+}
+@media only screen and (max-width: 1800px) {
+  .SignUpForm{
+ 
+  margin: 50px auto;
+ 
+  }
+}
 @media only screen and (max-width: 600px) {
 
   .SignUpForm{
