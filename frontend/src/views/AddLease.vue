@@ -5,7 +5,7 @@
       <p class="myTitle">Title</p>
       <input type="text" required placeholder="Title" v-model="title" />
       <p class="myLocation">Location</p>
-      <LocationInputForm v-model="location" @updatedLocation="updateLocation" />
+      <LocationInputForm  class="locDiv" v-model="location" @updatedLocation="updateLocation" />
       <DescriptionForm  class="descriptionTitle" v-model="description" @updatedDescription="updateDescription" />
       <div class="inputForBedsDiv">
         <InputForPricingBedAndPeople @updateBeds="updateNrOfBeds" @updateMaxPeople="updateNrOfMaxGuests" @updatePrice="updatePrice" />
@@ -245,15 +245,29 @@ export default {
     }
   }
 }
+
 </script>
 <style scoped>
+.addResidenceHeader{
+  margin-top: -100px;
+}
+.inputForLocationArea{
+  padding: 11.2px 22.4px;
+  font-size: 18px;
+  border-radius: 5px;
+  border:1px solid grey ;
+  text-align:initial;
+  margin-bottom: 15px;
+}
 .descriptionTitle{
   font-family: 'mukta';
+  font-size: 18px;
 }
 .myLocation{
   font-family: 'mukta';
 }
 .myTitle{
+
   font-family: 'mukta';
 }
 .addResidenceHeader{
@@ -267,10 +281,10 @@ export default {
   margin:5px;
 }
 .previewButton{
-  border: outset 5px green;
+  border: outset 5px #007b8e;;
   outline:1px solid black;
   opacity:1;
-  background-color: green;
+  background-color: #007b8e;;
   padding:5px;
   /*optional*/
   font-family: 'mukta';
@@ -283,6 +297,7 @@ export default {
   margin-bottom:15px;
 }
 .datePickerDiv{
+  position: inherit;
   margin:10px;
   padding-right:18px;
   padding-bottom:10px;
@@ -292,12 +307,13 @@ p {
   margin:3px;
 }
 .greyBackgroundDiv{
-  background-color: rgba(218, 224, 224, 0.8);
-  width:max-content;
-  margin-left:auto;
-  margin-right:auto;
-  padding:20px;
-  width: 450px;
+     width:max-content;
+    margin-left:auto;
+    margin-right:auto;
+    margin-top:20px;
+    background-color:rgba(218, 224, 224, 0.8);
+    padding:100px;
+    
 }
 .mainDiv{
   padding-left:5vw;
@@ -318,6 +334,7 @@ p {
   text-align:center;
   background-position:center;
   font-family: 'mukta';
+  font-weight: bold;
 }
 .inputForBedsDiv{
   width:max-content;
