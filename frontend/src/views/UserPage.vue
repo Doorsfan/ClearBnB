@@ -7,7 +7,7 @@
     
     
     <div class="addNewLeaseDiv">
-      <p class="pApartment" style="none"> Add new apartment for renting:</p>
+
       <hr>
       <router-link to="/addLease">
         <button @click="addNewLease" class="addNewLeaseButton">Add New Lease</button>
@@ -15,7 +15,7 @@
     </div>
     <hr>
     <div class="historicalButtonDiv">
-      <p class="pApartment">Booking history</p>
+    
       <hr>
       <button @click="switchHistoricalDisplay" class="addNewLeaseButton">Show Past Bookings</button>
     </div>
@@ -41,19 +41,17 @@
     <hr>
 
     <div class="residencesOutBox">
-      <p class="otherDiv">Other</p>
-      <hr class="hrDiv">
-      <router-link class="residencesLink" to="/">Your residences out for rent</router-link>
+      <router-link class="residencesLink" to="/">Your residences</router-link>
     </div>
     <div class="changeUserInfoButtonDiv">
-      <button class="changeUserInfoButton" @click="changeUserInfo">Change user info</button>
+      <button class="changeUserInfoButton" @click="changeUserInfo">Change info</button>
     </div>
   </div>
   </div>
   <div class="changeUserInfoDiv primaryDiv">
     <div class="mainDiv changeUserInfoMainDiv">
     <form class="userInfoForm">
-      <p class="changeUserInfoTitle">Change User Info</p>
+      <p class="changeUserInfoTitle">Change Info</p>
       <div class="mainFormDiv">
         <div class="divForInputs">
           <div class="InputDiv">
@@ -282,22 +280,23 @@ export default {
   ;
 }
 .residencesLink{
-    margin-top: 50px;
-    border: outset 5px #029ebb;;
-    outline:1px solid black;
-    opacity:1;
-    background-color: #029ebb;
-    padding:3px;
-    /*optional*/
-    font-family: arial, sans-serif;
-    /*input has OS specific font-family*/
-    color: black;
-    font-weight:bolder;
-    text-decoration: none;
-    cursor: pointer;
-    width:max-content;
-    font-size:10px;
-    background-color: #029ebb;
+  border: outset 5px #007b8e;
+  outline:1px solid black;
+  opacity:1;
+  background-color: #007b8e;
+  padding:3px;
+  /*optional*/
+  font-family: 'mukta';
+  /*input has OS specific font-family*/
+  color: black;
+  font-weight:bolder;
+  text-decoration: none;
+  width:max-content;
+  font-size:10px;
+  margin-bottom:15px;
+  margin-top: 10px;
+  width: 150px;
+    
     
 }
 .pDiv{
@@ -312,13 +311,13 @@ export default {
   font-weight: bold;
 }
 .addNewLeaseButton{
-  border: outset 5px green;
+  border: outset 5px #007b8e;
   outline:1px solid black;
   opacity:1;
-  background-color: green;
-  padding:5px;
+  background-color: #007b8e;
+  padding:3px;
   /*optional*/
-  font-family: arial, sans-serif;
+  font-family: 'mukta';
   /*input has OS specific font-family*/
   color: black;
   font-weight:bolder;
@@ -327,6 +326,7 @@ export default {
   font-size:10px;
   margin-bottom:15px;
   margin-top: 10px;
+  width: 150px;
 }
 .primaryDiv{
   padding-left:5vw;
@@ -345,13 +345,13 @@ export default {
   overflow-x:hidden;
 }
 .changeHistoricalDisplay, .changeHistoricalDisplay:active{
-  border: outset 5px #029ebb;;
+  border: outset 5px #007b8e;;
   outline:1px solid black;
   opacity:1;
-  background-color: #029ebb;
-  padding:5px;
+  background-color: #007b8e;
+  padding:3px;
   /*optional*/
-  font-family: arial, sans-serif;
+  font-family: 'mukta';
   
   /*input has OS specific font-family*/
   color: black;
@@ -366,7 +366,7 @@ export default {
   display:none;
 }
 .userPageTitle{
-  margin-top: -40px;
+
   text-align:center;
 }
   .bookingBox{
@@ -382,10 +382,10 @@ export default {
     margin-top:20px;
   }
   .changeUserInfoButton{
-    border: outset 5px #029ebb;;
+    border: outset 5px #007b8e;;
     outline:1px solid black;
     opacity:1;
-    background-color: #029ebb;
+    background-color: #007b8e;
     padding:3px;
     /*optional*/
     font-family: arial, sans-serif;
@@ -397,7 +397,8 @@ export default {
     width:max-content;
     font-size:10px;
     margin-top: 10px;
-    background-color: #029ebb;
+    background-color: #007b8e;
+    width: 150px;
   }
   .changeUserInfoDiv{
     display:none;
@@ -411,7 +412,7 @@ export default {
   .cancelButton{
     margin-right:5px;
     margin-left:50px;
-    background-color: #029ebb;
+    background-color: #007b8e;
     font-size: 12px;
     font:arial;
     text-decoration: none;
@@ -475,11 +476,12 @@ export default {
     margin-left:auto;
     margin-right:auto;
     margin-top:20px;
-    text-align:center;
     background-color:rgba(218, 224, 224, 0.8);
-    padding:50px;
+    padding:150px;
   }
   .userPageTitle{
+    font-size: 50px;
+    margin-top: -100px;
     margin-bottom:20px;
     font-weight:bolder;
   }
@@ -596,6 +598,7 @@ export default {
       margin:0px;
       padding:0px;
       padding: 10px;
+      
     }
   }
 </style>
