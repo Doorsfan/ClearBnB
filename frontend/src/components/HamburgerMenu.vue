@@ -5,9 +5,9 @@
   <div v-bind:class="[open ? 'active' : null, 'router-links']">
     <i @click="openMenu" class="fas fa-times"></i>
     <p><router-link to="/">Home</router-link></p>
-    <p><router-link to="/userPage">User Page</router-link></p>
-    <p><router-link to="/login">Log in</router-link></p>
-    <p><router-link to="/signUp">Sign up</router-link></p>
+    <p><router-link v-if="$store.getters.getCurrentUser" to="/userPage">User Page</router-link></p>
+    <p><router-link v-if="!$store.getters.getCurrentUser" to="/login">Log in</router-link></p>
+    <p><router-link v-if="!$store.getters.getCurrentUser" to="/signUp">Sign up</router-link></p>
   </div>
 </template>
 
