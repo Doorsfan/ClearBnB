@@ -281,6 +281,8 @@ export default {
   padding-top: 20px;
 }
 .mainDiv {
+  font-family: 'mukta';
+  font-weight: bold;
   padding-left: 5vw;
   padding-right: 5vw;
   padding-bottom: 2.5vh;
