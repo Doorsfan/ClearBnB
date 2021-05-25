@@ -255,8 +255,6 @@ methods: {
     this.location, formattedStartDate, formattedEndDate, this.selectedNumberOfGuests, toPay, this.lease);
     let checkIfBookedRes = await fetch('/rest/bookings');
     let bookedResAsJson = await checkIfBookedRes.json();
-    console.log(bookedResAsJson);
-    console.log("Lease is: ", this.lease);
     let currentTakenBookings = []
     for(let booking of bookedResAsJson){
       if(booking.leaseId == this.lease.id){

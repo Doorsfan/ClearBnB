@@ -133,7 +133,6 @@ export default {
       store.commit('setLeaseToBuild', this.lease)
     },
     updateIMGUrls(newImageURLs){
-      console.log("this imageURLs was: ", this.imageURLs);
       this.imageURLs.push(newImageURLs);
       this.lease.imageURLs = this.imageURLs;
       store.commit('setLeaseToBuild', this.lease)

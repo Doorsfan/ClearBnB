@@ -51,9 +51,6 @@ export default {
     }
   },
   watch: {
-    myLease(){
-      console.log("My lease changed!");
-    },
     newBookingHelper(){
       this.$emit("updatedBookingHelper", this.newBookingHelper);
     },
