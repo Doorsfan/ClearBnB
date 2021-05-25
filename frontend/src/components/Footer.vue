@@ -35,7 +35,7 @@ footer {
   flex-direction: column;
   align-items: center;
   width: 100%;
-  padding-top: 80px;
+  padding-top: 60px;
   position: absolute;
   z-index: 1;
 }
@@ -92,7 +92,7 @@ footer {
 
 .last {
   color: white;
-  margin-top: 20px;
+  margin-top: 25px;
   font-size: 18px;
   -webkit-text-stroke: 0.4px black;
 }
