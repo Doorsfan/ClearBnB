@@ -32,67 +32,9 @@ import store from '../../store.js'
 const disabledDate = ref(add(new Date(), { days: 5 }))
 export default {
   props: ['myLease'],
-  emits: ['updatedChosenStartDate','updatedChosenEndDate', 'updatedDisabledDays', 'updatedBookingHelper'],
+  emits: ['updatedChosenStartDate','updatedChosenEndDate', 'updatedDisabledDays', 'updatedBookingHelper', 'newDisabledDates'],
   async mounted(){
-    let splitMyStartDate = this.myLease.startDate.split('-');
-    let myStartYear = splitMyStartDate[0];
-    let myStartMonth = Number(splitMyStartDate[1]) - 1;
-    let myStartDay = splitMyStartDate[2];
-    this.startDate = new Date(myStartYear, myStartMonth, myStartDay)
-    this.originalStartDate = new Date(splitMyStartDate[0], Number(splitMyStartDate[1])-1, splitMyStartDate[2])
-
-    let splitMyEndDate = this.myLease.endDate.split('-');
-    let myEndYear = splitMyEndDate[0];
-    let myEndMonth = Number(splitMyEndDate[1]) - 1;
-    let myEndDay = splitMyEndDate[2];
-    this.endDate = new Date(myEndYear, myEndMonth, myEndDay);
-    this.originalEndDate = new Date(splitMyEndDate[0], Number(splitMyEndDate[1])-1, splitMyEndDate[2])
-
-    let res = await fetch('/rest/bookings')
-    let responseInJson = await res.json();
-    for(let booking of responseInJson){
-      if(booking.leaseId == this.myLease.id){
-        let bookingStartDate = booking.startDate;
-        let mySplitStartDate = bookingStartDate.split('-')
-        let myStartYear = Number(mySplitStartDate[0]);
-        let myStartMonth = Number(mySplitStartDate[1]);
-        let myStartDay = Number(mySplitStartDate[2]);
-
-        let bookingEndDate = booking.endDate;
-        let mySplitEndDate = bookingEndDate.split("-")
-        let myEndYear = Number(mySplitEndDate[0]);
-        let myEndMonth = Number(mySplitEndDate[1]);
-        let myEndDay = Number(mySplitEndDate[2]);
-        let takenDay = ''
-        let differenceInYears = myEndYear - myStartYear;
-        let differenceInMonths = myEndMonth - myStartMonth;
-        let differenceInDays = myEndDay - myStartDay;
-        while(differenceInDays > 0){
-          differenceInDays -= 1;
-          this.addDisabledDate(myEndYear, myEndMonth, myEndDay);
-          if(myEndDay == 0){
-            myEndMonth -= 1;
-            if(myEndMonth == 0){
-              myEndYear -= 1;
-              myEndMonth = 12;
-            }
-            if(myEndMonth == 11 || myEndMonth == 9 || myEndMonth == 6 || myEndMonth == 4){
-              myEndDay = 30
-            }
-            else if(myEndMonth == 12 || myEndMonth == 10 || myEndMonth == 8 || myEndMonth == 7 || myEndMonth == 5 || myEndMonth == 3 || myEndMonth == 1){
-              myEndDay = 31
-            }
-          }
-          else{
-            myEndDay -= 1;
-          }
-        }
-      }
-    }
-    let emptyBookingHelper = new BookingHelper();
-    emptyBookingHelper.setTakenBookings(this.disabledDays.dates);
-    store.commit('setBookingHelper', emptyBookingHelper);
-    this.newBookingHelper = emptyBookingHelper;
+    this.convertDate();
     this.periodicallyUpdateLeases();
   },
   data() {
@@ -126,17 +68,79 @@ export default {
     }
   },
   methods: {
+    convertDate(){
+      let splitMyStartDate = this.myLease.startDate.split('-');
+      let myStartYear = splitMyStartDate[0];
+      let myStartMonth = Number(splitMyStartDate[1]) - 1;
+      let myStartDay = splitMyStartDate[2];
+      this.startDate = new Date(myStartYear, myStartMonth, myStartDay)
+      this.originalStartDate = new Date(splitMyStartDate[0], Number(splitMyStartDate[1])-1, splitMyStartDate[2])
+
+      let splitMyEndDate = this.myLease.endDate.split('-');
+      let myEndYear = splitMyEndDate[0];
+      let myEndMonth = Number(splitMyEndDate[1]) - 1;
+      let myEndDay = splitMyEndDate[2];
+      this.endDate = new Date(myEndYear, myEndMonth, myEndDay);
+      this.originalEndDate = new Date(splitMyEndDate[0], Number(splitMyEndDate[1])-1, splitMyEndDate[2])
+    },
     async periodicallyUpdateLeases(){
-      console.log("hi");
       let local = this.disabledDays.dates;
       let store = this.$store;
-      setInterval(function(){ 
+      let getDisabledDatesFunction = this.getDisabledDates
+      let thisContext = this
+      setInterval(function() { 
          store.commit('updateBookedDates', local)
+         getDisabledDatesFunction()
+         thisContext.$emit("newDisabledDates", thisContext.disabledDays.dates);
       },
-      5000);
+      100);
+    },
+    async getDisabledDates(){
+      let res = await fetch('/rest/bookings')
+      let responseInJson = await res.json();
+      this.disabledDays.dates = []
+      for(let booking of responseInJson){
+        if(booking.leaseId == this.myLease.id){
+          let bookingStartDate = booking.startDate;
+          let mySplitStartDate = bookingStartDate.split('-')
+          let myStartYear = Number(mySplitStartDate[0]);
+          let myStartMonth = Number(mySplitStartDate[1]);
+          let myStartDay = Number(mySplitStartDate[2]);
+
+          let bookingEndDate = booking.endDate;
+          let mySplitEndDate = bookingEndDate.split("-")
+          let myEndYear = Number(mySplitEndDate[0]);
+          let myEndMonth = Number(mySplitEndDate[1]);
+          let myEndDay = Number(mySplitEndDate[2]);
+          let takenDay = ''
+          let differenceInYears = myEndYear - myStartYear;
+          let differenceInMonths = myEndMonth - myStartMonth;
+          let differenceInDays = myEndDay - myStartDay;
+          while(differenceInDays >= 0){
+            differenceInDays -= 1;
+            this.addDisabledDate(myEndYear, myEndMonth, myEndDay);
+            if(myEndDay == 0){
+              myEndMonth -= 1;
+              if(myEndMonth == 0){
+                myEndYear -= 1;
+                myEndMonth = 12;
+              }
+              if(myEndMonth == 11 || myEndMonth == 9 || myEndMonth == 6 || myEndMonth == 4){
+                myEndDay = 30
+              }
+              else if(myEndMonth == 12 || myEndMonth == 10 || myEndMonth == 8 || myEndMonth == 7 || myEndMonth == 5 || myEndMonth == 3 || myEndMonth == 1){
+                myEndDay = 31
+              }
+            }
+            else{
+              myEndDay -= 1;
+            }
+          }
+        }
+      }
     },
     addDisabledDate(year, month, day){ //"2021-05-20"
-      this.disabledDays.dates.push(new Date(year + '-' + month + '-' + day))
+      this.disabledDays.dates.push(new Date(year + '-' + month + '-' + day));
     }
   }
 }
