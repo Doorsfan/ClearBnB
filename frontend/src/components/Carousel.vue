@@ -7,7 +7,7 @@
 <script>
 //Implement Interaction with Arrow Buttons again in regards to Carousel Component
 export default {
-  props: ['myLease'],
+  props: ["myLease"],
   data() {
     return {};
   },
@@ -28,8 +28,8 @@ export default {
 };
 </script>
 <style scoped>
-*{
-  font-family:'mukta';
+* {
+  font-family: "mukta";
 }
 .imageCarousel {
   position: relative;
@@ -39,6 +39,7 @@ export default {
   display: inline-block;
 }
 img {
+  object-fit: cover;
   height: 180px;
   width: 150px;
   position: absolute;
