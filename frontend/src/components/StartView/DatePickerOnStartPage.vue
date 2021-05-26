@@ -1,100 +1,112 @@
 <template>
-<div class="datePickersMainDiv">
-  <div class="firstDiv">
-    <p class="fromTheText">From The</p>
-    <Datepicker id="fromDatePicker" class="fromDatePicker" v-model="startDate" :lower-limit="minimumStartDate" :upper-limit="endDate"/>
+  <div class="datePickersMainDiv">
+    <div class="firstDiv">
+      <p class="fromTheText">From The</p>
+      <Datepicker
+        id="fromDatePicker"
+        class="fromDatePicker"
+        v-model="startDate"
+        :lower-limit="minimumStartDate"
+        :upper-limit="endDate"
+      />
+    </div>
+    <div class="secondDiv">
+      <p class="toTheText">To The</p>
+      <Datepicker
+        id="toDatePicker"
+        class="toDatePicker"
+        v-model="endDate"
+        :lower-limit="minimumEndDate"
+      />
+    </div>
   </div>
-  <div class="secondDiv">
-    <p class="toTheText">To The</p>
-    <Datepicker id="toDatePicker" class="toDatePicker" v-model="endDate" :lower-limit="minimumEndDate"/>
-  </div>
-</div>
 </template>
 
 <script setup>
-  import Datepicker from 'vue3-datepicker'
+import Datepicker from 'vue3-datepicker';
 </script>
 <script>
-import { ref } from 'vue' //Ref transmutes a value to become part of a reactive Object
+import { ref } from 'vue'; //Ref transmutes a value to become part of a reactive Object
 import PPPN from '../../components/PPPN.js';
-  
-const minimumDate = ref(new Date()) //The earliest date a user can pick is Today
-const startDate = ref(new Date()) //The date for the From datePicker - the start Date
+
+const minimumDate = ref(new Date()); //The earliest date a user can pick is Today
+const startDate = ref(new Date()); //The date for the From datePicker - the start Date
 
 //To make the Date be able to just add 1 day, we can define a function on it's Prototype
 let myDateHelper = new PPPN();
-let endDateSevenDaysAhead = myDateHelper.addDays(new Date(),7);
-const endDate = ref(endDateSevenDaysAhead) //The date for the To datePicker - the end date
+let endDateSevenDaysAhead = myDateHelper.addDays(new Date(), 7);
+const endDate = ref(endDateSevenDaysAhead); //The date for the To datePicker - the end date
 
 export default {
   //emits: ['updateEndDate', 'updateStartDate'],
   data() {
     return {
       minimumStartDate: new Date(),
-      minimumEndDate: myDateHelper.addDays(new Date(),1),
-      startDate: new Date("2021-05-27"),
-      endDate: new Date("2021-07-30")
-    }
+      minimumEndDate: myDateHelper.addDays(new Date(), 1),
+      startDate: new Date('2021-05-27'),
+      endDate: new Date('2021-07-30'),
+    };
   },
   watch: {
-    startDate(){ //Keeps a track of when startDate has changed
-      let convertedDate = this.convertDate(this.startDate)
-      this.$emit("updateStartDate", convertedDate)
+    startDate() {
+      //Keeps a track of when startDate has changed
+      let convertedDate = this.convertDate(this.startDate);
+      this.$emit('updateStartDate', convertedDate);
     },
-    endDate(){
-      let convertedDate = this.convertDate(this.endDate)
-      this.$emit("updateEndDate", convertedDate)     
-    }
+    endDate() {
+      let convertedDate = this.convertDate(this.endDate);
+      this.$emit('updateEndDate', convertedDate);
+    },
   },
-  methods: {  
-    convertDate(dateToConvert){
+  methods: {
+    convertDate(dateToConvert) {
       let month = dateToConvert.getMonth() + 1;
       let day = dateToConvert.getDate();
       let zeroBeforeMonth = '';
       let zeroBeforeDay = '';
-      if(month < 10){
-        zeroBeforeMonth += '0' + month
-        month = zeroBeforeMonth
+      if (month < 10) {
+        zeroBeforeMonth += '0' + month;
+        month = zeroBeforeMonth;
       }
-      if(day < 10){
-        zeroBeforeDay += '0' + day
-        day = zeroBeforeDay
+      if (day < 10) {
+        zeroBeforeDay += '0' + day;
+        day = zeroBeforeDay;
       }
-      return dateToConvert.getFullYear() + '-' + month + '-' + day
-    } 
-  }
-}
+      return dateToConvert.getFullYear() + '-' + month + '-' + day;
+    },
+  },
+};
 </script>
-
 
 <style scoped>
 * {
   font-size: 20px;
+  font-family:'mukta';
 }
 p {
-  width:max-content;
-  margin-left:auto;
-  margin-right:auto;
+  width: max-content;
+  margin-left: auto;
+  margin-right: auto;
   padding-bottom: 8px;
 }
 @media only screen and (max-width: 300px) {
   div {
-    width:max-content;
-    padding:0px;
+    width: max-content;
+    padding: 0px;
     margin: 0px;
   }
 }
 @media only screen and (min-width: 1330px) {
-  .firstDiv, .secondDiv{
-    display:inline-block;
+  .firstDiv,
+  .secondDiv {
+    display: inline-block;
   }
-  .firstDiv{
+  .firstDiv {
     margin-left: 10px;
     margin-right: 15px;
   }
-  .secondDiv{
-    margin-right:15px;
+  .secondDiv {
+    margin-right: 15px;
   }
-
 }
 </style>

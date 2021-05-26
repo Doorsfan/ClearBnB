@@ -1,29 +1,30 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'mukta';
 }
-.house_icon{
-  width:30px;
-  height:30px;
-  position:absolute;
+.house_icon {
+  width: 30px;
+  height: 30px;
+  position: absolute;
   left: 15px;
   top: 10px;
 }
-.homeText{
-  position:absolute;
+.homeText {
+  position: absolute;
   left: 5px;
   top: 45px;
 }
 #app {
-    font-family: Avenir, Helvetica, Arial, sans-serif;
-    display:flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 input {
-  font-size:18px;
+  font-size: 18px;
 }
 .app-main {
-    flex-grow: 1;
-    background-color: white;
+  flex-grow: 1;
+  background-color: white;
+  overflow-x: hidden;
 }
