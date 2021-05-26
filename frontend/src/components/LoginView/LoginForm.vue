@@ -103,7 +103,7 @@ h1 {
   text-align: center;
   height: 600px;
   width: 500px;
-  margin: 180px auto;
+  margin: 310px auto;
   border-radius: 5px ;
   border: 1px solid grey;
   background-color: rgb(255, 255, 255, 0.9);
@@ -173,19 +173,23 @@ button:hover {
 @media only screen and (max-width: 1920px) {
   .LogInPage{
  
-  margin: 80px auto;
+  margin: 135px auto;
  
   }
 }
 @media only screen and (max-width: 1800px) {
 .LogInPage{
-  text-align: center;
-  height: 600px;
-  width: 500px;
-  margin: 50px auto;
-  border-radius: 5px ;
-  border: 1px solid grey;
-  background-color: rgb(255, 255, 255, 0.9);
+  margin: 150px auto;
+}}
+
+@media only screen and (max-width: 1025px) {
+.LogInPage{
+  margin: 250px auto;
+  
+}}
+@media only screen and (max-width: 1023px) {
+.LogInPage{
+  margin: 80px auto;
 }}
 @media only screen and (max-width: 540px) {
 .LogInPage{

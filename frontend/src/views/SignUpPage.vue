@@ -308,6 +308,20 @@ flex-direction: column;
  
   }
 }
+@media only screen and (max-width: 1025px) {
+  .SignUpForm{
+ 
+  margin: 120px auto;
+ 
+  }
+}
+@media only screen and (max-width: 1023px) {
+  .SignUpForm{
+ 
+  margin: 50px auto;
+ 
+  }
+}
 @media only screen and (max-width: 600px) {
 
   .SignUpForm{
