@@ -45,7 +45,7 @@ p {
 .locationInput {
   width: 150px;
   padding: 5px;
-  padding: 11.2px 22.4px;
+  padding: 7.5px 30.4px;
   font-size:18px;
 }
 </style>

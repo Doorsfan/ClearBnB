@@ -2,6 +2,7 @@
   <div class="firstDatePickerDiv">
     <p class="AvailableFromP">Book From The:</p>
     <datepicker
+      class="myDatePicker"
       v-model="startDate"
       :lowerLimit="originalStartDate"
       :upper-limit="originalEndDate"
@@ -11,6 +12,7 @@
   <div class="secondDatePickerDiv">
     <p class="AvailableToP">Book To The:</p>
     <datepicker
+      class="myDatePicker"
       v-model="endDate"
       :lower-limit="startDate"
       :upper-limit="originalEndDate"

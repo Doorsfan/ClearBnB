@@ -28,7 +28,7 @@ export default {
 }
 .bedsInputForm {
   width: 150px;
-  padding: 11.2px 22.4px;
+  padding: 7.5px 30.4px;
   text-align:center;
   font-size:18px;
   margin:3px;
