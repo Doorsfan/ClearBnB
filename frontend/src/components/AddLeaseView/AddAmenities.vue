@@ -2,15 +2,45 @@
   <p class="amenitiesText">Amenities:</p>
   <div class="AddAmenitiesDiv">
     <div class="firstDiv">
-      <p class="wifiText">Wifi: </p><input @change="updateWifi" type="checkbox" v-model="hasWifi" class="wifiBox">
-      <p class="kitchenText">Kitchen: </p><input @change="updateKitchen" type="checkbox" v-model="hasKitchen" class="kitchenBox">
+      <p class="wifiText">Wifi:</p>
+      <input
+        @change="updateWifi"
+        type="checkbox"
+        v-model="hasWifi"
+        class="wifiBox"
+      />
+      <p class="kitchenText">Kitchen:</p>
+      <input
+        @change="updateKitchen"
+        type="checkbox"
+        v-model="hasKitchen"
+        class="kitchenBox"
+      />
     </div>
     <div class="secondDiv">
-      <p class="washerText">Washer: </p><input @change="updateWasher" type="checkbox" v-model="hasWasher" class="washerBox">
-      <p class="heatingText">Heating: </p><input @change="updateHeating" type="checkbox" v-model="hasHeating" class="heatingBox">
+      <p class="washerText">Washer:</p>
+      <input
+        @change="updateWasher"
+        type="checkbox"
+        v-model="hasWasher"
+        class="washerBox"
+      />
+      <p class="heatingText">Heating:</p>
+      <input
+        @change="updateHeating"
+        type="checkbox"
+        v-model="hasHeating"
+        class="heatingBox"
+      />
     </div>
     <div class="thirdDiv">
-      <p class="airConditionerText">airConditioner: </p><input @change="updateAC" type="checkbox" v-model="hasAirConditioner" class="airConditionerBox">
+      <p class="airConditionerText">airConditioner:</p>
+      <input
+        @change="updateAC"
+        type="checkbox"
+        v-model="hasAirConditioner"
+        class="airConditionerBox"
+      />
     </div>
   </div>
 </template>
@@ -19,38 +49,51 @@ export default {
   //Åtgärd:
   // Parprogrammera från och med idag 13:00, sprida kunskap, sprida kompetens, öka produktivitet
   // Sprint 2 - Delegera annan Scrum Master, Mjukt förslag: Syftet är att en person som är aktiv men inte är lika produktiv ska kunna kan få en större förankring i projektet - vilket kan hjälpa produktiviteten av arbetet
-  // 
-  emits: ['updateWifi', 'updateKitchen', 'updateWasher', 'updateHeating', 'updateAC'],
-  mounted(){
-    if(this.$store.getters.getLeaseToBuild != null){
-      if(this.$store.getters.getLeaseToBuild.amenities.includes("wifi: true")){
+  //
+  emits: [
+    'updateWifi',
+    'updateKitchen',
+    'updateWasher',
+    'updateHeating',
+    'updateAC',
+  ],
+  mounted() {
+    if (this.$store.getters.getLeaseToBuild != null) {
+      if (
+        this.$store.getters.getLeaseToBuild.amenities.includes('wifi: true')
+      ) {
         this.hasWifi = true;
-      }
-      else{
+      } else {
         this.hasWifi = false;
       }
-      if(this.$store.getters.getLeaseToBuild.amenities.includes("kitchen: true")){
+      if (
+        this.$store.getters.getLeaseToBuild.amenities.includes('kitchen: true')
+      ) {
         this.hasKitchen = true;
-      }
-      else{
+      } else {
         this.hasKitchen = false;
       }
-      if(this.$store.getters.getLeaseToBuild.amenities.includes("washer: true")){
+      if (
+        this.$store.getters.getLeaseToBuild.amenities.includes('washer: true')
+      ) {
         this.hasWasher = true;
-      }
-      else{
+      } else {
         this.hasWasher = false;
       }
-      if(this.$store.getters.getLeaseToBuild.amenities.includes("heating: true")){
+      if (
+        this.$store.getters.getLeaseToBuild.amenities.includes('heating: true')
+      ) {
         this.hasHeating = true;
-      }
-      else{
+      } else {
         this.hasHeating = false;
       }
-      if(this.$store.getters.getLeaseToBuild.amenities.includes("airConditioner: true")){
+      if (
+        this.$store.getters.getLeaseToBuild.amenities.includes(
+          'airConditioner: true'
+        )
+      ) {
         this.hasAirConditioner = true;
-      }
-      else{
+      } else {
         this.hasAirConditioner = false;
       }
     }
@@ -61,64 +104,69 @@ export default {
       hasKitchen: false,
       hasWasher: false,
       hasHeating: false,
-      hasAirConditioner: false
-    }
+      hasAirConditioner: false,
+    };
   },
   methods: {
-    updateWifi(){
-      this.$emit("updateWifi", this.hasWifi);
+    updateWifi() {
+      this.$emit('updateWifi', this.hasWifi);
     },
-    updateKitchen(){
-      this.$emit("updateKitchen", this.hasKitchen);
+    updateKitchen() {
+      this.$emit('updateKitchen', this.hasKitchen);
     },
-    updateWasher(){
-      this.$emit("updateWasher", this.hasWasher);
+    updateWasher() {
+      this.$emit('updateWasher', this.hasWasher);
     },
-    updateHeating(){
-      this.$emit("updateHeating", this.hasHeating);
+    updateHeating() {
+      this.$emit('updateHeating', this.hasHeating);
     },
-    updateAC(){
-      this.$emit("updateAC", this.hasAirConditioner);
-    }
-  }
-}
+    updateAC() {
+      this.$emit('updateAC', this.hasAirConditioner);
+    },
+  },
+};
 </script>
 <style scoped>
-.airConditionerText{
-  margin-left:-20px;
+* {
+  font-family:'mukta';
 }
-.amenitiesText{
-  margin:3px;
-  margin-top:8px;
-  font-weight:bolder;
+.airConditionerText {
+  margin-left: -20px;
 }
-.firstDiv, .secondDiv, .thirdDiv{
-  text-align:center;
+.amenitiesText {
+  margin: 3px;
+  margin-top: 8px;
+  font-weight: bolder;
 }
-.thirdDiv{
-  margin:3px;
+.firstDiv,
+.secondDiv,
+.thirdDiv {
+  text-align: center;
 }
-.wifiBox{
-  margin-right:20px;
+.thirdDiv {
+  margin: 3px;
 }
-.washerBox{
-  margin-right:20px;
+.wifiBox {
+  margin-right: 20px;
 }
-.heatingBox{
-  margin-right:32px;
+.washerBox {
+  margin-right: 20px;
 }
-input{
-  text-align:left;
+.heatingBox {
+  margin-right: 32px;
 }
-div{
-  text-align:left;
+input {
+  text-align: left;
 }
-p{
-  width:max-content;
-  display:inline-block;
+div {
+  text-align: left;
 }
-input{
-  margin:5px;
-  margin-left:3px;
+p {
+  width: max-content;
+  display: inline-block;
+}
+input {
+  margin: 5px;
+  margin-left: 3px;
 }
 </style>

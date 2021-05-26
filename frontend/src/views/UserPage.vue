@@ -13,7 +13,7 @@
       <button @click="switchHistoricalDisplay" class="changeHistoricalDisplay">Show Past Bookings</button>
     </div>
     <div class="currentBookingsDiv">
-      <p class="yourFutureBookingsText">Your <b>CURRENT</b> bookings so far:</p>
+      <p class="yourFutureBookingsText">Your <b>CURRENT</b> bookings so far: </p>
       <div class="bookings">
         <FutureBookingsList @cancelBooking="cancelABooking" v-for="(futureBooking, futureIndex) of futureBookings"
         :key="futureIndex"
@@ -21,7 +21,7 @@
       </div>
     </div>
     <div class="pastBookingsDiv">
-      <p class="yourPastBookingsText">Your <b>PAST</b> bookings so far:</p>
+      <p class="yourPastBookingsText">Your <b>PAST</b> bookings so far: </p>
       <div class="bookings">
         <PastBookingsList v-for="(pastBooking, pastIndex) of pastBookings"
         :key="pastIndex"
@@ -44,28 +44,28 @@
       <div class="mainFormDiv">
         <div class="divForInputs">
           <div class="InputDiv">
-            <p class="newUserInfo">First Name:</p><input type="text" name="firstNameInput" class="firstNameInput" v-model="myFirstName" placeholder="First Name">
+            <p class="newUserInfo">First Name: </p><input type="text" name="firstNameInput" class="firstNameInput" v-model="myFirstName" placeholder="First Name">
           </div>
           <div class="InputDiv">
-            <p class="newUserInfo">Last Name:</p><input type="text" name="lastNameInput" class="lastNameInput" v-model="myLastName" placeholder="Last Name">
+            <p class="newUserInfo">Last Name: </p><input type="text" name="lastNameInput" class="lastNameInput" v-model="myLastName" placeholder="Last Name">
           </div>
           <div class="InputDiv">
-            <p class="newUserInfo">Phone Number:</p><input type="text" name="phoneNumberInput" class="phoneNumberInput" v-model="myPhoneNumber" placeholder="Phone Number">
+            <p class="newUserInfo">Phone Number: </p><input type="text" name="phoneNumberInput" class="phoneNumberInput" v-model="myPhoneNumber" placeholder="Phone Number">
           </div>
           <div class="InputDiv">
-            <p class="newUserInfo">Street Address:</p><input type="text" name="streetInput" class="streetInput" v-model="myStreetAddress" placeholder="Street Address">
+            <p class="newUserInfo">Street Address: </p><input type="text" name="streetInput" class="streetInput" v-model="myStreetAddress" placeholder="Street Address">
           </div>
           <div class="InputDiv">
-            <p class="newUserInfo">City:</p><input type="text" name="cityInput" class="cityInput" v-model="myCity" placeholder="City">
+            <p class="newUserInfo">City: </p><input type="text" name="cityInput" class="cityInput" v-model="myCity" placeholder="City">
           </div>
           <div class="InputDiv">
-            <p class="newUserInfo">Zip Code:</p><input type="text" name="zipInput" class="zipInput" v-model="myZipCode" placeholder="Zip Code">
+            <p class="newUserInfo">Zip Code: </p><input type="text" name="zipInput" class="zipInput" v-model="myZipCode" placeholder="Zip Code">
           </div>
           <div class="InputDiv">
-            <p class="newUserInfo">Country:</p><input type="text" name="countryInput" class="countryInput" v-model="myCountry" placeholder="Country">
+            <p class="newUserInfo">Country: </p><input type="text" name="countryInput" class="countryInput" v-model="myCountry" placeholder="Country">
           </div>
           <div class="newsLetterInputDiv">
-            <p class="newUserInfo">Newsletter:</p><input type="checkbox" name="newsLetterInput" class="newsLetterInput"
+            <p class="newUserInfo">Newsletter: </p><input type="checkbox" name="newsLetterInput" class="newsLetterInput"
             v-model="myNewsLetter">
           </div>
         </div>
@@ -87,7 +87,7 @@ import FutureBookingsList from '../components/UserView/FutureBookingsList.vue'
 import PastBookingsList from '../components/UserView/PastBookingsList.vue'
 import AdminBooking from '../components/AdminBooking.js'
 export default {
-  components: {
+  components:{
     FutureBookingsList,
     PastBookingsList
   },
@@ -101,8 +101,8 @@ export default {
       profits: 0,
       myFirstName: '',
       myLastName: '',
-      myPhoneNumber:'',
-      myStreetAddress:'',
+      myPhoneNumber: '',
+      myStreetAddress: '',
       myCity: '',
       myZipCode: '',
       myCountry: '',
@@ -181,7 +181,7 @@ export default {
     }
     
   },
-  methods:{
+  methods: {
     async cancelABooking(idToCancel){
       let index = 0;
       for(let bookingToRemoveFromAll of this.myBookings){
@@ -259,234 +259,231 @@ export default {
 }
 </script>
 <style scoped>
+*{
+  font-family: 'mukta';
+}
 .addNewLeaseButton{
   border: outset 5px green;
-  outline:1px solid black;
-  opacity:1;
+  outline: 1px solid black;
+  opacity: 1;
   background-color: green;
-  padding:5px;
-  /*optional*/
-  font-family: arial, sans-serif;
-  /*input has OS specific font-family*/
+  padding: 5px;
+  font-family: 'mukta';
   color: black;
-  font-weight:bolder;
+  font-weight: bolder;
   text-decoration: none;
-  width:max-content;
-  font-size:20px;
-  margin-bottom:15px;
+  width: max-content;
+  font-size: 20px;
+  margin-bottom: 15px;
 }
 .primaryDiv{
-  padding-left:5vw;
-  padding-right:5vw;
-  padding-bottom:2.5vh;
-  padding-top:2.5vh;
+  padding-left: 5vw;
+  padding-right: 5vw;
+  padding-bottom: 2.5vh;
+  padding-top: 2.5vh;
   background-image: url('/public/nice.jpg');
-  background-position:center;
-  background-size:cover;
-  background-repeat:no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
   opacity: 0.8;
-  height:max-content;
+  height: max-content;
   padding-bottom: 20vh;
-  width:100vw;
+  width: 100vw;
   background-attachment: fixed;
-  overflow-x:hidden;
+  overflow-x: hidden;
 }
 .changeHistoricalDisplay, .changeHistoricalDisplay:active{
   border: outset 5px #029ebb;;
-  outline:1px solid black;
-  opacity:1;
+  outline: 1px solid black;
+  opacity: 1;
   background-color: #029ebb;
-  padding:5px;
+  padding: 5px;
   /*optional*/
-  font-family: arial, sans-serif;
-  
-  /*input has OS specific font-family*/
+  font-family: 'mukta';
   color: black;
-  font-weight:bolder;
+  font-weight: bolder;
   text-decoration: none;
-  width:max-content;
-  font-size:20px;
-  margin-bottom:15px;
+  width: max-content;
+  font-size: 20px;
+  margin-bottom: 15px;
 }
 .pastBookingsDiv{
-  display:none;
+  display: none;
 }
 .userPageTitle{
-  text-align:center;
+  text-align: center;
 }
   .bookingBox{
-    text-align:center;
+    text-align: center;
   }
   .bookings{
-    margin-bottom:20px;
+    margin-bottom: 20px;
   }
   .showAdventure{
-    color:green;
+    color: green;
   }
   .changeUserInfoButtonDiv{
-    margin-top:20px;
+    margin-top: 20px;
   }
   .changeUserInfoButton{
     border: outset 5px #029ebb;;
-    outline:1px solid black;
-    opacity:1;
+    outline: 1px solid black;
+    opacity: 1;
     background-color: #029ebb;
-    padding:3px;
-    /*optional*/
-    font-family: arial, sans-serif;
-    /*input has OS specific font-family*/
+    padding: 3px;
+    font-family: 'mukta';
     color: black;
-    font-weight:bolder;
+    font-weight: bolder;
     text-decoration: none;
     cursor: pointer;
-    width:max-content;
-    font-size:20px;
-    margin-top:25px;
+    width: max-content;
+    font-size: 20px;
+    margin-top: 25px;
     background-color: #029ebb;
   }
   .changeUserInfoDiv{
-    display:none;
+    display: none;
   }
   .saveChangesButton,.cancelButton{
-    margin-left:2.5px;
-    margin-right:2.5px;
-    padding:2px;
+    margin-left: 2.5px;
+    margin-right: 2.5px;
+    padding: 2px;
     margin-top: 5px;
   }
   .cancelButton{
-    margin-right:5px;
-    margin-left:50px;
+    margin-right: 5px;
+    margin-left: 50px;
     background-color: #029ebb;
     font-size: 12px;
-    font:arial;
+    font: arial;
     text-decoration: none;
     border: solid 1px black;
-    color:black;
-    padding:3px;
-    padding-right:5px;
-    padding-left:5px;
-    padding-top:4.5px;
-    padding-bottom:4.5px;
-    border-radius:2px;
+    color: black;
+    padding: 3px;
+    padding-right: 5px;
+    padding-left: 5px;
+    padding-top: 4.5px;
+    padding-bottom: 4.5px;
+    border-radius: 2px;
   }
   .buttonsDiv{
-    width:max-content;
-    margin-left:auto;
-    margin-right:auto;
+    width: max-content;
+    margin-left: auto;
+    margin-right: auto;
   }
   .newsLetterInputDiv{
-    width:max-content;
-    margin-left:auto;
-    margin-right:auto;
+    width: max-content;
+    margin-left: auto;
+    margin-right: auto;
   }
   input{
-    padding-left:2px;
+    padding-left: 2px;
   }
   .changeUserInfoTitle{
-    margin-top:20px;
-    width:max-content;
-    margin-left:auto;
-    margin-right:auto;
-    font-weight:bolder;
+    margin-top: 20px;
+    width: max-content;
+    margin-left: auto;
+    margin-right: auto;
+    font-weight: bolder;
   }
   .InputDiv{
-    margin:8px;
+    margin: 8px;
   }
   .newUserInfo{
-    display:inline-block;
-    margin-right:3px;
+    display: inline-block;
+    margin-right: 3px;
   }
   .mainFormDiv{
-    text-align:right;
-    width:max-content;
-    margin-left:auto;
-    margin-right:auto;
+    text-align: right;
+    width: max-content;
+    margin-left: auto;
+    margin-right: auto;
   }
   .divForText{
-    width:max-content;
-    text-align:right;
-    display:inline-block;
-    margin-right:2px;
+    width: max-content;
+    text-align: right;
+    display: inline-block;
+    margin-right: 2px;
   }
   .divForInputs{
-    display:inline-block;
+    display: inline-block;
   }
   input{
-    display:inline-block;
-    font-size:14px;
+    display: inline-block;
+    font-size: 14px;
   }
   .mainDiv{
-    width:max-content;
-    margin-left:auto;
-    margin-right:auto;
-    margin-top:20px;
-    text-align:center;
-    background-color:rgba(218, 224, 224, 0.8);
-    padding:50px;
+    width: max-content;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    text-align: center;
+    background-color: rgba(218, 224, 224, 0.8);
+    padding: 50px;
   }
   .userPageTitle{
-    margin-bottom:20px;
-    font-weight:bolder;
+    margin-bottom: 20px;
+    font-weight: bolder;
   }
   .welcomeMessage{
-    margin-bottom:20px;
+    margin-bottom: 20px;
     border: outset 2px;
-    opacity:1;
+    opacity: 1;
     background-color: rgba(218, 224, 224, 0.8);
-    padding:3px;
+    padding: 3px;
   }
   .residencesLink:visited{
-    color:blue;
+    color: blue;
   }
   .yourFutureBookingsText, .yourPastBookingsText{
-    margin-bottom:20px;
+    margin-bottom: 20px;
     background: rgba(218, 224, 224, 0.8);
-    padding:3px;
-    border:outset 2px;
+    padding: 3px;
+    border: outset 2px;
   }
   .residencesOutBox{
-    margin-top:15px;
+    margin-top: 15px;
   }
   .residencesLink{
-    font-weight:bolder;
+    font-weight: bolder;
   }
 
-  @media only screen and (max-width: 450px) {
+  @media only screen and (max-width:450px) {
     .mainDiv{
-      margin:0px;
-      padding:0px;
-      margin-left:auto;
-      margin-right:auto;
+      margin: 0px;
+      padding: 0px;
+      margin-left: auto;
+      margin-right: auto;
       padding: 10px;
     }
   }
-  @media only screen and (max-width: 400px) {
+  @media only screen and (max-width:400px) {
     .mainDiv{
-      margin:0px;
-      padding:0px;
-      margin-left:auto;
-      margin-right:auto;
+      margin: 0px;
+      padding: 0px;
+      margin-left: auto;
+      margin-right: auto;
       padding: 10px;
     }
     .changeUserInfoMainDiv{
-      transform:scale(0.8);
-      padding:10px;
-      margin:0px;
+      transform: scale(0.8);
+      padding: 10px;
+      margin: 0px;
     }
   }
 
   @media only screen and (max-width: 330px) {
     * {
-      text-align:center;
-      width:max-content;
-      margin-left:auto;
-      margin-right:auto;
+      text-align: center;
+      width: max-content;
+      margin-left: auto;
+      margin-right: auto;
     }
     .changeUserInfoDiv{
-      margin:0px;
+      margin: 0px;
     }
     .changeUserInfoTitle{
-      padding-left:0px;
+      padding-left: 0px;
     }
     .userPageMainDiv{
       margin-top: 50px;
@@ -494,55 +491,55 @@ export default {
       padding-bottom: 10px;
     }
     .changeUserInfoMainDiv{
-      transform:scale(0.8);
-      padding:5px;
-      margin-left:auto;
-      margin-right:auto;
-      width:240px;
+      transform: scale(0.8);
+      padding: 5px;
+      margin-left: auto;
+      margin-right: auto;
+      width: 240px;
     }
     p {
-      display:block;
-      width:max-content;
-      text-align:center;
-      margin-left:auto;
-      margin-right:auto;
+      display: block;
+      width: max-content;
+      text-align: center;
+      margin-left: auto;
+      margin-right: auto;
     }
     input {
       display: block;
       width: max-content;
-      margin-left:auto;
-      margin-right:auto;
+      margin-left: auto;
+      margin-right: auto;
     }
     .mainFormDiv, .divForInputs, .InputDiv{
       width: 220px;
-      text-align:center;
-      margin:0px;
+      text-align: center;
+      margin: 0px;
       margin-top: 2px;
       margin-bottom: 4px;
     }
     .buttonsDiv{
-      padding:0px;
-      margin:0px;
+      padding: 0px;
+      margin: 0px;
     }
     .cancelButton{
-      margin-left:40px;
+      margin-left: 40px;
     }
   }
 
   @media only screen and (max-width: 290px) {
     *{
-      padding:0px;
-      margin:0px;
-      text-align:center;
-      align-content:center;
-      width:max-content;
-      margin-left:auto;
+      padding: 0px;
+      margin: 0px;
+      text-align: center;
+      align-content: center;
+      width: max-content;
+      margin-left: auto;
       margin-right: auto;
     }
     .mainDiv{
-      transform:scale(0.75);
-      margin:0px;
-      padding:0px;
+      transform: scale(0.75);
+      margin: 0px;
+      padding: 0px;
       padding: 10px;
     }
   }

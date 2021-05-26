@@ -1,9 +1,9 @@
 export default class BookingHelper {
   constructor() {
-    this.takenBookings = []
+    this.takenBookings = [];
   }
   getTakenBookings() {
-    return this.takenBookings
+    return this.takenBookings;
   }
   setTakenBookings(newTakenBookings) {
     this.takenBookings = newTakenBookings;

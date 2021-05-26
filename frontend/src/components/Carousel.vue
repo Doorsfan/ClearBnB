@@ -1,46 +1,48 @@
 <template>
   <div class="imageCarousel">
-    <img class="firstImage" :src="myLease.imageURLs[0]"/>
-    <img class="secondImage" :src="myLease.imageURLs[1]"/>
+    <img class="firstImage" :src="myLease.imageURLs[0]" />
+    <img class="secondImage" :src="myLease.imageURLs[1]" />
   </div>
 </template>
 <script>
 //Implement Interaction with Arrow Buttons again in regards to Carousel Component
 export default {
-  props: ["myLease"],
+  props: ['myLease'],
   data() {
-    return {
-    }
+    return {};
   },
   methods: {
-    previousPicture(){
-      let firstPicture = this.myLease.imageURLs[0]
-      let secondPicture = this.myLease.imageURLs[1]
-      this.myLease.imageURLs[1] = firstPicture
-      this.myLease.imageURLs[0] = secondPicture
+    previousPicture() {
+      let firstPicture = this.myLease.imageURLs[0];
+      let secondPicture = this.myLease.imageURLs[1];
+      this.myLease.imageURLs[1] = firstPicture;
+      this.myLease.imageURLs[0] = secondPicture;
     },
-    nextPicture(){
-      let firstPicture = this.myLease.imageURLs[0]
-      let secondPicture = this.myLease.imageURLs[1]
-      this.myLease.imageURLs[0] = secondPicture
-      this.myLease.imageURLs[1] = firstPicture
-    }
-  }
-}
+    nextPicture() {
+      let firstPicture = this.myLease.imageURLs[0];
+      let secondPicture = this.myLease.imageURLs[1];
+      this.myLease.imageURLs[0] = secondPicture;
+      this.myLease.imageURLs[1] = firstPicture;
+    },
+  },
+};
 </script>
 <style scoped>
-.imageCarousel{
-  position:relative;
-  height:180px;
-  width:150px;
-  margin:5px;
-  display:inline-block;
+*{
+  font-family:'mukta';
 }
-img{
+.imageCarousel {
+  position: relative;
   height: 180px;
-  width:150px;
-  position:absolute;
-  left:0;
+  width: 150px;
+  margin: 5px;
+  display: inline-block;
+}
+img {
+  height: 180px;
+  width: 150px;
+  position: absolute;
+  left: 0;
   -webkit-transition: opacity 0.7s ease-in-out;
   -moz-transition: opacity 0.7s ease-in-out;
   -o-transition: opacity 0.7s ease-in-out;
@@ -48,16 +50,16 @@ img{
 }
 @keyframes cyclingOpacity {
   0% {
-  opacity:1;
+    opacity: 1;
   }
   45% {
-  opacity:1;
+    opacity: 1;
   }
   55% {
-  opacity:0;
+    opacity: 0;
   }
   100% {
-  opacity:0;
+    opacity: 0;
   }
 }
 .secondImage {
@@ -72,7 +74,7 @@ img{
   border-width: 0 3px 3px 0;
   display: inline-block;
   padding: 3px;
-  margin-bottom:85px;
+  margin-bottom: 85px;
 }
 .left {
   transform: rotate(135deg);
