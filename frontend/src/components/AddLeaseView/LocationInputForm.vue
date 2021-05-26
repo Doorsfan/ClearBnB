@@ -22,13 +22,13 @@ export default {
   },
   data() {
     return {
-      location: "",
+      location: '',
     };
   },
   methods: {
     updateLocationArea() {
       let updatedLocationArea = location;
-      this.$emit("updatedLocation", this.location);
+      this.$emit('updatedLocation', this.location);
     },
   },
 };

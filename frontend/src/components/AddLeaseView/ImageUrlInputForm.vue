@@ -31,7 +31,7 @@ export default {
   data() {
     return {
       imageURLs: [],
-      imageURL: "",
+      imageURL: '',
     };
   },
   methods: {
@@ -50,6 +50,9 @@ export default {
 };
 </script>
 <style scoped>
+*{
+  font-family:'mukta';
+}
 .ImageURLSdiv {
   width: max-content;
   margin-left: auto;

@@ -68,14 +68,18 @@ export default class Booking {
     this.bookedStay = newBookedStay;
   }
   isInThePast(toCompare) {
-    let correctFormatToCompare = this.getDateInCorrectFormat(toCompare)
-    let splitFirstDate = correctFormatToCompare.split('-')
-    let todayInCorrectFormat = this.getDateInCorrectFormat(new Date())
-    let splitSecondDate = todayInCorrectFormat.split('-')
-    if (splitFirstDate[0] <= splitSecondDate[0] && splitFirstDate[1] <= splitSecondDate[1] && splitFirstDate[2] <= splitSecondDate[2]) {
-      return true
+    let correctFormatToCompare = this.getDateInCorrectFormat(toCompare);
+    let splitFirstDate = correctFormatToCompare.split('-');
+    let todayInCorrectFormat = this.getDateInCorrectFormat(new Date());
+    let splitSecondDate = todayInCorrectFormat.split('-');
+    if (
+      splitFirstDate[0] <= splitSecondDate[0] &&
+      splitFirstDate[1] <= splitSecondDate[1] &&
+      splitFirstDate[2] <= splitSecondDate[2]
+    ) {
+      return true;
     }
-    return false
+    return false;
   }
   getDateInCorrectFormat(myDate) {
     let today = new Date(myDate);

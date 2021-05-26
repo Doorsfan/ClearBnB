@@ -166,4 +166,8 @@ input {
   margin: 5px;
   margin-left: 3px;
 }
+input {
+  margin: 5px;
+  margin-left: 3px;
+}
 </style>
