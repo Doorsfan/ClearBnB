@@ -4,10 +4,7 @@
     <p class="userPageTitle">User Page</p>
     <hr class="hrDiv">
     <p v-if="$store.getters.getCurrentUser.username == 'admin@ClearBnB.se'" class="welcomeMessage">Welcome Admin!</p>
-    
-    
     <div class="addNewLeaseDiv">
-
       <hr>
       <router-link to="/addLease">
         <button @click="addNewLease" class="addNewLeaseButton">Add New Lease</button>
@@ -15,7 +12,6 @@
     </div>
     <hr>
     <div class="historicalButtonDiv">
-    
       <hr>
       <button @click="switchHistoricalDisplay" class="addNewLeaseButton">Show Past Bookings</button>
     </div>
@@ -39,7 +35,6 @@
       </div>
     </div>
     <hr>
-
     <div class="residencesOutBox">
       <router-link class="residencesLink" to="/">Your residences</router-link>
     </div>
@@ -81,7 +76,6 @@
           </div>
         </div>
       </div>
-      
     </form>
     <div class="buttonsDiv">
       <button @click="redisplayUserPage" class="cancelButton" value="Cancel">Cancel</button><button class="saveChangesButton" @click="updateUserInfo" value="Save Changes">Save Changes</button>
@@ -270,336 +264,10 @@ export default {
 }
 </script>
 <style scoped>
-.hrDiv{
-  margin-top: 5px;
-}
-.otherDiv{
-  margin-bottom: 5px;
-  font-family: 'mukta';
-  font-weight: bold
-  ;
-}
-.residencesLink{
-  border: outset 5px #007b8e;
-  outline:1px solid black;
-  opacity:1;
-  background-color: #007b8e;
-  padding:3px;
-  /*optional*/
-  font-family: 'mukta';
-  /*input has OS specific font-family*/
-  color: black;
-  font-weight:bolder;
-  text-decoration: none;
-  width:max-content;
-  font-size:10px;
-  margin-bottom:15px;
-  margin-top: 10px;
-  width: 150px;
-    
-    
-}
-.pDiv{
-  font-size: 10px;
-  font-family: 'mukta';
-  color: red;
-}
-
-.pApartment{
-  font-family: 'mukta';
-  text-decoration: none;
-  font-weight: bold;
-}
-.addNewLeaseButton{
-  border: outset 5px #007b8e;
-  outline:1px solid black;
-  opacity:1;
-  background-color: #007b8e;
-  padding:3px;
-  /*optional*/
-  font-family: 'mukta';
-  /*input has OS specific font-family*/
-  color: black;
-  font-weight: bolder;
-  text-decoration: none;
-  width:max-content;
-  font-size:10px;
-  margin-bottom:15px;
-  margin-top: 10px;
-  width: 150px;
-}
-.primaryDiv{
-  padding-left: 5vw;
-  padding-right: 5vw;
-  padding-bottom: 2.5vh;
-  padding-top: 2.5vh;
-  background-image: url('/public/nice.jpg');
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  opacity: 0.8;
-  height: max-content;
-  padding-bottom: 20vh;
-  width: 100vw;
-  background-attachment: fixed;
-  overflow-x: hidden;
-}
-.changeHistoricalDisplay, .changeHistoricalDisplay:active{
-  border: outset 5px #007b8e;;
-  outline:1px solid black;
-  opacity:1;
-  background-color: #007b8e;
-  padding:3px;
-  /*optional*/
-  font-family: 'mukta';
-  
-  /*input has OS specific font-family*/
-  color: black;
-  font-weight: bolder;
-  text-decoration: none;
-  width:max-content;
-  font-size:10px;
-  margin-bottom:15px;
-  margin-top: 10px;
-}
-.pastBookingsDiv{
-  display: none;
-}
-.userPageTitle{
-
+.mainDiv{
+  width:280px;
+  padding:10px;
   text-align:center;
 }
-  .bookingBox{
-    text-align: center;
-  }
-  .bookings{
-    margin-bottom: 20px;
-  }
-  .showAdventure{
-    color: green;
-  }
-  .changeUserInfoButtonDiv{
-    margin-top: 20px;
-  }
-  .changeUserInfoButton{
-    border: outset 5px #007b8e;;
-    outline:1px solid black;
-    opacity:1;
-    background-color: #007b8e;
-    padding:3px;
-    /*optional*/
-    font-family: 'mukta';
-    /*input has OS specific font-family*/
-    color: black;
-    font-weight: bolder;
-    text-decoration: none;
-    cursor: pointer;
-    width:max-content;
-    font-size:10px;
-    margin-top: 10px;
-    background-color: #007b8e;
-    width: 150px;
-  }
-  .changeUserInfoDiv{
-    display: none;
-  }
-  .saveChangesButton,.cancelButton{
-    margin-left: 2.5px;
-    margin-right: 2.5px;
-    padding: 2px;
-    margin-top: 5px;
-  }
-  .cancelButton{
-    margin-right:5px;
-    margin-left:50px;
-    background-color: #007b8e;
-    font-size: 12px;
-    font:'mukta';
-    text-decoration: none;
-    border: solid 1px black;
-    color: black;
-    padding: 3px;
-    padding-right: 5px;
-    padding-left: 5px;
-    padding-top: 4.5px;
-    padding-bottom: 4.5px;
-    border-radius: 2px;
-  }
-  .buttonsDiv{
-    width: max-content;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  .newsLetterInputDiv{
-    width: max-content;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  input{
-    padding-left: 2px;
-  }
-  .changeUserInfoTitle{
-    margin-top: 20px;
-    width: max-content;
-    margin-left: auto;
-    margin-right: auto;
-    font-weight: bolder;
-  }
-  .InputDiv{
-    margin: 8px;
-  }
-  .newUserInfo{
-    display: inline-block;
-    margin-right: 3px;
-  }
-  .mainFormDiv{
-    text-align: right;
-    width: max-content;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  .divForText{
-    width: max-content;
-    text-align: right;
-    display: inline-block;
-    margin-right: 2px;
-  }
-  .divForInputs{
-    display: inline-block;
-  }
-  input{
-    display: inline-block;
-    font-size: 14px;
-  }
-  .mainDiv{
-    width:max-content;
-    margin-left:auto;
-    margin-right:auto;
-    margin-top:20px;
-    background-color:rgba(218, 224, 224, 0.8);
-    padding:150px;
-  }
-  .userPageTitle{
-    font-size: 50px;
-    margin-top: -100px;
-    margin-bottom:20px;
-    font-weight:bolder;
-  }
-  .welcomeMessage{
-    font-family: 'mukta';
-    margin-bottom:20px;
-    opacity:1;
-    padding:3px;
-  
-  }
-  .yourFutureBookingsText, .yourPastBookingsText{
-    margin-bottom:20px;
-    
-  
-    border:outset 2px;
-  }
-  .residencesOutBox{
-    margin-top: 15px;
-  }
-  .residencesLink{
-    font-weight: bolder;
-  }
-
-  @media only screen and (max-width:450px) {
-    .mainDiv{
-      margin: 0px;
-      padding: 0px;
-      margin-left: auto;
-      margin-right: auto;
-      padding: 10px;
-    }
-  }
-  @media only screen and (max-width:400px) {
-    .mainDiv{
-      margin: 0px;
-      padding: 0px;
-      margin-left: auto;
-      margin-right: auto;
-      padding: 10px;
-    }
-    .changeUserInfoMainDiv{
-      transform: scale(0.8);
-      padding: 10px;
-      margin: 0px;
-    }
-  }
-
-  @media only screen and (max-width: 330px) {
-    * {
-      text-align: center;
-      width: max-content;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    .changeUserInfoDiv{
-      margin: 0px;
-    }
-    .changeUserInfoTitle{
-      padding-left: 0px;
-    }
-    .userPageMainDiv{
-      margin-top: 50px;
-      padding-top: 10px;
-      padding-bottom: 10px;
-    }
-    .changeUserInfoMainDiv{
-      transform: scale(0.8);
-      padding: 5px;
-      margin-left: auto;
-      margin-right: auto;
-      width: 240px;
-    }
-    p {
-      display: block;
-      width: max-content;
-      text-align: center;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    input {
-      display: block;
-      width: max-content;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    .mainFormDiv, .divForInputs, .InputDiv{
-      width: 220px;
-      text-align: center;
-      margin: 0px;
-      margin-top: 2px;
-      margin-bottom: 4px;
-    }
-    .buttonsDiv{
-      padding: 0px;
-      margin: 0px;
-    }
-    .cancelButton{
-      margin-left: 40px;
-    }
-  }
-
-  @media only screen and (max-width: 290px) {
-    *{
-      padding: 0px;
-      margin: 0px;
-      text-align: center;
-      align-content: center;
-      width: max-content;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    .mainDiv{
-      transform: scale(0.75);
-      margin: 0px;
-      padding: 0px;
-      padding: 10px;
-      
-    }
-  }
 </style>
 

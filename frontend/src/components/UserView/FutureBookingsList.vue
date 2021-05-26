@@ -41,28 +41,28 @@ export default {
 <style scoped>
 * {
   font-family: 'mukta';
+  color:black;
+  text-decoration:none;
+  font-weight:bold;
 }
 .cancelButton {
-  padding: 2px;
+  padding: 5px;
   font-weight: bolder;
   font-size: 20px;
   margin-top: 8px;
-  background: rgba(255, 182, 193, 0.863);
-  color: red;
+  background: rgba(255, 0, 0, 0.78);
+  color: white;
   cursor: pointer;
+  -webkit-text-stroke: solid 3px black;
 }
-.readMoreLink {
-  margin-left: 150px;
-}
-.goToBookedItem:visited {
-  color: blue;
-}
+
 .titleDiv {
   font-weight: bolder;
 }
 .firstImage {
-  width: 100px;
+  width: 150px;
   height: 100px;
+  border-radius:10px;
 }
 .mainBoxDiv {
   margin-left: auto;
@@ -72,33 +72,10 @@ export default {
   margin-top: 10px;
   margin-bottom: 10px;
   border: 1px solid black;
-  background: #eee;
+  background:white;
+  border-radius:10px;
 }
 .titleDiv {
   text-align: center;
-}
-
-.divHoldingLocationAndPrice {
-  display: inline;
-  height: 166px;
-  width: 300px;
-  margin: 0px;
-  padding: 0px;
-  position: absolute;
-}
-.textBox {
-  margin: 2px;
-  margin-left: 30px;
-  margin-top: 5px;
-  word-wrap: break-word;
-  width: 230px;
-  overflow-y: hidden;
-  overflow-x: hidden;
-  padding: 3px;
-  height: 143px;
-  margin-bottom: 10px;
-}
-.descriptionDiv {
-  height: 124px;
 }
 </style>
