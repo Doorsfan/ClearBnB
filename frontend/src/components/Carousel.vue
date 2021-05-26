@@ -41,12 +41,9 @@ export default {
 img {
   object-fit: cover;
   height: 180px;
-<<<<<<< HEAD
-=======
   width: 150px;
   position: absolute;
   object-fit: cover;
->>>>>>> 2510a14974af0e74b58771c919eb45ffd566885f
   left: 0;
   -webkit-transition: opacity 0.7s ease-in-out;
   -moz-transition: opacity 0.7s ease-in-out;
