@@ -1,5 +1,5 @@
 <template>
-  <div class="firstRow">
+  <div class="firstRowHousing">
     <input
       @change="updateChosenHousing"
       required
@@ -32,7 +32,7 @@
     />
     <label class="labelForOther" for="Other">Other</label>
   </div>
-  <div class="secondRow">
+  <div class="secondRowHousing">
     <input
       @change="updateChosenSize"
       required
@@ -59,36 +59,33 @@
 <script>
 //Implement so that it is a seperate section in the Radio Buttons for Entire residence/part
 export default {
-  emits: ['updateChosenHousing', 'updateChosenSize'],
+  emits: ["updateChosenHousing", "updateChosenSize"],
   mounted() {
     if (this.$store.getters.getLeaseToBuild != null) {
       this.firstRowChoice = this.$store.getters.getLeaseToBuild.typeOfHousing;
       this.secondRowChoice =
         this.$store.getters.getLeaseToBuild.entireResidence == true
-          ? 'Entire residence'
-          : 'Part';
+          ? "Entire residence"
+          : "Part";
     }
   },
   data() {
     return {
-      firstRowChoice: '',
-      secondRowChoice: '',
+      firstRowChoice: "",
+      secondRowChoice: "",
     };
   },
   methods: {
     updateChosenHousing() {
-      this.$emit('updateChosenHousing', this.firstRowChoice);
+      this.$emit("updateChosenHousing", this.firstRowChoice);
     },
     updateChosenSize() {
-      this.$emit('updateChosenSize', this.secondRowChoice);
+      this.$emit("updateChosenSize", this.secondRowChoice);
     },
   },
 };
 </script>
 <style scoped>
-*{
-  font-family:'mukta';
-}
 .labelForEntire {
   padding-right: 10px;
 }
@@ -101,12 +98,12 @@ export default {
 .labelForFlat {
   padding-right: 20px;
 }
-.firstRow {
+.firstRowHousing {
   width: 210px;
   margin-left: auto;
   margin-right: auto;
 }
-.secondRow {
+.secondRowHousing {
   width: 210px;
   margin-left: auto;
   margin-right: auto;

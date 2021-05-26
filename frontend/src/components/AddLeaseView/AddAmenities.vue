@@ -51,37 +51,37 @@ export default {
   // Sprint 2 - Delegera annan Scrum Master, Mjukt förslag: Syftet är att en person som är aktiv men inte är lika produktiv ska kunna kan få en större förankring i projektet - vilket kan hjälpa produktiviteten av arbetet
   //
   emits: [
-    'updateWifi',
-    'updateKitchen',
-    'updateWasher',
-    'updateHeating',
-    'updateAC',
+    "updateWifi",
+    "updateKitchen",
+    "updateWasher",
+    "updateHeating",
+    "updateAC",
   ],
   mounted() {
     if (this.$store.getters.getLeaseToBuild != null) {
       if (
-        this.$store.getters.getLeaseToBuild.amenities.includes('wifi: true')
+        this.$store.getters.getLeaseToBuild.amenities.includes("wifi: true")
       ) {
         this.hasWifi = true;
       } else {
         this.hasWifi = false;
       }
       if (
-        this.$store.getters.getLeaseToBuild.amenities.includes('kitchen: true')
+        this.$store.getters.getLeaseToBuild.amenities.includes("kitchen: true")
       ) {
         this.hasKitchen = true;
       } else {
         this.hasKitchen = false;
       }
       if (
-        this.$store.getters.getLeaseToBuild.amenities.includes('washer: true')
+        this.$store.getters.getLeaseToBuild.amenities.includes("washer: true")
       ) {
         this.hasWasher = true;
       } else {
         this.hasWasher = false;
       }
       if (
-        this.$store.getters.getLeaseToBuild.amenities.includes('heating: true')
+        this.$store.getters.getLeaseToBuild.amenities.includes("heating: true")
       ) {
         this.hasHeating = true;
       } else {
@@ -89,7 +89,7 @@ export default {
       }
       if (
         this.$store.getters.getLeaseToBuild.amenities.includes(
-          'airConditioner: true'
+          "airConditioner: true"
         )
       ) {
         this.hasAirConditioner = true;
@@ -109,33 +109,30 @@ export default {
   },
   methods: {
     updateWifi() {
-      this.$emit('updateWifi', this.hasWifi);
+      this.$emit("updateWifi", this.hasWifi);
     },
     updateKitchen() {
-      this.$emit('updateKitchen', this.hasKitchen);
+      this.$emit("updateKitchen", this.hasKitchen);
     },
     updateWasher() {
-      this.$emit('updateWasher', this.hasWasher);
+      this.$emit("updateWasher", this.hasWasher);
     },
     updateHeating() {
-      this.$emit('updateHeating', this.hasHeating);
+      this.$emit("updateHeating", this.hasHeating);
     },
     updateAC() {
-      this.$emit('updateAC', this.hasAirConditioner);
+      this.$emit("updateAC", this.hasAirConditioner);
     },
   },
 };
 </script>
 <style scoped>
-* {
-  font-family:'mukta';
-}
 .airConditionerText {
   margin-left: -20px;
 }
 .amenitiesText {
   margin: 3px;
-  margin-top: 8px;
+  margin-top: 30px;
   font-weight: bolder;
 }
 .firstDiv,
@@ -164,6 +161,10 @@ div {
 p {
   width: max-content;
   display: inline-block;
+}
+input {
+  margin: 5px;
+  margin-left: 3px;
 }
 input {
   margin: 5px;

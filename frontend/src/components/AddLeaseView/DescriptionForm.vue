@@ -1,10 +1,10 @@
 <template>
   <div>
-    <p class="myDescriptionP">Description:</p>
+    <p class="myDescription">Description:</p>
     <textarea
       required
       @change="sendUpMessage"
-      class="myInput"
+      class="descriptionInput"
       v-model="message"
       placeholder="Add a description to your Lease.."
     >
@@ -14,7 +14,7 @@
 <script>
 //Between Components, utilize Emit - Between Views, utilize saving into the Database
 export default {
-  emits: ['updatedDescription'],
+  emits: ["updatedDescription"],
   mounted() {
     if (this.$store.getters.getLeaseToBuild != null) {
       this.message = this.$store.getters.getLeaseToBuild.description;
@@ -22,29 +22,26 @@ export default {
   },
   data() {
     return {
-      message: '',
+      message: "",
     };
   },
   methods: {
     sendUpMessage() {
       let messageToSendUp = this.message;
-      this.$emit('updatedDescription', messageToSendUp);
+      this.$emit("updatedDescription", messageToSendUp);
     },
   },
 };
 </script>
 <style scoped>
-*{
-  font-family:'mukta';
-}
-.myInput {
+.descriptionInput {
   min-width: 150px;
   width: 195px;
   height: 100px;
   min-height: 80px;
   padding: 4px;
 }
-.myDescriptionP {
+.myDescription {
   margin: 3px;
   padding: 0px;
   font-weight: bolder;

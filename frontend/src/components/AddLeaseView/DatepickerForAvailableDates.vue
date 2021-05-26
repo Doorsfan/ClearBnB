@@ -16,10 +16,10 @@
   </div>
 </template>
 <script setup="">
-import Datepicker from 'vue3-datepicker';
+import Datepicker from "vue3-datepicker";
 </script>
 <script>
-import { ref } from 'vue';
+import { ref } from "vue";
 //NOTE: Datepickers are Readonly in properties, meaning you cannot directly attach CSS to them outside of built in
 // API - which only affects the input field in terms of selection of Date
 let thisDay = ref(new Date());
@@ -41,15 +41,15 @@ export default {
     endDate() {
       let latestLease = this.$store.getters.getLeaseToBuild;
       latestLease.endDate = this.endDate;
-      this.$store.commit('setLeaseToBuild', latestLease);
+      this.$store.commit("setLeaseToBuild", latestLease);
     },
     startDate() {
       let latestLease = this.$store.getters.getLeaseToBuild;
       latestLease.startDate = this.startDate;
-      this.$store.commit('setLeaseToBuild', latestLease);
+      this.$store.commit("setLeaseToBuild", latestLease);
     },
     disabledDays() {
-      this.$emit('updatedDisabledDays', this.disabledDays);
+      this.$emit("updatedDisabledDays", this.disabledDays);
     },
   },
   methods: {
@@ -62,7 +62,13 @@ export default {
 </script>
 <style scoped>
 .myDatePickerDiv {
-  width: 210px;
+  width: max-content;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 30px;
+}
+.AvailableToP {
+  margin-top: 30px;
 }
 p {
   margin: 2px;
@@ -70,6 +76,5 @@ p {
 }
 * {
   padding-left: 2px;
-  font-family:'mukta';
 }
 </style>

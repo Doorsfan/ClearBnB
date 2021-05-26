@@ -3,7 +3,13 @@
     <div class="greyBackgroundDiv">
       <h3 class="addResidenceHeader">Add a residence</h3>
       <p class="myTitle">Title</p>
-      <input type="text" required placeholder="Title" v-model="title" />
+      <input
+        type="text"
+        required
+        placeholder="Title"
+        v-model="title"
+        class="leaseTitle"
+      />
       <p class="myLocation">Location</p>
       <LocationInputForm v-model="location" @updatedLocation="updateLocation" />
       <DescriptionForm
@@ -51,33 +57,33 @@
   </div>
 </template>
 <script setup="">
-import DatepickerForAvailableDates from '../components/AddLeaseView/DatepickerForAvailableDates.vue';
-import DescriptionForm from '../components/AddLeaseView/DescriptionForm.vue';
-import HousingRadioButtons from '../components/AddLeaseView/HousingRadioButtons.vue';
-import InputForPricingBedAndPeople from '../components/AddLeaseView/InputForPricingBedAndPeople.vue';
-import ImageUrlInputForm from '../components/AddLeaseView/ImageUrlInputForm.vue';
-import LocationInputForm from '../components/AddLeaseView/LocationInputForm.vue';
-import AddAmenities from '../components/AddLeaseView/AddAmenities.vue';
-import Lease from '../components/Lease.vue';
-import ImageBox from '../components/AddLeaseView/ImageBox.vue';
-import store from '../store.js';
+import DatepickerForAvailableDates from "../components/AddLeaseView/DatepickerForAvailableDates.vue";
+import DescriptionForm from "../components/AddLeaseView/DescriptionForm.vue";
+import HousingRadioButtons from "../components/AddLeaseView/HousingRadioButtons.vue";
+import InputForPricingBedAndPeople from "../components/AddLeaseView/InputForPricingBedAndPeople.vue";
+import ImageUrlInputForm from "../components/AddLeaseView/ImageUrlInputForm.vue";
+import LocationInputForm from "../components/AddLeaseView/LocationInputForm.vue";
+import AddAmenities from "../components/AddLeaseView/AddAmenities.vue";
+import Lease from "../components/Lease.vue";
+import ImageBox from "../components/AddLeaseView/ImageBox.vue";
+import store from "../store.js";
 </script>
 <script>
 export default {
-  name: 'AddResidence',
+  name: "AddResidence",
   components: [
-    'DatepickerForAvailableDates',
-    'DescriptionForm',
-    'HousingRadioButtons',
-    'InputForPricingBedAndPeople',
-    'LocationInputForm',
-    'AddAmenities',
-    'ImageBox',
+    "DatepickerForAvailableDates",
+    "DescriptionForm",
+    "HousingRadioButtons",
+    "InputForPricingBedAndPeople",
+    "LocationInputForm",
+    "AddAmenities",
+    "ImageBox",
   ],
   watch: {
     title() {
       this.lease.title = this.title;
-      store.commit('setLeaseToBuild', this.lease);
+      store.commit("setLeaseToBuild", this.lease);
     },
     lease() {},
   },
@@ -89,9 +95,9 @@ export default {
       this.description = latestLease.description;
       this.typeOfHousing = latestLease.typeOfHousing;
       if (latestLease.entireResidence == true) {
-        this.size = 'Entire residence';
+        this.size = "Entire residence";
       } else {
-        this.size = 'Part';
+        this.size = "Part";
       }
       this.amenities = latestLease.amenities;
       this.imageURLs = latestLease.imageURLs;
@@ -107,54 +113,54 @@ export default {
         this.$store.getters.getLeaseToBuild == null
           ? new Lease(
               this.$store.getters.getCurrentUser.id,
-              '',
-              '',
-              '',
-              '',
-              '',
-              '',
-              '',
-              '',
-              '',
-              '',
-              '',
-              ''
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              ""
             )
           : this.$store.getters.getLeaseToBuild,
-      title: '',
+      title: "",
       location:
         this.$store.getters.getLeaseToBuild == null
-          ? ''
+          ? ""
           : this.$store.getters.getLeaseToBuild.location,
       description:
         this.$store.getters.getLeaseToBuild == null
-          ? ''
+          ? ""
           : this.$store.getters.getLeaseToBuild.description,
       typeOfHousing:
         this.$store.getters.getLeaseToBuild == null
-          ? ''
+          ? ""
           : this.$store.getters.getLeaseToBuild.typeOfHousing,
       size:
         this.$store.getters.getLeaseToBuild == null
-          ? ''
+          ? ""
           : this.$store.getters.getLeaseToBuild.entireResidence,
       startDate: new Date(),
       endDate: new Date(),
       price:
         this.$store.getters.getLeaseToBuild == null
-          ? ''
+          ? ""
           : this.$store.getters.getLeaseToBuild.price,
       maxGuests:
         this.$store.getters.getLeaseToBuild == null
-          ? ''
+          ? ""
           : this.$store.getters.getLeaseToBuild.maxGuests,
       beds:
         this.$store.getters.getLeaseToBuild == null
-          ? ''
+          ? ""
           : this.$store.getters.getLeaseToBuild.beds,
       amenities:
         this.$store.getters.getLeaseToBuild == null
-          ? ''
+          ? ""
           : this.$store.getters.getLeaseToBuild.amenities,
       hasWifi: false,
       hasKitchen: false,
@@ -167,104 +173,104 @@ export default {
   },
   methods: {
     mounted() {
-      if (document.getElementsByClassName('sunIconInHeader').length > 0) {
-        document.getElementsByClassName('sunIconInHeader')[0].src =
-          '/public/home_icon.png';
-        document.getElementsByClassName('sunIconInHeader')[0].className =
-          'house_icon';
-        document.getElementsByClassName('homeText')[0].style.display = 'block';
-        document.getElementsByClassName('center')[0].style.height = '70px';
+      if (document.getElementsByClassName("sunIconInHeader").length > 0) {
+        document.getElementsByClassName("sunIconInHeader")[0].src =
+          "/public/home_icon.png";
+        document.getElementsByClassName("sunIconInHeader")[0].className =
+          "house_icon";
+        document.getElementsByClassName("homeText")[0].style.display = "block";
+        document.getElementsByClassName("center")[0].style.height = "70px";
       }
-      this.$store.commit('setLeaseToBuild', this.lease);
+      this.$store.commit("setLeaseToBuild", this.lease);
     },
     removeFirstIMGinURLs() {
       this.imageURLs = this.imageURLs.filter(function (value, index, arr) {
         return index != 0;
       });
       this.lease.imageURLs = this.imageURLs;
-      store.commit('setLeaseToBuild', this.lease);
-      document.getElementsByClassName('mainDiv')[0].style.backgroundImage =
-        'url(' + '/public/house.jpg' + ')';
+      store.commit("setLeaseToBuild", this.lease);
+      document.getElementsByClassName("mainDiv")[0].style.backgroundImage =
+        "url(" + "/public/house.jpg" + ")";
     },
     removeSecondIMGinURLs() {
       this.imageURLs = this.imageURLs.filter(function (value, index, arr) {
         return index != 1;
       });
       this.lease.imageURLs = this.imageURLs;
-      store.commit('setLeaseToBuild', this.lease);
+      store.commit("setLeaseToBuild", this.lease);
     },
     removeThirdIMGinURLs() {
       this.imageURLs = this.imageURLs.filter(function (value, index, arr) {
         return index != 2;
       });
       this.lease.imageURLs = this.imageURLs;
-      store.commit('setLeaseToBuild', this.lease);
+      store.commit("setLeaseToBuild", this.lease);
     },
     removeFourthIMGinURLs() {
       this.imageURLs = this.imageURLs.filter(function (value, index, arr) {
         return index != 3;
       });
       this.lease.imageURLs = this.imageURLs;
-      store.commit('setLeaseToBuild', this.lease);
+      store.commit("setLeaseToBuild", this.lease);
     },
     removeFifthIMGinURLs() {
       this.imageURLs = this.imageURLs.filter(function (value, index, arr) {
         return index != 4;
       });
       this.lease.imageURLs = this.imageURLs;
-      store.commit('setLeaseToBuild', this.lease);
+      store.commit("setLeaseToBuild", this.lease);
     },
     updateIMGUrls(newImageURLs) {
-      console.log('this imageURLs was: ', this.imageURLs);
+      console.log("this imageURLs was: ", this.imageURLs);
       this.imageURLs.push(newImageURLs);
       this.lease.imageURLs = this.imageURLs;
-      store.commit('setLeaseToBuild', this.lease);
-      document.getElementsByClassName('mainDiv')[0].style.backgroundImage =
-        'url(' + this.imageURLs[0][0] + ')';
+      store.commit("setLeaseToBuild", this.lease);
+      document.getElementsByClassName("mainDiv")[0].style.backgroundImage =
+        "url(" + this.imageURLs[0][0] + ")";
     },
     updateTitle(newTitle) {
       this.title = newTitle;
       this.lease.title = this.title;
-      store.commit('setLeaseToBuild', this.lease);
+      store.commit("setLeaseToBuild", this.lease);
     },
     updateLocation(newLocation) {
       this.location = newLocation;
       this.lease.setLocation(this.location);
-      store.commit('setLeaseToBuild', this.lease);
+      store.commit("setLeaseToBuild", this.lease);
     },
     updateDescription(newDescription) {
       this.description = newDescription;
       this.lease.setDescription(this.description);
-      store.commit('setLeaseToBuild', this.lease);
+      store.commit("setLeaseToBuild", this.lease);
     },
     updateChosenHousing(chosenHousing) {
       this.typeOfHousing = chosenHousing;
       this.lease.setTypeOfHousing(this.typeOfHousing);
-      store.commit('setLeaseToBuild', this.lease);
+      store.commit("setLeaseToBuild", this.lease);
     },
     updateChosenSize(chosenSize) {
       this.size = chosenSize;
-      if (this.size == 'Part') {
+      if (this.size == "Part") {
         this.lease.setEntireResidence(false);
       } else {
         this.lease.setEntireResidence(true);
       }
-      store.commit('setLeaseToBuild', this.lease);
+      store.commit("setLeaseToBuild", this.lease);
     },
     updatePrice(updatedPrice) {
       this.price = updatedPrice;
       this.lease.setPrice(this.price);
-      store.commit('setLeaseToBuild', this.lease);
+      store.commit("setLeaseToBuild", this.lease);
     },
     updateNrOfMaxGuests(maxPeople) {
       this.maxPeople = maxPeople;
       this.lease.setMaxGuests(this.maxPeople);
-      store.commit('setLeaseToBuild', this.lease);
+      store.commit("setLeaseToBuild", this.lease);
     },
     updateNrOfBeds(amountOfBeds) {
       this.nrOfBeds = amountOfBeds;
       this.lease.setBeds(this.nrOfBeds);
-      store.commit('setLeaseToBuild', this.lease);
+      store.commit("setLeaseToBuild", this.lease);
     },
     updateWifi(hasWifi) {
       this.hasWifi = hasWifi;
@@ -292,40 +298,37 @@ export default {
     updateAmenities() {
       this.amenities = [];
       if (this.hasWifi) {
-        this.amenities.push('wifi: true');
+        this.amenities.push("wifi: true");
       } else {
-        this.amenities.push('wifi: false');
+        this.amenities.push("wifi: false");
       }
       if (this.hasKitchen) {
-        this.amenities.push('kitchen: true');
+        this.amenities.push("kitchen: true");
       } else {
-        this.amenities.push('kitchen: false');
+        this.amenities.push("kitchen: false");
       }
       if (this.hasWasher) {
-        this.amenities.push('washer: true');
+        this.amenities.push("washer: true");
       } else {
-        this.amenities.push('washer: false');
+        this.amenities.push("washer: false");
       }
       if (this.hasHeating) {
-        this.amenities.push('heating: true');
+        this.amenities.push("heating: true");
       } else {
-        this.amenities.push('heating: false');
+        this.amenities.push("heating: false");
       }
       if (this.hasAirConditioner) {
-        this.amenities.push('airConditioner: true');
+        this.amenities.push("airConditioner: true");
       } else {
-        this.amenities.push('airConditioner: false');
+        this.amenities.push("airConditioner: false");
       }
       this.lease.amenities = this.amenities;
-      store.commit('setLeaseToBuild', this.lease);
+      store.commit("setLeaseToBuild", this.lease);
     },
   },
 };
 </script>
 <style scoped>
-* {
-  font-family: 'mukta';
-}
 .imageURLInputDiv {
   margin-bottom: 10px;
 }
@@ -333,11 +336,13 @@ export default {
   margin: 5px;
 }
 .previewButton {
-  border: outset 5px green;
+  border: outset 5px #007b8e;
   outline: 1px solid black;
   opacity: 1;
-  background-color: green;
+  background-color: #007b8e;
   padding: 5px;
+  /*optional*/
+  font-family: "mukta", sans-serif;
   color: black;
   font-weight: bolder;
   text-decoration: none;
@@ -366,7 +371,7 @@ p {
   padding-right: 5vw;
   padding-bottom: 2.5vh;
   padding-top: 2.5vh;
-  background-image: url('/public/house.jpg');
+  background-image: url("/public/house.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   opacity: 0.8;
@@ -393,6 +398,41 @@ p {
     padding: 5px;
     padding-top: 20px;
     padding-bottom: 20px;
+  }
+}
+@media only screen and (min-width: 1330px) {
+  .greyBackgroundDiv {
+    padding: 10px 90px;
+  }
+}
+</style>
+
+<!--Styling for all subcomponents-->
+<style>
+.inputForLocationArea,
+.leaseTitle {
+  padding: 11.2px 22.4px;
+  font-family: "mukta", sans-serif;
+  font-size: 18px;
+  border-radius: 5px;
+  border: 1px solid grey;
+  text-align: initial;
+  margin-bottom: 15px;
+}
+
+@media only screen and (min-width: 1330px) {
+  .inputForLocationArea,
+  .leaseTitle,
+  .descriptionInput {
+    width: 400px !important;
+  }
+  .leaseTitle {
+    margin: auto;
+    margin-bottom: 30px;
+  }
+  .imageURL {
+    width: 345px !important;
+    margin-bottom: 30px;
   }
 }
 </style>

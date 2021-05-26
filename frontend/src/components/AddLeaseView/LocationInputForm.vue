@@ -1,6 +1,6 @@
 <template>
   <div class="addResidenceDiv">
-    <div class="innerDiv">
+    <div class="residenceInnerDiv">
       <input
         required
         type="text"
@@ -14,7 +14,7 @@
 </template>
 <script>
 export default {
-  emits: ['updatedLocation'],
+  emits: ["updatedLocation"],
   mounted() {
     if (this.$store.getters.getLeaseToBuild != null) {
       this.location = this.$store.getters.getLeaseToBuild.location;
@@ -34,11 +34,9 @@ export default {
 };
 </script>
 <style scoped>
-*{
-  font-family:'mukta';
-}
-.innerDiv {
-  width: 205px;
+.residenceInnerDiv {
+  width: max-content;
+  margin: auto;
   text-align: center;
 }
 .addResidenceHeader {

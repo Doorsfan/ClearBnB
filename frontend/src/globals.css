@@ -6,7 +6,7 @@
   box-sizing: border-box;
   font-family: 'mukta';
 }
-.house_icon {
+.house_icon{
   width: 30px;
   height: 30px;
   position: absolute;
@@ -19,8 +19,12 @@
   top: 45px;
 }
 #app {
-  display: flex;
-  flex-direction: column;
+    font-family: 'mukta', sans-serif;
+    display: flex;
+    flex-direction: column;
+}
+p, h1, h2, h3, h4 {
+  font-family: 'mukta', sans-serif;
 }
 input {
   font-size: 18px;
