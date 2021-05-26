@@ -42,6 +42,7 @@ img {
   height: 180px;
   width: 150px;
   position: absolute;
+  object-fit: cover;
   left: 0;
   -webkit-transition: opacity 0.7s ease-in-out;
   -moz-transition: opacity 0.7s ease-in-out;
