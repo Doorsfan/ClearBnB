@@ -4,7 +4,7 @@
       <p class="fromTheText">From The</p>
       <Datepicker
         id="fromDatePicker"
-        class="fromDatePicker"
+        class="fromDatePicker startPageDatePicker"
         v-model="startDate"
         :lower-limit="minimumStartDate"
         :upper-limit="endDate"
@@ -14,7 +14,7 @@
       <p class="toTheText">To The</p>
       <Datepicker
         id="toDatePicker"
-        class="toDatePicker"
+        class="toDatePicker startPageDatePicker"
         v-model="endDate"
         :lower-limit="minimumEndDate"
       />
@@ -82,13 +82,15 @@ export default {
 * {
   font-size: 20px;
   font-family:'mukta';
+  text-align:center;
 }
 p {
   width: max-content;
   margin-left: auto;
   margin-right: auto;
-  padding-bottom: 8px;
+  padding-bottom:3px;
 }
+
 @media only screen and (max-width: 300px) {
   div {
     width: max-content;

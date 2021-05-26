@@ -86,7 +86,7 @@ a:visited {
   text-align: center;
   margin: 5px;
   display: inline-block;
-  height: 340px;
+  height: 360px;
 }
 .leftArrowBox {
   display: inline-block;

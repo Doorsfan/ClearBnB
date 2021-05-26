@@ -261,7 +261,6 @@ button{
   margin-top:5px;
   font-weight: normal;
 }
-}
 @media only screen and (max-width: 374px) {
   input {
     width: 70%;
@@ -275,7 +274,6 @@ button{
 }
 p{
   font-size: 16px;
-}
 }
 @media only screen and (max-width: 324px) {
   .SignUpFromLogIn {

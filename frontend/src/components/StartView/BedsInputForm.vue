@@ -27,11 +27,16 @@ export default {
   font-family:'mukta';
 }
 .bedsInputForm {
-  width: 100px;
-  padding: 5px;
+  width: 150px;
+  padding: 11.2px 22.4px;
+  text-align:center;
+  font-size:18px;
+  margin:3px;
 }
 .bedsInputText {
-  margin-bottom: 8px;
-  padding-left: 2px;
+  width:max-content;
+  text-align:center;
+  margin-left:auto;
+  margin-right:auto;
 }
 </style>

@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Mukta:wght@400&display=swap');
 
+.startPageDatePicker{
+  padding: 11.2px 22.4px;
+  text-align:center;
+}
 * {
   margin: 0;
   padding: 0;

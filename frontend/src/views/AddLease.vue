@@ -319,6 +319,9 @@ export default {
       } else {
         this.amenities.push("airConditioner: false");
       }
+      if(this.hasWasher){
+        this.amenities.push("washer: true");
+      }
       else{
         this.amenities.push("washer: false")
       }

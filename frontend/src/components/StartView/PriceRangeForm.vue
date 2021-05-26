@@ -38,47 +38,17 @@ export default {
 };
 </script>
 <style scoped>
-*{
-  font-family:'mukta';
-}
-@media only screen and (min-width: 1330px) {
-  p {
-    margin-bottom: 6px;
-  }
-  .minPriceText,
-  .maxPriceText {
-    padding-left: 3px;
-  }
-  .firstPriceDiv,
-  .secondPriceDiv {
-    width: max-content;
-    display: inline-block;
-  }
-  .firstPriceDiv {
-    padding-left: 10px;
-  }
-  .secondPriceDiv {
-    padding-left: 10px;
-  }
+.firstPriceDiv, .secondPriceDiv{
+  display:inline-block;
+  width:max-content;
+  text-align: center;
 }
 input {
-  width: 60px;
+  width: 150px;
   margin: 3px;
+  padding: 11.2px 22.4px;
+  font-size:18px;
+  text-align:center;
 }
-.priceRangeFormDiv {
-  display: inline;
-  width: max-content;
-  margin-left: 20px;
-}
-.maxPriceInputForm {
-  width: 100px;
-  padding: 5px;
-}
-.minPriceInputForm {
-  width: 100px;
-  padding: 5px;
-}
-.firstPriceDiv {
-  margin-left: 5px;
-}
+
 </style>
