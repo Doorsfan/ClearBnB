@@ -57,10 +57,10 @@ export default {
 }
 .ImageURLStext {
   margin: 0px;
+  margin-top: 30px;
   text-align: center;
   margin-bottom: 5px;
   font-weight: bolder;
-  width: 205px;
 }
 .addImageButton {
   background-color: #009db5;

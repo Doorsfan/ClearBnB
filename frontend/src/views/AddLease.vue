@@ -427,10 +427,12 @@ p {
     width: 400px !important;
   }
   .leaseTitle {
-    margin: 40px auto;
+    margin: auto;
+    margin-bottom: 30px;
   }
   .imageURL {
     width: 345px !important;
+    margin-bottom: 30px;
   }
 }
 </style>

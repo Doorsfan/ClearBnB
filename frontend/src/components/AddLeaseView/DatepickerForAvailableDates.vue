@@ -1,74 +1,80 @@
 <template>
   <div class="myDatePickerDiv">
-  <p class="AvailableFromP">Available from:</p>
-  <datepicker
-    v-model="startDate"
-    placeholder="Lease starts at"    
-    :lowerLimit="thisDay"
-    :disabledDates="disabledDays"
-  />
-  <p class="AvailableToP">Available To:</p>
-  <datepicker
-    v-model="endDate"
-    placeholder="Lease ends at"
-    :lower-limit="startDate"
-  />
+    <p class="AvailableFromP">Available from:</p>
+    <datepicker
+      v-model="startDate"
+      placeholder="Lease starts at"
+      :lowerLimit="thisDay"
+      :disabledDates="disabledDays"
+    />
+    <p class="AvailableToP">Available To:</p>
+    <datepicker
+      v-model="endDate"
+      placeholder="Lease ends at"
+      :lower-limit="startDate"
+    />
   </div>
 </template>
 <script setup="">
-import Datepicker from 'vue3-datepicker'
+import Datepicker from "vue3-datepicker";
 </script>
 <script>
-import { ref } from 'vue'
+import { ref } from "vue";
 //NOTE: Datepickers are Readonly in properties, meaning you cannot directly attach CSS to them outside of built in
 // API - which only affects the input field in terms of selection of Date
-let thisDay = ref(new Date())
-let startDate = ref(new Date())
-let endDate = ref(new Date())
+let thisDay = ref(new Date());
+let startDate = ref(new Date());
+let endDate = ref(new Date());
 export default {
   data() {
     return {
       thisDay: thisDay,
       startDate: startDate,
       endDate: endDate,
-      disabledDays: { //Can integrate so that there are disabled days, just leaving this open as a possibility
-        dates: []
-      }
-    }
+      disabledDays: {
+        //Can integrate so that there are disabled days, just leaving this open as a possibility
+        dates: [],
+      },
+    };
   },
   watch: {
-    endDate(){
-      let latestLease = this.$store.getters.getLeaseToBuild
+    endDate() {
+      let latestLease = this.$store.getters.getLeaseToBuild;
       latestLease.endDate = this.endDate;
-      this.$store.commit('setLeaseToBuild', latestLease)
+      this.$store.commit("setLeaseToBuild", latestLease);
     },
-    startDate(){
-      let latestLease = this.$store.getters.getLeaseToBuild
+    startDate() {
+      let latestLease = this.$store.getters.getLeaseToBuild;
       latestLease.startDate = this.startDate;
-      this.$store.commit('setLeaseToBuild', latestLease)
+      this.$store.commit("setLeaseToBuild", latestLease);
     },
-    disabledDays(){
+    disabledDays() {
       this.$emit("updatedDisabledDays", this.disabledDays);
-    }
+    },
   },
   methods: {
-    addDisabledDate(dateString){ //"2021-05-20"
-      this.disabledDays.dates.push(new Date(dateString))
-    }
-  }
-}
+    addDisabledDate(dateString) {
+      //"2021-05-20"
+      this.disabledDays.dates.push(new Date(dateString));
+    },
+  },
+};
 </script>
 <style scoped>
-  .myDatePickerDiv{
-    width:max-content;
-    margin-left:auto;
-    margin-right:auto;
-  }
-  p{
-    margin:2px;
-    font-weight:bolder;
-  }
-  *{
-    padding-left: 2px;
-  }
+.myDatePickerDiv {
+  width: max-content;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 30px;
+}
+.AvailableToP {
+  margin-top: 30px;
+}
+p {
+  margin: 2px;
+  font-weight: bolder;
+}
+* {
+  padding-left: 2px;
+}
 </style>
