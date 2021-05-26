@@ -2,6 +2,7 @@
   <div v-if="relevantLease" class="firstDatePickerDiv">
     <p class="AvailableFromP">Available from:</p>
     <datepicker
+      class="myDatePicker"
       v-if="relevantLease"
       v-model="relevantLease.startDate"
       placeholder="Lease starts at"
@@ -14,6 +15,7 @@
   <div v-if="relevantLease" class="secondDatePickerDiv">
     <p class="AvailableToP">Available To:</p>
     <datepicker
+      class="myDatePicker"
       v-if="relevantLease"
       v-model="relevantLease.endDate"
       placeholder="Lease ends at"

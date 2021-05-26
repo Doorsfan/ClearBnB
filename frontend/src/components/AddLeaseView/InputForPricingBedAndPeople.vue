@@ -63,61 +63,22 @@ export default {
 </script>
 
 <style scoped>
-* {
-  padding: 0px;
-  margin: 0px;
-  text-align: left;
-  font-family:'mukta';
+p{
+  width:max-content;
+  display:inline-block;
 }
-.MaxPeopleP {
-  width: 30px;
-  margin-left: 22px;
-  margin-right: 10px;
-}
-p {
-  margin: 2px;
-  width: max-content;
-  display: inline;
-}
-.BedsP {
-  margin: 0px;
-  margin-left: 4px;
-}
-.divHoldingThePs {
-  margin: 0px;
-  padding: 0px;
+.MaxPeopleP{
+  margin-left:50px;
+  margin-right:50px;
 }
 input {
-  width: 30px;
   display: inline-block;
-  margin-top: 0px;
+  text-align:center;
+  padding: 7.5px 30.4px;
+  font-size:18px;
+  width:90px;
+  margin:10px;
+  margin-top:3px;
 }
-.peopleInputField {
-  margin-left: 42px;
-  margin-right: 42px;
-}
-.bedsInputField {
-  font-size: 14px;
-  margin: 1px;
-  margin-left: 3px;
-  margin-top: 2px;
-  padding: 2px;
-  width: 40px;
-}
-.peopleInputField {
-  font-size: 14px;
-  margin: 1px;
-  margin-top: 2px;
-  padding: 2px;
-  width: 35px;
-  margin-left: 40px;
-}
-.priceInputField {
-  font-size: 14px;
-  margin: 1px;
-  margin-top: 2px;
-  padding: 2px;
-  width: 40px;
-  margin-left: 40px;
-}
+
 </style>

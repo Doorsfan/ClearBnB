@@ -225,8 +225,7 @@ button:hover {
   button {
     width: 270px;
     height: 50px;
-
-    border-radius: 40px;
+    border-radius:40px;
   }
   .hiddenptag {
     display: inline;
@@ -252,9 +251,7 @@ h1{
 }
 button{
   width: 200px;
-  height: 50px;
-  border-radius: 40px ;
-  
+  height: 50px;  
 }
 .hiddenptag{
   display:inline;

@@ -34,6 +34,11 @@ export default {
 };
 </script>
 <style scoped>
+input {
+  text-align:center;
+  padding: 7.5px 30.4px;
+  font-size:18px;
+}
 .residenceInnerDiv {
   width: max-content;
   margin: auto;
@@ -45,13 +50,7 @@ export default {
   width: 205px;
   text-align: center;
 }
-.inputForLocationArea {
-  height: 26px;
-  padding: 3px;
-  width: 180px;
-  margin-left: 12.5px;
-  margin-right: 12.5px;
-}
+
 .addResidenceDiv {
   width: max-content;
   margin-left: auto;

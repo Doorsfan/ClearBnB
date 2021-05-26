@@ -2,6 +2,7 @@
   <div class="myDatePickerDiv">
     <p class="AvailableFromP">Available from:</p>
     <datepicker
+      class="myDatePicker"
       v-model="startDate"
       placeholder="Lease starts at"
       :lowerLimit="thisDay"
@@ -9,6 +10,7 @@
     />
     <p class="AvailableToP">Available To:</p>
     <datepicker
+      class="myDatePicker"
       v-model="endDate"
       placeholder="Lease ends at"
       :lower-limit="startDate"

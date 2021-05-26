@@ -39,7 +39,9 @@ export default {
   width: 195px;
   height: 100px;
   min-height: 80px;
-  padding: 4px;
+  padding: 7.5px 30.4px;
+  font-size:18px;
+  text-align:center;
 }
 .myDescription {
   margin: 3px;

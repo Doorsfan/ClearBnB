@@ -677,7 +677,7 @@ export default {
 select {
   border-radius: 4px;
   width: 50px;
-  padding: 3px;
+  padding: 7.5px 30.4px;
   background-color: rgba(234, 241, 241);
   margin-right: 10px;
 }
