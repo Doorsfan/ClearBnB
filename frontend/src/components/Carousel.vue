@@ -28,6 +28,9 @@ export default {
 };
 </script>
 <style scoped>
+* {
+  font-family: "mukta";
+}
 .imageCarousel {
   position: relative;
   height: 180px;
@@ -38,8 +41,6 @@ export default {
 img {
   object-fit: cover;
   height: 180px;
-  width: 150px;
-  position: absolute;
   left: 0;
   -webkit-transition: opacity 0.7s ease-in-out;
   -moz-transition: opacity 0.7s ease-in-out;

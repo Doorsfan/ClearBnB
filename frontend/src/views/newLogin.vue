@@ -4,36 +4,37 @@
   </div>
 </template>
 <script>
-import LoginForm from '../components/LoginView/LoginForm.vue'
+import LoginForm from '../components/LoginView/LoginForm.vue';
 export default {
   components: {
-    LoginForm
+    LoginForm,
   },
   data() {
-    return {
-    }
+    return {};
   },
-  mounted(){
-    if(document.getElementsByClassName("sunIconInHeader").length > 0){
-      document.getElementsByClassName("sunIconInHeader")[0].src = '/public/home_icon.png'
-      document.getElementsByClassName("sunIconInHeader")[0].className = 'house_icon'
-      document.getElementsByClassName("homeText")[0].style.display = 'block';
-      document.getElementsByClassName("center")[0].style.height = '70px';
+  mounted() {
+    if (document.getElementsByClassName('sunIconInHeader').length > 0) {
+      document.getElementsByClassName('sunIconInHeader')[0].src =
+        '/public/home_icon.png';
+      document.getElementsByClassName('sunIconInHeader')[0].className =
+        'house_icon';
+      document.getElementsByClassName('homeText')[0].style.display = 'block';
+      document.getElementsByClassName('center')[0].style.height = '70px';
     }
     this.$store.dispatch('saveLatestRoute', this.$route.path);
   },
-  methods:{
-  }
-}
+  methods: {},
+};
 </script>
 <style scoped>
-.mainDiv{
-  background-image: url("../../public/Login-signup.jpg");
-  background-position:center;
-  background-size:cover;
-  background-repeat:no-repeat;
-  height:max-content;
+.mainDiv {
+  font-family: 'mukta';
+  background-image: url('../../public/Login-signup.jpg');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: max-content;
   background-attachment: fixed;
-  overflow-x:hidden;
+  overflow-x: hidden;
 }
 </style>

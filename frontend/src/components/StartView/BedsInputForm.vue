@@ -1,29 +1,37 @@
 <template>
-    <p class="bedsInputText">Beds</p>
-    <input class="bedsInputForm" type="text" v-model="wantedBeds" placeholder="Beds">
+  <p class="bedsInputText">Beds</p>
+  <input
+    class="bedsInputForm"
+    type="text"
+    v-model="wantedBeds"
+    placeholder="Beds"
+  />
 </template>
 <script>
 export default {
   emits: ['updateMyAmountOfBeds'],
   data() {
     return {
-      wantedBeds: ''
-    }
+      wantedBeds: '',
+    };
   },
   watch: {
-    wantedBeds(){
-      this.$emit("updateMyAmountOfBeds", this.wantedBeds)
-    }
-  }
-}
+    wantedBeds() {
+      this.$emit('updateMyAmountOfBeds', this.wantedBeds);
+    },
+  },
+};
 </script>
 <style scoped>
-.bedsInputForm{
-  width:48px;
-  padding:1px;
+*{
+  font-family:'mukta';
 }
-.bedsInputText{
+.bedsInputForm {
+  width: 100px;
+  padding: 5px;
+}
+.bedsInputText {
   margin-bottom: 8px;
-  padding-left:2px;
+  padding-left: 2px;
 }
 </style>
