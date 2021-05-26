@@ -1,29 +1,57 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+@import url('https://fonts.googleapis.com/css2?family=Mukta:wght@400;700&display=swap');
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family:  'Mukta', sans-serif;
 }
-.house_icon{
-  width:30px;
-  height:30px;
-  position:absolute;
+.house_icon {
+  width: 30px;
+  height: 30px;
+  position: absolute;
   left: 15px;
   top: 10px;
 }
-.homeText{
-  position:absolute;
+.homeText {
+  position: absolute;
   left: 5px;
   top: 45px;
 }
+header  {
+  z-index: 100;
+  background: linear-gradient(0.25turn, #f69d3c, #ebf8e1, #ebf8e1, #f69d3c);
+  width: 100%;
+  box-shadow: 0px 10px 10px 3px rgba(95, 94, 94, 0.692);
+  height: max-content;
+}
 #app {
-    font-family: Avenir, Helvetica, Arial, sans-serif;
-    display:flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
+}
+
+.v3dp__datepicker input {
+  font-family:  'Mukta', sans-serif;
+  color:rgb(20, 20, 20);
+  font-size: 100%;
+  line-height: 160%;
+}
+.v3dp__datepicker {
+  --text-color: var(--vdp-text-color, #007b8e);
+  --elem-hover-bg-color: var(--vdp-hover-bg-color, #009bd5);
+  --elem-selected-bg-color: var(--vdp-hover-bg-color, #009bd5);
 }
 input {
-  font-size:18px;
+  font-size: 100%;
+  line-height: 160%;
+  border: none;
+  outline: none;
+  border-radius: 7px;
+  padding-inline-start: 10px;
+  background-color: rgb(236, 236, 235);
+  box-shadow: inset 2px 2px 8px rgba(95, 94, 94, 0.692);
 }
 .app-main {
-    flex-grow: 1;
-    background-color: white;
+  flex-grow: 1;
+  background-color: white;
+  overflow-x: hidden;
 }

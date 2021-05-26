@@ -14,10 +14,10 @@
 </template>
 <script>
 export default {
-  emits: ['updatedLocation'],
-  mounted(){
-    if(this.$store.getters.getLeaseToBuild != null){
-      this.location = this.$store.getters.getLeaseToBuild.location
+  emits: ["updatedLocation"],
+  mounted() {
+    if (this.$store.getters.getLeaseToBuild != null) {
+      this.location = this.$store.getters.getLeaseToBuild.location;
     }
   },
   data() {
@@ -34,22 +34,25 @@ export default {
 };
 </script>
 <style scoped>
+* {
+  font-family: "mukta";
+}
 .innerDiv {
   width: 205px;
-  text-align:center;
+  text-align: center;
 }
 .addResidenceHeader {
   margin: 0px;
   margin-bottom: 3px;
-  width:205px;
-  text-align:center;
+  width: 205px;
+  text-align: center;
 }
 .inputForLocationArea {
   height: 26px;
-  padding:3px;
-  width:180px;
-  margin-left:12.5px;
-  margin-right:12.5px;
+  padding: 3px;
+  width: 180px;
+  margin-left: 12.5px;
+  margin-right: 12.5px;
 }
 .addResidenceDiv {
   width: max-content;

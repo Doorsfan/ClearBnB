@@ -1,11 +1,31 @@
 <template>
   <i @click="previousPicture" class="arrow left"></i>
   <div class="imageCarousel">
-    <img v-if="myLease.imageURLs.length > 0" class="firstImage" :src="myLease.imageURLs[0]"/>
-    <img v-if="myLease.imageURLs.length > 1" class="secondImage" :src="myLease.imageURLs[1]"/>
-    <img v-if="myLease.imageURLs.length > 2" class="thirdImage" :src="myLease.imageURLs[2]"/>
-    <img v-if="myLease.imageURLs.length > 3" class="fourthImage" :src="myLease.imageURLs[3]"/>
-    <img v-if="myLease.imageURLs.length > 4" class="fifthImage" :src="myLease.imageURLs[4]"/>
+    <img
+      v-if="myLease.imageURLs.length > 0"
+      class="firstImage"
+      :src="myLease.imageURLs[0]"
+    />
+    <img
+      v-if="myLease.imageURLs.length > 1"
+      class="secondImage"
+      :src="myLease.imageURLs[1]"
+    />
+    <img
+      v-if="myLease.imageURLs.length > 2"
+      class="thirdImage"
+      :src="myLease.imageURLs[2]"
+    />
+    <img
+      v-if="myLease.imageURLs.length > 3"
+      class="fourthImage"
+      :src="myLease.imageURLs[3]"
+    />
+    <img
+      v-if="myLease.imageURLs.length > 4"
+      class="fifthImage"
+      :src="myLease.imageURLs[4]"
+    />
   </div>
   <i @click="nextPicture" class="arrow right"></i>
 </template>
@@ -16,38 +36,41 @@ export default {
   data() {
     return {
       currentImage: 0,
-      nextImage: 1
-    }
+      nextImage: 1,
+    };
   },
   methods: {
-    previousPicture(){
-      let firstPicture = this.myLease.imageURLs[currentImage]
-      let secondPicture = this.myLease.imageURLs[nextImage]
-      this.myLease.imageURLs[nextImage] = firstPicture
-      this.myLease.imageURLs[currentImage] = secondPicture
+    previousPicture() {
+      let firstPicture = this.myLease.imageURLs[currentImage];
+      let secondPicture = this.myLease.imageURLs[nextImage];
+      this.myLease.imageURLs[nextImage] = firstPicture;
+      this.myLease.imageURLs[currentImage] = secondPicture;
     },
-    nextPicture(){
-      let firstPicture = this.myLease.imageURLs[currentImage]
-      let secondPicture = this.myLease.imageURLs[nextImage]
-      this.myLease.imageURLs[currentImage] = secondPicture
-      this.myLease.imageURLs[nextImage] = firstPicture
-    }
-  }
-}
+    nextPicture() {
+      let firstPicture = this.myLease.imageURLs[currentImage];
+      let secondPicture = this.myLease.imageURLs[nextImage];
+      this.myLease.imageURLs[currentImage] = secondPicture;
+      this.myLease.imageURLs[nextImage] = firstPicture;
+    },
+  },
+};
 </script>
 <style scoped>
-.imageCarousel{
-  position:relative;
-  height:180px;
-  width:150px;
-  margin:5px;
-  display:inline-block;
+* {
+  font-family: "mukta";
 }
-img{
+.imageCarousel {
+  position: relative;
   height: 180px;
-  width:150px;
-  position:absolute;
-  left:0;
+  width: 150px;
+  margin: 5px;
+  display: inline-block;
+}
+img {
+  height: 180px;
+  width: 150px;
+  position: absolute;
+  left: 0;
   -webkit-transition: opacity 0.7s ease-in-out;
   -moz-transition: opacity 0.7s ease-in-out;
   -o-transition: opacity 0.7s ease-in-out;
@@ -55,16 +78,16 @@ img{
 }
 @keyframes cyclingOpacity {
   0% {
-  opacity:1;
+    opacity: 1;
   }
   45% {
-  opacity:1;
+    opacity: 1;
   }
   55% {
-  opacity:0;
+    opacity: 0;
   }
   100% {
-  opacity:0;
+    opacity: 0;
   }
 }
 .firstImage {
@@ -88,14 +111,14 @@ img{
   animation-duration: 30s;
   animation-direction: alternate;
 }
-.fourthImage{
+.fourthImage {
   animation-name: cyclingOpacity;
   animation-timing-function: ease-in-out;
   animation-iteration-count: infinite;
   animation-duration: 45s;
   animation-direction: alternate;
 }
-.fifthImage{
+.fifthImage {
   animation-name: cyclingOpacity;
   animation-timing-function: ease-in-out;
   animation-iteration-count: infinite;
@@ -107,7 +130,7 @@ img{
   border-width: 0 3px 3px 0;
   display: inline-block;
   padding: 3px;
-  margin-bottom:85px;
+  margin-bottom: 85px;
 }
 .left {
   transform: rotate(135deg);

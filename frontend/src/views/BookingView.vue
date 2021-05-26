@@ -27,6 +27,11 @@
             class="booking-view-image-4"
             :src="imageURLs[3]"
           />
+          <img
+            v-if="imageURLs.length > 4"
+            class="booking-view-image-5"
+            :src="imageURLs[4]"
+          />
         </div>
         <div class="type-price">
           <p>
@@ -94,10 +99,9 @@
         </div>
         <div v-if="!shouldShowModal" class="myDatePickerDiv">
           <DatepickerForBookingView
-            @updatedBookingHelper="checkNewHelper"
+            @newDisabledDates="checkDisabledDates"
             @updatedChosenStartDate="newStartDate"
             @updatedChosenEndDate="newEndDate"
-            @updatedDisabledDays="hi"
             v-if="lease"
             :myLease="lease"
           />
@@ -224,42 +228,36 @@
       </button>
     </div>
   </div>
-  <router-link class="hiddenLinkToLoginPage" to="/login">login</router-link>
-  <!--
-  <router-link class="hiddenLinkToStartPage" to="/">start</router-link>
-  -->
+  <router-link class="hiddenLoginPage hiddenLink" to="/login"
+    >Login</router-link>
+  <router-link class="hiddenStartPage hiddenLink" to="/">Start</router-link>
 </template>
 
 <script setup="">
-import DatepickerForAvailableDates from "../components/AddLeaseView/DatepickerForAvailableDates.vue";
-import BookingViewCarousel from "../components/BookingView/BookingViewCarousel.vue";
-import DatepickerForBookingView from "../components/BookingView/DatepickerForBookingView.vue";
+import DatepickerForAvailableDates from '../components/AddLeaseView/DatepickerForAvailableDates.vue';
+import BookingViewCarousel from '../components/BookingView/BookingViewCarousel.vue';
+import DatepickerForBookingView from '../components/BookingView/DatepickerForBookingView.vue';
 </script>
 <script>
-import User from "../components/User.js";
-import Booking from "../components/Booking";
-import AdminBooking from "../components/AdminBooking";
-import Lease from "../components/Lease.vue";
-import PPPN from "../components/PPPN.js";
-import Profit from "../components/Profit.js";
-import BookingHelper from "../components/BookingHelper.js";
-import store from "../components/../store.js";
+import User from '../components/User.js';
+import Booking from '../components/Booking';
+import AdminBooking from '../components/AdminBooking';
+import Lease from '../components/Lease.vue';
+import PPPN from '../components/PPPN.js';
+import Profit from '../components/Profit.js';
+import BookingHelper from '../components/BookingHelper.js';
+import store from '../components/../store.js';
 
 export default {
   mounted() {
-    if (document.getElementsByClassName("sunIconInHeader").length > 0) {
-      document.getElementsByClassName("sunIconInHeader")[0].src =
-        "/public/home_icon.png";
-      document.getElementsByClassName("sunIconInHeader")[0].className =
-        "house_icon";
-      document.getElementsByClassName("homeText")[0].style.display = "block";
-      document.getElementsByClassName("center")[0].style.height = "70px";
+    if (document.getElementsByClassName('sunIconInHeader').length > 0) {
+      document.getElementsByClassName('sunIconInHeader')[0].src =
+        '/public/home_icon.png';
+      document.getElementsByClassName('sunIconInHeader')[0].className =
+        'house_icon';
+      document.getElementsByClassName('homeText')[0].style.display = 'block';
+      document.getElementsByClassName('center')[0].style.height = '70px';
     }
-    let functionToCall = this.hi;
-    setInterval(function () {
-      let myThing = store.getters.getBookedDates;
-      functionToCall(myThing);
-    }, 5000);
   },
   watch: {
     selectedNumberOfGuests() {
@@ -293,8 +291,8 @@ export default {
       if (this.amountOfDays == 0) {
         this.amountOfDays = 1;
       }
-      let splitFormattedStartDate = formattedStartDate.split("-");
-      let splitFormattedEndDate = formattedEndDate.split("-");
+      let splitFormattedStartDate = formattedStartDate.split('-');
+      let splitFormattedEndDate = formattedEndDate.split('-');
     },
     chosenEndDate() {
       let formattedStartDate = this.priceHelper.getCorrectDateFormat(
@@ -325,49 +323,52 @@ export default {
   },
   data() {
     return {
-      title: "test",
-      location: "",
-      maxGuests: "",
-      imageURLs: ["", ""],
-      typeOfHousing: "",
-      price: "",
-      description: "",
-      lease: "",
-      selectedNumberOfGuests: "",
-      amenities: "",
-      chosenStartDate: "",
-      chosenEndDate: "",
-      amountOfDays: "",
-      startDateInBasicFormat: "",
-      endDateInBasicFormat: "",
+      title: 'test',
+      location: '',
+      maxGuests: '',
+      imageURLs: ['', ''],
+      typeOfHousing: '',
+      price: '',
+      description: '',
+      lease: '',
+      selectedNumberOfGuests: '',
+      amenities: '',
+      chosenStartDate: '',
+      chosenEndDate: '',
+      amountOfDays: '',
+      startDateInBasicFormat: '',
+      endDateInBasicFormat: '',
       user: this.$store.getters.getCurrentUser,
       priceHelper: new PPPN(),
-      allTakenDates: "",
-      invalidStartDate: false,
-      invalidEndDate: false,
+      allTakenDates: '',
+      dateIsTaken: false,
       didNotBookYet: true,
       ignoredFirstClick: false,
       shouldShowModal: false,
     };
   },
   methods: {
-    hi(myInput) {
-      if (myInput) {
-        for (let date of myInput) {
-          console.log(this.priceHelper.getCorrectDateFormat(date));
+    checkDisabledDates(bookedDates) {
+      for (let date of bookedDates) {
+        if (
+          date.getTime() >= this.chosenStartDate.getTime() &&
+          date.getTime() <= this.chosenEndDate.getTime()
+        ) {
+          this.dateIsTaken = true;
+          return true;
         }
       }
-      //Integrate so that it updates if the chosen date is valid or not based on store interaction
+      this.dateIsTaken = false;
+      return false;
     },
     mainWasClicked(event) {
       if (this.ignoredFirstClick) {
         if (
           this.shouldShowModal &&
-          event.target.className != "confirmationModal"
+          event.target.className != 'confirmationModal'
         ) {
-          console.log("Should close modal");
           document.getElementsByClassName(
-            "booking-view-app-main"
+            'booking-view-app-main'
           )[0].style.opacity = 1;
           this.shouldShowModal = false;
           this.ignoredFirstClick = false;
@@ -375,91 +376,36 @@ export default {
       }
       if (
         this.shouldShowModal &&
-        event.target.className != "confirmationModal"
+        event.target.className != 'confirmationModal'
       ) {
         this.ignoredFirstClick = true;
       }
-      console.log(event.target.className);
-    },
-    checkNewHelper(newHelper) {
-      this.allTakenDates = newHelper.takenBookings;
-      this.invalidStartDate = false;
-      this.invalidEndDate = false;
-      for (let takenDates of newHelper.takenBookings) {
-        if (this.chosenStartDate <= takenDates) {
-          this.invalidStartDate = true;
-        }
-        if (this.chosenEndDate >= takenDates) {
-          this.invalidEndDate = true;
-        }
-        if (this.invalidStartDate && this.invalidEndDate) {
-          return;
-        }
-      }
-      this.invalidStartDate = false;
-      this.invalidEndDate = false;
     },
     goToLogin() {
-      document.getElementsByClassName("hiddenLinkToLoginPage")[0].click();
+      document.getElementsByClassName('hiddenLoginPage')[0].click();
     },
     goBackToStartPage() {
-      document.getElementsByClassName("hiddenLinkToStartPage")[0].click();
+      document.getElementsByClassName('hiddenStartPage')[0].click();
     },
     newStartDate(myNewStartDate) {
       this.chosenStartDate = myNewStartDate;
-      this.startDateInBasicFormat = this.priceHelper.getCorrectDateFormat(
-        myNewStartDate
-      );
+      this.startDateInBasicFormat =
+        this.priceHelper.getCorrectDateFormat(myNewStartDate);
       if (this.startDateInBasicFormat == this.endDateInBasicFormat) {
         this.amountOfDays = 1;
       }
-      this.invalidStartDate = false;
-      this.invalidEndDate = false;
-      for (let takenDates of this.allTakenDates) {
-        if (this.chosenStartDate < takenDates) {
-          this.invalidStartDate = true;
-        }
-        if (this.chosenEndDate > takenDates) {
-          this.invalidEndDate = true;
-        }
-        if (this.invalidStartDate && this.invalidEndDate) {
-          return;
-        }
-      }
-      this.invalidStartDate = false;
-      this.invalidEndDate = false;
     },
     newEndDate(myNewEndDate) {
       this.chosenEndDate = myNewEndDate;
-      this.endDateInBasicFormat = this.priceHelper.getCorrectDateFormat(
-        myNewEndDate
-      );
+      this.endDateInBasicFormat =
+        this.priceHelper.getCorrectDateFormat(myNewEndDate);
       if (this.startDateInBasicFormat == this.endDateInBasicFormat) {
         this.amountOfDays = 1;
       }
-      this.invalidStartDate = false;
-      this.invalidEndDate = false;
-      for (let takenDates of this.allTakenDates) {
-        if (this.chosenStartDate < takenDates) {
-          this.invalidStartDate = true;
-        }
-        if (this.chosenEndDate > takenDates) {
-          this.invalidEndDate = true;
-        }
-        if (this.invalidStartDate && this.invalidEndDate) {
-          return;
-        }
-      }
-      this.invalidStartDate = false;
-      this.invalidEndDate = false;
     },
     async book() {
-      this.shouldShowModal = true;
-      document.getElementsByClassName(
-        "booking-view-app-main"
-      )[0].style.opacity = 0.4;
       let myPriceHelper = new PPPN();
-      let emptyUser = new User("", "");
+      let emptyUser = new User('', '');
       let filledUser = Object.assign(emptyUser, this.user);
       let formattedStartDate = myPriceHelper.getCorrectDateFormat(
         this.chosenStartDate
@@ -491,22 +437,88 @@ export default {
         toPay,
         this.lease
       );
+      let checkIfBookedRes = await fetch('/rest/bookings');
+      let bookedResAsJson = await checkIfBookedRes.json();
+      console.log(bookedResAsJson);
+      console.log('Lease is: ', this.lease);
+      let currentTakenBookings = [];
+      for (let booking of bookedResAsJson) {
+        if (booking.leaseId == this.lease.id) {
+          let bookingStartDate = booking.startDate;
+          let mySplitStartDate = bookingStartDate.split('-');
+          let myStartYear = Number(mySplitStartDate[0]);
+          let myStartMonth = Number(mySplitStartDate[1]) - 1;
+          let myStartDay = Number(mySplitStartDate[2]);
 
-      let secondRes = await fetch("/rest/bookings", {
-        method: "POST",
+          let bookingEndDate = booking.endDate;
+          let mySplitEndDate = bookingEndDate.split('-');
+          let myEndYear = Number(mySplitEndDate[0]);
+          let myEndMonth = Number(mySplitEndDate[1]) - 1;
+          let myEndDay = Number(mySplitEndDate[2]);
+          let takenDay = '';
+          let differenceInYears = myEndYear - myStartYear;
+          let differenceInMonths = myEndMonth - myStartMonth;
+          let differenceInDays = myEndDay - myStartDay;
+          while (differenceInDays >= 0) {
+            differenceInDays -= 1;
+            currentTakenBookings.push(
+              new Date(myEndYear, myEndMonth, myEndDay)
+            );
+            if (myEndDay == 0) {
+              myEndMonth -= 1;
+              if (myEndMonth == 0) {
+                myEndYear -= 1;
+                myEndMonth = 12;
+              }
+              if (
+                myEndMonth == 11 ||
+                myEndMonth == 9 ||
+                myEndMonth == 6 ||
+                myEndMonth == 4
+              ) {
+                myEndDay = 30;
+              } else if (
+                myEndMonth == 12 ||
+                myEndMonth == 10 ||
+                myEndMonth == 8 ||
+                myEndMonth == 7 ||
+                myEndMonth == 5 ||
+                myEndMonth == 3 ||
+                myEndMonth == 1
+              ) {
+                myEndDay = 31;
+              }
+            } else {
+              myEndDay -= 1;
+            }
+          }
+        }
+      }
+      if (this.checkDisabledDates(currentTakenBookings)) {
+        alert(
+          'Sadly, across the dates you chose - Someone else beat you to book it. Sorry!'
+        );
+        return;
+      }
+      this.shouldShowModal = true;
+      document.getElementsByClassName(
+        'booking-view-app-main'
+      )[0].style.opacity = 0.4;
+      let secondRes = await fetch('/rest/bookings', {
+        method: 'POST',
         body: JSON.stringify(myBooking),
       });
       let myProfit = new Profit(profit);
 
-      let thirdRes = await fetch("/rest/profit/", {
-        method: "POST",
+      let thirdRes = await fetch('/rest/profit/', {
+        method: 'POST',
         body: JSON.stringify(myProfit),
       });
 
       let secondResponseAsJson = await secondRes.json();
 
       let filledAdminBooking = new AdminBooking(
-        secondResponseAsJson["id"],
+        secondResponseAsJson['id'],
         filledUser.id,
         this.lease.id,
         this.lease.location,
@@ -516,19 +528,19 @@ export default {
         toPay,
         this.lease
       );
-      let adminRes = await fetch("/rest/adminBookings", {
-        method: "POST",
+      let adminRes = await fetch('/rest/adminBookings', {
+        method: 'POST',
         body: JSON.stringify(filledAdminBooking),
       });
       let adminResponseAsJson = await adminRes.json();
       this.getMyLease();
     },
     async getMyLease() {
-      let res = await fetch("/rest/leases/" + this.$route.query.id);
+      let res = await fetch('/rest/leases/' + this.$route.query.id);
       let responseInJson = await res.json();
       this.lease = responseInJson;
       let myHelper = new BookingHelper();
-      store.commit("setBookingHelper", myHelper);
+      store.commit('setBookingHelper', myHelper);
     },
   },
   async created() {
@@ -540,6 +552,12 @@ export default {
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Lobster&family=Merriweather+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Raleway:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap");
 
+* {
+  font-family: "mukta";
+}
+.hiddenLink {
+  display: hidden;
+}
 .thanksTextP {
   font-size: 26px;
   margin-bottom: 10px;
@@ -672,7 +690,6 @@ select {
   width: 90%;
   margin: 0 auto;
   padding: 50px;
-  font-family: Merriweather Sans;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -935,4 +952,3 @@ select {
   }
 }
 </style>
-

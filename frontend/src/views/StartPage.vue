@@ -1,6 +1,6 @@
 <template>
   <div class="mainDiv">
-    <div class="startPageDateDiv">
+    <div class="startPageSearchBar">
       <div class="locationDiv">
         <LocationInputForm @updateMyLocation="updateMyLocation" />
       </div>
@@ -265,89 +265,67 @@ export default {
 };
 </script>
 <style scoped>
+.startPageSearchBar {
+  margin: auto;
+  justify-content: space-evenly;
+  width: 90vw;
+  height: 160px;
+  font-size: 180%;
+  font-weight: 700;
+  color: #007b8e;
+  background-color: rgba(240, 221, 140, 0.8);
+  box-shadow: 10px 10px 10px 3px rgba(95, 94, 94, 0.692);
+  border-radius: 10px;
+  padding: 10px 5px 5px 5px;
+  display: flex;
+  border: 1px solid rgb(241, 232, 148);
+  box-sizing: border-box;
+}
+
 .leasesDiv {
   text-align: center;
 }
-.locationDiv,
-.datePickerDiv,
-.bedsInputDiv,
-.minAndMaxPriceDiv {
-  width: max-content;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
-.locationDiv {
-  padding-top: 20px;
-}
 .mainDiv {
-  padding-left: 5vw;
-  padding-right: 5vw;
   padding-bottom: 2.5vh;
   padding-top: 2.5vh;
-  background-image: url("../../airplane.jpg");
+  height: 100vh;
+  /* The rest of this block sets background opacity. */
+  background: linear-gradient(
+      rgba(250, 250, 250, 0.4),
+      rgba(250, 250, 250, 0.2)
+    ),
+    url("../../airplane.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: center;
 }
-.startPageDateDiv {
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 20px;
-  height: 120px;
-  font-size: 20px;
-  background-color: rgba(241, 232, 148, 0.8);
-  box-shadow: 5px 5px 5px 0 rgb(148, 141, 119);
-  border-radius: 10px;
-  width: max-content;
-  padding: 5px 5px;
-  display: block;
-  border: 1px solid rgb(241, 232, 148);
-  box-sizing: border-box;
-}
 
 @media only screen and (max-width: 300px) {
-  .startPageDateDiv {
+  .startPageSearchBar {
     margin: 0px;
-    padding: 0px;
+    padding: 5px;
   }
-  .minAndMaxPriceDiv {
+  .minAndMax + PriceDiv {
     padding-bottom: 20px;
   }
 }
 @media only screen and (min-width: 1330px) {
-  div {
-    margin: 0px;
-    padding: 0px;
-    display: inline-block;
-  }
+  /*
   .locationDiv,
   .datePickerDiv,
   .bedsInputDiv,
   .minAndMaxPriceDiv {
     display: inline-block;
-    width: max-content;
   }
 
   .locationDiv {
     padding-left: 20px;
   }
+  /*
   .minAndMaxPriceDiv {
     padding-left: 10px;
     padding-right: 20px;
-  }
-
-  /*
-  .startPageDateDiv {
-    width: max-content;
-    padding: 5px 5px;
-    margin: 2px 0;
-    display: block;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-    margin-left:auto;
-    margin-right:auto;
   }
   */
 }

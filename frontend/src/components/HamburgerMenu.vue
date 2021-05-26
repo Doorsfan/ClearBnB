@@ -5,9 +5,21 @@
   <div v-bind:class="[open ? 'active' : null, 'router-links']">
     <i @click="openMenu" class="fas fa-times"></i>
     <p><router-link to="/">Home</router-link></p>
-    <p><router-link to="/userPage">User Page</router-link></p>
-    <p><router-link to="/login">Log in</router-link></p>
-    <p><router-link to="/signUp">Sign up</router-link></p>
+    <p>
+      <router-link v-if="$store.getters.getCurrentUser" to="/userPage"
+        >User Page</router-link
+      >
+    </p>
+    <p>
+      <router-link v-if="!$store.getters.getCurrentUser" to="/login"
+        >Log in</router-link
+      >
+    </p>
+    <p>
+      <router-link v-if="!$store.getters.getCurrentUser" to="/signUp"
+        >Sign up</router-link
+      >
+    </p>
   </div>
 </template>
 
@@ -39,9 +51,11 @@ export default {
   display: flex;
   flex-direction: column;
   border-right: 2px solid #00200c;
+  font-family: "mukta";
 }
 .router-links p {
   width: 180px;
+  font-family: "mukta";
 }
 .router-links p a {
   display: inline-block;
@@ -52,10 +66,12 @@ export default {
   font-weight: bold;
   width: 100%;
   padding: 20px 0 20px 20px;
+  font-family: "mukta";
 }
 .fa {
   font-size: 40px;
   cursor: pointer;
+  margin-top: 10px;
 }
 .active {
   transform: translateX(0);
@@ -70,5 +86,6 @@ export default {
 }
 .router-links p .router-link-active {
   color: blueviolet;
+  font-family: "mukta";
 }
 </style>

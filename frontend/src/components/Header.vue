@@ -156,10 +156,13 @@ export default {
   left: 0px;
   top: 0px;
 }
+/*
 .navbar {
   background: linear-gradient(0.25turn, #f69d3c, #ebf8e1, #ebf8e1, #f69d3c);
   width: 100%;
 }
+*/
+/*
 .homeIcon {
   display: inline-block;
   width: 40px;
@@ -173,12 +176,15 @@ export default {
   font-size: 16px;
   color: black;
 }
+*/
 .navbar {
+  /*
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   border: 1px solid rgb(230, 197, 126);
-  box-shadow: 0 5px 0 0 rgb(70, 67, 59);
+  */
+
   padding: 0 20px;
 }
 .pc-nav,
@@ -193,6 +199,7 @@ a {
   text-decoration: none;
   color: rgb(63, 63, 63);
 }
+
 .center {
   font-weight: bold;
   width: max-content;
