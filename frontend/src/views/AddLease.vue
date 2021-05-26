@@ -1,7 +1,7 @@
 <template>
   <div class="mainDiv">
     <div class="greyBackgroundDiv">
-      <h3 class="addResidenceHeader">Add a residence</h3>
+      <h3 class="addResidenceHeader">Add residence</h3>
       <p class="myTitle">Title</p>
       <input type="text" required placeholder="Title" v-model="title" />
       <p class="myLocation">Location</p>
@@ -250,6 +250,7 @@ export default {
 <style scoped>
 .addResidenceHeader{
   margin-top: -100px;
+ 
 }
 .inputForLocationArea{
   padding: 11.2px 22.4px;
@@ -261,14 +262,16 @@ export default {
 }
 .descriptionTitle{
   font-family: 'mukta';
-  font-size: 18px;
+  font-size: 20px;
 }
 .myLocation{
   font-family: 'mukta';
+  font-size: 20px;
 }
 .myTitle{
 
   font-family: 'mukta';
+  font-size: 20px;
 }
 .addResidenceHeader{
   font-size: 50px;
@@ -335,6 +338,7 @@ p {
   background-position:center;
   font-family: 'mukta';
   font-weight: bold;
+  font-size: 17px;
 }
 .inputForBedsDiv{
   width:max-content;
