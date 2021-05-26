@@ -30,7 +30,7 @@
         v-if="$store.getters.getCurrentUser"
         to="/"
         ><button @click="logOut" type="button" class="logOutLink">
-          Log Out
+          LOG OUT
         </button></router-link
       >
     </div>
@@ -49,6 +49,7 @@ export default {
 </script>
 
 <style scoped>
+
 footer {
   margin-top: 0;
   background-color: #fdbf81;
@@ -132,8 +133,10 @@ footer {
   border: none;
   margin-top: 0px;
   font-size: 28px;
-  -webkit-text-stroke: 0.6px white;
+  -webkit-text-stroke: 0.0px white;
   font-weight: bold;
+  font-size: 16px;
+  
 }
 
 </style>
