@@ -21,9 +21,9 @@
     </div>
     <hr>
     <div class="currentBookingsDiv">
-      <p class="pApartment">Current bookings:</p>
+      <p v-if="futureBookings.length > 0" class="pApartment">Current bookings:</p>
       <hr>
-      <p class="pDiv">No bookings at the moment</p>
+      <p v-if="futureBookings.length == 0" class="pDiv">No bookings at the moment</p>
       <div class="bookings">
         <FutureBookingsList @cancelBooking="cancelABooking" v-for="(futureBooking, futureIndex) of futureBookings"
         :key="futureIndex"
@@ -31,7 +31,7 @@
       </div>
     </div>
     <div class="pastBookingsDiv">
-      <p class="yourPastBookingsText">Your <b>PAST</b> bookings so far:</p>
+      <p v-if="pastBookings.length > 0" class="yourPastBookingsText">Your <b>PAST</b> bookings so far:</p>
       <div class="bookings">
         <PastBookingsList v-for="(pastBooking, pastIndex) of pastBookings"
         :key="pastIndex"
