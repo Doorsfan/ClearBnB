@@ -6,7 +6,7 @@
       <input
         type="text"
         required
-        placeholder="Title"
+        placeholder="My Title"
         v-model="title"
         class="leaseTitle"
       />
@@ -345,12 +345,11 @@ export default {
 
 </script>
 <style scoped>
-.addResidenceHeader{
-  margin-top: -100px;
- 
+input{
+  text-align:center;
 }
 .inputForLocationArea{
-  padding: 11.2px 22.4px;
+  padding: 7.5px 30.4px;
   font-size: 18px;
   border-radius: 5px;
   border:1px solid grey ;
@@ -379,22 +378,22 @@ export default {
 }
 .buttonDiv {
   margin: 5px;
+  padding-bottom:10px;
 }
 .previewButton{
-  border: outset 5px #007b8e;;
-  outline:1px solid black;
-  opacity:1;
-  background-color: #007b8e;;
-  padding:5px;
-  /*optional*/
-  font-family: 'mukta';
-  /*input has OS specific font-family*/
-  color: black;
-  font-weight: bolder;
-  text-decoration: none;
-  width: max-content;
-  font-size: 15px;
-  margin-bottom: 15px;
+  width: 120px;
+  height: 50px;
+  padding: 10px 20px;
+  background-color: #029ebb;
+  color: white;
+  border: 1px solid grey;
+  border-radius: 2px;
+  cursor: pointer;
+  margin-top: 10px;
+  font-size: 18px;
+  margin-right: 10px;
+  margin-left: 10px;
+  text-decoration:none;
 }
 .datePickerDiv{
   position: inherit;
@@ -407,13 +406,12 @@ p {
   margin: 3px;
 }
 .greyBackgroundDiv{
-     width:max-content;
+    width:max-content;
     margin-left:auto;
     margin-right:auto;
     margin-top:20px;
     background-color:rgba(218, 224, 224, 0.8);
     padding:100px;
-    
 }
 .mainDiv {
   padding-left: 5vw;

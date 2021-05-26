@@ -46,7 +46,7 @@ export default {
 input {
   width: 150px;
   margin: 3px;
-  padding: 11.2px 22.4px;
+  padding: 7.5px 30.4px;
   font-size:18px;
   text-align:center;
 }

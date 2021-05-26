@@ -442,6 +442,8 @@ select {
   padding: 3px;
   background-color: rgba(234, 241, 241);
   margin-right: 10px;
+  padding: 7.5px 30.4px;
+  outline:none;
 }
 
 .booking-view-container {

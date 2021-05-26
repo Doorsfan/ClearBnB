@@ -229,9 +229,7 @@ h1{
 }
 button{
   width: 200px;
-  height: 50px;
-  border-radius: 40px ;
-  
+  height: 50px;  
 }
 .hiddenptag{
   display:inline;

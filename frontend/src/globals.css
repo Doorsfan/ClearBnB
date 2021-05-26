@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Mukta:wght@400&display=swap');
 
-.startPageDatePicker{
-  padding: 11.2px 22.4px;
+.startPageDatePicker, .myDatePicker{
+  padding: 7.5px 30.4px;
   text-align:center;
 }
 * {
@@ -32,6 +32,7 @@ p, h1, h2, h3, h4 {
 }
 input {
   font-size: 18px;
+  text-align:center;
 }
 .app-main {
   flex-grow: 1;
