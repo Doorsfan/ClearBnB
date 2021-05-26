@@ -267,7 +267,7 @@ export default {
 
 .SignUpForm {
   text-align: center;
-  height: 860px;
+  height: 880px;
   width: clamp(600px, 80vw, 1200px);
   margin: 180px auto;
   border-radius: 5px;
@@ -276,12 +276,12 @@ export default {
   padding: 0 50px;
 }
 form input{
-  padding: 11.2px 22.4px;
+  padding: 7.5px 30.4px;
   font-size: 18px;
   border-radius: 5px;
   border: 1px solid grey;
   text-align: initial;
-  margin-bottom: 15px;
+  margin-bottom: 8px;
 }
 
 button{
@@ -300,7 +300,7 @@ button:hover {
 }
 h1 {
   color: black;
-  margin-bottom: 50px;
+  margin-bottom: 35px;
   margin-top: 35px;
   font-size: 45px;
   font-weight: bold;
@@ -310,7 +310,7 @@ p {
   text-align: left;
   margin-right: 5px;
   margin-bottom: 3px;
-  font-size: 16;
+  font-size: 16px;
   font-weight: bold;
 }
 
@@ -362,19 +362,21 @@ p {
   }
 }
 @media only screen and (max-width: 600px) {
-  .SignUpForm {
-    height: 950px;
-    width: clamp(280px, 100vw, 600px);
-    margin: auto;
-    border-radius: 0px;
-  }
 
   .SignUpForm{
-  height: 1140px;
+  height: 1170px;
   width: clamp(280px, 100vw, 600px);
   margin: auto;
   border-radius: 0px ;
   }
+  .firstLast {
+  display: flex;
+  flex-direction: column;
+}
+  b{
+    border-radius: 40px;
+  } 
+
 
   .firstNameDiv {
     flex-grow: 1;
@@ -461,7 +463,7 @@ p {
 }
 @media only screen and (max-width: 527px) {
 .SignUpForm{
-  height:1125px;
+  height:1165px;
   }
   h1 {
     font-size: 35px;
@@ -474,7 +476,7 @@ p {
     margin-bottom: 35px;
   }
   .SignUpForm{
-  height:1115px;
+  height:1150px;
   }
 }
 @media only screen and (max-width: 387px) {
@@ -483,7 +485,7 @@ p {
     margin-bottom: 35px;
   }
   .SignUpForm{
-  height:1110px;
+  height:1145px;
   padding: 0 30px;
   }
   .errorBox{
@@ -504,7 +506,7 @@ p {
     margin-bottom: 35px;
   }
   .SignUpForm{
-  height: 1105px;
+  height: 1140px;
   }
 }
 @media only screen and (max-width: 301px) {
@@ -513,7 +515,7 @@ p {
     margin-bottom: 35px;
   }
   .SignUpForm{
-  height: 1095px;
+  height: 1140px;
   }
   .letterRegister {
     margin-top: 10px;
@@ -524,6 +526,7 @@ p {
   .newsLetterDiv {
     display: flex;
     justify-content: center;
+    margin-bottom: 15px;
   }
   button {
     align-self: center;
