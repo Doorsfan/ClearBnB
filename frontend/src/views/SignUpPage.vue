@@ -373,7 +373,7 @@ p {
   display: flex;
   flex-direction: column;
 }
-  b{
+  button{
     border-radius: 40px;
   } 
 
