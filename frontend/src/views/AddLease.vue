@@ -406,6 +406,7 @@ p {
   }
 }
 </style>
+
 <!--Styling for all subcomponents-->
 <style>
 .inputForLocationArea,
@@ -421,12 +422,15 @@ p {
 
 @media only screen and (min-width: 1330px) {
   .inputForLocationArea,
-  .leaseTitle {
-    background-color: red;
+  .leaseTitle,
+  .descriptionInput {
     width: 400px !important;
   }
   .leaseTitle {
     margin: 40px auto;
+  }
+  .imageURL {
+    width: 345px !important;
   }
 }
 </style>

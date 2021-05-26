@@ -35,7 +35,8 @@ export default {
 </script>
 <style scoped>
 .residenceInnerDiv {
-  width: 205px;
+  width: max-content;
+  margin: auto;
   text-align: center;
 }
 .addResidenceHeader {
