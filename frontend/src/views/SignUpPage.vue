@@ -1,105 +1,111 @@
 <template>
-  <div class="mainDiv">
-    <form @submit.prevent class="SignUpForm">
-      <div class="UserInputFirstAndLastName">
-        <div class="titleDiv">
-          <h1 class="registerTitle">Create new account</h1>
+  <div class="signUpPageDiv">
+    <div class="mainDiv">
+      <form @submit.prevent class="SignUpForm">
+        <div class="UserInputFirstAndLastName">
+          <div class="titleDiv">
+            <h1 class="registerTitle">Create new account</h1>
+          </div>
+          <div class="firstLast">
+            <div class="firstNameDiv formhandler">
+              <p class="nameP">First name:</p>
+              <input
+                v-model="firstName"
+                placeholder="First Name"
+                class="firstNameInput"
+              />
+            </div>
+            <div class="lastNameDiv formhandler">
+              <p class="lastNameP">Last name:</p>
+              <input
+                v-model="lastName"
+                placeholder="Last Name"
+                class="lastNameInput"
+              />
+            </div>
+          </div>
         </div>
-        <div class="firstLast">
-          <div class="firstNameDiv formhandler">
-            <p class="nameP">First name:</p>
+        <div class="emailDiv formhandler">
+          <p class="emailP">Email:</p>
+          <input
+            v-model="email"
+            type="email"
+            placeholder="Email"
+            class="emailInput"
+          />
+        </div>
+        <div class="passwordsDiv">
+          <div class="passwordDiv formhandler">
+            <p class="passwordP">Password:</p>
             <input
-              v-model="firstName"
-              placeholder="First Name"
-              class="firstNameInput"
+              v-model="password"
+              type="password"
+              placeholder="Password"
+              class="passwordInput"
             />
           </div>
-          <div class="lastNameDiv formhandler">
-            <p class="lastNameP">Last name:</p>
+          <div class="repeatPasswordDiv formhandler">
+            <p class="repeatPasswordP">Repeat Password:</p>
             <input
-              v-model="lastName"
-              placeholder="Last Name"
-              class="lastNameInput"
+              v-model="repeatPassword"
+              type="password"
+              placeholder="Repeat Password"
+              class="repeatPasswordInput"
             />
           </div>
         </div>
-      </div>
-      <div class="emailDiv formhandler">
-        <p class="emailP">Email:</p>
-        <input
-          v-model="email"
-          type="email"
-          placeholder="Email"
-          class="emailInput"
-        />
-      </div>
-      <div class="passwordsDiv">
-        <div class="passwordDiv formhandler">
-          <p class="passwordP">Password:</p>
+        <div class="phoneNumber formhandler">
+          <p class="phoneNumberP">Phone Number:</p>
           <input
-            v-model="password"
-            type="password"
-            placeholder="Password"
-            class="passwordInput"
+            v-model="phoneNumber"
+            placeholder="Phone Number"
+            class="phoneNumberInput"
           />
         </div>
-        <div class="repeatPasswordDiv formhandler">
-          <p class="repeatPasswordP">Repeat Password:</p>
-          <input
-            v-model="repeatPassword"
-            type="password"
-            placeholder="Repeat Password"
-            class="repeatPasswordInput"
-          />
+        <div class="streetZip">
+          <div class="streetDiv formhandler">
+            <p class="streetP">Street:</p>
+            <input
+              v-model="streetAddress"
+              placeholder="My Street"
+              class="streetInput"
+            />
+          </div>
+          <div class="zipDiv formhandler">
+            <p class="zipP">Zip Code:</p>
+            <input v-model="zipCode" placeholder="Zip Code" class="zipInput" />
+          </div>
         </div>
-      </div>
-      <div class="phoneNumber formhandler">
-        <p class="phoneNumberP">Phone Number:</p>
-        <input
-          v-model="phoneNumber"
-          placeholder="Phone Number"
-          class="phoneNumberInput"
-        />
-      </div>
-      <div class="streetZip">
-        <div class="streetDiv formhandler">
-          <p class="streetP">Street:</p>
-          <input
-            v-model="streetAddress"
-            placeholder="My Street"
-            class="streetInput"
-          />
-        </div>
-        <div class="zipDiv formhandler">
-          <p class="zipP">Zip Code:</p>
-          <input v-model="zipCode" placeholder="Zip Code" class="zipInput" />
-        </div>
-      </div>
-      <div class="countryCity">
-        <div class="countryDiv formhandler">
-          <p class="countryP">Country:</p>
-          <input v-model="country" placeholder="Country" class="countryInput" />
-        </div>
-        <div class="cityDiv formhandler">
-          <p class="cityP">City:</p>
-          <input v-model="city" placeholder="City" class="cityInput" />
-        </div>
-      </div>
-
-      <div class="letterRegister">
-        <div class="newsLetterDiv">
-          <input v-model="newsLetter" type="checkbox" class="newsLetterBox" />
-          <p class="newsLetterP">Newsletter</p>
+        <div class="countryCity">
+          <div class="countryDiv formhandler">
+            <p class="countryP">Country:</p>
+            <input
+              v-model="country"
+              placeholder="Country"
+              class="countryInput"
+            />
+          </div>
+          <div class="cityDiv formhandler">
+            <p class="cityP">City:</p>
+            <input v-model="city" placeholder="City" class="cityInput" />
+          </div>
         </div>
 
-        <button class="registerButton" @click="registerUser" value="Register">
-          Register
-        </button>
-      </div>
-      <div class="takenUserBox">
-        <p class="errorBox">A user with that Email already exists.</p>
-      </div>
-    </form>
+        <div class="letterRegister">
+          <div class="newsLetterDiv">
+            <input v-model="newsLetter" type="checkbox" class="newsLetterBox" />
+            <p class="newsLetterP">Newsletter</p>
+          </div>
+
+          <button class="registerButton" @click="registerUser" value="Register">
+            Register
+          </button>
+        </div>
+        <div class="takenUserBox">
+          <p class="errorBox">A user with that Email already exists.</p>
+        </div>
+      </form>
+    </div>
   </div>
 </template>
 <script>
@@ -121,17 +127,6 @@ export default {
       phoneNumber: '',
       newsLetter: false,
     };
-  },
-  mounted() {
-    this.$store.dispatch('saveLatestRoute', this.$route.path);
-    if (document.getElementsByClassName('sunIconInHeader').length > 0) {
-      document.getElementsByClassName('sunIconInHeader')[0].src =
-        '/public/home_icon.png';
-      document.getElementsByClassName('sunIconInHeader')[0].className =
-        'house_icon';
-      document.getElementsByClassName('homeText')[0].style.display = 'block';
-      document.getElementsByClassName('center')[0].style.height = '70px';
-    }
   },
   methods: {
     async registerUser() {
@@ -197,7 +192,7 @@ export default {
   display: flex;
   flex-direction: row;
 }
-.emailDiv{
+.emailDiv {
   padding-top: 25px;
   width: 50%;
   padding-right: 5px;
@@ -218,7 +213,7 @@ export default {
   flex-grow: 1;
   padding-right: 5px;
 }
-.cityDiv{
+.cityDiv {
   flex-grow: 1;
   padding-left: 5px;
 }
@@ -227,11 +222,11 @@ export default {
   flex-direction: row;
   padding-top: 25px;
 }
-.streetDiv{
+.streetDiv {
   flex-grow: 0.8;
   padding-right: 5px;
 }
-.zipDiv{
+.zipDiv {
   flex-grow: 0.2;
   padding-left: 5px;
 }
@@ -250,7 +245,7 @@ export default {
   margin: 0;
   padding-left: 4px;
 }
-.newsLetterBox{
+.newsLetterBox {
   padding-top: 5px;
   margin-top: 1px;
 }
@@ -260,7 +255,7 @@ export default {
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-  height: max-content;
+  height: 90vh;
   background-attachment: fixed;
   overflow-x: hidden;
 }
@@ -275,7 +270,7 @@ export default {
   background-color: rgb(255, 255, 255, 0.9);
   padding: 0 50px;
 }
-form input{
+form input {
   padding: 7.5px 30.4px;
   font-size: 18px;
   border-radius: 5px;
@@ -284,7 +279,7 @@ form input{
   margin-bottom: 8px;
 }
 
-button{
+button {
   width: 120px;
   height: 50px;
   padding: 10px 20px;
@@ -313,7 +308,9 @@ p {
   font-size: 16px;
   font-weight: bold;
 }
-
+.signUpPageDiv {
+  min-height: 85vh;
+}
 .takenUserBox {
   margin: 0px;
   margin-top: 10px;
@@ -336,6 +333,7 @@ p {
 }
 .mainDiv {
   min-height: 75vh;
+  min-width:100vw;
 }
 @media only screen and (max-width: 1920px) {
   .SignUpForm {
@@ -348,35 +346,29 @@ p {
   }
 }
 @media only screen and (max-width: 1025px) {
-  .SignUpForm{
- 
-  margin: 120px auto;
- 
+  .SignUpForm {
+    margin: 120px auto;
   }
 }
 @media only screen and (max-width: 1023px) {
-  .SignUpForm{
- 
-  margin: 50px auto;
- 
+  .SignUpForm {
+    margin: 50px auto;
   }
 }
 @media only screen and (max-width: 600px) {
-
-  .SignUpForm{
-  height: 1170px;
-  width: clamp(280px, 100vw, 600px);
-  margin: auto;
-  border-radius: 0px ;
+  .SignUpForm {
+    height: 1170px;
+    width: clamp(280px, 100vw, 600px);
+    margin: auto;
+    border-radius: 0px;
   }
   .firstLast {
-  display: flex;
-  flex-direction: column;
-}
-  b{
+    display: flex;
+    flex-direction: column;
+  }
+  b {
     border-radius: 40px;
-  } 
-
+  }
 
   .firstNameDiv {
     flex-grow: 1;
@@ -462,8 +454,8 @@ p {
   }
 }
 @media only screen and (max-width: 527px) {
-.SignUpForm{
-  height:1165px;
+  .SignUpForm {
+    height: 1165px;
   }
   h1 {
     font-size: 35px;
@@ -475,8 +467,8 @@ p {
     font-size: 30px;
     margin-bottom: 35px;
   }
-  .SignUpForm{
-  height:1150px;
+  .SignUpForm {
+    height: 1150px;
   }
 }
 @media only screen and (max-width: 387px) {
@@ -484,29 +476,27 @@ p {
     font-size: 29px;
     margin-bottom: 35px;
   }
-  .SignUpForm{
-  height:1145px;
-  padding: 0 30px;
+  .SignUpForm {
+    height: 1145px;
+    padding: 0 30px;
   }
-  .errorBox{
-  display:none;
-  width:300px;
-  margin-right:auto;
-  background-color: red;
-  color:white;
-  padding:3px;
-  outline: 1px solid black;
-
-
-}
+  .errorBox {
+    display: none;
+    width: 300px;
+    margin-right: auto;
+    background-color: red;
+    color: white;
+    padding: 3px;
+    outline: 1px solid black;
+  }
 }
 @media only screen and (max-width: 339px) {
   h1 {
     font-size: 25px;
     margin-bottom: 35px;
   }
-  .SignUpForm{
-  height: 1140px;
+  .SignUpForm {
+    height: 1140px;
   }
 }
 @media only screen and (max-width: 301px) {
@@ -514,8 +504,8 @@ p {
     font-size: 22px;
     margin-bottom: 35px;
   }
-  .SignUpForm{
-  height: 1140px;
+  .SignUpForm {
+    height: 1140px;
   }
   .letterRegister {
     margin-top: 10px;
@@ -530,6 +520,12 @@ p {
   }
   button {
     align-self: center;
+  }
+  form input {
+    padding: 0px;
+    padding-left: 3px;
+    max-width: 200px;
+    width: 200px;
   }
 }
 </style>

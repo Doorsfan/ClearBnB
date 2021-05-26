@@ -85,9 +85,11 @@ export default {
 *{
   font-family:'mukta';
 }
-.myImage {
-  width: 150px;
-  height: 100px;
+img {
+  min-width:200px;
+  min-height:100px;
+  width: 25vw;
+  height: 25vh;
 }
 .xSmall {
   background: red;
@@ -95,5 +97,30 @@ export default {
   margin: 2px;
   color: white;
   position: absolute;
+}
+
+@media only screen and (min-width: 400px) {
+  img {
+    width:300px;
+    height: 150px;
+  }
+}
+@media only screen and (min-width: 900px) {
+  img {
+    width:400px;
+    height: 200px;
+  }
+}
+@media only screen and (min-width: 1200px) {
+  img {
+    width:500px;
+    height: 250px;
+  }
+}
+@media only screen and (max-width: 400px) {
+  img {
+    width:200px;
+    height: 100px;
+  }
 }
 </style>

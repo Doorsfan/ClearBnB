@@ -56,4 +56,13 @@ input {
   margin-left: auto;
   margin-right: auto;
 }
+
+@media only screen and (max-width: 350px) {
+  input {
+    padding: 10px;
+  }
+  .locationDiv{
+    width:100vw;
+  }
+}
 </style>

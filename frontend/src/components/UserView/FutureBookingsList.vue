@@ -41,39 +41,42 @@ export default {
 <style scoped>
 * {
   font-family: 'mukta';
-  color:black;
-  text-decoration:none;
+  color: black;
   font-weight:bold;
+  text-decoration:none;
+  text-decoration-color: white;
 }
 .cancelButton {
   padding: 5px;
-  font-weight: bolder;
+  font-weight: bold;
   font-size: 20px;
   margin-top: 8px;
   background: rgba(255, 0, 0, 0.78);
   color: white;
   cursor: pointer;
   -webkit-text-stroke: solid 3px black;
+  border-radius:10px;
 }
 
-.titleDiv {
-  font-weight: bolder;
-}
 .firstImage {
-  width: 150px;
-  height: 100px;
+  object-fit: cover;
+  object-position:center;
+  width:50vw;
+  max-width: 900px;
+  height: 700px;
+  max-height:30vh;
   border-radius:10px;
 }
 .mainBoxDiv {
   margin-left: auto;
   margin-right: auto;
-  width: max-content;
+  width: 75vw;
   padding: 20px;
   margin-top: 10px;
   margin-bottom: 10px;
-  border: 1px solid black;
-  background:white;
+  background-color: rgba(218, 224, 224, 0.8);
   border-radius:10px;
+  max-width:1200px;
 }
 .titleDiv {
   text-align: center;

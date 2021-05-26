@@ -3,8 +3,7 @@
     <div v-if="!isSmall" class="pc-nav">
       <div class="left">
         <router-link to="/">
-          <img class="sunIconInHeader" src="src/assets/clearbnb-logo.png" />
-          <p class="homeText">Home</p>
+          <img class="sunIconInHeader" src="../assets/clearbnb-logo.png" />
         </router-link>
       </div>
       <div class="center"></div>
@@ -163,7 +162,6 @@ export default {
 }
 .homeIcon {
   display: inline-block;
-  width: 40px;
   margin-top: 10px;
   margin-left: 5px;
 }

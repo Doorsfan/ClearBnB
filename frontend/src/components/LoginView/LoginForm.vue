@@ -1,4 +1,5 @@
 <template>
+  <div class="mainLoginDiv">
   <div class="LogInPage">
     <h1>Log in</h1>
     <form class="LoginForm" @submit.prevent="login">
@@ -17,80 +18,72 @@
         <p class="errorText">Error - Bad credentials</p>
       </div>
     </form>
-  
+
     <div class="ButtonsDiv">
-      
-      <button><router-link class="CancelButton" to="/">Cancel</router-link></button> 
+      <button>
+        <router-link class="CancelButton" to="/">Cancel</router-link>
+      </button>
       <p class="hiddenptag">or</p>
       <button @click.prevent="login" class="LoginButton">Login</button>
     </div>
     <div class="SignUpFromLogIn">
-    <p>New to ClearBnB?</p>
-    <router-link to="signUp" class="signUpLink">Sign up</router-link>
+      <p>New to ClearBnB?</p>
+      <router-link to="signUp" class="signUpLink">Sign up</router-link>
     </div>
+  </div>
   </div>
 </template>
 
 <script>
-import store from '../../store.js'
-import User from '../../components/User.js'
-import UserInfo from '../UserInfo.js'
+import store from '../../store.js';
+import User from '../../components/User.js';
+import UserInfo from '../UserInfo.js';
 export default {
-  mounted(){
-    this.$store.dispatch('saveLatestRoute', this.$route.path);
-    if(document.getElementsByClassName("sunIconInHeader").length > 0){
-      document.getElementsByClassName("sunIconInHeader")[0].src = '/public/home_icon.png'
-      document.getElementsByClassName("sunIconInHeader")[0].className = 'house_icon'
-      document.getElementsByClassName("homeText")[0].style.display = 'block';
-      document.getElementsByClassName("center")[0].style.height = '70px';
-    }
-  },
   data() {
     return {
-      username: "",
-      password: ""
+      username: '',
+      password: '',
     };
   },
   methods: {
-    async login(){
+    async login() {
       let user = new User(this.username, this.password);
       let res = await fetch('/api/login', {
         method: 'POST',
-        body: JSON.stringify(user)
-      })
-      let response = await res.json()
-      if(response.error == "Bad credentials"){ //Failed to log in
-        document.getElementsByClassName("failedLoginDiv")[0].style.display = "block";
-        document.getElementsByClassName("errorText")[0].style.display = "block";
-      }
-      else{
-        let currentUser = new User('','');
-        user = Object.assign(currentUser,response)
-        document.getElementsByClassName("failedLoginDiv")[0].style.display = "none";
-        this.$store.dispatch('login', user)
+        body: JSON.stringify(user),
+      });
+      let response = await res.json();
+      if (response.error == 'Bad credentials') {
+        //Failed to log in
+        document.getElementsByClassName('failedLoginDiv')[0].style.display =
+          'block';
+        document.getElementsByClassName('errorText')[0].style.display = 'block';
+      } else {
+        let currentUser = new User('', '');
+        user = Object.assign(currentUser, response);
+        document.getElementsByClassName('failedLoginDiv')[0].style.display =
+          'none';
+        this.$store.dispatch('login', user);
         //window.location = '/'
         document.getElementsByClassName('CancelButton')[0].click(); //Simulate a click on the Cancel button to go to the start page
         //To interact with the stores getters, write this.$store.getters.<gettersName>
         //console.log(this.$store.getters.getCurrentUser) Example
       }
-    }
+    },
   },
 };
 </script>
 
 <style scoped>
-
-.hiddenptag{
-  display:none;
+.hiddenptag {
+  display: none;
 }
-.failedLoginDiv{
-  
-  display:flex;
+.failedLoginDiv {
+  display: flex;
   align-items: center;
   color: red;
   justify-content: center;
-  display:none;
-  
+  display: none;
 }
 h1 {
   color: black;
@@ -99,172 +92,173 @@ h1 {
   font-size: 50px;
   font-weight: bold;
 }
-.LogInPage{
+.LogInPage {
   text-align: center;
   height: 600px;
   width: 500px;
   margin: 310px auto;
-  border-radius: 5px ;
+  border-radius: 5px;
   border: 1px solid grey;
   background-color: rgb(255, 255, 255, 0.9);
-
-
+  min-height: max-content;
 }
-form{
+form {
   padding-top: 50px;
 }
-form input{
+form input {
   padding: 7.5px 30.4px;
   font-size: 18px;
   border-radius: 5px;
-  border:1px solid grey ;
-  text-align:initial;
+  border: 1px solid grey;
+  text-align: initial;
   margin-bottom: 15px;
 }
-button{
+button {
   width: 120px;
   height: 50px;
   padding: 10px 20px;
   background-color: #029ebb;
   color: white;
   border: 1px solid grey;
-  border-radius: 2px ;
+  border-radius: 2px;
   cursor: pointer;
   margin-top: 10px;
   font-size: 18px;
   margin-right: 10px;
   margin-left: 10px;
-  
 }
-.ButtonsDiv{
-  display:flex;
+.ButtonsDiv {
+  display: flex;
   flex-direction: row;
   justify-content: center;
   margin-top: 10px;
-  
 }
-.SignUpFromLogIn{
-  margin-top:162px;
-  display:flex;
+.SignUpFromLogIn {
+  margin-top: 162px;
+  display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
 }
-a{
+a {
   text-decoration: none;
   color: white;
 }
-.signUpLink{
-  color:#029ebb;
+.signUpLink {
+  color: #029ebb;
   margin-left: 5px;
   text-decoration: underline;
   font-size: 17px;
   font-weight: bold;
 }
-p{
+p {
   font-size: 17px;
   font-weight: bold;
 }
-
-
+.LoginForm{
+  min-height:max-content;
+}
 button:hover {
   transform: scale(1.1);
 }
+.mainLoginDiv{
+  min-height:80vh;
+}
 @media only screen and (max-width: 1920px) {
-  .LogInPage{
- 
-  margin: 135px auto;
- 
+  .LogInPage {
+    margin: 135px auto;
   }
 }
 @media only screen and (max-width: 1800px) {
-.LogInPage{
-  margin: 150px auto;
-}}
+  .LogInPage {
+    margin: 150px auto;
+  }
+}
 
 @media only screen and (max-width: 1025px) {
-.LogInPage{
-  margin: 241px auto;
-  
-}}
-@media only screen and (max-width: 1023px) {
-.LogInPage{
-  margin: 70px auto;
-}}
-@media only screen and (max-width: 540px) {
-.LogInPage{
-  width: clamp(280px, 100vw, 500px);
-  margin: 20px auto;
- 
+  .LogInPage {
+    margin: 241px auto;
+  }
 }
+@media only screen and (max-width: 1023px) {
+  .LogInPage {
+    margin: 70px auto;
+  }
+}
+@media only screen and (max-width: 540px) {
+  .LogInPage {
+    width: clamp(280px, 100vw, 500px);
+    margin: 20px auto;
+  }
 }
 @media only screen and (max-width: 500px) {
-.LogInPage{
-  width: clamp(280px, 100vw, 500px);
-  border-radius: 0px ;
-  margin: auto;
- 
-}
-
-form{
-  padding-top: 20px;
-
- 
-}
-.LogInPage{
-  height: 570px;
-}
-h1{
-  margin-top:50px;
-  
-}
-.SignUpFromLogIn{
-  margin-top:60px;
-}
-.ButtonsDiv{
-  display:flex;
-  flex-direction: column-reverse;
-  justify-content: center;
-  align-items: center;
-}
-button{
-  width: 200px;
-  height: 50px;  
-}
-.hiddenptag{
-  display:inline;
-  margin-top:5px;
-  font-weight: normal;
-}
+  .LogInPage {
+    width: clamp(280px, 100vw, 500px);
+    border-radius: 0px;
+    margin: auto;
+  }
+  @media only screen and (max-width: 300px) {
+    div {
+      max-width: 100vw;
+    }
+    input {
+      padding: 0px;
+    }
+    form input {
+      padding: 0px;
+    }
+  }
+  form {
+    padding-top: 20px;
+  }
+  .LogInPage {
+    height: 570px;
+  }
+  h1 {
+    margin-top: 50px;
+  }
+  .SignUpFromLogIn {
+    margin-top: 60px;
+  }
+  .ButtonsDiv {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: center;
+    align-items: center;
+  }
+  button {
+    width: 200px;
+    height: 50px;
+  }
+  .hiddenptag {
+    display: inline;
+    margin-top: 5px;
+    font-weight: normal;
+  }
 }
 @media only screen and (max-width: 374px) {
-
- 
-
-input{
-  width: 70%;
-}
-p{
-  font-size: 16px;
-}
+  input {
+    width: 70%;
+  }
+  p {
+    font-size: 16px;
+  }
 }
 @media only screen and (max-width: 324px) {
-
-.SignUpFromLogIn{
-  margin-top:35px;
-  display:flex;
-  flex-direction: column;
-}
-p{
-  font-size: 17px;
-}
-.signUpLink{
-  font-size: 18px;
-  text-decoration: none;;
-}
-.hiddenptag{
-  font-size: 16px;
-}
-
+  .SignUpFromLogIn {
+    margin-top: 35px;
+    display: flex;
+    flex-direction: column;
+  }
+  p {
+    font-size: 17px;
+  }
+  .signUpLink {
+    font-size: 18px;
+    text-decoration: none;
+  }
+  .hiddenptag {
+    font-size: 16px;
+  }
 }
 </style>

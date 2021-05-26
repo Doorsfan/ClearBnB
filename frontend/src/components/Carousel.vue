@@ -33,17 +33,23 @@ export default {
 }
 .imageCarousel {
   position: relative;
-  height: 180px;
-  width: 150px;
+  height: 30vh;
+  max-height:500px;
+  width: 50vw;
+  max-width:1200px;
   margin: 5px;
   display: inline-block;
 }
 img {
   object-fit: cover;
-  height: 180px;
-  width: 150px;
+  object-position:center;
+  height: 30vh;
+  max-height:500px;
+  width: 52vw;
+  max-width:1200px;
+  margin-left:auto;
+  margin-right:auto;
   position: absolute;
-  object-fit: cover;
   left: 0;
   -webkit-transition: opacity 0.7s ease-in-out;
   -moz-transition: opacity 0.7s ease-in-out;
@@ -85,5 +91,10 @@ img {
 .right {
   transform: rotate(-45deg);
   -webkit-transform: rotate(-45deg);
+}
+@media only screen and (max-width: 300px) {
+  img {
+    margin-left: 0px;
+  }
 }
 </style>

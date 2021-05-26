@@ -50,5 +50,9 @@ input {
   font-size:18px;
   text-align:center;
 }
-
+@media only screen and (max-width: 400px) {
+  .firstPriceDiv,.secondPriceDiv{
+    display:block;
+  }
+}
 </style>

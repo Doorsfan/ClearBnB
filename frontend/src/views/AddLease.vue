@@ -169,17 +169,6 @@ export default {
     };
   },
   methods: {
-    mounted() {
-      if (document.getElementsByClassName("sunIconInHeader").length > 0) {
-        document.getElementsByClassName("sunIconInHeader")[0].src =
-          "/public/home_icon.png";
-        document.getElementsByClassName("sunIconInHeader")[0].className =
-          "house_icon";
-        document.getElementsByClassName("homeText")[0].style.display = "block";
-        document.getElementsByClassName("center")[0].style.height = "70px";
-      }
-      this.$store.commit("setLeaseToBuild", this.lease);
-    },
     removeFirstIMGinURLs() {
       this.imageURLs = this.imageURLs.filter(function (value, index, arr) {
         return index != 0;
@@ -406,17 +395,20 @@ p {
   margin: 3px;
 }
 .greyBackgroundDiv{
-    width:max-content;
-    margin-left:auto;
-    margin-right:auto;
-    margin-top:20px;
-    background-color:rgba(218, 224, 224, 0.8);
-    padding:100px;
+  width:90vw;
+  margin-top:20px;
+  background-color:rgba(218, 224, 224, 0.8);
+  padding:100px;
+  margin: 0px;
+  padding: 5px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+
 }
 .mainDiv {
   padding-left: 5vw;
   padding-right: 5vw;
-  padding-bottom: 2.5vh;
+  padding-bottom: 200px;
   padding-top: 2.5vh;
   background-image: url("/public/house.jpg");
   background-size: cover;
@@ -436,25 +428,15 @@ p {
   font-size: 17px;
 }
 .inputForBedsDiv {
-  width: max-content;
   margin-left: auto;
-  margin-right: auto;
+  margin-right:auto;
+  padding-bottom: 10px;
+  padding-top: 10px;
   margin-top: 5px;
   margin-bottom: 5px;
 }
-@media only screen and (max-width: 300px) {
-  .greyBackgroundDiv {
-    margin: 0px;
-    padding: 5px;
-    padding-top: 20px;
-    padding-bottom: 20px;
-  }
-}
-@media only screen and (min-width: 1330px) {
-  .greyBackgroundDiv {
-    padding: 10px 90px;
-  }
-}
+
+
 </style>
 
 <!--Styling for all subcomponents-->
@@ -469,12 +451,13 @@ p {
   text-align: initial;
   margin-bottom: 15px;
 }
-
 @media only screen and (min-width: 1330px) {
   .inputForLocationArea,
-  .leaseTitle,
-  .descriptionInput {
+  .leaseTitle{
     width: 400px !important;
+  }
+  .descriptionInput{
+    width: 800px !important;
   }
   .leaseTitle {
     margin: auto;
@@ -483,6 +466,15 @@ p {
   .imageURL {
     width: 345px !important;
     margin-bottom: 30px;
+  }
+}
+@media only screen and (max-width: 350px){
+  p {
+    display:block;
+    width: 220px;
+    margin-left:auto;
+    margin-right:auto;
+    text-align:center;
   }
 }
 </style>

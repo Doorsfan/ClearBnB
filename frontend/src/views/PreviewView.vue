@@ -45,8 +45,8 @@
           <p class="wholeOrPartialText">You get Access to:</p>
           <p class="exampleSize">Whole/Part of Residence goes here</p>
         </div>
-        <div class="myDatePickerDiv">
-          <PreviewDatePicker
+        <div v-if="myLease" class="myDatePickerDiv">
+          <PreviewDatePicker v-if="myLease.startDate && myLease.endDate"
             :leaseStartDate="myLease.startDate"
             :leaseEndDate="myLease.endDate"
           />
@@ -64,7 +64,10 @@
       <div v-if="myLease">
         <div class="location-maxguests">
           <h1>{{ myLease.title }}</h1>
-          <p>{{ myLease.location }} | Maximum {{ myLease.maxGuests }} guests</p>
+          <p v-if="myLease.location.length > 0 && myLease.maxGuests > 0">{{ myLease.location }} | Maximum {{ myLease.maxGuests }} guests</p>
+          <p v-if="myLease.location.length == 0 && myLease.maxGuests > 0">Your Location | Maximum {{ myLease.maxGuests }} guests</p>
+          <p v-if="myLease.location.length > 0 && myLease.maxGuests == 0">{{ myLease.location }} | Max Amount of Guests</p>
+          <p v-if="myLease.location.length == 0 && myLease.maxGuests == 0">Your Location | Max Amount of Guests</p>
         </div>
         <div class="booking-view-images-container">
           <img
@@ -95,8 +98,8 @@
         </div>
         <div class="type-price">
           <p>
-            {{ myLease.typeOfHousing }} | Per person per night:
-            {{ Math.round(myLease.price * 1.15 * 100) / 100 }} Euro
+            {{ myLease.typeOfHousing ? myLease.typeOfHousing : 'Type of Housing' }} | Per person per night:
+            {{ myLease.price ? Math.round(myLease.price * 1.15 * 100) / 100 : 'X amount of '}} Euro
           </p>
         </div>
         <div class="booking-view-description">
@@ -144,7 +147,7 @@
         </div>
         <div class="amountOfBeds">
           <p class="bedsText">Available Beds</p>
-          {{ myLease.beds }}
+          {{ myLease.beds ? myLease.beds : 'Example Amount' }}
         </div>
         <div class="DivForGuests">
           <div class="guestsTitle">Guests</div>
@@ -263,15 +266,6 @@ export default {
     },
   },
   mounted() {
-    if (document.getElementsByClassName('sunIconInHeader').length > 0) {
-      document.getElementsByClassName('sunIconInHeader')[0].src =
-        '/public/home_icon.png';
-      document.getElementsByClassName('sunIconInHeader')[0].className =
-        'house_icon';
-      document.getElementsByClassName('homeText')[0].style.display = 'block';
-      document.getElementsByClassName('center')[0].style.height = '70px';
-    }
-
     this.myLease = this.$store.getters.getLeaseToBuild;
     this.previewStartDate = this.myLease.startDate;
     this.previewEndDate = this.myLease.endDate;
@@ -341,30 +335,27 @@ export default {
   margin-left: 10px;
 }
 .cancelButton {
-  border: outset 5px red;
-  outline: 1px solid black;
-  opacity: 1;
-  background-color: red;
-  padding: 5px;
+  width: 100px;
+  height: 40px;
+  border-radius: 10px;
+  background-color: rgba(246, 69, 37, 0.842);
   color: white;
-  font-weight: bolder;
-  text-decoration: none;
-  width: max-content;
-  font-size: 20px;
-  margin-bottom: 15px;
+  border: 1px solid grey;
+  cursor: pointer;
+  margin-top: 10px;
+  font-size: 18px;
 }
 .publishButton {
-  border: outset 5px green;
-  outline: 1px solid black;
-  opacity: 1;
-  background-color: green;
-  padding: 5px;
-  color: black;
-  font-weight: bolder;
-  text-decoration: none;
-  width: max-content;
-  font-size: 20px;
-  margin-bottom: 15px;
+  width: 100px;
+  height: 40px;
+  border-radius: 10px;
+  background-color: #029ebb;
+  color: white;
+  border: 1px solid grey;
+  cursor: pointer;
+  margin-top: 10px;
+  font-size: 18px;
+
 }
 .PriceToPayInTotal {
   margin-top: 10px;
@@ -625,6 +616,14 @@ select {
   }
   .mainDiv > * {
     padding: 10px;
+  }
+  .cancelButtonDiv,
+  .publishButtonDiv {
+    width: max-content;
+    display: block;
+    padding:0px;
+    margin-left:auto;
+    margin-right:auto;
   }
 }
 </style>

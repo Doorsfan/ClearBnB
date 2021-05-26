@@ -63,12 +63,7 @@ export default {
 };
 </script>
 <style scoped>
-.myDatePickerDiv {
-  width: max-content;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 30px;
-}
+
 .AvailableToP {
   margin-top: 30px;
 }
@@ -76,7 +71,9 @@ p {
   margin: 2px;
   font-weight: bolder;
 }
-* {
-  padding-left: 2px;
+.myDatePickerDiv{
+  width:max-content;
+  margin-left:auto;
+  margin-right:auto;
 }
 </style>

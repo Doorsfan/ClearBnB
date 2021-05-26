@@ -250,16 +250,6 @@ import BookingHelper from '../components/BookingHelper.js';
 import store from '../components/../store.js';
 
 export default {
-  mounted() {
-    if (document.getElementsByClassName('sunIconInHeader').length > 0) {
-      document.getElementsByClassName('sunIconInHeader')[0].src =
-        '/public/home_icon.png';
-      document.getElementsByClassName('sunIconInHeader')[0].className =
-        'house_icon';
-      document.getElementsByClassName('homeText')[0].style.display = 'block';
-      document.getElementsByClassName('center')[0].style.height = '70px';
-    }
-  },
   watch: {
     selectedNumberOfGuests() {
       let formattedStartDate = this.priceHelper.getCorrectDateFormat(
@@ -344,7 +334,6 @@ export default {
       allTakenDates: '',
       dateIsTaken: false,
       didNotBookYet: true,
-      ignoredFirstClick: false,
       shouldShowModal: false,
     };
   },
@@ -363,23 +352,14 @@ export default {
       return false;
     },
     mainWasClicked(event) {
-      if (this.ignoredFirstClick) {
-        if (
-          this.shouldShowModal &&
-          event.target.className != 'confirmationModal'
-        ) {
-          document.getElementsByClassName(
-            'booking-view-app-main'
-          )[0].style.opacity = 1;
-          this.shouldShowModal = false;
-          this.ignoredFirstClick = false;
-        }
-      }
       if (
         this.shouldShowModal &&
         event.target.className != 'confirmationModal'
       ) {
-        this.ignoredFirstClick = true;
+        document.getElementsByClassName(
+          'booking-view-app-main'
+        )[0].style.opacity = 1;
+        this.shouldShowModal = false;
       }
     },
     goToLogin() {
@@ -553,7 +533,7 @@ export default {
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Lobster&family=Merriweather+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Raleway:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
 
-*{
+* {
   font-family: 'mukta';
 }
 .hiddenLink {
@@ -590,19 +570,20 @@ export default {
 }
 .confirmationModal {
   position: fixed;
-  left: 30%;
+  left: 35vw;
   z-index: 5;
   color: white;
   background-color: rgba(0, 0, 0, 0.95);
-  top: 100px;
-  width: 40%;
+  top: 20vh;
+  width: 500px;
+  min-width: 200px;
   text-align: center;
-  min-height: 70vh;
-  margin-left: auto;
-  margin-right: auto;
-  padding-top: 23vh;
+  height: max-content;
+  min-height: 300px;
+  padding-top: 0px;
   display: block;
   border-radius: 50px;
+  max-width: 90vw;
 }
 .PriceToPayInTotal {
   margin-top: 10px;
@@ -618,6 +599,35 @@ export default {
   outline: 1px solid black;
   margin-top: 8px;
   margin-bottom: 10px;
+}
+#app > main > div.confirmationModal > div.locationText > button {
+  min-width: 150px;
+  width: 25vw;
+  min-height: max-content;
+  height: 7vh;
+  max-height: max-content;
+  margin-bottom: 30px;
+  max-width: 250px;
+  color: white;
+  -webkit-text-stroke: 0.2px black;
+}
+#app > main > div.confirmationModal > div.thanksTextDiv.modalDiv > p {
+  margin-top: 10vh;
+}
+#app
+  > main
+  > div.confirmationModal
+  > div.locationText
+  > div.peopleModalDiv.modalDiv
+  > p {
+  display: inline-block;
+  width: max-content;
+}
+#app > main > div.confirmationModal > div.locationText > button {
+  margin-top: -20px;
+}
+#app > main > div.confirmationModal > div.thanksTextDiv.modalDiv > p {
+  padding: 10px;
 }
 .hiddenLink {
   display: none;
@@ -670,6 +680,7 @@ export default {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  padding-bottom: 200px;
 }
 .DivForGuests {
   margin-bottom: 20px;
@@ -963,6 +974,36 @@ select {
     > div.booking-view-images-container
     > img.booking-view-image-5 {
     height: 100px;
+  }
+}
+@media only screen and (max-width: 750px) {
+  .confirmationModal {
+    left: 15vw;
+  }
+}
+@media only screen and (max-width: 650px) {
+  .confirmationModal {
+    left: 10vw;
+  }
+}
+@media only screen and (max-width: 600px) {
+  .confirmationModal {
+    left: 5vw;
+  }
+}
+@media only screen and (max-width: 550px) {
+  .confirmationModal {
+    top: 10vh;
+  }
+}
+@media only screen and (max-width: 420px) {
+  .confirmationModal {
+    top: 10vh;
+  }
+}
+@media only screen and (max-width: 375px) {
+  .confirmationModal {
+    top: 10vh;
   }
 }
 </style>

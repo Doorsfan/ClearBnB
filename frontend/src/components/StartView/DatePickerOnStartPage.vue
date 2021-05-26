@@ -92,10 +92,9 @@ p {
 }
 
 @media only screen and (max-width: 300px) {
-  div {
-    width: max-content;
-    padding: 0px;
-    margin: 0px;
+  .firstDiv,
+  .secondDiv{
+    padding-left: 15px;
   }
 }
 @media only screen and (min-width: 1330px) {

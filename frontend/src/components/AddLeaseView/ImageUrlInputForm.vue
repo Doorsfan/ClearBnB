@@ -89,10 +89,17 @@ button {
   margin-left:10px;
 }
 input {
-  width: 120px;
+  min-width:150px;
+  max-width:300px;
+  width:30vw;
   display: inline;
   font-size: 14px;
   padding: 7.5px 30.4px;
+}
+@media only screen and (max-width: 300px) {
+  input {
+    padding: 0px;
+  }
 }
 
 </style>
