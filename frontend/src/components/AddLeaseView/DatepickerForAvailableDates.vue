@@ -60,8 +60,9 @@ export default {
 </script>
 <style scoped>
   .myDatePickerDiv{
-    width:210px;
-
+    width:max-content;
+    margin-left:auto;
+    margin-right:auto;
   }
   p{
     margin:2px;
