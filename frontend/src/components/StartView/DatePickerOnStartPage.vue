@@ -1,7 +1,7 @@
 <template>
   <div class="datePickersMainDiv">
     <div class="firstDiv">
-      <p class="fromTheText">From The</p>
+      <p class="fromTheText">Check-in</p>
       <Datepicker
         id="fromDatePicker"
         class="fromDatePicker startPageDatePicker"
@@ -11,7 +11,7 @@
       />
     </div>
     <div class="secondDiv">
-      <p class="toTheText">To The</p>
+      <p class="toTheText">Check-out</p>
       <Datepicker
         id="toDatePicker"
         class="toDatePicker startPageDatePicker"
