@@ -499,6 +499,10 @@ p {
 
 
 }
+  .newsLetterP{
+    width:max-content;
+    display:inline-block;
+  }
 }
 @media only screen and (max-width: 339px) {
   h1 {
