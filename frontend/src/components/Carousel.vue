@@ -33,15 +33,17 @@ export default {
 }
 .imageCarousel {
   position: relative;
-  height: 180px;
-  width: 150px;
+  height: 20vh;
+  width: 20vw;
   margin: 5px;
   display: inline-block;
 }
 img {
   object-fit: cover;
-  height: 180px;
-  width: 150px;
+  align-self: center;
+  height: 20vh;
+  width: 20vw;
+  border-radius: 7px;
   position: absolute;
   object-fit: cover;
   left: 0;

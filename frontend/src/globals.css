@@ -1,9 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Mukta:wght@400;700&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css');
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family:  'Mukta', sans-serif;
+}
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
 }
 .house_icon {
   width: 30px;

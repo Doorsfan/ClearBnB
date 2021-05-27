@@ -1,31 +1,35 @@
 <template>
-  <div class="mainDiv">
-    <div class="startPageSearchBar">
-      <div class="locationDiv">
-        <LocationInputForm @updateMyLocation="updateMyLocation" />
+  <div class="startPageAppMain">
+    <div class="startPageContainer">
+      <div class="startPageSearchBar">
+        <div class="locationDiv">
+          <LocationInputForm @updateMyLocation="updateMyLocation" />
+        </div>
+        <div class="datePickerDiv">
+          <DatePickerOnStartPage
+            @updateStartDate="updateSearchStartDate"
+            @updateEndDate="updateSearchEndDate"
+          />
+        </div>
+        <div class="bedsInputDiv">
+          <BedsInputForm @updateMyAmountOfBeds="updateMyAmountOfBeds" />
+        </div>
+        <div class="minAndMaxPriceDiv">
+          <PriceRangeForm
+            @updateMyMinPrice="updateMyMinPrice"
+            @updateMyMaxPrice="updateMyMaxPrice"
+          />
+        </div>
       </div>
-      <div class="datePickerDiv">
-        <DatePickerOnStartPage
-          @updateStartDate="updateSearchStartDate"
-          @updateEndDate="updateSearchEndDate"
-        />
+      <div class="leaseBoxContainer">
+        <div class="leasesDiv">
+          <LeaseDisplayBox
+            v-for="(leaseItem, index) of relevantLeases"
+            :key="index"
+            :lease="leaseItem"
+          />
+        </div>
       </div>
-      <div class="bedsInputDiv">
-        <BedsInputForm @updateMyAmountOfBeds="updateMyAmountOfBeds" />
-      </div>
-      <div class="minAndMaxPriceDiv">
-        <PriceRangeForm
-          @updateMyMinPrice="updateMyMinPrice"
-          @updateMyMaxPrice="updateMyMaxPrice"
-        />
-      </div>
-    </div>
-    <div class="leasesDiv">
-      <LeaseDisplayBox
-        v-for="(leaseItem, index) of relevantLeases"
-        :key="index"
-        :lease="leaseItem"
-      />
     </div>
   </div>
 </template>
@@ -140,7 +144,7 @@ export default {
     this.relevantLeases = this.allLeases;
     if (document.getElementsByClassName("house_icon").length > 0) {
       document.getElementsByClassName("house_icon")[0].src =
-        "/src/assets/clearbnb-logo.png";
+        "/src/assets/clearbnb-logo-wider.png";
       document.getElementsByClassName("house_icon")[0].className =
         "sunIconInHeader";
       document.getElementsByClassName("homeText")[0].style.display = "none";
@@ -263,10 +267,38 @@ export default {
 };
 </script>
 <style scoped>
+.startPageAppMain {
+  background: linear-gradient(
+      rgba(250, 250, 250, 0.4),
+      rgba(250, 250, 250, 0.2)
+    ),
+    url("../../airplane.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.startPageContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 90%;
+  margin: 0 auto;
+  padding: 50px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: rgb(10, 10, 10);
+  margin-top: 30px;
+  margin-bottom: 10px;
+}
 .startPageSearchBar {
   margin: auto;
   justify-content: space-evenly;
-  width: 90vw;
+  width: 100%;
   height: 160px;
   font-size: 180%;
   font-weight: 700;
@@ -278,15 +310,21 @@ export default {
   display: flex;
   border: 1px solid rgb(241, 232, 148);
   box-sizing: border-box;
+  z-index: 50;
 }
-.leasesDiv {
-  text-align: center;
+.leaseBoxContainer {
+  width: 100%;
+  display: flex;
+  align-content: space-between;
+  margin: 30px auto 30px auto;
 }
+/*
 .mainDiv {
   padding-bottom: 2.5vh;
   padding-top: 2.5vh;
-  height: 100vh;
-  /* The rest of this block sets background opacity. */
+  height: 100%;*/
+/* The rest of this block sets background opacity. */
+/*
   background: linear-gradient(
       rgba(250, 250, 250, 0.4),
       rgba(250, 250, 250, 0.2)
@@ -297,6 +335,7 @@ export default {
   background-attachment: fixed;
   background-position: center;
 }
+*/
 @media only screen and (max-width: 300px) {
   .startPageSearchBar {
     margin: 0px;

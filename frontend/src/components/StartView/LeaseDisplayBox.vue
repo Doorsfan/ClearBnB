@@ -34,11 +34,11 @@
   </div>
 </template>
 <script setup="">
-import Carousel from '../Carousel.vue';
+import Carousel from "../Carousel.vue";
 </script>
 <script>
 export default {
-  props: ['lease'],
+  props: ["lease"],
   data() {
     return {};
   },
@@ -63,12 +63,7 @@ export default {
 };
 </script>
 <style scoped>
-*{
-  font-family:'mukta';
-}
 a {
-  font-family: 'mukta';
-  color: black;
   text-decoration: none;
 }
 a:visited {
@@ -78,15 +73,15 @@ a:visited {
   font-weight: bold;
 }
 .leaseBox {
-  background-color: rgba(218, 224, 224, 0.8);
-  min-width: max-content;
-  min-width: 280px;
-  width: 320px;
-  padding: 10px;
+  background-color: rgba(245, 231, 201, 0.8);
+  width: 28%;
+  padding: 40px 20px;
   text-align: center;
-  margin: 5px;
+  margin: 1vw;
   display: inline-block;
-  height: 340px;
+  border-radius: 10px;
+  box-shadow: 10px 10px 10px 3px rgba(95, 94, 94, 0.692);
+  font-size: 160%;
 }
 .leftArrowBox {
   display: inline-block;

@@ -27,11 +27,6 @@
             class="booking-view-image-4"
             :src="imageURLs[3]"
           />
-          <img
-            v-if="imageURLs.length > 4"
-            class="booking-view-image-5"
-            :src="imageURLs[4]"
-          />
         </div>
         <div class="type-price">
           <p>
@@ -111,7 +106,7 @@
         <p v-if="selectedNumberOfGuests > 0 && amountOfDays > 0">
           Total Price to pay for {{ amountOfDays }} days for
           {{ selectedNumberOfGuests }}
-          {{ selectedNumberOfGuests > 1 ? 'people' : 'person' }}:
+          {{ selectedNumberOfGuests > 1 ? "people" : "person" }}:
           {{
             Math.round(1.15 * (price * selectedNumberOfGuests * amountOfDays))
           }}
@@ -207,12 +202,12 @@
       </div>
       <div class="amountOfDaysModalDiv modalDiv">
         For a total of {{ amountOfDays }}
-        {{ amountOfDays > 1 ? 'days' : 'day' }}
+        {{ amountOfDays > 1 ? "days" : "day" }}
       </div>
       <div class="peopleModalDiv modalDiv">
         <p class="peopleModalP">For</p>
         {{ selectedNumberOfGuests }}
-        {{ selectedNumberOfGuests > 1 ? 'people' : 'person' }}
+        {{ selectedNumberOfGuests > 1 ? "people" : "person" }}
       </div>
       <div class="priceModalDiv modalDiv">
         <p class="priceModalP">
@@ -235,29 +230,29 @@
 </template>
 
 <script setup="">
-import DatepickerForAvailableDates from '../components/AddLeaseView/DatepickerForAvailableDates.vue';
-import BookingViewCarousel from '../components/BookingView/BookingViewCarousel.vue';
-import DatepickerForBookingView from '../components/BookingView/DatepickerForBookingView.vue';
+import DatepickerForAvailableDates from "../components/AddLeaseView/DatepickerForAvailableDates.vue";
+import BookingViewCarousel from "../components/BookingView/BookingViewCarousel.vue";
+import DatepickerForBookingView from "../components/BookingView/DatepickerForBookingView.vue";
 </script>
 <script>
-import User from '../components/User.js';
-import Booking from '../components/Booking';
-import AdminBooking from '../components/AdminBooking';
-import Lease from '../components/Lease.vue';
-import PPPN from '../components/PPPN.js';
-import Profit from '../components/Profit.js';
-import BookingHelper from '../components/BookingHelper.js';
-import store from '../components/../store.js';
+import User from "../components/User.js";
+import Booking from "../components/Booking";
+import AdminBooking from "../components/AdminBooking";
+import Lease from "../components/Lease.vue";
+import PPPN from "../components/PPPN.js";
+import Profit from "../components/Profit.js";
+import BookingHelper from "../components/BookingHelper.js";
+import store from "../components/../store.js";
 
 export default {
   mounted() {
-    if (document.getElementsByClassName('sunIconInHeader').length > 0) {
-      document.getElementsByClassName('sunIconInHeader')[0].src =
-        '/public/home_icon.png';
-      document.getElementsByClassName('sunIconInHeader')[0].className =
-        'house_icon';
-      document.getElementsByClassName('homeText')[0].style.display = 'block';
-      document.getElementsByClassName('center')[0].style.height = '70px';
+    if (document.getElementsByClassName("sunIconInHeader").length > 0) {
+      document.getElementsByClassName("sunIconInHeader")[0].src =
+        "/public/home_icon.png";
+      document.getElementsByClassName("sunIconInHeader")[0].className =
+        "house_icon";
+      document.getElementsByClassName("homeText")[0].style.display = "block";
+      document.getElementsByClassName("center")[0].style.height = "70px";
     }
   },
   watch: {
@@ -292,8 +287,8 @@ export default {
       if (this.amountOfDays == 0) {
         this.amountOfDays = 1;
       }
-      let splitFormattedStartDate = formattedStartDate.split('-');
-      let splitFormattedEndDate = formattedEndDate.split('-');
+      let splitFormattedStartDate = formattedStartDate.split("-");
+      let splitFormattedEndDate = formattedEndDate.split("-");
     },
     chosenEndDate() {
       let formattedStartDate = this.priceHelper.getCorrectDateFormat(
@@ -324,24 +319,24 @@ export default {
   },
   data() {
     return {
-      title: 'test',
-      location: '',
-      maxGuests: '',
-      imageURLs: ['', ''],
-      typeOfHousing: '',
-      price: '',
-      description: '',
-      lease: '',
-      selectedNumberOfGuests: '',
-      amenities: '',
-      chosenStartDate: '',
-      chosenEndDate: '',
-      amountOfDays: '',
-      startDateInBasicFormat: '',
-      endDateInBasicFormat: '',
+      title: "test",
+      location: "",
+      maxGuests: "",
+      imageURLs: ["", ""],
+      typeOfHousing: "",
+      price: "",
+      description: "",
+      lease: "",
+      selectedNumberOfGuests: "",
+      amenities: "",
+      chosenStartDate: "",
+      chosenEndDate: "",
+      amountOfDays: "",
+      startDateInBasicFormat: "",
+      endDateInBasicFormat: "",
       user: this.$store.getters.getCurrentUser,
       priceHelper: new PPPN(),
-      allTakenDates: '',
+      allTakenDates: "",
       dateIsTaken: false,
       didNotBookYet: true,
       ignoredFirstClick: false,
@@ -366,10 +361,10 @@ export default {
       if (this.ignoredFirstClick) {
         if (
           this.shouldShowModal &&
-          event.target.className != 'confirmationModal'
+          event.target.className != "confirmationModal"
         ) {
           document.getElementsByClassName(
-            'booking-view-app-main'
+            "booking-view-app-main"
           )[0].style.opacity = 1;
           this.shouldShowModal = false;
           this.ignoredFirstClick = false;
@@ -377,36 +372,38 @@ export default {
       }
       if (
         this.shouldShowModal &&
-        event.target.className != 'confirmationModal'
+        event.target.className != "confirmationModal"
       ) {
         this.ignoredFirstClick = true;
       }
     },
     goToLogin() {
-      document.getElementsByClassName('hiddenLoginPage')[0].click();
+      document.getElementsByClassName("hiddenLoginPage")[0].click();
     },
     goBackToStartPage() {
-      document.getElementsByClassName('hiddenStartPage')[0].click();
+      document.getElementsByClassName("hiddenStartPage")[0].click();
     },
     newStartDate(myNewStartDate) {
       this.chosenStartDate = myNewStartDate;
-      this.startDateInBasicFormat =
-        this.priceHelper.getCorrectDateFormat(myNewStartDate);
+      this.startDateInBasicFormat = this.priceHelper.getCorrectDateFormat(
+        myNewStartDate
+      );
       if (this.startDateInBasicFormat == this.endDateInBasicFormat) {
         this.amountOfDays = 1;
       }
     },
     newEndDate(myNewEndDate) {
       this.chosenEndDate = myNewEndDate;
-      this.endDateInBasicFormat =
-        this.priceHelper.getCorrectDateFormat(myNewEndDate);
+      this.endDateInBasicFormat = this.priceHelper.getCorrectDateFormat(
+        myNewEndDate
+      );
       if (this.startDateInBasicFormat == this.endDateInBasicFormat) {
         this.amountOfDays = 1;
       }
     },
     async book() {
       let myPriceHelper = new PPPN();
-      let emptyUser = new User('', '');
+      let emptyUser = new User("", "");
       let filledUser = Object.assign(emptyUser, this.user);
       let formattedStartDate = myPriceHelper.getCorrectDateFormat(
         this.chosenStartDate
@@ -438,25 +435,25 @@ export default {
         toPay,
         this.lease
       );
-      let checkIfBookedRes = await fetch('/rest/bookings');
+      let checkIfBookedRes = await fetch("/rest/bookings");
       let bookedResAsJson = await checkIfBookedRes.json();
       console.log(bookedResAsJson);
-      console.log('Lease is: ', this.lease);
+      console.log("Lease is: ", this.lease);
       let currentTakenBookings = [];
       for (let booking of bookedResAsJson) {
         if (booking.leaseId == this.lease.id) {
           let bookingStartDate = booking.startDate;
-          let mySplitStartDate = bookingStartDate.split('-');
+          let mySplitStartDate = bookingStartDate.split("-");
           let myStartYear = Number(mySplitStartDate[0]);
           let myStartMonth = Number(mySplitStartDate[1]) - 1;
           let myStartDay = Number(mySplitStartDate[2]);
 
           let bookingEndDate = booking.endDate;
-          let mySplitEndDate = bookingEndDate.split('-');
+          let mySplitEndDate = bookingEndDate.split("-");
           let myEndYear = Number(mySplitEndDate[0]);
           let myEndMonth = Number(mySplitEndDate[1]) - 1;
           let myEndDay = Number(mySplitEndDate[2]);
-          let takenDay = '';
+          let takenDay = "";
           let differenceInYears = myEndYear - myStartYear;
           let differenceInMonths = myEndMonth - myStartMonth;
           let differenceInDays = myEndDay - myStartDay;
@@ -497,29 +494,29 @@ export default {
       }
       if (this.checkDisabledDates(currentTakenBookings)) {
         alert(
-          'Sadly, across the dates you chose - Someone else beat you to book it. Sorry!'
+          "Sadly, across the dates you chose - Someone else beat you to book it. Sorry!"
         );
         return;
       }
       this.shouldShowModal = true;
       document.getElementsByClassName(
-        'booking-view-app-main'
+        "booking-view-app-main"
       )[0].style.opacity = 0.4;
-      let secondRes = await fetch('/rest/bookings', {
-        method: 'POST',
+      let secondRes = await fetch("/rest/bookings", {
+        method: "POST",
         body: JSON.stringify(myBooking),
       });
       let myProfit = new Profit(profit);
 
-      let thirdRes = await fetch('/rest/profit/', {
-        method: 'POST',
+      let thirdRes = await fetch("/rest/profit/", {
+        method: "POST",
         body: JSON.stringify(myProfit),
       });
 
       let secondResponseAsJson = await secondRes.json();
 
       let filledAdminBooking = new AdminBooking(
-        secondResponseAsJson['id'],
+        secondResponseAsJson["id"],
         filledUser.id,
         this.lease.id,
         this.lease.location,
@@ -529,19 +526,19 @@ export default {
         toPay,
         this.lease
       );
-      let adminRes = await fetch('/rest/adminBookings', {
-        method: 'POST',
+      let adminRes = await fetch("/rest/adminBookings", {
+        method: "POST",
         body: JSON.stringify(filledAdminBooking),
       });
       let adminResponseAsJson = await adminRes.json();
       this.getMyLease();
     },
     async getMyLease() {
-      let res = await fetch('/rest/leases/' + this.$route.query.id);
+      let res = await fetch("/rest/leases/" + this.$route.query.id);
       let responseInJson = await res.json();
       this.lease = responseInJson;
       let myHelper = new BookingHelper();
-      store.commit('setBookingHelper', myHelper);
+      store.commit("setBookingHelper", myHelper);
     },
   },
   async created() {
@@ -551,10 +548,10 @@ export default {
 </script>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Lobster&family=Merriweather+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Raleway:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Lobster&family=Merriweather+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Raleway:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap");
 
-*{
-  font-family: 'mukta';
+* {
+  font-family: "mukta";
 }
 .hiddenLink {
   display: hidden;
@@ -663,13 +660,19 @@ export default {
   border-radius: 5px;
 }
 .booking-view-app-main {
-  background-image: url(https://images.unsplash.com/photo-1573088870079-67b4526aa950?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=667&q=80);
+  background: linear-gradient(
+      rgba(250, 250, 250, 0.4),
+      rgba(250, 250, 250, 0.2)
+    ),
+    url(https://images.unsplash.com/photo-1573088870079-67b4526aa950?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=667&q=80);
   background-size: cover;
   background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  height: 100%;
 }
 .DivForGuests {
   margin-bottom: 20px;
@@ -761,16 +764,6 @@ select {
   transform: scale(1.08);
 }
 
-.booking-view-image-5 {
-  width: 50%;
-  height: 300px;
-  object-fit: cover;
-  object-position: center;
-  margin: 0 10px 10px 10px;
-  box-shadow: 5px 5px 5px 0 rgb(136, 154, 160);
-  border-radius: 4px;
-}
-
 .booking-view-image-5:hover {
   transform: scale(1.08);
 }
@@ -783,7 +776,7 @@ select {
   text-align: justify;
   padding: 0 90px;
   line-height: 160%;
-  font-size: 110%;
+  font-size: 150%;
 }
 .myDatePickerDiv {
   width: max-content;
