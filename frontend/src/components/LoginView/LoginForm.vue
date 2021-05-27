@@ -1,36 +1,41 @@
 <template>
   <div class="mainLoginDiv">
-  <div class="LogInPage">
-    <h1>Log in</h1>
-    <form class="LoginForm" @submit.prevent="login">
-      <div class="emailDiv">
-        <input v-model="username" type="email" placeholder="E-mail" required />
-      </div>
-      <div class="passwordDiv">
-        <input
-          v-model="password"
-          type="password"
-          placeholder="Password"
-          required
-        />
-      </div>
-      <div class="failedLoginDiv">
-        <p class="errorText">Error - Bad credentials</p>
-      </div>
-    </form>
+    <div class="LogInPage">
+      <h1>Log in</h1>
+      <form class="LoginForm" @submit.prevent="login">
+        <div class="emailDiv">
+          <input
+            v-model="username"
+            type="email"
+            placeholder="E-mail"
+            required
+          />
+        </div>
+        <div class="passwordDiv">
+          <input
+            v-model="password"
+            type="password"
+            placeholder="Password"
+            required
+          />
+        </div>
+        <div class="failedLoginDiv">
+          <p class="errorText">Error - Bad credentials</p>
+        </div>
+      </form>
 
-    <div class="ButtonsDiv">
-      <button>
-        <router-link class="CancelButton" to="/">Cancel</router-link>
-      </button>
-      <p class="hiddenptag">or</p>
-      <button @click.prevent="login" class="LoginButton">Login</button>
+      <div class="ButtonsDiv">
+        <button>
+          <router-link class="CancelButton" to="/">Cancel</router-link>
+        </button>
+        <p class="hiddenptag">or</p>
+        <button @click.prevent="login" class="LoginButton">Login</button>
+      </div>
+      <div class="SignUpFromLogIn">
+        <p>New to ClearBnB?</p>
+        <router-link to="signUp" class="signUpLink">Sign up</router-link>
+      </div>
     </div>
-    <div class="SignUpFromLogIn">
-      <p>New to ClearBnB?</p>
-      <router-link to="signUp" class="signUpLink">Sign up</router-link>
-    </div>
-  </div>
   </div>
 </template>
 
@@ -197,7 +202,11 @@ button:hover {
     border-radius: 0px;
     margin: auto;
   }
-  @media only screen and (max-width: 300px) {
+  button {
+    border-radius: 15px;
+  }
+}
+@media only screen and (max-width: 300px) {
     div {
       max-width: 100vw;
     }
@@ -207,7 +216,7 @@ button:hover {
     form input {
       padding: 0px;
     }
-  }
+  
   form {
     padding-top: 20px;
   }
