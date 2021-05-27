@@ -249,11 +249,11 @@ export default {
         }
       }
     }
-
+    let today = new Date();
     for (let booking of this.myBookings) {
-      if (booking.isInThePast(booking.endDate)) {
+      if (booking.endDate < today) {
         this.pastBookings.push(booking);
-      } else if (!booking.isInThePast(booking.endDate)) {
+      } else {
         this.futureBookings.push(booking);
       }
     }
