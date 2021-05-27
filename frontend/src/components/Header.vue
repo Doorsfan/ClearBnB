@@ -3,7 +3,11 @@
     <div v-if="!isSmall" class="pc-nav">
       <div class="left">
         <router-link to="/">
-          <img class="sunIconInHeader" src="src/assets/clearbnb-logo.png" />
+          <img
+            class="sunIconInHeader"
+            src="src/assets/clearbnb-logo-wider.png"
+            alt="ClearBnB"
+          />
           <p class="homeText">Home</p>
         </router-link>
       </div>
@@ -80,27 +84,27 @@
 </template>
 
 <script>
-import Hamburger from './HamburgerMenu.vue';
+import Hamburger from "./HamburgerMenu.vue";
 export default {
-  props: ['signUp', 'login'],
-  emits: ['loggedOut'],
+  props: ["signUp", "login"],
+  emits: ["loggedOut"],
   components: {
     Hamburger,
   },
   data() {
     return {
       isSmall: false,
-      big: window.matchMedia('(min-width:750px)'),
+      big: window.matchMedia("(min-width:750px)"),
       currentUser: this.$store.getters.getCurrentUser,
     };
   },
   mounted() {
     this.watchMedia(this.big);
-    this.big.addEventListener('change', this.watchMedia);
+    this.big.addEventListener("change", this.watchMedia);
   },
   methods: {
     logOut() {
-      this.$store.commit('setUser', null);
+      this.$store.commit("setUser", null);
       this.currentUser = null;
     },
     watchMedia: function (x) {
@@ -112,7 +116,6 @@ export default {
 </script>
 
 <style scoped>
-
 .smallLogOutDiv {
   width: max-content;
 }
@@ -137,11 +140,8 @@ export default {
   background: none;
   border: none;
 }
-.sunIconInHeader {
-  height: 68px;
-  width: 150px;
-}
 .logOutLink {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
   background: none;
   border: none;
   font-size: 13px;
@@ -156,11 +156,13 @@ export default {
   left: 0px;
   top: 0px;
 }
+/*
 .navbar {
   background: linear-gradient(0.25turn, #f69d3c, #ebf8e1, #ebf8e1, #f69d3c);
   width: 100%;
-  height: 70px;
 }
+*/
+/*
 .homeIcon {
   display: inline-block;
   width: 40px;
@@ -174,11 +176,14 @@ export default {
   font-size: 16px;
   color: black;
 }
+*/
 .navbar {
+  /*
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  border-bottom: 1px solid #00200c;
+  border: 1px solid rgb(230, 197, 126);
+  */
   padding: 0 20px;
 }
 .pc-nav,
@@ -194,12 +199,11 @@ a {
   color: rgb(63, 63, 63);
 }
 .center {
-  margin: 0 10px;
   font-weight: bold;
   width: max-content;
   margin-left: auto;
   margin-right: auto;
-  height: 210px;
+  height: 200px;
 }
 .right {
   align-self: flex-start;
