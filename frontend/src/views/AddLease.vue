@@ -334,6 +334,12 @@ export default {
 
 </script>
 <style scoped>
+@media only screen and (min-width: 1200px){
+  .greyBackgroundDiv{
+    max-width: 1500px;
+  }
+}
+
 input{
   text-align:center;
 }
@@ -403,7 +409,9 @@ p {
   padding: 5px;
   padding-top: 20px;
   padding-bottom: 20px;
-
+  max-width: 1200px;
+  margin-left:auto;
+  margin-right:auto;
 }
 .mainDiv {
   padding-left: 5vw;
@@ -436,11 +444,16 @@ p {
   margin-bottom: 5px;
 }
 
-
 </style>
 
 <!--Styling for all subcomponents-->
 <style>
+@media only screen and (max-width: 500px) {
+  #app > main > div > div > div.buttonDiv > a{
+    border-radius: 10px;
+  }
+}
+
 .inputForLocationArea,
 .leaseTitle {
   padding: 11.2px 22.4px;

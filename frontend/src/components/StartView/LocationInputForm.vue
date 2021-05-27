@@ -37,6 +37,7 @@ p {
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 3px;
+  color: #029ebb;
 }
 
 .locationInputText{

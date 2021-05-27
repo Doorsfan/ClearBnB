@@ -38,10 +38,16 @@ export default {
 };
 </script>
 <style scoped>
+p {
+  color: #029ebb;
+}
 .firstPriceDiv, .secondPriceDiv{
   display:inline-block;
   width:max-content;
   text-align: center;
+}
+.secondPriceDiv{
+  margin-left:10px;
 }
 input {
   width: 150px;
@@ -53,6 +59,9 @@ input {
 @media only screen and (max-width: 400px) {
   .firstPriceDiv,.secondPriceDiv{
     display:block;
+  }
+  .secondPriceDiv{
+    margin-left:0px;
   }
 }
 </style>

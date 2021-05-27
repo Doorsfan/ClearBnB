@@ -89,6 +89,7 @@ p {
   margin-left: auto;
   margin-right: auto;
   padding-bottom:3px;
+  color: #029ebb;
 }
 
 @media only screen and (max-width: 300px) {

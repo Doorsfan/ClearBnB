@@ -4,33 +4,35 @@
       v-if="$store.getters.getCurrentUser != null"
       class="userPageMainDiv"
     >
-      <p v-if="$store.getters.getCurrentUser.username != 'admin@ClearBnB.se'" class="welcomeMessage">Welcome {{ $store.getters.getCurrentUser.username }}</p>
-      <p
-        v-if="$store.getters.getCurrentUser.username == 'admin@ClearBnB.se'"
-        class="welcomeMessage"
-      >
-        Welcome Admin!
-      </p>
-      <div class="addNewLeaseDiv">
-        <router-link to="/addLease">
-          <button @click="addNewLease" class="addNewLeaseButton">
-            Add New Lease
+      <div class="menuDiv">
+        <p v-if="$store.getters.getCurrentUser.username != 'admin@ClearBnB.se'" class="welcomeMessage">Welcome {{ currentUserInfo.firstName + ' ' + currentUserInfo.lastName }}!</p>
+        <p
+          v-if="$store.getters.getCurrentUser.username == 'admin@ClearBnB.se'"
+          class="welcomeMessage"
+        >
+          Welcome Admin!
+        </p>
+        <div class="addNewLeaseDiv">
+          <router-link to="/addLease">
+            <button @click="addNewLease" class="addNewLeaseButton">
+              Add New Lease
+            </button>
+          </router-link>
+        </div>
+        <div class="historicalButtonDiv">
+          <button v-if="showFutureBookings" @click="switchToPastDisplay" class="showPastBookingsButton">
+            Show Past Bookings
           </button>
-        </router-link>
-      </div>
-      <div class="historicalButtonDiv">
-        <button v-if="showFutureBookings" @click="switchToPastDisplay" class="showPastBookingsButton">
-          Show Past Bookings
-        </button>
-        <button v-if="showPastBookings" @click="switchToFutureDisplay"
-        class="showPastBookingsButton">
-          Show Future Bookings
-        </button>
+          <button v-if="showPastBookings" @click="switchToFutureDisplay"
+          class="showPastBookingsButton">
+            Show Future Bookings
+          </button>
+          <p class="currentBookingsP">
+            Current bookings:
+          </p>
+        </div>
       </div>
       <div v-if="showFutureBookings" class="currentBookingsDiv">
-        <p v-if="futureBookings.length > 0" class="currentBookingsP">
-          Current bookings:
-        </p>
         <p v-if="futureBookings.length == 0" class="noBookingsP">
           No bookings at the moment
         </p>
@@ -215,6 +217,7 @@ export default {
     });
     let result = await secondRes.json();
     this.currentUserInfo = result;
+    console.log(this.currentUserInfo);
     this.profits = 0;
 
     //Load from the DB all the Bookings that are tied to this users userId based on the userInfo
@@ -252,9 +255,12 @@ export default {
         }
       }
     }
-    let today = new Date();
     for (let booking of this.myBookings) {
-      if (booking.endDate < today) {
+      let splitEndDate = booking.endDate.split('-');
+      let today = new Date();
+      let endDate = new Date(splitEndDate[0] + '-' + splitEndDate[1] + '-' + splitEndDate[2]);
+      let actualEndDate = new Date(endDate.getFullYear() + '-' + ((endDate.getMonth() - 1) < 10 ? '0' + (endDate.getMonth() - 1) : (endDate.getMonth() - 1)) + '-' + (endDate.getDate() < 10 ? '0' + endDate.getDate() : endDate.getDate()));
+      if (actualEndDate.getTime() > today.getTime()) {
         this.pastBookings.push(booking);
       } else {
         this.futureBookings.push(booking);
@@ -276,6 +282,14 @@ export default {
     }
   },
   methods: {
+     async updateCurrentUserInfo() {
+      this.user = this.$store.getters.getCurrentUser;
+      let secondRes = await fetch('/rest/userinfos/' + this.user.id, {
+        method: 'GET',
+      });
+      let result = await secondRes.json();
+      this.currentUserInfo = result;
+    },
     async cancelABooking(idToCancel) {
       let index = 0;
       for (let bookingToRemoveFromAll of this.myBookings) {
@@ -342,6 +356,7 @@ export default {
       }
     },
     redisplayUserPage(){
+      this.updateCurrentUserInfo();
       this.showUserPage = true;
       this.changeInfo = false;
     },
@@ -353,6 +368,34 @@ export default {
 };
 </script>
 <style scoped>
+.newUserInfo{
+  background-color:#029ebb;
+  color:white;
+  border-radius:10px;
+  padding-left:7px;
+  padding-right:7px;
+  width:max-content;
+  margin-left:auto;
+  margin-right:auto;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.newsLetterInput{
+  margin-left:3px;
+  margin-top:3px;
+}
+.menuDiv{
+  background-color: rgba(218, 224, 224, 0.8);
+  margin-left:auto;
+  margin-right:auto;
+  padding: 7px;
+  border-radius:10px;
+  width:max-content;
+  padding-left:5vw;
+  padding-right:5vw;
+  padding-top:20px;
+  padding-bottom:20px;
+}
 .userPageMainDiv{
   width:85vw;
   max-width:1300px;
@@ -362,7 +405,10 @@ export default {
   padding-bottom:5vh;
 }
 .changeUserInfoTitle{
-  max-width: 300px;
+  max-width: max-content;
+  padding-left: 25px;
+  padding-right: 25px;
+  margin-bottom:15px;
   margin-left:auto;
   margin-right:auto;
   background-color: #029ebb;
@@ -407,7 +453,7 @@ export default {
 }
 .addNewLeaseButton,
 .showPastBookingsButton,
-.changeUserInfoButton,
+
 .cancelButton,
 .saveChangesButton {
   width: 200px;
@@ -424,6 +470,7 @@ export default {
 }
 .cancelButton{
   background-color: rgba(246, 69, 37, 0.842);
+  margin-top:0px;
 }
 .newsLetterP{
   width:max-content;
@@ -434,6 +481,19 @@ export default {
 }
 .addNewLeaseButton:hover, .showPastBookingsButton:hover, .changeUserInfoButton:hover{
   transform:scale(1.08);
+}
+.changeUserInfoButton{
+  width: 200px;
+  height: 40px;
+  border-radius: 10px;
+  background-color: #029ebb;
+  color: white;
+  border: 1px solid grey;
+  cursor: pointer;
+  margin-top: 3px;
+  font-size: 18px;
+  margin-right: 10px;
+  margin-left: 10px;
 }
 .changeUserInfoDiv{
   background-color: rgba(218, 224, 224, 0.8);
@@ -460,6 +520,16 @@ export default {
   margin-right:auto;
   border-radius:10px;
   padding-top:10px;
+}
+.changeUserInfoButtonDiv{
+  background-color: rgba(218, 224, 224, 0.8);
+  width:max-content;
+  margin-left:auto;
+  margin-right:auto;
+  padding: 10px;
+  padding-left:20px;
+  padding-right:20px;
+  border-radius: 10px;
 }
 .cancelButton:hover, .saveChangesButton:hover{
   transform: scale(1.05);

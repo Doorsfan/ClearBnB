@@ -23,6 +23,9 @@ export default {
 };
 </script>
 <style scoped>
+p {
+  color: #029ebb;
+}
 *{
   font-family:'mukta';
 }

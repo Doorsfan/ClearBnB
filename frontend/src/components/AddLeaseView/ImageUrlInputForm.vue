@@ -96,6 +96,11 @@ input {
   font-size: 14px;
   padding: 7.5px 30.4px;
 }
+@media only screen and (max-width: 500px){
+  .addImageButton {
+    border-radius:10px;
+  }
+}
 @media only screen and (max-width: 300px) {
   input {
     padding: 0px;

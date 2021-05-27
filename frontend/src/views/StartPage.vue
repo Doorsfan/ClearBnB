@@ -297,6 +297,7 @@ export default {
   font-size: 20px;
   background-color: rgba(218, 224, 224, 0.8);
   padding-bottom: 15px;
+  border-radius: 10px;
 }
 
 @media only screen and (min-width: 1330px) {

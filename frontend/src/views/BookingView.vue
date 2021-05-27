@@ -533,6 +533,7 @@ export default {
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Lobster&family=Merriweather+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Raleway:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
 
+
 * {
   font-family: 'mukta';
 }
@@ -569,11 +570,12 @@ export default {
   display: inline-block;
 }
 .confirmationModal {
+  font:'mukta';
   position: fixed;
   left: 35vw;
   z-index: 5;
-  color: white;
-  background-color: rgba(0, 0, 0, 0.95);
+  color: black;
+  background: radial-gradient(#ebf8e1 30%, #f69d3c );
   top: 20vh;
   width: 500px;
   min-width: 200px;
@@ -671,6 +673,11 @@ export default {
 .bookingButton {
   padding: 5px;
   border-radius: 5px;
+  background-color: #029ebb;
+  color:white;
+  min-height: 50px;
+  min-width:max-content;
+  font-size:2rem;
 }
 .booking-view-app-main {
   background-image: url(https://images.unsplash.com/photo-1573088870079-67b4526aa950?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=667&q=80);
@@ -1004,6 +1011,11 @@ select {
 @media only screen and (max-width: 375px) {
   .confirmationModal {
     top: 10vh;
+  }
+}
+@media only screen and (max-width: 500px) {
+  #app > main > div > div > div.BookingButtonDiv > button{
+    border-radius:10px;
   }
 }
 </style>
