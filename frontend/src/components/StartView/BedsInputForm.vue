@@ -9,29 +9,18 @@
 </template>
 <script>
 export default {
-  emits: ['updateMyAmountOfBeds'],
+  emits: ["updateMyAmountOfBeds"],
   data() {
     return {
-      wantedBeds: '',
+      wantedBeds: "",
     };
   },
   watch: {
     wantedBeds() {
-      this.$emit('updateMyAmountOfBeds', this.wantedBeds);
+      this.$emit("updateMyAmountOfBeds", this.wantedBeds);
     },
   },
 };
 </script>
 <style scoped>
-*{
-  font-family:'mukta';
-}
-.bedsInputForm {
-  width: 100px;
-  padding: 5px;
-}
-.bedsInputText {
-  margin-bottom: 8px;
-  padding-left: 2px;
-}
 </style>
