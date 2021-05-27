@@ -76,7 +76,7 @@ a:visited {
   background-color: rgba(245, 231, 201, 0.8);
   width: 28%;
   padding: 40px 20px;
-  text-align: center;
+  text-align: left;
   margin: 1vw;
   display: inline-block;
   border-radius: 10px;
