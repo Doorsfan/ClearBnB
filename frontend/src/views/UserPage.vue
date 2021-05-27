@@ -53,6 +53,9 @@
             :key="pastIndex"
             :pastBooking="pastBooking"
           />
+        <p v-if="pastBookings.length == 0" class="noBookingsP">
+          No bookings at the moment
+        </p>
         </div>
       </div>
       <div class="changeUserInfoButtonDiv">
