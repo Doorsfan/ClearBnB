@@ -1,4 +1,5 @@
 <template>
+  <div class="mainLoginDiv">
   <div class="LogInPage">
     <h1>Log in</h1>
     <form class="LoginForm" @submit.prevent="login">
@@ -30,6 +31,7 @@
       <router-link to="signUp" class="signUpLink">Sign up</router-link>
     </div>
   </div>
+  </div>
 </template>
 
 <script>
@@ -37,17 +39,6 @@ import store from '../../store.js';
 import User from '../../components/User.js';
 import UserInfo from '../UserInfo.js';
 export default {
-  mounted() {
-    this.$store.dispatch('saveLatestRoute', this.$route.path);
-    if (document.getElementsByClassName('sunIconInHeader').length > 0) {
-      document.getElementsByClassName('sunIconInHeader')[0].src =
-        '/public/home_icon.png';
-      document.getElementsByClassName('sunIconInHeader')[0].className =
-        'house_icon';
-      document.getElementsByClassName('homeText')[0].style.display = 'block';
-      document.getElementsByClassName('center')[0].style.height = '70px';
-    }
-  },
   data() {
     return {
       username: '',
@@ -84,9 +75,6 @@ export default {
 </script>
 
 <style scoped>
-*{
-  font-family:'mukta';
-}
 .hiddenptag {
   display: none;
 }
@@ -99,8 +87,8 @@ export default {
 }
 h1 {
   color: black;
-  margin-bottom: 40px;
-  margin-top: 50px;
+  margin-bottom: 20px;
+  margin-top: 40px;
   font-size: 50px;
   font-weight: bold;
 }
@@ -108,19 +96,20 @@ h1 {
   text-align: center;
   height: 600px;
   width: 500px;
-  margin: 180px auto;
+  margin: 310px auto;
   border-radius: 5px;
   border: 1px solid grey;
   background-color: rgb(255, 255, 255, 0.9);
+  min-height: max-content;
 }
 form {
   padding-top: 50px;
 }
 form input {
-  padding: 11.2px 22.4px;
+  padding: 7.5px 30.4px;
   font-size: 18px;
   border-radius: 5px;
-  border: 1px solid black;
+  border: 1px solid grey;
   text-align: initial;
   margin-bottom: 15px;
 }
@@ -145,7 +134,7 @@ button {
   margin-top: 10px;
 }
 .SignUpFromLogIn {
-  margin-top: 170px;
+  margin-top: 162px;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -159,31 +148,41 @@ a {
   color: #029ebb;
   margin-left: 5px;
   text-decoration: underline;
-  font-size: 16px;
+  font-size: 17px;
   font-weight: bold;
 }
 p {
-  font-size: 16;
+  font-size: 17px;
   font-weight: bold;
 }
-
+.LoginForm{
+  min-height:max-content;
+}
 button:hover {
   transform: scale(1.1);
 }
+.mainLoginDiv{
+  min-height:80vh;
+}
 @media only screen and (max-width: 1920px) {
   .LogInPage {
-    margin: 80px auto;
+    margin: 135px auto;
   }
 }
 @media only screen and (max-width: 1800px) {
   .LogInPage {
-    text-align: center;
-    height: 600px;
-    width: 500px;
-    margin: 50px auto;
-    border-radius: 5px;
-    border: 1px solid grey;
-    background-color: rgb(255, 255, 255, 0.9);
+    margin: 150px auto;
+  }
+}
+
+@media only screen and (max-width: 1025px) {
+  .LogInPage {
+    margin: 241px auto;
+  }
+}
+@media only screen and (max-width: 1023px) {
+  .LogInPage {
+    margin: 70px auto;
   }
 }
 @media only screen and (max-width: 540px) {
@@ -198,7 +197,17 @@ button:hover {
     border-radius: 0px;
     margin: auto;
   }
-
+  @media only screen and (max-width: 300px) {
+    div {
+      max-width: 100vw;
+    }
+    input {
+      padding: 0px;
+    }
+    form input {
+      padding: 0px;
+    }
+  }
   form {
     padding-top: 20px;
   }
@@ -209,7 +218,7 @@ button:hover {
     margin-top: 50px;
   }
   .SignUpFromLogIn {
-    margin-top: 80px;
+    margin-top: 60px;
   }
   .ButtonsDiv {
     display: flex;
@@ -218,10 +227,8 @@ button:hover {
     align-items: center;
   }
   button {
-    width: 270px;
+    width: 200px;
     height: 50px;
-
-    border-radius: 40px;
   }
   .hiddenptag {
     display: inline;
@@ -233,16 +240,13 @@ button:hover {
   input {
     width: 70%;
   }
-  button {
-    width: 70%;
-  }
   p {
     font-size: 16px;
   }
 }
 @media only screen and (max-width: 324px) {
   .SignUpFromLogIn {
-    margin-top: 55px;
+    margin-top: 35px;
     display: flex;
     flex-direction: column;
   }

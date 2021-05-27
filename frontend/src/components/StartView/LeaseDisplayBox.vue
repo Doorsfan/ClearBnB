@@ -4,18 +4,20 @@
       class="linkToDetailsPage"
       :to="{ path: '/BookingView', query: { id: lease.id } }"
     >
-      <div id="foo" v-on:click="select($event)" class="mainBoxDiv">
+      <div id="foo" class="mainBoxDiv">
         <div class="titleDiv">
           <p class="leaseTitleText">{{ lease.title }}</p>
         </div>
         <Carousel :myLease="lease" />
-        <div class="locationDiv"><b>Location:</b> {{ lease.location }}</div>
+        <div class="locationDiv"><b>Location:</b>  {{ lease.location }}</div>
         <div class="startsFromDiv">
-          <b>Available from:</b> {{ lease.startDate }}
+          <p class="startsP"><b>Available from:</b> {{ lease.startDate }}</p>
         </div>
-        <div clas="endsOnDiv"><b>Available to:</b> {{ lease.endDate }}</div>
+        <div clas="endsOnDiv">
+          <p class="endsP"><b>Available to:</b> {{ lease.endDate }}</p>
+        </div>
         <div class="pricePerNightDiv">
-          <b>Price Per Night:</b> {{ Math.round(lease.price * 1.15) }}
+          <p class="priceP"><b>Price Per Night:</b> {{ Math.round(lease.price * 1.15) }}</p>
         </div>
       </div>
     </router-link>
@@ -66,6 +68,7 @@ export default {
 *{
   font-family:'mukta';
 }
+
 a {
   font-family: 'mukta';
   color: black;
@@ -80,36 +83,45 @@ a:visited {
 .leaseBox {
   background-color: rgba(218, 224, 224, 0.8);
   min-width: max-content;
-  min-width: 280px;
-  width: 320px;
+  min-width: 240px;
+  width: 80vw;
   padding: 10px;
   text-align: center;
-  margin: 5px;
+  margin: 0px;
+  margin-top:10px;
+  margin-bottom:10px;
   display: inline-block;
-  height: 340px;
+  height: 45vh;
+  min-height:600px;
+  max-height:800px;
 }
 .leftArrowBox {
   display: inline-block;
   position: relative;
-  top: -180px;
-  left: -90px;
-  height: 35px;
-  width: 35px;
-  background-color: lightblue;
+  top: -315px;
+  left: -28vw;
+  height: 43px;
+  width: 43px;
+  background-color: white;
   z-index: 5;
   transform: rotate(270deg);
   border-radius: 25px;
   padding-top: 5px;
 }
-
+.leaseTitleText{
+  font-size:2rem;
+}
+.locationDiv,.startsP, .endsP, .priceP{
+  font-size:1.5rem;
+}
 .rightArrowBox {
   display: inline-block;
   position: relative;
-  top: -180px;
-  left: 90px;
-  height: 35px;
-  width: 35px;
-  background-color: lightblue;
+  top: -315px;
+  left: 28.5vw;
+  height: 43px;
+  width: 43px;
+  background-color: white;
   border-radius: 25px;
   z-index: 5;
   transform: rotate(90deg);
@@ -146,15 +158,42 @@ a:visited {
   top: 5px;
 }
 
-@media only screen and (max-width: 400px) {
+@media only screen and (max-width: 350px) {
   .leaseBox {
-    width: 245px;
+    margin:0px;
+    padding:0px;
+    padding:15px;
+    width: 90vw;
+    height:40vh;
+    min-height:700px;
+    margin-top:10px;
+    margin-bottom:10px;
   }
-  p {
-    width: 150px;
-    text-align: center;
-    margin-left: auto;
-    margin-right: auto;
+  .leftArrowBox {
+    display: inline-block;
+    position: relative;
+    top: -385px;
+    left: -27vw;
+    height: 43px;
+    width: 43px;
+    background-color: white;
+    z-index: 5;
+    transform: rotate(270deg);
+    border-radius: 25px;
+    padding-top: 5px;
+  }
+  .rightArrowBox {
+    display: inline-block;
+    position: relative;
+    top: -385px;
+    left: 28.5vw;
+    height: 43px;
+    width: 43px;
+    background-color: white;
+    border-radius: 25px;
+    z-index: 5;
+    transform: rotate(90deg);
+    padding-top: 5px;
   }
 }
 </style>

@@ -140,14 +140,6 @@ export default {
     let response = await res.json();
     this.allLeases = response;
     this.relevantLeases = this.allLeases;
-    if (document.getElementsByClassName("house_icon").length > 0) {
-      document.getElementsByClassName("house_icon")[0].src =
-        "/src/assets/clearbnb-logo.png";
-      document.getElementsByClassName("house_icon")[0].className =
-        "sunIconInHeader";
-      document.getElementsByClassName("homeText")[0].style.display = "none";
-      document.getElementsByClassName("center")[0].style.height = "210px";
-    }
     this.$store.dispatch("saveLatestRoute", this.$route.path);
     if (this.$store.getters.getCurrentUser != null) {
       this.$emit("loggedIn", true);
@@ -275,13 +267,14 @@ export default {
 .datePickerDiv,
 .bedsInputDiv,
 .minAndMaxPriceDiv {
-  width: max-content;
   display: block;
+  width:max-content;
   margin-left: auto;
   margin-right: auto;
 }
 .locationDiv {
   padding-top: 20px;
+  width:max-content;
 }
 .mainDiv {
   font-family: 'mukta';
@@ -306,15 +299,6 @@ export default {
   padding-bottom: 15px;
 }
 
-@media only screen and (max-width: 300px) {
-  .startPageDateDiv {
-    margin: 0px;
-    padding: 0px;
-  }
-  .minAndMaxPriceDiv {
-    padding-bottom: 20px;
-  }
-}
 @media only screen and (min-width: 1330px) {
   div {
     margin: 0px;

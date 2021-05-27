@@ -2,6 +2,7 @@
   <div class="myDatePickerDiv">
     <p class="AvailableFromP">Available from:</p>
     <datepicker
+      class="myDatePicker"
       v-model="startDate"
       placeholder="Lease starts at"
       :lowerLimit="thisDay"
@@ -9,6 +10,7 @@
     />
     <p class="AvailableToP">Available To:</p>
     <datepicker
+      class="myDatePicker"
       v-model="endDate"
       placeholder="Lease ends at"
       :lower-limit="startDate"
@@ -61,12 +63,7 @@ export default {
 };
 </script>
 <style scoped>
-.myDatePickerDiv {
-  width: max-content;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 30px;
-}
+
 .AvailableToP {
   margin-top: 30px;
 }
@@ -74,7 +71,9 @@ p {
   margin: 2px;
   font-weight: bolder;
 }
-* {
-  padding-left: 2px;
+.myDatePickerDiv{
+  width:max-content;
+  margin-left:auto;
+  margin-right:auto;
 }
 </style>

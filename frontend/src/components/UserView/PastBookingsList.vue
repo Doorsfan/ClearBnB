@@ -25,61 +25,43 @@ export default {
   data() {
     return {};
   },
-  methods: {},
+  methods: {
+    cancelBooking() {
+      this.$emit('cancelBooking', this.pastBooking.id);
+    },
+  },
 };
 </script>
 <style scoped>
-*{
-  font-family:'mukta';
+* {
+  font-family: 'mukta';
+  color:black;
+  font-weight:bold;
+  text-decoration:none;
+  text-decoration-color: white;
 }
-.readMoreLink {
-  margin-left: 150px;
-}
-.goToBookedItem:visited {
-  color: blue;
-}
-.titleDiv {
-  font-weight: bolder;
-}
+
 .firstImage {
-  width: 100px;
-  height: 100px;
+  object-fit: cover;
+  object-position:center;
+  width:50vw;
+  max-width: 900px;
+  height: 700px;
+  max-height:30vh;
+  border-radius:10px;
 }
 .mainBoxDiv {
   margin-left: auto;
   margin-right: auto;
-  width: max-content;
+  width: 75vw;
   padding: 20px;
   margin-top: 10px;
   margin-bottom: 10px;
-  border: 1px solid black;
-  background: #eee;
+  background-color: rgba(218, 224, 224, 0.8);
+  border-radius:10px;
+  max-width:1200px;
 }
 .titleDiv {
   text-align: center;
-}
-
-.divHoldingLocationAndPrice {
-  display: inline;
-  height: 166px;
-  width: 300px;
-  margin: 0px;
-  padding: 0px;
-  position: absolute;
-}
-.textBox {
-  margin: 2px;
-  margin-left: 30px;
-  margin-top: 5px;
-  word-wrap: break-word;
-  width: 230px;
-  overflow-y: hidden;
-  overflow-x: hidden;
-  padding: 3px;
-  height: 143px;
-  margin-bottom: 10px;
-}
-.descriptionDiv {
-  height: 124px;
 }
 </style>

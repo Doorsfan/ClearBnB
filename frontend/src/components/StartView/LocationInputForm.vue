@@ -36,14 +36,16 @@ p {
   width: max-content;
   margin-left: auto;
   margin-right: auto;
-  margin-bottom: 10px;
+  margin-bottom: 3px;
 }
-* {
+
+.locationInputText{
   font-size: 20px;
 }
 .locationInput {
   width: 150px;
   padding: 5px;
-  line-height: 17px;
+  padding: 7.5px 30.4px;
+  font-size:18px;
 }
 </style>

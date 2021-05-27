@@ -35,11 +35,13 @@ export default {
 </script>
 <style scoped>
 .descriptionInput {
-  min-width: 150px;
-  width: 195px;
-  height: 100px;
+  min-width: 250px;
+  width: 60vw;
+  height: 15vh;
   min-height: 80px;
-  padding: 4px;
+  padding: 7.5px 30.4px;
+  font-size:18px;
+  text-align:center;
 }
 .myDescription {
   margin: 3px;

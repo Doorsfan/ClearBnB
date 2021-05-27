@@ -30,7 +30,7 @@
         v-if="$store.getters.getCurrentUser"
         to="/"
         ><button @click="logOut" type="button" class="logOutLink">
-          Log Out
+          LOG OUT
         </button></router-link
       >
     </div>
@@ -49,6 +49,7 @@ export default {
 </script>
 
 <style scoped>
+
 footer {
   margin-top: 0;
   background-color: #fdbf81;
@@ -60,7 +61,7 @@ footer {
   flex-direction: column;
   align-items: center;
   width: 100%;
-  padding-top: 140px;
+  padding-top: 55px;
   position: absolute;
   z-index: 1;
 }
@@ -69,16 +70,16 @@ footer {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
 }
 
 .icons div {
   width: 45px;
   height: 45px;
-  margin: 0rem 10px;
+  margin: 0px 10px;
   display: grid;
   place-content: center;
-  background-color: white;
+  background-color: rgb(255, 255, 255, 0.7);
   border-radius: 50%;
 }
 
@@ -97,10 +98,10 @@ footer {
 .links a {
   text-decoration: none;
   text-transform: uppercase;
-  font-weight: 700;
-  font-size: 1.6rem;
+  font-weight: bolder;
+  font-size: 16px;
   color: black;
-  -webkit-text-stroke: 0.6px white;
+  -webkit-text-stroke: 0.0px white;
 }
 
 .links a:hover {
@@ -111,15 +112,14 @@ footer {
   width: 5px;
   height: 5px;
   border-radius: 50%;
-  margin: 0rem 10px;
+  margin: 0 10px;
   background-color: white;
 }
 
 .last {
   color: white;
-  margin-top: 10px;
-  font-size: 18px;
-  -webkit-text-stroke: 0.4px black;
+  margin-top: 30px;
+  font-size: 14px;
 }
 
 .logOutLink {
@@ -133,44 +133,10 @@ footer {
   border: none;
   margin-top: 0px;
   font-size: 28px;
-  -webkit-text-stroke: 0.6px white;
+  -webkit-text-stroke: 0.0px white;
   font-weight: bold;
+  font-size: 16px;
+  
 }
 
-@media only screen and (max-width: 600px) {
-  * {
-    transform: scale(0.9);
-  }
-  .last {
-    font-size: 14px;
-    padding-bottom: 20px;
-  }
-}
-@media only screen and (max-width: 475px) {
-  footer {
-    transform: scale(0.8);
-  }
-  .last {
-    font-size: 14px;
-    padding-bottom: 20px;
-  }
-}
-@media only screen and (max-width: 375px) {
-  footer {
-    transform: scale(0.7);
-  }
-  .last {
-    font-size: 14px;
-    padding-bottom: 20px;
-  }
-}
-@media only screen and (max-width: 270px) {
-  footer {
-    transform: scale(0.7);
-  }
-  .last {
-    font-size: 14px;
-    padding-bottom: 20px;
-  }
-}
 </style>

@@ -63,61 +63,40 @@ export default {
 </script>
 
 <style scoped>
-* {
-  padding: 0px;
-  margin: 0px;
-  text-align: left;
-  font-family:'mukta';
+.MaxPeopleP{
+  margin-left:11.5vw;
+  margin-right:11.5vw;
+  width: 8vw;
+  min-width:50px;
+  max-width:200px;
 }
-.MaxPeopleP {
-  width: 30px;
-  margin-left: 22px;
-  margin-right: 10px;
-}
-p {
-  margin: 2px;
-  width: max-content;
-  display: inline;
-}
-.BedsP {
-  margin: 0px;
-  margin-left: 4px;
-}
-.divHoldingThePs {
-  margin: 0px;
-  padding: 0px;
+.BedsP{
+  min-width:50px;
+  max-width:200px;
 }
 input {
-  width: 30px;
   display: inline-block;
-  margin-top: 0px;
+  text-align:center;
+  padding: 0px;
+  font-size:18px;
+  min-width: 50px;
+  max-width:200px;
+  width:8vw;
+  margin-top:3px;
 }
-.peopleInputField {
-  margin-left: 42px;
-  margin-right: 42px;
+.peopleInputField{
+  margin-left:10vw;
+  margin-right: 10vw;
 }
-.bedsInputField {
-  font-size: 14px;
-  margin: 1px;
-  margin-left: 3px;
-  margin-top: 2px;
-  padding: 2px;
-  width: 40px;
+p{
+  margin-left:0px;
+  margin-right:0px;
+  width:max-content;
+  display:inline-block;
 }
-.peopleInputField {
-  font-size: 14px;
-  margin: 1px;
-  margin-top: 2px;
-  padding: 2px;
-  width: 35px;
-  margin-left: 40px;
-}
-.priceInputField {
-  font-size: 14px;
-  margin: 1px;
-  margin-top: 2px;
-  padding: 2px;
-  width: 40px;
-  margin-left: 40px;
+@media only screen and (max-width: 450px) {
+  input {
+    padding: 0px;
+  }
 }
 </style>

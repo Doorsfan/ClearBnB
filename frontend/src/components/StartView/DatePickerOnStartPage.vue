@@ -1,20 +1,20 @@
 <template>
   <div class="datePickersMainDiv">
     <div class="firstDiv">
-      <p class="fromTheText">From The</p>
+      <p class="fromTheText">Check-in</p>
       <Datepicker
         id="fromDatePicker"
-        class="fromDatePicker"
+        class="fromDatePicker startPageDatePicker"
         v-model="startDate"
         :lower-limit="minimumStartDate"
         :upper-limit="endDate"
       />
     </div>
     <div class="secondDiv">
-      <p class="toTheText">To The</p>
+      <p class="toTheText">Check-out</p>
       <Datepicker
         id="toDatePicker"
-        class="toDatePicker"
+        class="toDatePicker startPageDatePicker"
         v-model="endDate"
         :lower-limit="minimumEndDate"
       />
@@ -82,18 +82,19 @@ export default {
 * {
   font-size: 20px;
   font-family:'mukta';
+  text-align:center;
 }
 p {
   width: max-content;
   margin-left: auto;
   margin-right: auto;
-  padding-bottom: 8px;
+  padding-bottom:3px;
 }
+
 @media only screen and (max-width: 300px) {
-  div {
-    width: max-content;
-    padding: 0px;
-    margin: 0px;
+  .firstDiv,
+  .secondDiv{
+    padding-left: 15px;
   }
 }
 @media only screen and (min-width: 1330px) {

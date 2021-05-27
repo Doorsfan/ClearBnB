@@ -1,21 +1,18 @@
 <template>
   <div class="mainDiv">
     <div class="greyBackgroundDiv">
-      <h3 class="addResidenceHeader">Add a residence</h3>
+      <h3 class="addResidenceHeader">Add residence</h3>
       <p class="myTitle">Title</p>
       <input
         type="text"
         required
-        placeholder="Title"
+        placeholder="My Title"
         v-model="title"
         class="leaseTitle"
       />
       <p class="myLocation">Location</p>
-      <LocationInputForm v-model="location" @updatedLocation="updateLocation" />
-      <DescriptionForm
-        v-model="description"
-        @updatedDescription="updateDescription"
-      />
+      <LocationInputForm  class="locDiv" v-model="location" @updatedLocation="updateLocation" />
+      <DescriptionForm  class="descriptionTitle" v-model="description" @updatedDescription="updateDescription" />
       <div class="inputForBedsDiv">
         <InputForPricingBedAndPeople
           @updateBeds="updateNrOfBeds"
@@ -172,17 +169,6 @@ export default {
     };
   },
   methods: {
-    mounted() {
-      if (document.getElementsByClassName("sunIconInHeader").length > 0) {
-        document.getElementsByClassName("sunIconInHeader")[0].src =
-          "/public/home_icon.png";
-        document.getElementsByClassName("sunIconInHeader")[0].className =
-          "house_icon";
-        document.getElementsByClassName("homeText")[0].style.display = "block";
-        document.getElementsByClassName("center")[0].style.height = "70px";
-      }
-      this.$store.commit("setLeaseToBuild", this.lease);
-    },
     removeFirstIMGinURLs() {
       this.imageURLs = this.imageURLs.filter(function (value, index, arr) {
         return index != 0;
@@ -322,54 +308,107 @@ export default {
       } else {
         this.amenities.push("airConditioner: false");
       }
-      this.lease.amenities = this.amenities;
-      store.commit("setLeaseToBuild", this.lease);
-    },
-  },
-};
+      if(this.hasWasher){
+        this.amenities.push("washer: true");
+      }
+      else{
+        this.amenities.push("washer: false")
+      }
+      if(this.hasHeating){
+        this.amenities.push("heating: true")
+      }
+      else{
+        this.amenities.push("heating: false")
+      }
+      if(this.hasAirConditioner){
+        this.amenities.push("airConditioner: true")
+      }
+      else{
+        this.amenities.push("airConditioner: false")
+      }
+      this.lease.amenities = this.amenities
+      store.commit('setLeaseToBuild', this.lease)
+    }
+  }
+}
+
 </script>
 <style scoped>
-.imageURLInputDiv {
-  margin-bottom: 10px;
+input{
+  text-align:center;
+}
+.inputForLocationArea{
+  padding: 7.5px 30.4px;
+  font-size: 18px;
+  border-radius: 5px;
+  border:1px solid grey ;
+  text-align:initial;
+  margin-bottom: 15px;
+}
+.descriptionTitle{
+  font-family: 'mukta';
+  font-size: 20px;
+}
+.myLocation{
+  font-family: 'mukta';
+  font-size: 20px;
+}
+.myTitle{
+
+  font-family: 'mukta';
+  font-size: 20px;
+}
+.addResidenceHeader{
+  font-size: 50px;
+    
+}
+.imageURLInputDiv{
+  margin-bottom:10px;
 }
 .buttonDiv {
   margin: 5px;
+  padding-bottom:10px;
 }
-.previewButton {
-  border: outset 5px #007b8e;
-  outline: 1px solid black;
-  opacity: 1;
-  background-color: #007b8e;
-  padding: 5px;
-  /*optional*/
-  font-family: "mukta", sans-serif;
-  color: black;
-  font-weight: bolder;
-  text-decoration: none;
-  width: max-content;
-  font-size: 15px;
-  margin-bottom: 15px;
+.previewButton{
+  width: 120px;
+  height: 50px;
+  padding: 10px 20px;
+  background-color: #029ebb;
+  color: white;
+  border: 1px solid grey;
+  border-radius: 2px;
+  cursor: pointer;
+  margin-top: 10px;
+  font-size: 18px;
+  margin-right: 10px;
+  margin-left: 10px;
+  text-decoration:none;
 }
-.datePickerDiv {
-  margin: 10px;
-  padding-right: 18px;
-  padding-bottom: 10px;
+.datePickerDiv{
+  position: inherit;
+  margin:10px;
+  padding-right:18px;
+  padding-bottom:10px;
 }
 p {
   font-weight: bolder;
   margin: 3px;
 }
-.greyBackgroundDiv {
-  background-color: rgba(218, 224, 224, 0.8);
-  width: max-content;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 20px;
+.greyBackgroundDiv{
+  width:90vw;
+  margin-top:20px;
+  background-color:rgba(218, 224, 224, 0.8);
+  padding:100px;
+  margin: 0px;
+  padding: 5px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+
 }
 .mainDiv {
   padding-left: 5vw;
   padding-right: 5vw;
-  padding-bottom: 2.5vh;
+  padding-bottom: 200px;
   padding-top: 2.5vh;
   background-image: url("/public/house.jpg");
   background-size: cover;
@@ -378,33 +417,26 @@ p {
   height: max-content;
   width: 100vw;
   background-attachment: fixed;
-  overflow-x: hidden;
-  min-height: 900px;
-  align-items: center;
-  align-self: center;
-  text-align: center;
-  background-position: center;
+  overflow-x:hidden;
+  min-height:900px;
+  align-items:center;
+  align-self:center;
+  text-align:center;
+  background-position:center;
+  font-family: 'mukta';
+  font-weight: bold;
+  font-size: 17px;
 }
 .inputForBedsDiv {
-  width: max-content;
   margin-left: auto;
-  margin-right: auto;
+  margin-right:auto;
+  padding-bottom: 10px;
+  padding-top: 10px;
   margin-top: 5px;
   margin-bottom: 5px;
 }
-@media only screen and (max-width: 300px) {
-  .greyBackgroundDiv {
-    margin: 0px;
-    padding: 5px;
-    padding-top: 20px;
-    padding-bottom: 20px;
-  }
-}
-@media only screen and (min-width: 1330px) {
-  .greyBackgroundDiv {
-    padding: 10px 90px;
-  }
-}
+
+
 </style>
 
 <!--Styling for all subcomponents-->
@@ -419,12 +451,13 @@ p {
   text-align: initial;
   margin-bottom: 15px;
 }
-
 @media only screen and (min-width: 1330px) {
   .inputForLocationArea,
-  .leaseTitle,
-  .descriptionInput {
+  .leaseTitle{
     width: 400px !important;
+  }
+  .descriptionInput{
+    width: 800px !important;
   }
   .leaseTitle {
     margin: auto;
@@ -433,6 +466,15 @@ p {
   .imageURL {
     width: 345px !important;
     margin-bottom: 30px;
+  }
+}
+@media only screen and (max-width: 350px){
+  p {
+    display:block;
+    width: 220px;
+    margin-left:auto;
+    margin-right:auto;
+    text-align:center;
   }
 }
 </style>
