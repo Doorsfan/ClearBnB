@@ -470,6 +470,9 @@ p {
   .SignUpForm {
     height: 1150px;
   }
+  #app > main > div > div > form > div.letterRegister > div{
+    width: 100px;
+  }
 }
 @media only screen and (max-width: 387px) {
   h1 {
