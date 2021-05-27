@@ -157,7 +157,11 @@ a:visited {
   left: 0px;
   top: 5px;
 }
-
+@media only screen and (max-width: 730px){
+  .leaseBox{
+    min-height: 750px;
+  }
+}
 @media only screen and (max-width: 350px) {
   .leaseBox {
     margin:0px;
@@ -165,7 +169,7 @@ a:visited {
     padding:15px;
     width: 90vw;
     height:40vh;
-    min-height:700px;
+    min-height: 850px;
     margin-top:10px;
     margin-bottom:10px;
   }
