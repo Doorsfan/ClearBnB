@@ -163,6 +163,12 @@ a:visited {
   left: 0px;
   top: 5px;
 }
+#app > main{
+  min-width: 100vw;
+}
+#app > main > div{
+  min-width: 100vw;
+}
 @media only screen and (max-width: 730px) {
 }
 @media only screen and (max-width: 350px) {
