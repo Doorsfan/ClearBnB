@@ -257,6 +257,9 @@ export default {
 };
 </script>
 <style scoped>
+footer {
+  height: 10vh;
+}
 *{
   font-family: 'mukta';
 }
@@ -289,7 +292,7 @@ export default {
   background-attachment: fixed;
   background-position: center;
   min-width: 100vw;
-  min-height: 68vh;
+  min-height: 90vh;
 }
 .startPageDateDiv {
   margin-left: auto;
