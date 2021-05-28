@@ -444,6 +444,15 @@ p {
   margin-bottom: 5px;
 }
 
+@media only screen and (max-width: 350px){
+  p {
+    display:block;
+    width: 220px;
+    margin-left:auto;
+    margin-right:auto;
+    text-align:center;
+  }
+}
 </style>
 
 <!--Styling for all subcomponents-->
@@ -479,15 +488,6 @@ p {
   .imageURL {
     width: 345px !important;
     margin-bottom: 30px;
-  }
-}
-@media only screen and (max-width: 350px){
-  p {
-    display:block;
-    width: 220px;
-    margin-left:auto;
-    margin-right:auto;
-    text-align:center;
   }
 }
 </style>
