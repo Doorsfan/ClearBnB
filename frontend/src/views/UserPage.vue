@@ -27,8 +27,11 @@
           class="showPastBookingsButton">
             Show Future Bookings
           </button>
-          <p class="currentBookingsP">
-            Current bookings:
+          <p v-if="showPastBookings" class="currentBookingsP">
+            Your Past Bookings
+          </p>
+          <p v-if="showFutureBookings" class="currentBookingsP">
+            Your Current Bookings
           </p>
         </div>
       </div>
@@ -48,9 +51,6 @@
         </div>
       </div>
       <div v-if="showPastBookings" class="pastBookingsDiv">
-        <p v-if="pastBookings.length > 0" class="yourPastBookingsText">
-          Your <b>PAST</b> bookings so far:
-        </p>
         <div class="bookings">
           <PastBookingsList
             v-for="(pastBooking, pastIndex) of pastBookings"
@@ -226,10 +226,6 @@ export default {
 
     //Load from the DB all the Bookings that are tied to this users userId based on the userInfo
     if (this.user.username == 'admin@ClearBnB.se') {
-      $('.yourPastBookingsText').text('All PAST Bookings in the System so far');
-      $('.yourFutureBookingsText').text(
-        'All FUTURE Bookings in the System so far'
-      );
       let secondRes = await fetch('/rest/adminBookings', {
         method: 'GET',
       });
@@ -261,12 +257,16 @@ export default {
     }
     for (let booking of this.myBookings) {
       let splitEndDate = booking.endDate.split('-');
+      let splitStartDate = booking.startDate.split('-');
       let today = new Date();
       let endDate = new Date(splitEndDate[0] + '-' + splitEndDate[1] + '-' + splitEndDate[2]);
+      let startDate = new Date(splitStartDate[0] + '-' + splitStartDate[1] + '-' + splitStartDate[2]);
       let actualEndDate = new Date(endDate.getFullYear() + '-' + ((endDate.getMonth() - 1) < 10 ? '0' + (endDate.getMonth() - 1) : (endDate.getMonth() - 1)) + '-' + (endDate.getDate() < 10 ? '0' + endDate.getDate() : endDate.getDate()));
-      if (actualEndDate.getTime() > today.getTime()) {
+      let actualStartDate = new Date(startDate.getFullYear() + '-' + ((startDate.getMonth() - 1) < 10 ? '0' + (startDate.getMonth() - 1) : (startDate.getMonth() - 1)) + '-' + (startDate.getDate() < 10 ? '0' + startDate.getDate() : startDate.getDate()));
+      if(actualStartDate.getTime() < today.getTime()){
         this.pastBookings.push(booking);
-      } else {
+      }
+      else{
         this.futureBookings.push(booking);
       }
     }
