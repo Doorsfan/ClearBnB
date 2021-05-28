@@ -110,6 +110,7 @@ a:visited {
   transform: rotate(270deg);
   border-radius: 25px;
   padding-top: 5px;
+  border: solid black 1px;
 }
 .leaseTitleText {
   font-size: 2rem;
@@ -132,6 +133,7 @@ a:visited {
   z-index: 5;
   transform: rotate(90deg);
   padding-top: 5px;
+  border: solid black 1px;
 }
 .rightArrowBox:hover,
 .leftArrowBox:hover,
