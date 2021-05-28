@@ -1,33 +1,35 @@
 <template>
   <div class="mainDiv">
-    <div class="startPageDateDiv">
-      <div class="locationDiv">
-        <LocationInputForm @updateMyLocation="updateMyLocation" />
+    <div class="thirdDiv">
+      <div class="divHoldingTopDivs">
+        <div class="locationDiv">
+          <LocationInputForm @updateMyLocation="updateMyLocation" />
+        </div>
+        <div class="datePickerDiv">
+          <DatePickerOnStartPage
+            @updateStartDate="updateSearchStartDate"
+            @updateEndDate="updateSearchEndDate"
+          />
+        </div>
+        <div class="bedsInputDiv">
+          <BedsInputForm @updateMyAmountOfBeds="updateMyAmountOfBeds" />
+        </div>
+        <div class="minAndMaxPriceDiv">
+          <PriceRangeForm
+            @updateMyMinPrice="updateMyMinPrice"
+            @updateMyMaxPrice="updateMyMaxPrice"
+          />
+        </div>
       </div>
-      <div class="datePickerDiv">
-        <DatePickerOnStartPage
-          @updateStartDate="updateSearchStartDate"
-          @updateEndDate="updateSearchEndDate"
-        />
-      </div>
-      <div class="bedsInputDiv">
-        <BedsInputForm @updateMyAmountOfBeds="updateMyAmountOfBeds" />
-      </div>
-      <div class="minAndMaxPriceDiv">
-        <PriceRangeForm
-          @updateMyMinPrice="updateMyMinPrice"
-          @updateMyMaxPrice="updateMyMaxPrice"
+    </div>
+      <div class="leasesDiv">
+        <LeaseDisplayBox
+          v-for="(leaseItem, index) of relevantLeases"
+          :key="index"
+          :lease="leaseItem"
         />
       </div>
     </div>
-    <div class="leasesDiv">
-      <LeaseDisplayBox
-        v-for="(leaseItem, index) of relevantLeases"
-        :key="index"
-        :lease="leaseItem"
-      />
-    </div>
-  </div>
 </template>
 <script>
 import LeaseDisplayBox from "../components/StartView/LeaseDisplayBox.vue";
@@ -257,6 +259,14 @@ export default {
 };
 </script>
 <style scoped>
+.divHoldingTopDivs{
+  width:max-content;
+  margin-left:auto;
+  margin-right:auto;
+  border-radius:10px;
+  padding-bottom:10px;
+}
+
 footer {
   height: 10vh;
 }
@@ -302,12 +312,26 @@ footer {
   padding-bottom: 15px;
   border-radius: 10px;
 }
-
+.thirdDiv{
+  background-color:rgba(255, 255, 255, 0.9);
+  width:80vw;
+  margin-left:auto;
+  margin-right:auto;
+  border-radius:10px;
+}
+@media only screen and (max-width: 350px) {
+  .thirdDiv{
+    width:90vw;
+  }
+}
 @media only screen and (min-width: 1330px) {
   div {
     margin: 0px;
     padding: 0px;
     display: inline-block;
+  }
+  .thirdDiv, .divHoldingTopDivs{
+    display:block;
   }
   .locationDiv,
   .datePickerDiv,
@@ -325,15 +349,25 @@ footer {
     padding-right: 20px;
   }
   .startPageDateDiv {
-    width: max-content;
+    width: 80vw;
     padding: 5px 5px;
     margin: 2px 0;
     display: block;
     border: 1px solid #ccc;
-    border-radius: 1px;
+    border-radius: 10px;
     box-sizing: border-box;
     margin-left: auto;
     margin-right: auto;
+  }
+}
+@media only screen and (max-width: 1550px) {
+  .minAndMaxPriceDiv, .bedsInputDiv, .datePickerDiv, .locationDiv{
+    display: block;
+  }
+}
+@media only screen and (min-width: 1550px) {
+  .minAndMaxPriceDiv, .bedsInputDiv, .datePickerDiv, .locationDiv{
+    display: inline-block;
   }
 }
 </style>

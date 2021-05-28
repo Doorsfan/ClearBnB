@@ -163,8 +163,7 @@ a:visited {
   left: 0px;
   top: 5px;
 }
-@media only screen and (max-width: 730px) {
-}
+
 @media only screen and (max-width: 350px) {
   .leaseBox {
     margin: 0px;
@@ -177,7 +176,7 @@ a:visited {
   .leftArrowBox {
     display: inline-block;
     position: relative;
-    top: -385px;
+    top: -335px;
     left: -27vw;
     height: 43px;
     width: 43px;
@@ -190,7 +189,7 @@ a:visited {
   .rightArrowBox {
     display: inline-block;
     position: relative;
-    top: -385px;
+    top: -335px;
     left: 28.5vw;
     height: 43px;
     width: 43px;

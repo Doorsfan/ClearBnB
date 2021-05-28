@@ -35,6 +35,8 @@ p {
   text-align:center;
   font-size:18px;
   margin:3px;
+  margin-left:auto;
+  margin-right:auto;
 }
 .bedsInputText {
   width:max-content;

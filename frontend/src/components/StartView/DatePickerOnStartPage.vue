@@ -98,11 +98,12 @@ p {
     padding-left: 15px;
   }
 }
-@media only screen and (min-width: 1330px) {
-  .firstDiv,
-  .secondDiv {
-    display: inline-block;
+@media only screen and (min-width: 1550px) {
+  div{
+    display:inline-block;
   }
+}
+@media only screen and (min-width: 1330px) {
   .firstDiv {
     margin-left: 10px;
     margin-right: 15px;

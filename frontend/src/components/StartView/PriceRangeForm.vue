@@ -42,9 +42,13 @@ p {
   color: #029ebb;
 }
 .firstPriceDiv, .secondPriceDiv{
-  display:inline-block;
-  width:max-content;
+  display:block;
   text-align: center;
+}
+@media only screen and (min-width: 1550px) {
+  .firstPriceDiv, .secondPriceDiv{
+    display:inline-block;
+  }
 }
 .secondPriceDiv{
   margin-left:10px;
