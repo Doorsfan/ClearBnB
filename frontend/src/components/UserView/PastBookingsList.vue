@@ -57,7 +57,7 @@ export default {
   padding: 20px;
   margin-top: 10px;
   margin-bottom: 10px;
-  background-color: rgba(218, 224, 224, 0.8);
+  background-color: rgba(255, 255, 255, 0.9);
   border-radius:10px;
   max-width:1200px;
 }

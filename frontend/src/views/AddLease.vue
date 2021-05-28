@@ -403,7 +403,7 @@ p {
 .greyBackgroundDiv{
   width:90vw;
   margin-top:20px;
-  background-color:rgba(218, 224, 224, 0.8);
+  background-color:rgba(255, 255, 255, 0.9);
   padding:100px;
   margin: 0px;
   padding: 5px;

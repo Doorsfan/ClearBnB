@@ -390,7 +390,7 @@ export default {
   margin-top:3px;
 }
 .menuDiv{
-  background-color: rgba(218, 224, 224, 0.8);
+  background-color: rgba(255, 255, 255, 0.9);
   margin-left:auto;
   margin-right:auto;
   padding: 7px;
@@ -441,7 +441,6 @@ export default {
   margin-right:auto;
   padding-top:5vh;
   padding-bottom:5vh;
-  background-color: rgba(255, 255, 255, 0,9);
 }
 .changeUserInfoTitle{
   max-width: 200px;
@@ -545,10 +544,10 @@ export default {
   font-size: 18px;
 }
 .changeUserInfoDiv{
-  background-color: rgba(218, 224, 224, 0.8);
+  background-color: rgba(255, 255, 255, 0.8);
 }
 .userInfoForm{
-  background-color: rgba(218, 224, 224, 0.8);
+  background-color: rgba(255, 255, 255, 0.8);
   width: 80vw;
   max-width:840px;
   margin-left:auto;
@@ -556,6 +555,7 @@ export default {
   border-radius:10px;
   padding-top:5vh;
 }
+
 
 .newsLetterInput{
   display:inline-block;
@@ -572,7 +572,7 @@ export default {
   padding-top:10px;
 }
 .changeUserInfoButtonDiv{
-  background-color: rgba(218, 224, 224, 0.8);
+  background-color: rgba(255, 255, 255, 0.9);
   margin-left:auto;
   margin-right:auto;
   padding: 10px;
