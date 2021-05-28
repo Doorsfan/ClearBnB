@@ -374,11 +374,12 @@ export default {
   border-radius:10px;
   padding-left:7px;
   padding-right:7px;
-  width:max-content;
+  width:50vw;
+  max-width: 155px;
   margin-left:auto;
   margin-right:auto;
-  margin-top: 5px;
-  margin-bottom: 5px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 .newsLetterInput{
   margin-left:3px;
@@ -390,11 +391,13 @@ export default {
   margin-right:auto;
   padding: 7px;
   border-radius:10px;
-  width:max-content;
+  width:75vw;
+  min-width:max-content;
   padding-left:5vw;
   padding-right:5vw;
   padding-top:20px;
   padding-bottom:20px;
+  max-width:1200px;
 }
 .userPageMainDiv{
   width:85vw;
@@ -406,7 +409,9 @@ export default {
   background-color: rgba(255, 255, 255, 0,9);
 }
 .changeUserInfoTitle{
-  max-width: max-content;
+  max-width: 200px;
+  min-width: 200px;
+  font-size: 25px;
   padding-left: 25px;
   padding-right: 25px;
   margin-bottom:15px;
@@ -421,19 +426,22 @@ export default {
   background-color: #029ebb;
   border-radius:10px;
   color:white;
-  width: 75vw;
-  max-width:300px;
   margin-left:auto;
   margin-right:auto;
+  width: 50vw;
+  min-width:20vw;
+  max-width: 400px;
 }
 .currentBookingsP{
   margin-top:10px;
   background-color: #029ebb;
   color:white;
-  padding-left:40px;
-  padding-right:40px;
   border-radius:10px;
-  width:max-content;
+  width: 50vw;
+  padding-left: 5px;
+  padding-right: 5px;
+  min-width:20vw;
+  max-width: 400px;
   margin-left:auto;
   margin-right:auto;
 }
@@ -454,11 +462,12 @@ export default {
 }
 .addNewLeaseButton,
 .showPastBookingsButton,
-
 .cancelButton,
 .saveChangesButton {
-  width: 200px;
-  height: 40px;
+  width: 50vw;
+  min-width:20vw;
+  max-width: 400px;
+  min-height:max-content;
   border-radius: 10px;
   background-color: #029ebb;
   color: white;
@@ -468,6 +477,8 @@ export default {
   font-size: 18px;
   margin-right: 10px;
   margin-left: 10px;
+  padding-left:3px;
+  padding-right:3px;
 }
 .cancelButton{
   background-color: rgba(246, 69, 37, 0.842);
@@ -484,7 +495,11 @@ export default {
   transform:scale(1.08);
 }
 .changeUserInfoButton{
-  width: 200px;
+  width: 50vw;
+  min-width:max-content;
+  padding-left:3px;
+  padding-right:3px;
+  max-width:400px;
   height: 40px;
   border-radius: 10px;
   background-color: #029ebb;
@@ -493,15 +508,14 @@ export default {
   cursor: pointer;
   margin-top: 3px;
   font-size: 18px;
-  margin-right: 10px;
-  margin-left: 10px;
 }
 .changeUserInfoDiv{
   background-color: rgba(218, 224, 224, 0.8);
 }
 .userInfoForm{
   background-color: rgba(218, 224, 224, 0.8);
-  max-width:440px;
+  width: 80vw;
+  max-width:840px;
   margin-left:auto;
   margin-right:auto;
   border-radius:10px;
@@ -515,7 +529,7 @@ export default {
 .buttonsDiv{
   background-color: rgba(218, 224, 224, 0.8);
   padding-bottom:20px;
-  max-width:max-content;
+  max-width:840px;
   margin-top:8px;
   margin-left:auto;
   margin-right:auto;
@@ -524,15 +538,22 @@ export default {
 }
 .changeUserInfoButtonDiv{
   background-color: rgba(218, 224, 224, 0.8);
-  width:max-content;
   margin-left:auto;
   margin-right:auto;
   padding: 10px;
   padding-left:20px;
   padding-right:20px;
   border-radius: 10px;
+  width: 75vw;
+  max-width:1200px;
 }
 .cancelButton:hover, .saveChangesButton:hover{
   transform: scale(1.05);
+}
+@media only screen and (max-width: 1050px) {
+  .buttonsDiv{
+    width:80vw;
+    max-width:80vw;
+  }
 }
 </style>
