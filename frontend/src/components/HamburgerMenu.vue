@@ -44,13 +44,13 @@ export default {
   top: 0;
   left: 0;
   z-index: 2;
-  background-color: white;
+  background: linear-gradient(0.2turn, #fb8f51, #ffe694);
   min-height: 100vh;
   transform: translateX(-100%);
   transition: all 0.3s;
   display: flex;
   flex-direction: column;
-  border-right: 2px solid #00200c;
+  border-right: 2px solid grey;
   font-family:'mukta';
 }
 .router-links p {
