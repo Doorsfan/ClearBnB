@@ -35,7 +35,7 @@ export default {
 </script>
 <style scoped>
 .descriptionInput {
-  min-width: 250px;
+  min-width: 220px;
   width: 60vw;
   height: 15vh;
   min-height: 80px;
@@ -47,5 +47,10 @@ export default {
   margin: 3px;
   padding: 0px;
   font-weight: bolder;
+}
+@media only screen and (min-width: 350px) {
+  * {
+    padding: 0px;
+  }
 }
 </style>
