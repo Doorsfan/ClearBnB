@@ -47,66 +47,7 @@ import AdminBooking from "../components/AdminBooking.js";
 import Profit from "../components/Profit.js";
 
 //Load in all the leases of the page from the DB here
-let res = await fetch("/rest/leases");
-let responseInJson = await res.json();
-let originalListOfAllLeases = [];
-for (let eachLease in responseInJson) {
-  let myLease = {};
-  myLease.id = responseInJson[eachLease].id;
-  myLease.ownerId = responseInJson[eachLease].ownerId;
-  myLease.title = responseInJson[eachLease].title;
-  myLease.location = responseInJson[eachLease].location;
-  myLease.description = responseInJson[eachLease].description;
-  myLease.typeOfHousing = responseInJson[eachLease].typeOfHousing;
-  myLease.startDate = responseInJson[eachLease].startDate;
-  myLease.endDate = responseInJson[eachLease].endDate;
-  myLease.price = responseInJson[eachLease].price;
-  myLease.maxGuests = responseInJson[eachLease].maxGuests;
-  myLease.beds = responseInJson[eachLease].beds;
-  myLease.amenities = {};
 
-  for (let amenity in responseInJson[eachLease].amenities) {
-    if (amenity.includes("false")) {
-      if (amenity.includes("wifi")) {
-        myLease.amenities.wifi = false;
-      }
-      if (amenity.includes("kitchen")) {
-        myLease.amenities.kitchen = false;
-      }
-      if (amenity.includes("washer")) {
-        myLease.amenities.washer = false;
-      }
-      if (amenity.includes("heating")) {
-        myLease.amenities.heating = false;
-      }
-      if (amenity.includes("airConditioner")) {
-        myLease.amenities.airConditioner = false;
-      }
-    }
-    if (amenity.includes("true")) {
-      if (amenity.includes("wifi")) {
-        myLease.amenities.wifi = true;
-      }
-      if (amenity.includes("kitchen")) {
-        myLease.amenities.kitchen = true;
-      }
-      if (amenity.includes("washer")) {
-        myLease.amenities.washer = true;
-      }
-      if (amenity.includes("heating")) {
-        myLease.amenities.heating = true;
-      }
-      if (amenity.includes("airConditioner")) {
-        myLease.amenities.airConditioner = true;
-      }
-    }
-  }
-  myLease.imageURLs = [];
-  for (let i = 0; i < responseInJson[eachLease].imageURLs.length; i++) {
-    myLease.imageURLs.push(responseInJson[eachLease].imageURLs[i]);
-  }
-  originalListOfAllLeases.push(myLease);
-}
 export default {
   emits: ["loggedIn", "loggedOut"],
   components: {
@@ -120,8 +61,8 @@ export default {
   },
   data() {
     return {
-      relevantLeases: originalListOfAllLeases, //An array of Lease objects
-      allLeases: originalListOfAllLeases,
+      relevantLeases: this.originalListOfAllLeases, //An array of Lease objects
+      allLeases: this.originalListOfAllLeases,
       validStartDate: false,
       validEndDate: false,
       shouldAddLease: false,
@@ -133,9 +74,70 @@ export default {
       myMaxPrice: "",
       choseStartDate: this.getAnyDateInCorrectFormat("2021-05-27"),
       choseEndDate: this.getAnyDateInCorrectFormat("2021-06-30"),
+      originalListOfAllLeases: []
     };
   },
   async mounted() {
+    let firstRes = await fetch("/rest/leases");
+    let responseInJson = await firstRes.json();
+    this.originalListOfAllLeases = [];
+    for (let eachLease in responseInJson) {
+      let myLease = {};
+      myLease.id = responseInJson[eachLease].id;
+      myLease.ownerId = responseInJson[eachLease].ownerId;
+      myLease.title = responseInJson[eachLease].title;
+      myLease.location = responseInJson[eachLease].location;
+      myLease.description = responseInJson[eachLease].description;
+      myLease.typeOfHousing = responseInJson[eachLease].typeOfHousing;
+      myLease.startDate = responseInJson[eachLease].startDate;
+      myLease.endDate = responseInJson[eachLease].endDate;
+      myLease.price = responseInJson[eachLease].price;
+      myLease.maxGuests = responseInJson[eachLease].maxGuests;
+      myLease.beds = responseInJson[eachLease].beds;
+      myLease.amenities = {};
+
+      for (let amenity in responseInJson[eachLease].amenities) {
+        if (amenity.includes("false")) {
+          if (amenity.includes("wifi")) {
+            myLease.amenities.wifi = false;
+          }
+          if (amenity.includes("kitchen")) {
+            myLease.amenities.kitchen = false;
+          }
+          if (amenity.includes("washer")) {
+            myLease.amenities.washer = false;
+          }
+          if (amenity.includes("heating")) {
+            myLease.amenities.heating = false;
+          }
+          if (amenity.includes("airConditioner")) {
+            myLease.amenities.airConditioner = false;
+          }
+        }
+        if (amenity.includes("true")) {
+          if (amenity.includes("wifi")) {
+            myLease.amenities.wifi = true;
+          }
+          if (amenity.includes("kitchen")) {
+            myLease.amenities.kitchen = true;
+          }
+          if (amenity.includes("washer")) {
+            myLease.amenities.washer = true;
+          }
+          if (amenity.includes("heating")) {
+            myLease.amenities.heating = true;
+          }
+          if (amenity.includes("airConditioner")) {
+            myLease.amenities.airConditioner = true;
+          }
+        }
+      }
+      myLease.imageURLs = [];
+      for (let i = 0; i < responseInJson[eachLease].imageURLs.length; i++) {
+        myLease.imageURLs.push(responseInJson[eachLease].imageURLs[i]);
+      }
+      this.originalListOfAllLeases.push(myLease);
+    }
     let res = await fetch("/rest/leases", {
       method: "GET",
     });
