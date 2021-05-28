@@ -22,14 +22,14 @@
         </div>
       </div>
     </div>
-      <div class="leasesDiv">
-        <LeaseDisplayBox
-          v-for="(leaseItem, index) of relevantLeases"
-          :key="index"
-          :lease="leaseItem"
-        />
-      </div>
+    <div class="leasesDiv">
+      <LeaseDisplayBox
+        v-for="(leaseItem, index) of relevantLeases"
+        :key="index"
+        :lease="leaseItem"
+      />
     </div>
+  </div>
 </template>
 <script>
 import LeaseDisplayBox from "../components/StartView/LeaseDisplayBox.vue";
@@ -74,7 +74,7 @@ export default {
       myMaxPrice: "",
       choseStartDate: this.getAnyDateInCorrectFormat("2021-05-27"),
       choseEndDate: this.getAnyDateInCorrectFormat("2021-06-30"),
-      originalListOfAllLeases: []
+      originalListOfAllLeases: [],
     };
   },
   async mounted() {
@@ -261,46 +261,50 @@ export default {
 };
 </script>
 <style scoped>
-.divHoldingTopDivs{
-  width:max-content;
-  margin-left:auto;
-  margin-right:auto;
-  border-radius:10px;
-  padding-bottom:10px;
+.divHoldingTopDivs {
+  width: max-content;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 10px;
+  padding-bottom: 10px;
 }
 
 footer {
   height: 10vh;
 }
-*{
-  font-family: 'mukta';
+* {
+  font-family: "mukta";
 }
 .leasesDiv {
   text-align: center;
-  margin-left:auto;
-  margin-right:auto;
+  margin-left: auto;
+  margin-right: auto;
 }
 .locationDiv,
 .datePickerDiv,
 .bedsInputDiv,
 .minAndMaxPriceDiv {
   display: block;
-  width:max-content;
+  width: max-content;
   margin-left: auto;
   margin-right: auto;
 }
 .locationDiv {
   padding-top: 20px;
-  width:max-content;
+  width: max-content;
 }
 .mainDiv {
-  font-family: 'mukta';
+  font-family: "mukta";
   font-weight: bold;
   padding-left: 5vw;
   padding-right: 5vw;
   padding-bottom: 2.5vh;
   padding-top: 2.5vh;
-  background-image: url("../../airplane.jpg");
+  background: linear-gradient(
+      rgba(245, 234, 214, 0.3),
+      rgba(245, 234, 214, 0.3)
+    ),
+    url("../../airplane.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -316,26 +320,32 @@ footer {
   padding-bottom: 15px;
   border-radius: 10px;
 }
-.thirdDiv{
-  background-color:rgba(255, 255, 255, 0.8);
-  width:80vw;
-  margin-left:auto;
-  margin-right:auto;
-  border-radius:10px;
+.thirdDiv {
+  background-color: rgba(255, 255, 255, 0.8);
+  width: 80vw;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 10px;
 }
 @media only screen and (max-width: 350px) {
-  .thirdDiv{
-    width:90vw;
+  .thirdDiv {
+    width: 90vw;
   }
 }
 
 @media only screen and (max-width: 1550px) {
-  .minAndMaxPriceDiv, .bedsInputDiv, .datePickerDiv, .locationDiv{
+  .minAndMaxPriceDiv,
+  .bedsInputDiv,
+  .datePickerDiv,
+  .locationDiv {
     display: block;
   }
 }
 @media only screen and (min-width: 1550px) {
-  .minAndMaxPriceDiv, .bedsInputDiv, .datePickerDiv, .locationDiv{
+  .minAndMaxPriceDiv,
+  .bedsInputDiv,
+  .datePickerDiv,
+  .locationDiv {
     display: inline-block;
   }
 }
