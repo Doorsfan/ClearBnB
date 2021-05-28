@@ -689,8 +689,8 @@ export default {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  padding-bottom: 200px;
-  padding-top: 200px;
+  padding-bottom: 80px;
+  padding-top: 80px;
 }
 .DivForGuests {
   margin-bottom: 20px;
