@@ -3,7 +3,7 @@
     <div v-if="!isSmall" class="pc-nav">
       <div class="left">
         <router-link to="/">
-          <img class="sunIconInHeader" src="../assets/ClearBnBLogo2.png" />
+          <img class="sunIconInHeader" src="../assets/clearbnb-logo-wider.png" />
         </router-link>
       </div>
       <div class="center"></div>
@@ -138,6 +138,7 @@ export default {
 .sunIconInHeader {
   max-width:100vw;
   min-height:107px;
+  height: 107px;
 }
 .logOutLink {
   background: none;
