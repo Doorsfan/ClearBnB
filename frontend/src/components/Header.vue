@@ -175,7 +175,6 @@ export default {
   font-family: "mukta", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  border-bottom: 1px solid #00200c;
   padding: 0 20px;
 }
 .pc-nav,
