@@ -422,7 +422,7 @@ export default {
   padding-top:2px;
 }
 .noBookingsDiv{
-  background-color: rgba(218, 224, 224, 0.8);
+  background-color: rgba(255, 255, 255, 0.9);
   width: 25vw;
   min-width: 220px;
   border-radius: 10px;
