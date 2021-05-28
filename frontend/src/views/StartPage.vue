@@ -194,7 +194,7 @@ export default {
       return false;
     },
     checkWhichFilterToRun() {
-      this.relevantLeases = originalListOfAllLeases.filter(
+      this.relevantLeases = this.originalListOfAllLeases.filter(
         this.returnRelevantLeases
       );
     },
@@ -301,8 +301,8 @@ footer {
   padding-bottom: 2.5vh;
   padding-top: 2.5vh;
   background: linear-gradient(
-      rgba(245, 234, 214, 0.3),
-      rgba(245, 234, 214, 0.3)
+      rgba(250, 250, 250, 0.4),
+      rgba(250, 250, 250, 0.2)
     ),
     url("../../airplane.jpg");
   background-size: cover;
@@ -327,7 +327,7 @@ footer {
   margin-right: auto;
   border-radius: 10px;
 }
-@media only screen and (max-width: 350px) {
+@media only screen and (max-width: 400px) {
   .thirdDiv {
     width: 90vw;
   }
