@@ -95,7 +95,7 @@ a:visited {
   margin-top: 10px;
   margin-bottom: 10px;
   display: inline-block;
-  max-height: 800px;
+  min-height: max-content;
   border-radius:17px;
 }
 .leftArrowBox {
@@ -166,6 +166,62 @@ a:visited {
   top: 5px;
 }
 
+@media only screen and (min-height: 10px) {
+  .rightArrowBox, .leftArrowBox{
+    top: -220px;
+  }
+}
+@media only screen and (min-height: 100px) {
+  .rightArrowBox, .leftArrowBox{
+    top: -220px;
+  }
+}
+@media only screen and (min-height: 200px) {
+  .rightArrowBox, .leftArrowBox{
+    top: -240px;
+  }
+}
+@media only screen and (min-height: 300px) {
+  .rightArrowBox, .leftArrowBox{
+    top: -240px;
+  }
+}
+@media only screen and (min-height: 400px) {
+  .rightArrowBox, .leftArrowBox{
+    top: -270px;
+  }
+}
+@media only screen and (min-height: 500px) {
+  .rightArrowBox, .leftArrowBox{
+    top: -280px;
+  }
+}
+@media only screen and (min-height: 600px) {
+  .rightArrowBox, .leftArrowBox{
+    top: -290px;
+  }
+}
+@media only screen and (min-height: 700px) {
+  .rightArrowBox, .leftArrowBox{
+    top: -300px;
+  }
+}
+@media only screen and (min-height: 800px) {
+  .rightArrowBox, .leftArrowBox{
+    top: -310px;
+  }
+}
+@media only screen and (min-height: 900px) {
+  .rightArrowBox, .leftArrowBox{
+    top: -32vh;
+  }
+}
+@media only screen and (min-height: 1400px) {
+  .rightArrowBox, .leftArrowBox{
+    top: -28vh;
+  }
+}
+
 @media only screen and (max-width: 350px) {
   .leaseBox {
     margin: 0px;
@@ -174,32 +230,6 @@ a:visited {
     width: 90vw;
     margin-top: 10px;
     margin-bottom: 10px;
-  }
-  .leftArrowBox {
-    display: inline-block;
-    position: relative;
-    top: -335px;
-    left: -27vw;
-    height: 43px;
-    width: 43px;
-    background-color: white;
-    z-index: 5;
-    transform: rotate(270deg);
-    border-radius: 25px;
-    padding-top: 5px;
-  }
-  .rightArrowBox {
-    display: inline-block;
-    position: relative;
-    top: -335px;
-    left: 28.5vw;
-    height: 43px;
-    width: 43px;
-    background-color: white;
-    border-radius: 25px;
-    z-index: 5;
-    transform: rotate(90deg);
-    padding-top: 5px;
   }
 }
 </style>
