@@ -44,6 +44,14 @@ p, h1, h2, h3, h4 {
 input {
   font-size: 18px;
   text-align:center;
+  font-size: 100%; 
+  line-height: 160%; 
+  border: none; 
+  outline: none; 
+  border-radius: 7px; 
+  padding-inline-start: 10px; 
+  background-color: rgb(236, 236, 235); 
+  box-shadow: inset 2px 2px 8px rgba(95, 94, 94, 0.692); 
 }
 .app-main {
   flex-grow: 1;
@@ -55,31 +63,31 @@ input {
   #app > main > div > div.startPageDateDiv > div.datePickerDiv > div > div.firstDiv > div > div:nth-child(4) > div.v3dp__body > div.v3dp__elements > button {
     padding: 0px;
   }
-  #app > main > div > div.startPageDateDiv > div.datePickerDiv > div > div.firstDiv > div > div:nth-child(4){
+  #app > main > div > div.startPageDateDiv > div.datePickerDiv > div > div.firstDiv > div > div:nth-child(4) {
     max-width:70vw;
     margin-left:auto;
     margin-right:auto;
   }
-  #app > main > div > div.startPageDateDiv > div.datePickerDiv > div > div.secondDiv > div > div:nth-child(4){
+  #app > main > div > div.startPageDateDiv > div.datePickerDiv > div > div.secondDiv > div > div:nth-child(4) {
     max-width: 70vw;
     margin-left:auto;
     margin-right:auto;
   }
 
-  #app > main > div > div.startPageDateDiv > div.datePickerDiv > div > div.secondDiv > div > div:nth-child(4) > div.v3dp__body > div.v3dp__elements > button{
+  #app > main > div > div.startPageDateDiv > div.datePickerDiv > div > div.secondDiv > div > div:nth-child(4) > div.v3dp__body > div.v3dp__elements > button {
     padding: 0px;
   }
-  #app > main > div > div > div.datePickerDiv > div > div:nth-child(2) > div:nth-child(4){
+  #app > main > div > div > div.datePickerDiv > div > div:nth-child(2) > div:nth-child(4) {
     max-width: 70vw;
     margin-left:auto;
     margin-right:auto;
   }
-  #app > main > div > div > div.datePickerDiv > div > div:nth-child(4) > div:nth-child(4){
+  #app > main > div > div > div.datePickerDiv > div > div:nth-child(4) > div:nth-child(4) {
     max-width: 70vw;
     margin-left:auto;
     margin-right:auto;
   }
-  #app > main > div > div > div:nth-child(1) > div.myDatePickerDiv > div.firstDatePickerDiv > div > div:nth-child(4){
+  #app > main > div > div > div:nth-child(1) > div.myDatePickerDiv > div.firstDatePickerDiv > div > div:nth-child(4) {
     max-width: 70vw;
     margin-left:auto;
     margin-right:auto;
@@ -87,12 +95,15 @@ input {
   #app > main > div > div > div:nth-child(1) > div.myDatePickerDiv > div.firstDatePickerDiv > div > div:nth-child(4) > div.v3dp__body > div.v3dp__elements > button {
     padding: 0px;
   }
-  #app > main > div > div > div:nth-child(1) > div.myDatePickerDiv > div.secondDatePickerDiv > div > div:nth-child(4){
+  #app > main > div > div > div:nth-child(1) > div.myDatePickerDiv > div.secondDatePickerDiv > div > div:nth-child(4) {
     max-width: 70vw;
     margin-left:auto;
     margin-right:auto;
   }
-  #app > main > div > div > div:nth-child(1) > div.myDatePickerDiv > div.secondDatePickerDiv > div > div:nth-child(4) > div.v3dp__body > div.v3dp__elements > button{
+  #app > main > div > div > div:nth-child(1) > div.myDatePickerDiv > div.secondDatePickerDiv > div > div:nth-child(4) > div.v3dp__body > div.v3dp__elements > button {
+    padding: 0px;
+  }
+  #app > main > div > div > div.datePickerDiv > div > div:nth-child(4) > div:nth-child(4) > div.v3dp__body > div.v3dp__elements > button {
     padding: 0px;
   }
 }
