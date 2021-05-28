@@ -272,7 +272,7 @@ export default {
   margin: 180px auto;
   border-radius: 5px;
   border: 1px solid grey;
-  background-color: rgb(255, 255, 255, 0.9);
+  background-color: rgb(255, 255, 255, 0.8);
   padding: 0 50px;
 }
 form input{

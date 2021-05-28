@@ -275,6 +275,8 @@ footer {
 }
 .leasesDiv {
   text-align: center;
+  margin-left:auto;
+  margin-right:auto;
 }
 .locationDiv,
 .datePickerDiv,
@@ -308,12 +310,12 @@ footer {
   margin-left: auto;
   margin-right: auto;
   font-size: 20px;
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: rgba(255, 255, 255, 0.8);
   padding-bottom: 15px;
   border-radius: 10px;
 }
 .thirdDiv{
-  background-color:rgba(255, 255, 255, 0.9);
+  background-color:rgba(255, 255, 255, 0.8);
   width:80vw;
   margin-left:auto;
   margin-right:auto;
@@ -324,42 +326,7 @@ footer {
     width:90vw;
   }
 }
-@media only screen and (min-width: 1330px) {
-  div {
-    margin: 0px;
-    padding: 0px;
-    display: inline-block;
-  }
-  .thirdDiv, .divHoldingTopDivs{
-    display:block;
-  }
-  .locationDiv,
-  .datePickerDiv,
-  .bedsInputDiv,
-  .minAndMaxPriceDiv {
-    display: inline-block;
-    width: max-content;
-  }
 
-  .locationDiv {
-    padding-left: 20px;
-  }
-  .minAndMaxPriceDiv {
-    padding-left: 10px;
-    padding-right: 20px;
-  }
-  .startPageDateDiv {
-    width: 80vw;
-    padding: 5px 5px;
-    margin: 2px 0;
-    display: block;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    box-sizing: border-box;
-    margin-left: auto;
-    margin-right: auto;
-  }
-}
 @media only screen and (max-width: 1550px) {
   .minAndMaxPriceDiv, .bedsInputDiv, .datePickerDiv, .locationDiv{
     display: block;

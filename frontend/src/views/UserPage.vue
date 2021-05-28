@@ -35,7 +35,7 @@
       <div v-if="showFutureBookings" class="currentBookingsDiv">
         <div v-if="futureBookings.length == 0" class="noBookingsDiv">
           <p v-if="futureBookings.length == 0" class="noBookingsP">
-            No bookings at the moment
+            No future bookings at the moment
           </p>
         </div>
         <div class="bookings">
@@ -59,7 +59,7 @@
           />
         <div v-if="pastBookings.length == 0" class="noBookingsDiv">
           <p v-if="pastBookings.length == 0" class="noBookingsP">
-            No bookings at the moment
+            No past bookings at the moment
           </p>
         </div>
         </div>
@@ -390,7 +390,7 @@ export default {
   margin-top:3px;
 }
 .menuDiv{
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: rgba(255, 255, 255, 0.8);
   margin-left:auto;
   margin-right:auto;
   padding: 7px;
@@ -422,7 +422,7 @@ export default {
   padding-top:2px;
 }
 .noBookingsDiv{
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: rgba(255, 255, 255, 0.8);
   width: 25vw;
   min-width: 220px;
   border-radius: 10px;
@@ -572,7 +572,7 @@ export default {
   padding-top:10px;
 }
 .changeUserInfoButtonDiv{
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: rgba(255, 255, 255, 0.8);
   margin-left:auto;
   margin-right:auto;
   padding: 10px;
