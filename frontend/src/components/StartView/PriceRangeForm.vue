@@ -50,6 +50,9 @@ p {
     display:inline-block;
   }
 }
+.firstPriceDiv{
+  margin-left:10px;
+}
 .secondPriceDiv{
   margin-left:10px;
 }
