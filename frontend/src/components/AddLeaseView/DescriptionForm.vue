@@ -48,9 +48,4 @@ export default {
   padding: 0px;
   font-weight: bolder;
 }
-@media only screen and (min-width: 350px) {
-  * {
-    padding: 0px;
-  }
-}
 </style>

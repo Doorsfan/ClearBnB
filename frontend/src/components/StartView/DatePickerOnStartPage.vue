@@ -97,6 +97,8 @@ p {
   .secondDiv{
     padding-left: 0px;
   }
+
+  
 }
 @media only screen and (min-width: 1550px) {
   div{

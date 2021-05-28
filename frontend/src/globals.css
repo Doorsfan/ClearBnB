@@ -48,6 +48,33 @@ input {
   #app > main > div > div.thirdDiv > div > div.datePickerDiv > div > div.firstDiv > div > div:nth-child(4) > div.v3dp__body > div.v3dp__elements > * {
     width: max-content;
   }
+
+  #app > main > div > div.thirdDiv > div > div.datePickerDiv > div > div.firstDiv > div > div:nth-child(4){
+    width: 231px;
+  }
+
+  #app > main > div > div.thirdDiv > div > div.datePickerDiv > div > div.firstDiv > div > div:nth-child(4) > * {
+    width: 231px;
+  } 
+
+  #app > main > div > div.thirdDiv > div > div.datePickerDiv > div > div.firstDiv > div > div:nth-child(4) > div.v3dp__body {
+    width: 231px;
+  }
+
+ #app > main > div > div.thirdDiv > div > div.datePickerDiv > div > div.firstDiv > div > div:nth-child(4) > div.v3dp__body > div.v3dp__elements > * {
+   width: 33px;
+ }
+
+  #app > main > div > div.thirdDiv > div > div.datePickerDiv > div > div.secondDiv > div > div:nth-child(4){
+    width: 231px;
+  }
+  #app > main > div > div.thirdDiv > div > div.datePickerDiv > div > div.secondDiv > div > div:nth-child(4) > * {
+    width: 231px;
+  }
+
+  #app > main > div > div.thirdDiv > div > div.datePickerDiv > div > div.secondDiv > div > div:nth-child(4) > div.v3dp__body > div.v3dp__elements > * {
+    width: 33px;
+  }
   .startPageDatePicker, .myDatePicker{
     padding: 0px;
   }
