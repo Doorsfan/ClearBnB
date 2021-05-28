@@ -185,4 +185,9 @@ a:visited {
     top: -310px;
   }
 }
+@media only screen and (max-width: 300px) {
+  .rightArrowBox, .leftArrowBox{
+    top: -380px;
+  }
+}
 </style>
