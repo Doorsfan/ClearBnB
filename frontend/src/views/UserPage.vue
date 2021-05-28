@@ -33,9 +33,11 @@
         </div>
       </div>
       <div v-if="showFutureBookings" class="currentBookingsDiv">
-        <p v-if="futureBookings.length == 0" class="noBookingsP">
-          No bookings at the moment
-        </p>
+        <div v-if="futureBookings.length == 0" class="noBookingsDiv">
+          <p v-if="futureBookings.length == 0" class="noBookingsP">
+            No bookings at the moment
+          </p>
+        </div>
         <div class="bookings">
           <FutureBookingsList
             @cancelBooking="cancelABooking"
@@ -55,9 +57,11 @@
             :key="pastIndex"
             :pastBooking="pastBooking"
           />
-        <p v-if="pastBookings.length == 0" class="noBookingsP">
-          No bookings at the moment
-        </p>
+        <div v-if="pastBookings.length == 0" class="noBookingsDiv">
+          <p v-if="pastBookings.length == 0" class="noBookingsP">
+            No bookings at the moment
+          </p>
+        </div>
         </div>
       </div>
       <div class="changeUserInfoButtonDiv">
@@ -399,6 +403,37 @@ export default {
   padding-bottom:20px;
   max-width:1200px;
 }
+.noBookingsP{
+  background-color: red;
+  margin-left:auto;
+  margin-right:auto;
+  border-radius: 10px;
+  font-size:20px;
+  margin-top: 40px;
+  margin-bottom: 40px;
+  width:20vw;
+  min-width: 150px;
+  max-width: 400px;
+  height: max-content;
+  max-height: 100px;
+  color: white;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top:2px;
+}
+.noBookingsDiv{
+  background-color: rgba(218, 224, 224, 0.8);
+  width: 25vw;
+  min-width: 220px;
+  border-radius: 10px;
+  min-height: 180px;
+  height: 13vw;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-left:auto;
+  margin-right:auto;
+  padding-top:2.5%;
+}
 .userPageMainDiv{
   width:85vw;
   max-width:1300px;
@@ -458,7 +493,7 @@ export default {
   background-repeat: no-repeat;
   background-attachment: fixed;
   overflow-x: hidden;
-  min-height:74vh;
+  min-height:83vh;
 }
 .addNewLeaseButton,
 .showPastBookingsButton,
@@ -550,6 +585,7 @@ export default {
 .cancelButton:hover, .saveChangesButton:hover{
   transform: scale(1.05);
 }
+
 @media only screen and (max-width: 1050px) {
   .buttonsDiv{
     width:80vw;
