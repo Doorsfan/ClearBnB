@@ -696,12 +696,12 @@ select {
   border-radius: 4px;
   width: 50px;
   padding: 7.5px 30.4px;
-  background-color: rgba(234, 241, 241);
+  background-color: rgb(255, 255, 255);
   margin-right: 10px;
 }
 
 .booking-view-container {
-  background-color: rgba(218, 224, 224, 0.8);
+  background-color: rgba(255, 255, 255, 0.9);
   display: flex;
   flex-direction: column;
   align-items: center;

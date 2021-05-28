@@ -85,7 +85,7 @@ a:visited {
   font-weight: bold;
 }
 .leaseBox {
-  background-color: rgba(218, 224, 224, 0.8);
+  background-color: rgba(255, 255, 255, 0.8);
   min-width: max-content;
   min-width: 240px;
   width: 80vw;

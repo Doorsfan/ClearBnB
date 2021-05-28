@@ -298,7 +298,7 @@ footer {
   margin-left: auto;
   margin-right: auto;
   font-size: 20px;
-  background-color: rgba(218, 224, 224, 0.8);
+  background-color: rgba(255, 255, 255, 0.9);
   padding-bottom: 15px;
   border-radius: 10px;
 }
