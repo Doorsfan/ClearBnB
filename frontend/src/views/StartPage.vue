@@ -194,7 +194,7 @@ export default {
       return false;
     },
     checkWhichFilterToRun() {
-      this.relevantLeases = originalListOfAllLeases.filter(
+      this.relevantLeases = this.originalListOfAllLeases.filter(
         this.returnRelevantLeases
       );
     },
@@ -323,7 +323,7 @@ footer {
   margin-right:auto;
   border-radius:10px;
 }
-@media only screen and (max-width: 350px) {
+@media only screen and (max-width: 400px) {
   .thirdDiv{
     width:90vw;
   }
