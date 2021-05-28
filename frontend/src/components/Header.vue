@@ -136,6 +136,8 @@ export default {
   border: none;
 }
 .sunIconInHeader {
+  max-width:100vw;
+  min-height:105px;
 }
 .logOutLink {
   background: none;
