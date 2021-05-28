@@ -678,6 +678,8 @@ export default {
   min-height: 50px;
   min-width:max-content;
   font-size:2rem;
+  cursor: pointer;
+  border: 1px solid grey;
 }
 .booking-view-app-main {
   background-image: url(https://images.unsplash.com/photo-1573088870079-67b4526aa950?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=667&q=80);
