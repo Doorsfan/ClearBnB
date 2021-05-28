@@ -403,6 +403,7 @@ export default {
   margin-right:auto;
   padding-top:5vh;
   padding-bottom:5vh;
+  background-color: rgba(255, 255, 255, 0,9);
 }
 .changeUserInfoTitle{
   max-width: max-content;
