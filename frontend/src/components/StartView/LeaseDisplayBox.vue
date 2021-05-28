@@ -95,7 +95,7 @@ a:visited {
   margin-top: 10px;
   margin-bottom: 10px;
   display: inline-block;
-  max-height: 800px;
+  min-height: max-content;
   border-radius:17px;
 }
 .leftArrowBox {
@@ -221,6 +221,7 @@ a:visited {
     top: -28vh;
   }
 }
+
 @media only screen and (max-width: 350px) {
   .leaseBox {
     margin: 0px;
@@ -229,32 +230,6 @@ a:visited {
     width: 90vw;
     margin-top: 10px;
     margin-bottom: 10px;
-  }
-  .leftArrowBox {
-    display: inline-block;
-    position: relative;
-    top: -335px;
-    left: -27vw;
-    height: 43px;
-    width: 43px;
-    background-color: white;
-    z-index: 5;
-    transform: rotate(270deg);
-    border-radius: 25px;
-    padding-top: 5px;
-  }
-  .rightArrowBox {
-    display: inline-block;
-    position: relative;
-    top: -335px;
-    left: 28.5vw;
-    height: 43px;
-    width: 43px;
-    background-color: white;
-    border-radius: 25px;
-    z-index: 5;
-    transform: rotate(90deg);
-    padding-top: 5px;
   }
 }
 </style>
