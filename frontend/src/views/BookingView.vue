@@ -533,6 +533,7 @@ export default {
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Lobster&family=Merriweather+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Raleway:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
 
+
 * {
   font-family: 'mukta';
 }
@@ -569,11 +570,12 @@ export default {
   display: inline-block;
 }
 .confirmationModal {
+  font:'mukta';
   position: fixed;
   left: 35vw;
   z-index: 5;
-  color: white;
-  background-color: rgba(0, 0, 0, 0.95);
+  color: black;
+  background: radial-gradient(#ebf8e1 30%, #f69d3c );
   top: 20vh;
   width: 500px;
   min-width: 200px;
@@ -671,6 +673,13 @@ export default {
 .bookingButton {
   padding: 5px;
   border-radius: 5px;
+  background-color: #029ebb;
+  color:white;
+  min-height: 50px;
+  min-width:max-content;
+  font-size:2rem;
+  cursor: pointer;
+  border: 1px solid grey;
 }
 .booking-view-app-main {
   background-image: url(https://images.unsplash.com/photo-1573088870079-67b4526aa950?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=667&q=80);
@@ -681,6 +690,7 @@ export default {
   flex-direction: column;
   min-height: 100vh;
   padding-bottom: 200px;
+  padding-top: 200px;
 }
 .DivForGuests {
   margin-bottom: 20px;
@@ -689,12 +699,12 @@ select {
   border-radius: 4px;
   width: 50px;
   padding: 7.5px 30.4px;
-  background-color: rgba(234, 241, 241);
+  background-color: rgb(255, 255, 255);
   margin-right: 10px;
 }
 
 .booking-view-container {
-  background-color: rgba(218, 224, 224, 0.8);
+  background-color: rgba(255, 255, 255, 0.8);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1004,6 +1014,11 @@ select {
 @media only screen and (max-width: 375px) {
   .confirmationModal {
     top: 10vh;
+  }
+}
+@media only screen and (max-width: 500px) {
+  #app > main > div > div > div.BookingButtonDiv > button{
+    border-radius:10px;
   }
 }
 </style>

@@ -108,7 +108,7 @@ h1 {
   margin: 310px auto;
   border-radius: 5px ;
   border: 1px solid grey;
-  background-color: rgb(255, 255, 255, 0.9);
+  background-color: rgb(255, 255, 255, 0.8);
 
 
 }

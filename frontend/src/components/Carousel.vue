@@ -55,6 +55,7 @@ img {
   -moz-transition: opacity 0.7s ease-in-out;
   -o-transition: opacity 0.7s ease-in-out;
   transition: opacity 0.7s ease-in-out;
+  border-radius:15px;
 }
 @keyframes cyclingOpacity {
   0% {
@@ -96,5 +97,10 @@ img {
   img {
     margin-left: 0px;
   }
+}
+@media only screen and (max-width: 475px) {
+ img, .imageCarousel{
+   height: 150px;
+ } 
 }
 </style>

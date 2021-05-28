@@ -89,19 +89,23 @@ p {
   margin-left: auto;
   margin-right: auto;
   padding-bottom:3px;
+  color: #029ebb;
 }
 
 @media only screen and (max-width: 300px) {
   .firstDiv,
   .secondDiv{
-    padding-left: 15px;
+    padding-left: 0px;
+  }
+
+  
+}
+@media only screen and (min-width: 1550px) {
+  div{
+    display:inline-block;
   }
 }
 @media only screen and (min-width: 1330px) {
-  .firstDiv,
-  .secondDiv {
-    display: inline-block;
-  }
   .firstDiv {
     margin-left: 10px;
     margin-right: 15px;

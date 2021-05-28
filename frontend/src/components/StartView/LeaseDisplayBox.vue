@@ -4,12 +4,12 @@
       class="linkToDetailsPage"
       :to="{ path: '/BookingView', query: { id: lease.id } }"
     >
-      <div id="foo" class="mainBoxDiv">
+      <div class="mainBoxDivForLeases">
         <div class="titleDiv">
           <p class="leaseTitleText">{{ lease.title }}</p>
         </div>
         <Carousel :myLease="lease" />
-        <div class="locationDiv"><b>Location:</b>  {{ lease.location }}</div>
+        <div class="locationDiv"><b>Location:</b> {{ lease.location }}</div>
         <div class="startsFromDiv">
           <p class="startsP"><b>Available from:</b> {{ lease.startDate }}</p>
         </div>
@@ -17,7 +17,9 @@
           <p class="endsP"><b>Available to:</b> {{ lease.endDate }}</p>
         </div>
         <div class="pricePerNightDiv">
-          <p class="priceP"><b>Price Per Night:</b> {{ Math.round(lease.price * 1.15) }}</p>
+          <p class="priceP">
+            <b>Price Per Night:</b> {{ Math.round(lease.price * 1.15) }}
+          </p>
         </div>
       </div>
     </router-link>
@@ -65,10 +67,12 @@ export default {
 };
 </script>
 <style scoped>
-*{
-  font-family:'mukta';
+* {
+  font-family: 'mukta';
 }
-
+.mainBoxDivForLeases {
+  height: max-content;
+}
 a {
   font-family: 'mukta';
   color: black;
@@ -81,43 +85,46 @@ a:visited {
   font-weight: bold;
 }
 .leaseBox {
-  background-color: rgba(218, 224, 224, 0.8);
+  background-color: rgba(255, 255, 255, 0.8);
   min-width: max-content;
   min-width: 240px;
   width: 80vw;
   padding: 10px;
   text-align: center;
   margin: 0px;
-  margin-top:10px;
-  margin-bottom:10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
   display: inline-block;
-  height: 45vh;
-  min-height:600px;
-  max-height:800px;
+  min-height: max-content;
+  border-radius:17px;
 }
 .leftArrowBox {
   display: inline-block;
   position: relative;
-  top: -315px;
+  top: -285px;
   left: -28vw;
   height: 43px;
   width: 43px;
   background-color: white;
-  z-index: 5;
+  z-index: 1;
   transform: rotate(270deg);
   border-radius: 25px;
   padding-top: 5px;
+  border: solid black 1px;
 }
-.leaseTitleText{
-  font-size:2rem;
+.leaseTitleText {
+  font-size: 2rem;
 }
-.locationDiv,.startsP, .endsP, .priceP{
-  font-size:1.5rem;
+.locationDiv,
+.startsP,
+.endsP,
+.priceP {
+  font-size: 1.5rem;
 }
 .rightArrowBox {
   display: inline-block;
   position: relative;
-  top: -315px;
+  top: -285px;
   left: 28.5vw;
   height: 43px;
   width: 43px;
@@ -126,6 +133,7 @@ a:visited {
   z-index: 5;
   transform: rotate(90deg);
   padding-top: 5px;
+  border: solid black 1px;
 }
 .rightArrowBox:hover,
 .leftArrowBox:hover,
@@ -157,47 +165,29 @@ a:visited {
   left: 0px;
   top: 5px;
 }
-@media only screen and (max-width: 730px){
-  .leaseBox{
-    min-height: 750px;
+
+@media only screen and (max-width: 450px) {
+  .leaseBox {
+    margin: 0px;
+    padding: 0px;
+    padding: 15px;
+    width: 90vw;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  .rightArrowBox, .leftArrowBox{
+    top: -270px;
   }
 }
-@media only screen and (max-width: 350px) {
-  .leaseBox {
-    margin:0px;
-    padding:0px;
-    padding:15px;
-    width: 90vw;
-    height:40vh;
-    min-height: 850px;
-    margin-top:10px;
-    margin-bottom:10px;
+
+@media only screen and (max-width: 325px) {
+  .rightArrowBox, .leftArrowBox{
+    top: -310px;
   }
-  .leftArrowBox {
-    display: inline-block;
-    position: relative;
-    top: -385px;
-    left: -27vw;
-    height: 43px;
-    width: 43px;
-    background-color: white;
-    z-index: 5;
-    transform: rotate(270deg);
-    border-radius: 25px;
-    padding-top: 5px;
-  }
-  .rightArrowBox {
-    display: inline-block;
-    position: relative;
-    top: -385px;
-    left: 28.5vw;
-    height: 43px;
-    width: 43px;
-    background-color: white;
-    border-radius: 25px;
-    z-index: 5;
-    transform: rotate(90deg);
-    padding-top: 5px;
+}
+@media only screen and (max-width: 300px) {
+  .rightArrowBox, .leftArrowBox{
+    top: -380px;
   }
 }
 </style>

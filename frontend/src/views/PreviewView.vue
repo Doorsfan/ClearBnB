@@ -267,8 +267,21 @@ export default {
   },
   mounted() {
     this.myLease = this.$store.getters.getLeaseToBuild;
-    this.previewStartDate = this.myLease.startDate;
-    this.previewEndDate = this.myLease.endDate;
+    if(this.myLease != null){
+      if(this.myLease.startDate != null){
+        this.previewStartDate = this.myLease.startDate; 
+      }
+      else{
+        this.previewStartDate = new Date();
+      }
+      if(this.myLease.endDate != null){
+        this.previewEndDate = this.myLease.endDate;
+      }
+      else{
+        this.previewEndDate = new Date();
+      }
+    }
+    
     if (this.myLease != null) {
       if (this.myLease.entireResidence == true) {
         $('.EntireOrPart').text('Entire Residence');

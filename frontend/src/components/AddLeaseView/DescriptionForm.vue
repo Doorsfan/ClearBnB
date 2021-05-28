@@ -35,7 +35,7 @@ export default {
 </script>
 <style scoped>
 .descriptionInput {
-  min-width: 250px;
+  min-width: 220px;
   width: 60vw;
   height: 15vh;
   min-height: 80px;

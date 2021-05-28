@@ -1,33 +1,35 @@
 <template>
   <div class="mainDiv">
-    <div class="startPageDateDiv">
-      <div class="locationDiv">
-        <LocationInputForm @updateMyLocation="updateMyLocation" />
+    <div class="thirdDiv">
+      <div class="divHoldingTopDivs">
+        <div class="locationDiv">
+          <LocationInputForm @updateMyLocation="updateMyLocation" />
+        </div>
+        <div class="datePickerDiv">
+          <DatePickerOnStartPage
+            @updateStartDate="updateSearchStartDate"
+            @updateEndDate="updateSearchEndDate"
+          />
+        </div>
+        <div class="bedsInputDiv">
+          <BedsInputForm @updateMyAmountOfBeds="updateMyAmountOfBeds" />
+        </div>
+        <div class="minAndMaxPriceDiv">
+          <PriceRangeForm
+            @updateMyMinPrice="updateMyMinPrice"
+            @updateMyMaxPrice="updateMyMaxPrice"
+          />
+        </div>
       </div>
-      <div class="datePickerDiv">
-        <DatePickerOnStartPage
-          @updateStartDate="updateSearchStartDate"
-          @updateEndDate="updateSearchEndDate"
-        />
-      </div>
-      <div class="bedsInputDiv">
-        <BedsInputForm @updateMyAmountOfBeds="updateMyAmountOfBeds" />
-      </div>
-      <div class="minAndMaxPriceDiv">
-        <PriceRangeForm
-          @updateMyMinPrice="updateMyMinPrice"
-          @updateMyMaxPrice="updateMyMaxPrice"
+    </div>
+      <div class="leasesDiv">
+        <LeaseDisplayBox
+          v-for="(leaseItem, index) of relevantLeases"
+          :key="index"
+          :lease="leaseItem"
         />
       </div>
     </div>
-    <div class="leasesDiv">
-      <LeaseDisplayBox
-        v-for="(leaseItem, index) of relevantLeases"
-        :key="index"
-        :lease="leaseItem"
-      />
-    </div>
-  </div>
 </template>
 <script>
 import LeaseDisplayBox from "../components/StartView/LeaseDisplayBox.vue";
@@ -45,66 +47,7 @@ import AdminBooking from "../components/AdminBooking.js";
 import Profit from "../components/Profit.js";
 
 //Load in all the leases of the page from the DB here
-let res = await fetch("/rest/leases");
-let responseInJson = await res.json();
-let originalListOfAllLeases = [];
-for (let eachLease in responseInJson) {
-  let myLease = {};
-  myLease.id = responseInJson[eachLease].id;
-  myLease.ownerId = responseInJson[eachLease].ownerId;
-  myLease.title = responseInJson[eachLease].title;
-  myLease.location = responseInJson[eachLease].location;
-  myLease.description = responseInJson[eachLease].description;
-  myLease.typeOfHousing = responseInJson[eachLease].typeOfHousing;
-  myLease.startDate = responseInJson[eachLease].startDate;
-  myLease.endDate = responseInJson[eachLease].endDate;
-  myLease.price = responseInJson[eachLease].price;
-  myLease.maxGuests = responseInJson[eachLease].maxGuests;
-  myLease.beds = responseInJson[eachLease].beds;
-  myLease.amenities = {};
 
-  for (let amenity in responseInJson[eachLease].amenities) {
-    if (amenity.includes("false")) {
-      if (amenity.includes("wifi")) {
-        myLease.amenities.wifi = false;
-      }
-      if (amenity.includes("kitchen")) {
-        myLease.amenities.kitchen = false;
-      }
-      if (amenity.includes("washer")) {
-        myLease.amenities.washer = false;
-      }
-      if (amenity.includes("heating")) {
-        myLease.amenities.heating = false;
-      }
-      if (amenity.includes("airConditioner")) {
-        myLease.amenities.airConditioner = false;
-      }
-    }
-    if (amenity.includes("true")) {
-      if (amenity.includes("wifi")) {
-        myLease.amenities.wifi = true;
-      }
-      if (amenity.includes("kitchen")) {
-        myLease.amenities.kitchen = true;
-      }
-      if (amenity.includes("washer")) {
-        myLease.amenities.washer = true;
-      }
-      if (amenity.includes("heating")) {
-        myLease.amenities.heating = true;
-      }
-      if (amenity.includes("airConditioner")) {
-        myLease.amenities.airConditioner = true;
-      }
-    }
-  }
-  myLease.imageURLs = [];
-  for (let i = 0; i < responseInJson[eachLease].imageURLs.length; i++) {
-    myLease.imageURLs.push(responseInJson[eachLease].imageURLs[i]);
-  }
-  originalListOfAllLeases.push(myLease);
-}
 export default {
   emits: ["loggedIn", "loggedOut"],
   components: {
@@ -118,8 +61,8 @@ export default {
   },
   data() {
     return {
-      relevantLeases: originalListOfAllLeases, //An array of Lease objects
-      allLeases: originalListOfAllLeases,
+      relevantLeases: this.originalListOfAllLeases, //An array of Lease objects
+      allLeases: this.originalListOfAllLeases,
       validStartDate: false,
       validEndDate: false,
       shouldAddLease: false,
@@ -131,9 +74,70 @@ export default {
       myMaxPrice: "",
       choseStartDate: this.getAnyDateInCorrectFormat("2021-05-27"),
       choseEndDate: this.getAnyDateInCorrectFormat("2021-06-30"),
+      originalListOfAllLeases: []
     };
   },
   async mounted() {
+    let firstRes = await fetch("/rest/leases");
+    let responseInJson = await firstRes.json();
+    this.originalListOfAllLeases = [];
+    for (let eachLease in responseInJson) {
+      let myLease = {};
+      myLease.id = responseInJson[eachLease].id;
+      myLease.ownerId = responseInJson[eachLease].ownerId;
+      myLease.title = responseInJson[eachLease].title;
+      myLease.location = responseInJson[eachLease].location;
+      myLease.description = responseInJson[eachLease].description;
+      myLease.typeOfHousing = responseInJson[eachLease].typeOfHousing;
+      myLease.startDate = responseInJson[eachLease].startDate;
+      myLease.endDate = responseInJson[eachLease].endDate;
+      myLease.price = responseInJson[eachLease].price;
+      myLease.maxGuests = responseInJson[eachLease].maxGuests;
+      myLease.beds = responseInJson[eachLease].beds;
+      myLease.amenities = {};
+
+      for (let amenity in responseInJson[eachLease].amenities) {
+        if (amenity.includes("false")) {
+          if (amenity.includes("wifi")) {
+            myLease.amenities.wifi = false;
+          }
+          if (amenity.includes("kitchen")) {
+            myLease.amenities.kitchen = false;
+          }
+          if (amenity.includes("washer")) {
+            myLease.amenities.washer = false;
+          }
+          if (amenity.includes("heating")) {
+            myLease.amenities.heating = false;
+          }
+          if (amenity.includes("airConditioner")) {
+            myLease.amenities.airConditioner = false;
+          }
+        }
+        if (amenity.includes("true")) {
+          if (amenity.includes("wifi")) {
+            myLease.amenities.wifi = true;
+          }
+          if (amenity.includes("kitchen")) {
+            myLease.amenities.kitchen = true;
+          }
+          if (amenity.includes("washer")) {
+            myLease.amenities.washer = true;
+          }
+          if (amenity.includes("heating")) {
+            myLease.amenities.heating = true;
+          }
+          if (amenity.includes("airConditioner")) {
+            myLease.amenities.airConditioner = true;
+          }
+        }
+      }
+      myLease.imageURLs = [];
+      for (let i = 0; i < responseInJson[eachLease].imageURLs.length; i++) {
+        myLease.imageURLs.push(responseInJson[eachLease].imageURLs[i]);
+      }
+      this.originalListOfAllLeases.push(myLease);
+    }
     let res = await fetch("/rest/leases", {
       method: "GET",
     });
@@ -190,7 +194,7 @@ export default {
       return false;
     },
     checkWhichFilterToRun() {
-      this.relevantLeases = originalListOfAllLeases.filter(
+      this.relevantLeases = this.originalListOfAllLeases.filter(
         this.returnRelevantLeases
       );
     },
@@ -257,11 +261,24 @@ export default {
 };
 </script>
 <style scoped>
+.divHoldingTopDivs{
+  width:max-content;
+  margin-left:auto;
+  margin-right:auto;
+  border-radius:10px;
+  padding-bottom:10px;
+}
+
+footer {
+  height: 10vh;
+}
 *{
   font-family: 'mukta';
 }
 .leasesDiv {
   text-align: center;
+  margin-left:auto;
+  margin-right:auto;
 }
 .locationDiv,
 .datePickerDiv,
@@ -289,47 +306,37 @@ export default {
   background-attachment: fixed;
   background-position: center;
   min-width: 100vw;
-  min-height: 68vh;
+  min-height: 90vh;
 }
 .startPageDateDiv {
   margin-left: auto;
   margin-right: auto;
   font-size: 20px;
-  background-color: rgba(218, 224, 224, 0.8);
+  background-color: rgba(255, 255, 255, 0.8);
   padding-bottom: 15px;
+  border-radius: 10px;
+}
+.thirdDiv{
+  background-color:rgba(255, 255, 255, 0.8);
+  width:80vw;
+  margin-left:auto;
+  margin-right:auto;
+  border-radius:10px;
+}
+@media only screen and (max-width: 400px) {
+  .thirdDiv{
+    width:90vw;
+  }
 }
 
-@media only screen and (min-width: 1330px) {
-  div {
-    margin: 0px;
-    padding: 0px;
-    display: inline-block;
-  }
-  .locationDiv,
-  .datePickerDiv,
-  .bedsInputDiv,
-  .minAndMaxPriceDiv {
-    display: inline-block;
-    width: max-content;
-  }
-
-  .locationDiv {
-    padding-left: 20px;
-  }
-  .minAndMaxPriceDiv {
-    padding-left: 10px;
-    padding-right: 20px;
-  }
-  .startPageDateDiv {
-    width: max-content;
-    padding: 5px 5px;
-    margin: 2px 0;
+@media only screen and (max-width: 1550px) {
+  .minAndMaxPriceDiv, .bedsInputDiv, .datePickerDiv, .locationDiv{
     display: block;
-    border: 1px solid #ccc;
-    border-radius: 1px;
-    box-sizing: border-box;
-    margin-left: auto;
-    margin-right: auto;
+  }
+}
+@media only screen and (min-width: 1550px) {
+  .minAndMaxPriceDiv, .bedsInputDiv, .datePickerDiv, .locationDiv{
+    display: inline-block;
   }
 }
 </style>

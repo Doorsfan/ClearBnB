@@ -208,6 +208,9 @@ export default {
     },
     updateIMGUrls(newImageURLs) {
       console.log("this imageURLs was: ", this.imageURLs);
+      if(this.imageURLs == ''){
+        this.imageURLs = []
+      }
       this.imageURLs.push(newImageURLs);
       this.lease.imageURLs = this.imageURLs;
       store.commit("setLeaseToBuild", this.lease);
@@ -334,6 +337,12 @@ export default {
 
 </script>
 <style scoped>
+@media only screen and (min-width: 1200px){
+  .greyBackgroundDiv{
+    max-width: 1500px;
+  }
+}
+
 input{
   text-align:center;
 }
@@ -397,13 +406,15 @@ p {
 .greyBackgroundDiv{
   width:90vw;
   margin-top:20px;
-  background-color:rgba(218, 224, 224, 0.8);
+  background-color:rgba(255, 255, 255, 0.9);
   padding:100px;
   margin: 0px;
   padding: 5px;
   padding-top: 20px;
   padding-bottom: 20px;
-
+  max-width: 1200px;
+  margin-left:auto;
+  margin-right:auto;
 }
 .mainDiv {
   padding-left: 5vw;
@@ -436,11 +447,28 @@ p {
   margin-bottom: 5px;
 }
 
-
+@media only screen and (max-width: 350px){
+  p {
+    display:block;
+    width: 220px;
+    margin-left:auto;
+    margin-right:auto;
+    text-align:center;
+  }
+  input {
+    padding: 5px;
+  }
+}
 </style>
 
 <!--Styling for all subcomponents-->
 <style>
+@media only screen and (max-width: 500px) {
+  #app > main > div > div > div.buttonDiv > a{
+    border-radius: 10px;
+  }
+}
+
 .inputForLocationArea,
 .leaseTitle {
   padding: 11.2px 22.4px;
@@ -466,15 +494,6 @@ p {
   .imageURL {
     width: 345px !important;
     margin-bottom: 30px;
-  }
-}
-@media only screen and (max-width: 350px){
-  p {
-    display:block;
-    width: 220px;
-    margin-left:auto;
-    margin-right:auto;
-    text-align:center;
   }
 }
 </style>

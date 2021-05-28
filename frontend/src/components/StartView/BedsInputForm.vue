@@ -23,6 +23,10 @@ export default {
 };
 </script>
 <style scoped>
+p {
+  color: #029ebb;
+  font-size:20px;
+}
 *{
   font-family:'mukta';
 }
@@ -32,6 +36,8 @@ export default {
   text-align:center;
   font-size:18px;
   margin:3px;
+  margin-left:auto;
+  margin-right:auto;
 }
 .bedsInputText {
   width:max-content;
