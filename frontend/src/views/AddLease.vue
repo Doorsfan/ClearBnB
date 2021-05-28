@@ -452,9 +452,6 @@ p {
     margin-right:auto;
     text-align:center;
   }
-  input {
-    padding: 5px;
-  }
 }
 </style>
 

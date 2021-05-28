@@ -59,7 +59,7 @@ input {
 
 @media only screen and (max-width: 350px) {
   input {
-    padding: 5px;
+    padding: 10px;
   }
   .locationDiv{
     width:100vw;

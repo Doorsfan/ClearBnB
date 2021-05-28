@@ -25,7 +25,6 @@ export default {
 <style scoped>
 p {
   color: #029ebb;
-  font-size:20px;
 }
 *{
   font-family:'mukta';

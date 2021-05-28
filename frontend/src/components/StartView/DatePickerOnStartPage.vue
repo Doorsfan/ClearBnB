@@ -95,7 +95,7 @@ p {
 @media only screen and (max-width: 300px) {
   .firstDiv,
   .secondDiv{
-    padding-left: 0px;
+    padding-left: 15px;
   }
 }
 @media only screen and (min-width: 1550px) {

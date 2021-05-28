@@ -40,7 +40,6 @@ export default {
 <style scoped>
 p {
   color: #029ebb;
-  font-size: 20px;
 }
 .firstPriceDiv, .secondPriceDiv{
   display:block;
