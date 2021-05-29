@@ -162,7 +162,7 @@ export default {
         method: 'POST',
         body: JSON.stringify(newUserInfo),
       });
-      document.getElementsByClassName('cancelButton')[0].click();
+      alert('Thank you for signing up to ClearBnB!');
     },
   },
 };
@@ -176,7 +176,6 @@ export default {
   display: flex;
   flex-direction: row;
 }
-
 .firstNameDiv {
   flex-grow: 1;
   padding-right: 5px;
@@ -189,7 +188,7 @@ export default {
   display: flex;
   flex-direction: row;
 }
-.emailDiv{
+.emailDiv {
   padding-top: 25px;
   width: 50%;
   padding-right: 5px;
@@ -210,7 +209,7 @@ export default {
   flex-grow: 1;
   padding-right: 5px;
 }
-.cityDiv{
+.cityDiv {
   flex-grow: 1;
   padding-left: 5px;
 }
@@ -219,11 +218,11 @@ export default {
   flex-direction: row;
   padding-top: 25px;
 }
-.streetDiv{
+.streetDiv {
   flex-grow: 0.8;
   padding-right: 5px;
 }
-.zipDiv{
+.zipDiv {
   flex-grow: 0.2;
   padding-left: 5px;
 }
@@ -242,11 +241,10 @@ export default {
   margin: 0;
   padding-left: 4px;
 }
-.newsLetterBox{
+.newsLetterBox {
   padding-top: 5px;
   margin-top: 1px;
 }
-
 .mainDiv {
   background-image: url('../../public/Login-signup.jpg');
   background-position: center;
@@ -256,7 +254,6 @@ export default {
   background-attachment: fixed;
   overflow-x: hidden;
 }
-
 .SignUpForm {
   text-align: center;
   height: 880px;
@@ -267,7 +264,7 @@ export default {
   background-color: rgb(255, 255, 255, 0.8);
   padding: 0 50px;
 }
-form input{
+form input {
   padding: 7.5px 30.4px;
   font-size: 18px;
   border-radius: 5px;
@@ -275,8 +272,7 @@ form input{
   text-align: initial;
   margin-bottom: 8px;
 }
-
-button{
+button {
   width: 120px;
   height: 50px;
   padding: 10px 20px;
@@ -305,7 +301,6 @@ p {
   font-size: 16px;
   font-weight: bold;
 }
-
 .takenUserBox {
   margin: 0px;
   margin-top: 10px;
@@ -340,36 +335,29 @@ p {
   }
 }
 @media only screen and (max-width: 1025px) {
-  .SignUpForm{
- 
-  margin: 120px auto;
- 
+  .SignUpForm {
+    margin: 120px auto;
   }
 }
 @media only screen and (max-width: 1023px) {
-  .SignUpForm{
- 
-  margin: 50px auto;
- 
+  .SignUpForm {
+    margin: 50px auto;
   }
 }
 @media only screen and (max-width: 600px) {
-
-  .SignUpForm{
-  height: 1170px;
-  width: clamp(280px, 100vw, 600px);
-  margin: auto;
-  border-radius: 0px ;
+  .SignUpForm {
+    height: 1170px;
+    width: clamp(280px, 100vw, 600px);
+    margin: auto;
+    border-radius: 0px;
   }
   .firstLast {
-  display: flex;
-  flex-direction: column;
-}
-  button{
+    display: flex;
+    flex-direction: column;
+  }
+  button {
     border-radius: 40px;
-  } 
-
-
+  }
   .firstNameDiv {
     flex-grow: 1;
     padding-left: 2px;
@@ -454,8 +442,8 @@ p {
   }
 }
 @media only screen and (max-width: 527px) {
-.SignUpForm{
-  height:1165px;
+  .SignUpForm {
+    height: 1165px;
   }
   h1 {
     font-size: 35px;
@@ -467,8 +455,8 @@ p {
     font-size: 30px;
     margin-bottom: 35px;
   }
-  .SignUpForm{
-  height:1150px;
+  .SignUpForm {
+    height: 1150px;
   }
 }
 @media only screen and (max-width: 387px) {
@@ -476,24 +464,22 @@ p {
     font-size: 29px;
     margin-bottom: 35px;
   }
-  .SignUpForm{
-  height:1145px;
-  padding: 0 30px;
+  .SignUpForm {
+    height: 1145px;
+    padding: 0 30px;
   }
-  .errorBox{
-  display:none;
-  width:300px;
-  margin-right:auto;
-  background-color: red;
-  color:white;
-  padding:3px;
-  outline: 1px solid black;
-
-
-}
-  .newsLetterP{
-    width:max-content;
-    display:inline-block;
+  .errorBox {
+    display: none;
+    width: 300px;
+    margin-right: auto;
+    background-color: red;
+    color: white;
+    padding: 3px;
+    outline: 1px solid black;
+  }
+  .newsLetterP {
+    width: max-content;
+    display: inline-block;
   }
 }
 @media only screen and (max-width: 339px) {
@@ -501,8 +487,8 @@ p {
     font-size: 25px;
     margin-bottom: 35px;
   }
-  .SignUpForm{
-  height: 1140px;
+  .SignUpForm {
+    height: 1140px;
   }
 }
 @media only screen and (max-width: 301px) {
@@ -510,8 +496,8 @@ p {
     font-size: 22px;
     margin-bottom: 35px;
   }
-  .SignUpForm{
-  height: 1140px;
+  .SignUpForm {
+    height: 1140px;
   }
   .letterRegister {
     margin-top: 10px;

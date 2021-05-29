@@ -117,11 +117,13 @@ export default {
           let myStartYear = Number(mySplitStartDate[0]);
           let myStartMonth = Number(mySplitStartDate[1]) - 1;
           let myStartDay = Number(mySplitStartDate[2]);
+
           let bookingEndDate = booking.endDate;
           let mySplitEndDate = bookingEndDate.split('-');
           let myEndYear = Number(mySplitEndDate[0]);
           let myEndMonth = Number(mySplitEndDate[1] - 1);
           let myEndDay = Number(mySplitEndDate[2]);
+
           let takenDay = '';
 
           let date1 = new Date(myStartYear, myStartMonth, myStartDay);

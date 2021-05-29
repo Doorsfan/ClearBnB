@@ -313,7 +313,7 @@ export default {
   },
   data() {
     return {
-      title: 'test',
+      title: 'Default',
       location: '',
       maxGuests: '',
       imageURLs: ['', ''],
@@ -369,7 +369,11 @@ export default {
     },
     newStartDate(myNewStartDate) {
       let today = new Date();
-      if(myNewStartDate.getFullYear() < today.getFullYear() && myNewStartDate.getMonth() <= today.getMonth() && myNewStartDate.getDate() <= today.getDate()){
+      if (
+        myNewStartDate.getFullYear() < today.getFullYear() &&
+        myNewStartDate.getMonth() <= today.getMonth() &&
+        myNewStartDate.getDate() <= today.getDate()
+      ) {
         myNewStartDate = today;
       }
       this.chosenStartDate = myNewStartDate;
@@ -405,7 +409,7 @@ export default {
         this.amountOfDays = newAmountOfDays;
       }
       let basePrice =
-        (this.amountOfDays * this.selectedNumberOfGuests * this.price);
+        this.amountOfDays * this.selectedNumberOfGuests * this.price;
       let toPay = Math.round(
         1.15 * (this.amountOfDays * this.selectedNumberOfGuests * this.price)
       );
@@ -420,10 +424,10 @@ export default {
         toPay,
         this.lease
       );
-      let checkIfBookedRes = await fetch('/rest/bookings');
-      let bookedResAsJson = await checkIfBookedRes.json();
-      let currentTakenBookings = [];
-      for (let booking of bookedResAsJson) {
+      let res = await fetch('/rest/bookings');
+      let responseInJson = await res.json();
+      let alreadyTakenDates = [];
+      for (let booking of responseInJson) {
         if (booking.leaseId == this.lease.id) {
           let bookingStartDate = booking.startDate;
           let mySplitStartDate = bookingStartDate.split('-');
@@ -434,40 +438,46 @@ export default {
           let bookingEndDate = booking.endDate;
           let mySplitEndDate = bookingEndDate.split('-');
           let myEndYear = Number(mySplitEndDate[0]);
-          let myEndMonth = Number(mySplitEndDate[1]) - 1;
+          let myEndMonth = Number(mySplitEndDate[1] - 1);
           let myEndDay = Number(mySplitEndDate[2]);
+
           let takenDay = '';
-          let differenceInYears = myEndYear - myStartYear;
-          let differenceInMonths = myEndMonth - myStartMonth;
-          let differenceInDays = myEndDay - myStartDay;
-          while (differenceInDays >= 0) {
+          
+          let date1 = new Date(myStartYear, myStartMonth, myStartDay);
+          let date2 = new Date(myEndYear, myEndMonth, myEndDay);
+          let differenceInTime = date2.getTime() - date1.getTime();
+          let differenceInDays = differenceInTime / (1000 * 3600 * 24);
+          while (differenceInDays > -1) {
             differenceInDays -= 1;
-            currentTakenBookings.push(
-              new Date(myEndYear, myEndMonth, myEndDay)
-            );
-            if (myEndDay == 0) {
+            alreadyTakenDates.push(new Date(myEndYear, myEndMonth, myEndDay));
+            if (myEndDay == 1) {
               myEndMonth -= 1;
-              if (myEndMonth == 0) {
+              if (myEndMonth == -1) {
                 myEndYear -= 1;
-                myEndMonth = 12;
+                myEndMonth = 11;
               }
               if (
                 myEndMonth == 11 ||
                 myEndMonth == 9 ||
-                myEndMonth == 6 ||
-                myEndMonth == 4
-              ) {
-                myEndDay = 30;
-              } else if (
-                myEndMonth == 12 ||
-                myEndMonth == 10 ||
-                myEndMonth == 8 ||
                 myEndMonth == 7 ||
-                myEndMonth == 5 ||
-                myEndMonth == 3 ||
-                myEndMonth == 1
+                myEndMonth == 6 ||
+                myEndMonth == 4 ||
+                myEndMonth == 2 ||
+                myEndMonth == 0
               ) {
                 myEndDay = 31;
+              }
+              else if ( 
+                myEndMonth == 10 
+                || myEndMonth == 8 
+                || myEndMonth == 5 
+                || myEndMonth == 3 
+              ) 
+              {
+                myEndDay = 30;
+              }
+              else {
+                myEndDay = 28;
               }
             } else {
               myEndDay -= 1;
@@ -475,7 +485,7 @@ export default {
           }
         }
       }
-      if (this.checkDisabledDates(currentTakenBookings)) {
+      if (this.checkDisabledDates(alreadyTakenDates)) {
         alert(
           'Sadly, across the dates you chose - Someone else beat you to book it. Sorry!'
         );
@@ -525,13 +535,21 @@ export default {
       let pastYear = splitMyDate[0];
       let pastMonth = splitMyDate[1];
       let pastDay = splitMyDate[2];
-      
-      if(pastYear <= today.getFullYear() && pastMonth <= (today.getMonth() + 1) && pastDay <= today.getDate()){
-        responseInJson.startDate = today.getFullYear() + '-' + ((today.getMonth() + 1) < 10 ? '0' + (today.getMonth() + 1) : today.getMonth() + 1);
-        if(today.getDate() < 10){
+
+      if (
+        pastYear <= today.getFullYear() &&
+        pastMonth <= today.getMonth() + 1 &&
+        pastDay <= today.getDate()
+      ) {
+        responseInJson.startDate =
+          today.getFullYear() +
+          '-' +
+          (today.getMonth() + 1 < 10
+            ? '0' + (today.getMonth() + 1)
+            : today.getMonth() + 1);
+        if (today.getDate() < 10) {
           responseInJson.startDate += '-' + '0' + today.getDate();
-        }
-        else{
+        } else {
           responseInJson.startDate += '-' + today.getDate();
         }
       }
@@ -548,7 +566,6 @@ export default {
 
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Lobster&family=Merriweather+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Raleway:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
-
 
 * {
   font-family: 'mukta';
@@ -586,12 +603,12 @@ export default {
   display: inline-block;
 }
 .confirmationModal {
-  font:'mukta';
+  font: 'mukta';
   position: fixed;
   left: 35vw;
   z-index: 5;
   color: black;
-  background: radial-gradient(#ebf8e1 30%, #f69d3c );
+  background: radial-gradient(#ebf8e1 30%, #f69d3c);
   top: 20vh;
   width: 500px;
   min-width: 200px;
@@ -690,10 +707,10 @@ export default {
   padding: 5px;
   border-radius: 5px;
   background-color: #029ebb;
-  color:white;
+  color: white;
   min-height: 50px;
-  min-width:max-content;
-  font-size:2rem;
+  min-width: max-content;
+  font-size: 2rem;
   cursor: pointer;
   border: 1px solid grey;
 }
@@ -1033,8 +1050,8 @@ select {
   }
 }
 @media only screen and (max-width: 500px) {
-  #app > main > div > div > div.BookingButtonDiv > button{
-    border-radius:10px;
+  #app > main > div > div > div.BookingButtonDiv > button {
+    border-radius: 10px;
   }
 }
 </style>

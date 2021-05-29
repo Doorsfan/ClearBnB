@@ -1,11 +1,17 @@
 <template>
-  <div v-if="showUserPage && $store.getters.getCurrentUser != null" class="mainDiv">
-    <div
-      v-if="$store.getters.getCurrentUser != null"
-      class="userPageMainDiv"
-    >
+  <div
+    v-if="showUserPage && $store.getters.getCurrentUser != null"
+    class="mainDiv"
+  >
+    <div v-if="$store.getters.getCurrentUser != null" class="userPageMainDiv">
       <div class="menuDiv">
-        <p v-if="$store.getters.getCurrentUser.username != 'admin@ClearBnB.se'" class="welcomeMessage">Welcome {{ currentUserInfo.firstName + ' ' + currentUserInfo.lastName }}!</p>
+        <p
+          v-if="$store.getters.getCurrentUser.username != 'admin@ClearBnB.se'"
+          class="welcomeMessage"
+        >
+          Welcome
+          {{ currentUserInfo.firstName + ' ' + currentUserInfo.lastName }}!
+        </p>
         <p
           v-if="$store.getters.getCurrentUser.username == 'admin@ClearBnB.se'"
           class="welcomeMessage"
@@ -20,11 +26,18 @@
           </router-link>
         </div>
         <div class="historicalButtonDiv">
-          <button v-if="showFutureBookings" @click="switchToPastDisplay" class="showPastBookingsButton">
+          <button
+            v-if="showFutureBookings"
+            @click="switchToPastDisplay"
+            class="showPastBookingsButton"
+          >
             Show Past Bookings
           </button>
-          <button v-if="showPastBookings" @click="switchToFutureDisplay"
-          class="showPastBookingsButton">
+          <button
+            v-if="showPastBookings"
+            @click="switchToFutureDisplay"
+            class="showPastBookingsButton"
+          >
             Show Future Bookings
           </button>
           <p v-if="showPastBookings" class="currentBookingsP">
@@ -57,11 +70,11 @@
             :key="pastIndex"
             :pastBooking="pastBooking"
           />
-        <div v-if="pastBookings.length == 0" class="noBookingsDiv">
-          <p v-if="pastBookings.length == 0" class="noBookingsP">
-            No past bookings at the moment
-          </p>
-        </div>
+          <div v-if="pastBookings.length == 0" class="noBookingsDiv">
+            <p v-if="pastBookings.length == 0" class="noBookingsP">
+              No past bookings at the moment
+            </p>
+          </div>
         </div>
       </div>
       <div class="changeUserInfoButtonDiv">
@@ -206,7 +219,7 @@ export default {
       changeInfo: false,
       showPastBookings: false,
       showFutureBookings: true,
-      showUserPage: true
+      showUserPage: true,
     };
   },
   async mounted() {
@@ -249,13 +262,15 @@ export default {
       }
     }
     for (let booking of this.myBookings) {
-      let splitEndDate = booking.endDate.split('-');
       let splitStartDate = booking.startDate.split('-');
       let today = new Date();
-      if(splitStartDate[0] <= today.getFullYear() && splitStartDate[1] <= (today.getMonth() + 1) && splitStartDate[2] <= today.getDate()){
+      if (
+        splitStartDate[0] <= today.getFullYear() &&
+        splitStartDate[1] <= today.getMonth() + 1 &&
+        splitStartDate[2] <= today.getDate()
+      ) {
         this.pastBookings.push(booking);
-      }
-      else{
+      } else {
         this.futureBookings.push(booking);
       }
     }
@@ -275,7 +290,7 @@ export default {
     }
   },
   methods: {
-     async updateCurrentUserInfo() {
+    async updateCurrentUserInfo() {
       this.user = this.$store.getters.getCurrentUser;
       let secondRes = await fetch('/rest/userinfos/' + this.user.id, {
         method: 'GET',
@@ -337,70 +352,70 @@ export default {
       let responseAsJson = await res.json();
     },
     switchToPastDisplay() {
-      if(this.showFutureBookings == true){
+      if (this.showFutureBookings == true) {
         this.showPastBookings = true;
         this.showFutureBookings = false;
       }
     },
-    switchToFutureDisplay(){
-      if(this.showPastBookings == true){
+    switchToFutureDisplay() {
+      if (this.showPastBookings == true) {
         this.showPastBookings = false;
         this.showFutureBookings = true;
       }
     },
-    redisplayUserPage(){
+    redisplayUserPage() {
       this.updateCurrentUserInfo();
       this.showUserPage = true;
       this.changeInfo = false;
     },
-    changeUserInfo(){
+    changeUserInfo() {
       this.showUserPage = false;
       this.changeInfo = true;
-    }
+    },
   },
 };
 </script>
 <style scoped>
-.newUserInfo{
-  background-color:#029ebb;
-  color:white;
-  border-radius:10px;
-  padding-left:7px;
-  padding-right:7px;
-  width:50vw;
+.newUserInfo {
+  background-color: #029ebb;
+  color: white;
+  border-radius: 10px;
+  padding-left: 7px;
+  padding-right: 7px;
+  width: 50vw;
   max-width: 155px;
-  margin-left:auto;
-  margin-right:auto;
+  margin-left: auto;
+  margin-right: auto;
   margin-top: 10px;
   margin-bottom: 10px;
 }
-.newsLetterInput{
-  margin-left:3px;
-  margin-top:3px;
+.newsLetterInput {
+  margin-left: 3px;
+  margin-top: 3px;
 }
-.menuDiv{
+.menuDiv {
   background-color: rgba(255, 255, 255, 0.8);
-  margin-left:auto;
-  margin-right:auto;
+  margin-left: auto;
+  margin-right: auto;
   padding: 7px;
-  border-radius:10px;
-  width:75vw;
-  min-width:max-content;
-  padding-left:5vw;
-  padding-right:5vw;
-  padding-top:20px;
-  padding-bottom:20px;
-  max-width:1200px;
-}
-.noBookingsP{
-  background-color: red;
-  margin-left:auto;
-  margin-right:auto;
   border-radius: 10px;
-  font-size:20px;
+  width: 75vw;
+  min-width: max-content;
+  padding-left: 5vw;
+  padding-right: 5vw;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  max-width: 1200px;
+}
+.noBookingsP {
+  background-color: red;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 10px;
+  font-size: 20px;
   margin-top: 40px;
   margin-bottom: 40px;
-  width:20vw;
+  width: 20vw;
   min-width: 150px;
   max-width: 400px;
   height: max-content;
@@ -408,9 +423,9 @@ export default {
   color: white;
   padding-left: 10px;
   padding-right: 10px;
-  padding-top:2px;
+  padding-top: 2px;
 }
-.noBookingsDiv{
+.noBookingsDiv {
   background-color: rgba(255, 255, 255, 0.8);
   width: 25vw;
   min-width: 220px;
@@ -419,54 +434,54 @@ export default {
   height: 13vw;
   margin-top: 20px;
   margin-bottom: 20px;
-  margin-left:auto;
-  margin-right:auto;
-  padding-top:2.5%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 2.5%;
 }
-.userPageMainDiv{
-  width:85vw;
-  max-width:1300px;
-  margin-left:auto;
-  margin-right:auto;
-  padding-top:5vh;
-  padding-bottom:5vh;
+.userPageMainDiv {
+  width: 85vw;
+  max-width: 1300px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 5vh;
+  padding-bottom: 5vh;
 }
-.changeUserInfoTitle{
+.changeUserInfoTitle {
   max-width: 200px;
   min-width: 200px;
   font-size: 25px;
   padding-left: 25px;
   padding-right: 25px;
-  margin-bottom:15px;
-  margin-left:auto;
-  margin-right:auto;
+  margin-bottom: 15px;
+  margin-left: auto;
+  margin-right: auto;
   background-color: #029ebb;
-  border-radius:10px;
-  color:white;
+  border-radius: 10px;
+  color: white;
 }
-.welcomeMessage{
-  padding:10px;
+.welcomeMessage {
+  padding: 10px;
   background-color: #029ebb;
-  border-radius:10px;
-  color:white;
-  margin-left:auto;
-  margin-right:auto;
+  border-radius: 10px;
+  color: white;
+  margin-left: auto;
+  margin-right: auto;
   width: 50vw;
-  min-width:20vw;
+  min-width: 20vw;
   max-width: 400px;
 }
-.currentBookingsP{
-  margin-top:10px;
+.currentBookingsP {
+  margin-top: 10px;
   background-color: #029ebb;
-  color:white;
-  border-radius:10px;
+  color: white;
+  border-radius: 10px;
   width: 50vw;
   padding-left: 5px;
   padding-right: 5px;
-  min-width:20vw;
+  min-width: 20vw;
   max-width: 400px;
-  margin-left:auto;
-  margin-right:auto;
+  margin-left: auto;
+  margin-right: auto;
 }
 .mainDiv {
   width: 100vw;
@@ -481,16 +496,16 @@ export default {
   background-repeat: no-repeat;
   background-attachment: fixed;
   overflow-x: hidden;
-  min-height:83vh;
+  min-height: 83vh;
 }
 .addNewLeaseButton,
 .showPastBookingsButton,
 .cancelButton,
 .saveChangesButton {
   width: 50vw;
-  min-width:20vw;
+  min-width: 20vw;
   max-width: 400px;
-  min-height:max-content;
+  min-height: max-content;
   border-radius: 10px;
   background-color: #029ebb;
   color: white;
@@ -500,29 +515,31 @@ export default {
   font-size: 18px;
   margin-right: 10px;
   margin-left: 10px;
-  padding-left:3px;
-  padding-right:3px;
+  padding-left: 3px;
+  padding-right: 3px;
 }
-.cancelButton{
+.cancelButton {
   background-color: rgba(246, 69, 37, 0.842);
-  margin-top:0px;
+  margin-top: 0px;
 }
-.newsLetterP{
-  width:max-content;
-  display:inline-block;
-  margin-left:auto;
-  margin-right:auto;
+.newsLetterP {
+  width: max-content;
+  display: inline-block;
+  margin-left: auto;
+  margin-right: auto;
   padding-right: 5px;
 }
-.addNewLeaseButton:hover, .showPastBookingsButton:hover, .changeUserInfoButton:hover{
-  transform:scale(1.08);
+.addNewLeaseButton:hover,
+.showPastBookingsButton:hover,
+.changeUserInfoButton:hover {
+  transform: scale(1.08);
 }
-.changeUserInfoButton{
+.changeUserInfoButton {
   width: 50vw;
-  min-width:max-content;
-  padding-left:3px;
-  padding-right:3px;
-  max-width:400px;
+  min-width: max-content;
+  padding-left: 3px;
+  padding-right: 3px;
+  max-width: 400px;
   height: 40px;
   border-radius: 10px;
   background-color: #029ebb;
@@ -532,53 +549,53 @@ export default {
   margin-top: 3px;
   font-size: 18px;
 }
-.changeUserInfoDiv{
+.changeUserInfoDiv {
   background-color: rgba(255, 255, 255, 0.8);
 }
-.userInfoForm{
+.userInfoForm {
   background-color: rgba(255, 255, 255, 0.8);
   width: 80vw;
-  max-width:840px;
-  margin-left:auto;
-  margin-right:auto;
-  border-radius:10px;
-  padding-top:5vh;
+  max-width: 840px;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 10px;
+  padding-top: 5vh;
 }
 
-
-.newsLetterInput{
-  display:inline-block;
-  width:max-content;
+.newsLetterInput {
+  display: inline-block;
+  width: max-content;
 }
-.buttonsDiv{
+.buttonsDiv {
   background-color: rgba(218, 224, 224, 0.8);
-  padding-bottom:20px;
-  max-width:840px;
-  margin-top:8px;
-  margin-left:auto;
-  margin-right:auto;
-  border-radius:10px;
-  padding-top:10px;
+  padding-bottom: 20px;
+  max-width: 840px;
+  margin-top: 8px;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 10px;
+  padding-top: 10px;
 }
-.changeUserInfoButtonDiv{
+.changeUserInfoButtonDiv {
   background-color: rgba(255, 255, 255, 0.8);
-  margin-left:auto;
-  margin-right:auto;
+  margin-left: auto;
+  margin-right: auto;
   padding: 10px;
-  padding-left:20px;
-  padding-right:20px;
+  padding-left: 20px;
+  padding-right: 20px;
   border-radius: 10px;
   width: 75vw;
-  max-width:1200px;
+  max-width: 1200px;
 }
-.cancelButton:hover, .saveChangesButton:hover{
+.cancelButton:hover,
+.saveChangesButton:hover {
   transform: scale(1.05);
 }
 
 @media only screen and (max-width: 1050px) {
-  .buttonsDiv{
-    width:80vw;
-    max-width:80vw;
+  .buttonsDiv {
+    width: 80vw;
+    max-width: 80vw;
   }
 }
 </style>
