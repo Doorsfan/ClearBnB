@@ -369,6 +369,10 @@ export default {
       document.getElementsByClassName('hiddenStartPage')[0].click();
     },
     newStartDate(myNewStartDate) {
+      let today = new Date();
+      if(myNewStartDate.getFullYear() < today.getFullYear() && myNewStartDate.getMonth() <= today.getMonth() && myNewStartDate.getDate() <= today.getDate()){
+        myNewStartDate = today;
+      }
       this.chosenStartDate = myNewStartDate;
       this.startDateInBasicFormat =
         this.priceHelper.getCorrectDateFormat(myNewStartDate);
@@ -402,11 +406,14 @@ export default {
         this.amountOfDays = newAmountOfDays;
       }
       let basePrice =
-        this.amountOfDays * this.selectedNumberOfGuests * this.price;
+        (this.amountOfDays * this.selectedNumberOfGuests * this.price);
       let toPay = Math.round(
         1.15 * (this.amountOfDays * this.selectedNumberOfGuests * this.price)
       );
+      console.log("The baseprice was: ", basePrice);
+      console.log("The price toPay was: ", toPay);
       let profit = toPay - basePrice;
+      console.log("The profit was: ", profit);
 
       let myBooking = new Booking(
         filledUser.id,
@@ -418,6 +425,7 @@ export default {
         toPay,
         this.lease
       );
+      console.log("The booking was: ", myBooking);
       let checkIfBookedRes = await fetch('/rest/bookings');
       let bookedResAsJson = await checkIfBookedRes.json();
       console.log(bookedResAsJson);
@@ -519,7 +527,27 @@ export default {
     async getMyLease() {
       let res = await fetch('/rest/leases/' + this.$route.query.id);
       let responseInJson = await res.json();
+      let splitMyDate = responseInJson.startDate.split('-');
+      let today = new Date();
+
+      let pastYear = splitMyDate[0];
+      let pastMonth = splitMyDate[1];
+      let pastDay = splitMyDate[2];
+      
+      if(pastYear <= today.getFullYear() && pastMonth <= (today.getMonth() + 1) && pastDay <= today.getDate()){
+        responseInJson.startDate = today.getFullYear() + '-' + ((today.getMonth() + 1) < 10 ? '0' + (today.getMonth() + 1) : today.getMonth() + 1);
+        if(today.getDate() < 10){
+          responseInJson.startDate += '-' + '0' + today.getDate();
+        }
+        else{
+          responseInJson.startDate += '-' + today.getDate();
+        }
+        console.log("The response in Json is now: " + responseInJson.startDate);
+      }
+
       this.lease = responseInJson;
+
+      console.log("This leas was now: ", this.lease);
       let myHelper = new BookingHelper();
       store.commit('setBookingHelper', myHelper);
     },

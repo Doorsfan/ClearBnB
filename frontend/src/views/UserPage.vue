@@ -259,11 +259,7 @@ export default {
       let splitEndDate = booking.endDate.split('-');
       let splitStartDate = booking.startDate.split('-');
       let today = new Date();
-      let endDate = new Date(splitEndDate[0] + '-' + splitEndDate[1] + '-' + splitEndDate[2]);
-      let startDate = new Date(splitStartDate[0] + '-' + splitStartDate[1] + '-' + splitStartDate[2]);
-      let actualEndDate = new Date(endDate.getFullYear() + '-' + ((endDate.getMonth() - 1) < 10 ? '0' + (endDate.getMonth() - 1) : (endDate.getMonth() - 1)) + '-' + (endDate.getDate() < 10 ? '0' + endDate.getDate() : endDate.getDate()));
-      let actualStartDate = new Date(startDate.getFullYear() + '-' + ((startDate.getMonth() - 1) < 10 ? '0' + (startDate.getMonth() - 1) : (startDate.getMonth() - 1)) + '-' + (startDate.getDate() < 10 ? '0' + startDate.getDate() : startDate.getDate()));
-      if(actualStartDate.getTime() < today.getTime()){
+      if(splitStartDate[0] <= today.getFullYear() && splitStartDate[1] <= (today.getMonth() + 1) && splitStartDate[2] <= today.getDate()){
         this.pastBookings.push(booking);
       }
       else{

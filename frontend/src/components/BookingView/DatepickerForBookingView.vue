@@ -57,6 +57,7 @@ export default {
         dates: [],
       },
       newBookingHelper: '',
+      runningSpinner: false
     };
   },
   watch: {
@@ -78,6 +79,8 @@ export default {
   },
   methods: {
     convertDate() {
+      console.log(this.myLease.startDate);
+      console.log("The lease was: ", this.myLease);
       let splitMyStartDate = this.myLease.startDate.split('-');
       let myStartYear = splitMyStartDate[0];
       let myStartMonth = Number(splitMyStartDate[1]) - 1;
@@ -105,11 +108,14 @@ export default {
       let store = this.$store;
       let getDisabledDatesFunction = this.getDisabledDates;
       let thisContext = this;
-      setInterval(function () {
-        store.commit('updateBookedDates', local);
-        getDisabledDatesFunction();
-        thisContext.$emit('newDisabledDates', thisContext.disabledDays.dates);
-      }, 100);
+      if(!this.runningSpinner){
+        setInterval(function () {
+          store.commit('updateBookedDates', local);
+          getDisabledDatesFunction();
+          thisContext.$emit('newDisabledDates', thisContext.disabledDays.dates);
+        }, 100);
+        this.runningSpinner = true;
+      }
     },
     async getDisabledDates() {
       let res = await fetch('/rest/bookings');
