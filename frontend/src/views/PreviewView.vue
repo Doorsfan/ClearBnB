@@ -204,7 +204,7 @@
           </div>
           <div class="publishButtonDiv">
             <button
-              v-if="$store.getters.getLeaseToBuild.imageURLs.length > 0 && previewStartYear <= previewEndYear && previewStartMonth <= previewEndMonth && previewStartDate <= previewEndDate"
+              v-if="$store.getters.getLeaseToBuild.imageURLs.length > 0 && isValidDate"
               @click="PublishLease"
               class="publishButton"
               type="button"
@@ -219,7 +219,7 @@
           >
             Cannot Publish a Lease without a image URL added!
           </div>
-          <div class="errorBox" v-if="!(previewStartYear <= previewEndYear && previewStartMonth <= previewEndMonth && previewStartDate <= previewEndDate)">
+          <div class="errorBox" v-if="!isValidDate">
             Cannot publish with negative date intervals!
           </div>
         </div>
@@ -300,7 +300,12 @@ export default {
         this.previewEndDate = new Date();
       }
     }
-
+    if(this.previewStartDate == ''){
+      this.previewStartDate = new Date();
+    }
+    if(this.previewEndDate == ''){
+      this.previewEndDate = new Date();
+    }
     if (this.myLease != null) {
       if (this.myLease.entireResidence == true) {
         $('.EntireOrPart').text('Entire Residence');
@@ -335,12 +340,15 @@ export default {
         }
       }
     }
-    this.previewStartYear = this.previewStartDate.getFullYear();
-    this.previewStartMonth = this.previewStartDate.getMonth();
-    this.previewStartDate = this.previewStartDate.getDate();
-    this.previewEndYear = this.previewEndDate.getFullYear();
-    this.previewEndMonth = this.previewEndDate.getMonth();
-    this.previewEndDate = this.previewEndDate.getDate();
+    console.log(this.previewEndDate);
+    let wantedStartDate = new Date(this.previewStartDate.getFullYear(), this.previewStartDate.getMonth(), this.previewStartDate.getDate())
+    let wantedEndDate = new Date(this.previewEndDate.getFullYear(), this.previewEndDate.getMonth(), this.previewEndDate.getDate())
+    if(wantedStartDate.getTime() <= wantedEndDate.getTime()){
+      this.isValidDate = true;
+    }
+    else{
+      this.isValidDate = false;
+    }
   },
   data() {
     return {
@@ -350,10 +358,11 @@ export default {
       previewEndDate: '',
       previewStartYear: '',
       previewStartMonth: '',
-      previewStartDate: '',
+      previewStartDay: '',
       previewEndYear: '',
       previewEndMonth: '',
-      previewEndDate: ''
+      previewEndDay: '',
+      isValidDate: ''
     };
   },
 };
