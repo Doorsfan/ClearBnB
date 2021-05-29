@@ -207,7 +207,6 @@ export default {
       store.commit("setLeaseToBuild", this.lease);
     },
     updateIMGUrls(newImageURLs) {
-      console.log("this imageURLs was: ", this.imageURLs);
       if(this.imageURLs == ''){
         this.imageURLs = []
       }

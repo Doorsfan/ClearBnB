@@ -410,11 +410,7 @@ export default {
       let toPay = Math.round(
         1.15 * (this.amountOfDays * this.selectedNumberOfGuests * this.price)
       );
-      console.log("The baseprice was: ", basePrice);
-      console.log("The price toPay was: ", toPay);
       let profit = toPay - basePrice;
-      console.log("The profit was: ", profit);
-
       let myBooking = new Booking(
         filledUser.id,
         this.lease.id,
@@ -425,11 +421,8 @@ export default {
         toPay,
         this.lease
       );
-      console.log("The booking was: ", myBooking);
       let checkIfBookedRes = await fetch('/rest/bookings');
       let bookedResAsJson = await checkIfBookedRes.json();
-      console.log(bookedResAsJson);
-      console.log('Lease is: ', this.lease);
       let currentTakenBookings = [];
       for (let booking of bookedResAsJson) {
         if (booking.leaseId == this.lease.id) {
@@ -542,12 +535,8 @@ export default {
         else{
           responseInJson.startDate += '-' + today.getDate();
         }
-        console.log("The response in Json is now: " + responseInJson.startDate);
       }
-
       this.lease = responseInJson;
-
-      console.log("This leas was now: ", this.lease);
       let myHelper = new BookingHelper();
       store.commit('setBookingHelper', myHelper);
     },

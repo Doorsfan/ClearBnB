@@ -209,11 +209,6 @@ export default {
       showUserPage: true
     };
   },
-  watch: {
-    myRoute() {
-      console.log('my route changed!');
-    },
-  },
   async mounted() {
     this.user = this.$store.getters.getCurrentUser;
     let secondRes = await fetch('/rest/userinfos/' + this.user.id, {
@@ -221,7 +216,6 @@ export default {
     });
     let result = await secondRes.json();
     this.currentUserInfo = result;
-    console.log(this.currentUserInfo);
     this.profits = 0;
 
     //Load from the DB all the Bookings that are tied to this users userId based on the userInfo

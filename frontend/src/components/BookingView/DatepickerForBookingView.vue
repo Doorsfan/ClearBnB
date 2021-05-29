@@ -57,13 +57,9 @@ export default {
         dates: [],
       },
       newBookingHelper: '',
-      runningSpinner: false
     };
   },
   watch: {
-    myLease() {
-      console.log('My lease changed!');
-    },
     newBookingHelper() {
       this.$emit('updatedBookingHelper', this.newBookingHelper);
     },
@@ -79,8 +75,6 @@ export default {
   },
   methods: {
     convertDate() {
-      console.log(this.myLease.startDate);
-      console.log("The lease was: ", this.myLease);
       let splitMyStartDate = this.myLease.startDate.split('-');
       let myStartYear = splitMyStartDate[0];
       let myStartMonth = Number(splitMyStartDate[1]) - 1;
@@ -108,14 +102,12 @@ export default {
       let store = this.$store;
       let getDisabledDatesFunction = this.getDisabledDates;
       let thisContext = this;
-      if(!this.runningSpinner){
-        setInterval(function () {
-          store.commit('updateBookedDates', local);
-          getDisabledDatesFunction();
-          thisContext.$emit('newDisabledDates', thisContext.disabledDays.dates);
-        }, 100);
-        this.runningSpinner = true;
-      }
+      setInterval(function () {
+        store.commit('updateBookedDates', local);
+        getDisabledDatesFunction();
+        thisContext.$emit('newDisabledDates', thisContext.disabledDays.dates);
+      }, 100);
+
     },
     async getDisabledDates() {
       let res = await fetch('/rest/bookings');
@@ -126,44 +118,51 @@ export default {
           let bookingStartDate = booking.startDate;
           let mySplitStartDate = bookingStartDate.split('-');
           let myStartYear = Number(mySplitStartDate[0]);
-          let myStartMonth = Number(mySplitStartDate[1]);
+          let myStartMonth = Number(mySplitStartDate[1]) - 1;
           let myStartDay = Number(mySplitStartDate[2]);
-
           let bookingEndDate = booking.endDate;
           let mySplitEndDate = bookingEndDate.split('-');
           let myEndYear = Number(mySplitEndDate[0]);
-          let myEndMonth = Number(mySplitEndDate[1]);
+          let myEndMonth = Number(mySplitEndDate[1] - 1);
           let myEndDay = Number(mySplitEndDate[2]);
           let takenDay = '';
-          let differenceInYears = myEndYear - myStartYear;
-          let differenceInMonths = myEndMonth - myStartMonth;
-          let differenceInDays = myEndDay - myStartDay;
-          while (differenceInDays >= 0) {
+
+          let date1 = new Date(myStartYear, myStartMonth, myStartDay);
+          let date2 = new Date(myEndYear, myEndMonth, myEndDay);
+          let differenceInTime = date2.getTime() - date1.getTime();
+          let differenceInDays = differenceInTime / (1000 * 3600 * 24);
+          while (differenceInDays > -1) {
             differenceInDays -= 1;
-            this.addDisabledDate(myEndYear, myEndMonth, myEndDay);
-            if (myEndDay == 0) {
+            this.disabledDays.dates.push(new Date(myEndYear, myEndMonth, myEndDay));
+            if (myEndDay == 1) {
               myEndMonth -= 1;
-              if (myEndMonth == 0) {
+              if (myEndMonth == -1) {
                 myEndYear -= 1;
-                myEndMonth = 12;
+                myEndMonth = 11;
               }
-              if (
+              if ( //december, october, augusti, july, may, march, january
+              // 11, 9, 7, 6, 4, 2, 0
                 myEndMonth == 11 ||
                 myEndMonth == 9 ||
-                myEndMonth == 6 ||
-                myEndMonth == 4
-              ) {
-                myEndDay = 30;
-              } else if (
-                myEndMonth == 12 ||
-                myEndMonth == 10 ||
-                myEndMonth == 8 ||
                 myEndMonth == 7 ||
-                myEndMonth == 5 ||
-                myEndMonth == 3 ||
-                myEndMonth == 1
+                myEndMonth == 6 ||
+                myEndMonth == 4 ||
+                myEndMonth == 2 ||
+                myEndMonth == 0
               ) {
                 myEndDay = 31;
+              }
+              else if ( 
+                myEndMonth == 10 
+                || myEndMonth == 8 
+                || myEndMonth == 5 
+                || myEndMonth == 3 
+              ) 
+              {
+                myEndDay = 30;
+              }
+              else {
+                myEndDay = 28;
               }
             } else {
               myEndDay -= 1;
@@ -171,11 +170,7 @@ export default {
           }
         }
       }
-    },
-    addDisabledDate(year, month, day) {
-      //"2021-05-20"
-      this.disabledDays.dates.push(new Date(year + '-' + month + '-' + day));
-    },
+    }
   },
 };
 </script>

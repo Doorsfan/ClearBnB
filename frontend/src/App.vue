@@ -20,11 +20,6 @@ export default {
     Header,
     Footer,
   },
-  watch: {
-    currentUser() {
-      console.log('There was a change in teh current user');
-    },
-  },
   data() {
     return {
       signUp: 'signUp',

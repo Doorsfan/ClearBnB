@@ -70,10 +70,7 @@ export default {
         user = Object.assign(currentUser,response)
         document.getElementsByClassName("failedLoginDiv")[0].style.display = "none";
         this.$store.dispatch('login', user)
-        //window.location = '/'
-        document.getElementsByClassName('CancelButton')[0].click(); //Simulate a click on the Cancel button to go to the start page
-        //To interact with the stores getters, write this.$store.getters.<gettersName>
-        //console.log(this.$store.getters.getCurrentUser) Example
+        document.getElementsByClassName('CancelButton')[0].click();
       }
     }
   },
