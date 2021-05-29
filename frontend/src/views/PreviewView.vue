@@ -340,7 +340,6 @@ export default {
         }
       }
     }
-    console.log(this.previewEndDate);
     let wantedStartDate = new Date(this.previewStartDate.getFullYear(), this.previewStartDate.getMonth(), this.previewStartDate.getDate())
     let wantedEndDate = new Date(this.previewEndDate.getFullYear(), this.previewEndDate.getMonth(), this.previewEndDate.getDate())
     if(wantedStartDate.getTime() <= wantedEndDate.getTime()){
