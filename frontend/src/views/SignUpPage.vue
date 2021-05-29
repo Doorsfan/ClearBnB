@@ -9,6 +9,7 @@
           <div class="firstNameDiv formhandler">
             <p class="nameP">First name:</p>
             <input
+              required
               v-model="firstName"
               placeholder="First Name"
               class="firstNameInput"
@@ -17,6 +18,7 @@
           <div class="lastNameDiv formhandler">
             <p class="lastNameP">Last name:</p>
             <input
+              required
               v-model="lastName"
               placeholder="Last Name"
               class="lastNameInput"
@@ -27,6 +29,7 @@
       <div class="emailDiv formhandler">
         <p class="emailP">Email:</p>
         <input
+          required
           v-model="email"
           type="email"
           placeholder="Email"
@@ -37,6 +40,7 @@
         <div class="passwordDiv formhandler">
           <p class="passwordP">Password:</p>
           <input
+            required
             v-model="password"
             type="password"
             placeholder="Password"
@@ -46,6 +50,7 @@
         <div class="repeatPasswordDiv formhandler">
           <p class="repeatPasswordP">Repeat Password:</p>
           <input
+            required
             v-model="repeatPassword"
             type="password"
             placeholder="Repeat Password"
@@ -56,6 +61,7 @@
       <div class="phoneNumber formhandler">
         <p class="phoneNumberP">Phone Number:</p>
         <input
+          required
           v-model="phoneNumber"
           placeholder="Phone Number"
           class="phoneNumberInput"
@@ -65,6 +71,7 @@
         <div class="streetDiv formhandler">
           <p class="streetP">Street:</p>
           <input
+            required
             v-model="streetAddress"
             placeholder="My Street"
             class="streetInput"
@@ -72,17 +79,17 @@
         </div>
         <div class="zipDiv formhandler">
           <p class="zipP">Zip Code:</p>
-          <input v-model="zipCode" placeholder="Zip Code" class="zipInput" />
+          <input required v-model="zipCode" placeholder="Zip Code" class="zipInput" />
         </div>
       </div>
       <div class="countryCity">
         <div class="countryDiv formhandler">
           <p class="countryP">Country:</p>
-          <input v-model="country" placeholder="Country" class="countryInput" />
+          <input required v-model="country" placeholder="Country" class="countryInput" />
         </div>
         <div class="cityDiv formhandler">
           <p class="cityP">City:</p>
-          <input v-model="city" placeholder="City" class="cityInput" />
+          <input required v-model="city" placeholder="City" class="cityInput" />
         </div>
       </div>
 
