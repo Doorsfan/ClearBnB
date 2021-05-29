@@ -65,7 +65,7 @@ export default {
       myAmountOfBeds: "",
       myMinPrice: "",
       myMaxPrice: "",
-      choseStartDate: this.getAnyDateInCorrectFormat("2021-05-27"),
+      choseStartDate: new Date(),
       choseEndDate: this.getAnyDateInCorrectFormat("2021-06-30"),
       originalListOfAllLeases: []
     };

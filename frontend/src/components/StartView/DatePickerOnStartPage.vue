@@ -41,7 +41,7 @@ export default {
     return {
       minimumStartDate: new Date(),
       minimumEndDate: myDateHelper.addDays(new Date(), 1),
-      startDate: new Date('2021-05-27'),
+      startDate: new Date(),
       endDate: new Date('2021-07-30'),
     };
   },
