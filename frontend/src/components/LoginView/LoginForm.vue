@@ -34,18 +34,9 @@
 <script>
 import store from '../../store.js'
 import User from '../../components/User.js'
-import UserInfo from '../UserInfo.js'
 export default {
   mounted(){
     this.$store.dispatch('saveLatestRoute', this.$route.path);
-    if (document.getElementsByClassName("house_icon").length > 0) {
-      document.getElementsByClassName("house_icon")[0].src =
-        "/src/assets/clearbnb-logo.png";
-      document.getElementsByClassName("house_icon")[0].className =
-        "sunIconInHeader";
-      document.getElementsByClassName("homeText")[0].style.display = "none";
-      document.getElementsByClassName("center")[0].style.height = "210px";
-    }
   },
   data() {
     return {
@@ -62,13 +53,11 @@ export default {
       })
       let response = await res.json()
       if(response.error == "Bad credentials"){ //Failed to log in
-        document.getElementsByClassName("failedLoginDiv")[0].style.display = "block";
-        document.getElementsByClassName("errorText")[0].style.display = "block";
+        alert("Error - Failed to login, bad credentials!");
       }
       else{
         let currentUser = new User('','');
         user = Object.assign(currentUser,response)
-        document.getElementsByClassName("failedLoginDiv")[0].style.display = "none";
         this.$store.dispatch('login', user)
         document.getElementsByClassName('CancelButton')[0].click();
       }

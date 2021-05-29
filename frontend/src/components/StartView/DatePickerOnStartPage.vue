@@ -32,13 +32,11 @@ import PPPN from '../../components/PPPN.js';
 const minimumDate = ref(new Date()); //The earliest date a user can pick is Today
 const startDate = ref(new Date()); //The date for the From datePicker - the start Date
 
-//To make the Date be able to just add 1 day, we can define a function on it's Prototype
 let myDateHelper = new PPPN();
 let endDateSevenDaysAhead = myDateHelper.addDays(new Date(), 7);
 const endDate = ref(endDateSevenDaysAhead); //The date for the To datePicker - the end date
 
 export default {
-  //emits: ['updateEndDate', 'updateStartDate'],
   data() {
     return {
       minimumStartDate: new Date(),
@@ -49,7 +47,6 @@ export default {
   },
   watch: {
     startDate() {
-      //Keeps a track of when startDate has changed
       let convertedDate = this.convertDate(this.startDate);
       this.$emit('updateStartDate', convertedDate);
     },

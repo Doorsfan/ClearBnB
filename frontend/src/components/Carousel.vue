@@ -8,9 +8,6 @@
 //Implement Interaction with Arrow Buttons again in regards to Carousel Component
 export default {
   props: ["myLease"],
-  data() {
-    return {};
-  },
   methods: {
     previousPicture() {
       let firstPicture = this.myLease.imageURLs[0];

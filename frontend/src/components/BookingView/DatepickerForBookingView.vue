@@ -28,8 +28,6 @@ import { ref } from 'vue';
 import { add } from 'date-fns';
 import BookingHelper from '../../components/BookingHelper.js';
 import store from '../../store.js';
-//NOTE: Datepickers are Readonly in properties, meaning you cannot directly attach CSS to them outside of built in
-// API - which only affects the input field in terms of selection of Date
 
 const disabledDate = ref(add(new Date(), { days: 5 }));
 export default {
@@ -53,7 +51,6 @@ export default {
       originalStartDate: new Date(),
       disabledDate: new Date(),
       disabledDays: {
-        //Can integrate so that there are disabled days, just leaving this open as a possibility
         dates: [],
       },
       newBookingHelper: '',
@@ -140,8 +137,7 @@ export default {
                 myEndYear -= 1;
                 myEndMonth = 11;
               }
-              if ( //december, october, augusti, july, may, march, january
-              // 11, 9, 7, 6, 4, 2, 0
+              if (
                 myEndMonth == 11 ||
                 myEndMonth == 9 ||
                 myEndMonth == 7 ||

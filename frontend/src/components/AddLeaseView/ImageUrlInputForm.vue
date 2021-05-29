@@ -39,10 +39,8 @@ export default {
   methods: {
     addImageUrl() {
       if (this.imageURL.length > 0) {
-        let emptyArray = [];
-        for (let image of this.imageURLs) {
-          emptyArray.push(image);
-        }
+        let emptyArray = []
+        console.log(this.imageURL);
         emptyArray.push(this.imageURL);
         this.$emit("updatedImgURLs", emptyArray);
         this.imageURL = "";

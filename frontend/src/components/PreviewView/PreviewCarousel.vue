@@ -22,12 +22,8 @@
   />
 </template>
 <script>
-//Implement Interaction with Arrow Buttons again in regards to Carousel Component
 export default {
   props: ['lease'],
-  data() {
-    return {};
-  },
   methods: {
     previousPicture() {
       let firstPicture = this.lease.imageURLs[0];

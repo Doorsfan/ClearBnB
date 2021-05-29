@@ -30,7 +30,6 @@
   <i @click="nextPicture" class="arrow right"></i>
 </template>
 <script>
-//Implement Interaction with Arrow Buttons again in regards to Carousel Component
 export default {
   props: ['myLease'],
   data() {

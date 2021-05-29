@@ -81,8 +81,7 @@ export default {
     title() {
       this.lease.title = this.title;
       store.commit("setLeaseToBuild", this.lease);
-    },
-    lease() {},
+    }
   },
   beforeMount() {
     if (this.$store.getters.getLeaseToBuild != null) {
@@ -101,6 +100,12 @@ export default {
     } else {
       this.lease.startDate = new Date();
       this.lease.endDate = new Date();
+    }
+  },
+  mounted(){
+    if(this.imageURLs.length > 0){
+      document.getElementsByClassName("mainDiv")[0].style.backgroundImage =
+        "url(" + this.imageURLs[0] + ")";
     }
   },
   data() {
@@ -173,48 +178,86 @@ export default {
       this.imageURLs = this.imageURLs.filter(function (value, index, arr) {
         return index != 0;
       });
-      this.lease.imageURLs = this.imageURLs;
+      let emptyArray = []
+      for(let image of this.imageURLs){
+        emptyArray.push(image);
+      }
+      this.lease.imageURLs = emptyArray;
       store.commit("setLeaseToBuild", this.lease);
-      document.getElementsByClassName("mainDiv")[0].style.backgroundImage =
+      if(emptyArray.length == 0){
+        document.getElementsByClassName("mainDiv")[0].style.backgroundImage =
         "url(" + "/public/house.jpg" + ")";
+      }
+      else {
+        document.getElementsByClassName("mainDiv")[0].style.backgroundImage =
+        "url(" + emptyArray[0] + ")";
+      }
     },
     removeSecondIMGinURLs() {
       this.imageURLs = this.imageURLs.filter(function (value, index, arr) {
         return index != 1;
       });
-      this.lease.imageURLs = this.imageURLs;
+      let emptyArray = []
+      for(let image of this.imageURLs){
+        emptyArray.push(image);
+      }
+      this.lease.imageURLs = emptyArray;
       store.commit("setLeaseToBuild", this.lease);
     },
     removeThirdIMGinURLs() {
       this.imageURLs = this.imageURLs.filter(function (value, index, arr) {
         return index != 2;
       });
-      this.lease.imageURLs = this.imageURLs;
+      let emptyArray = []
+      for(let image of this.imageURLs){
+        emptyArray.push(image);
+      }
+      this.lease.imageURLs = emptyArray;
       store.commit("setLeaseToBuild", this.lease);
     },
     removeFourthIMGinURLs() {
       this.imageURLs = this.imageURLs.filter(function (value, index, arr) {
         return index != 3;
       });
-      this.lease.imageURLs = this.imageURLs;
+      let emptyArray = []
+      for(let image of this.imageURLs){
+        emptyArray.push(image);
+      }
+      this.lease.imageURLs = emptyArray;
       store.commit("setLeaseToBuild", this.lease);
     },
     removeFifthIMGinURLs() {
       this.imageURLs = this.imageURLs.filter(function (value, index, arr) {
         return index != 4;
       });
-      this.lease.imageURLs = this.imageURLs;
+      let emptyArray = []
+      for(let image of this.imageURLs){
+        emptyArray.push(image);
+      }
+      this.lease.imageURLs = emptyArray;
       store.commit("setLeaseToBuild", this.lease);
     },
     updateIMGUrls(newImageURLs) {
       if(this.imageURLs == ''){
         this.imageURLs = []
       }
-      this.imageURLs.push(newImageURLs);
+      let emptyArray = []
+      for(let image of newImageURLs){
+        emptyArray.push(image);
+      }
+      for(let oldImage of this.imageURLs){
+        emptyArray.push(oldImage);
+      }
+
+      newImageURLs = newImageURLs.flat();
+
+      this.imageURLs = emptyArray;
       this.lease.imageURLs = this.imageURLs;
       store.commit("setLeaseToBuild", this.lease);
-      document.getElementsByClassName("mainDiv")[0].style.backgroundImage =
-        "url(" + this.imageURLs[0][0] + ")";
+      if(this.imageURLs.length > 0){
+        document.getElementsByClassName("mainDiv")[0].style.backgroundImage =
+        "url(" + this.imageURLs[0] + ")";
+      }
     },
     updateTitle(newTitle) {
       this.title = newTitle;

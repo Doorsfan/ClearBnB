@@ -16,9 +16,6 @@
     </router-link>
   </div>
 </template>
-<script setup="">
-import Carousel from '../Carousel.vue';
-</script>
 <script>
 export default {
   props: ['pastBooking'],

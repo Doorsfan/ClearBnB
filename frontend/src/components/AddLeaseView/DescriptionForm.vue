@@ -12,7 +12,6 @@
   </div>
 </template>
 <script>
-//Between Components, utilize Emit - Between Views, utilize saving into the Database
 export default {
   emits: ["updatedDescription"],
   mounted() {

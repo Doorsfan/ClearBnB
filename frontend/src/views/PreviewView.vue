@@ -224,7 +224,7 @@ export default {
     async PublishLease() {
       let leaseToPublish = this.$store.getters.getLeaseToBuild;
       let myURLs = [];
-      for (let image of leaseToPublish.imageURLs[0]) {
+      for (let image of leaseToPublish.imageURLs) {
         myURLs.push(image);
       }
       myURLs.flat();
@@ -263,6 +263,7 @@ export default {
         body: JSON.stringify(completeLeash),
       });
       let response = await res.json();
+      alert("Thank you for putting up a lease at ClearBnB!");
     },
   },
   mounted() {

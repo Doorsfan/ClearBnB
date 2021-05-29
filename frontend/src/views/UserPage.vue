@@ -218,7 +218,6 @@ export default {
     this.currentUserInfo = result;
     this.profits = 0;
 
-    //Load from the DB all the Bookings that are tied to this users userId based on the userInfo
     if (this.user.username == 'admin@ClearBnB.se') {
       let secondRes = await fetch('/rest/adminBookings', {
         method: 'GET',

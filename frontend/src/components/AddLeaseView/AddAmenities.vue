@@ -46,10 +46,6 @@
 </template>
 <script>
 export default {
-  //Åtgärd:
-  // Parprogrammera från och med idag 13:00, sprida kunskap, sprida kompetens, öka produktivitet
-  // Sprint 2 - Delegera annan Scrum Master, Mjukt förslag: Syftet är att en person som är aktiv men inte är lika produktiv ska kunna kan få en större förankring i projektet - vilket kan hjälpa produktiviteten av arbetet
-  //
   emits: [
     "updateWifi",
     "updateKitchen",

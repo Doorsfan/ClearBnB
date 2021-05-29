@@ -236,7 +236,6 @@
 
 <script setup="">
 import DatepickerForAvailableDates from '../components/AddLeaseView/DatepickerForAvailableDates.vue';
-import BookingViewCarousel from '../components/BookingView/BookingViewCarousel.vue';
 import DatepickerForBookingView from '../components/BookingView/DatepickerForBookingView.vue';
 </script>
 <script>

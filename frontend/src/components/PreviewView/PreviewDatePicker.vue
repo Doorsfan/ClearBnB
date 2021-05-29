@@ -31,8 +31,6 @@ import Datepicker from 'vue3-datepicker';
 </script>
 <script>
 import { ref } from 'vue';
-//NOTE: Datepickers are Readonly in properties, meaning you cannot directly attach CSS to them outside of built in
-// API - which only affects the input field in terms of selection of Date
 export default {
   props: ['leaseStartDate', 'leaseEndDate'],
   beforeMounted() {
@@ -53,14 +51,12 @@ export default {
       endDate: ref(new Date()),
       relevantLease: this.$store.getters.getLeaseToBuild,
       disabledDays: {
-        //Can integrate so that there are disabled days, just leaving this open as a possibility
         dates: [],
       },
     };
   },
   methods: {
     addDisabledDate(dateString) {
-      //"2021-05-20"
       this.disabledDays.dates.push(new Date(dateString));
     },
   },
