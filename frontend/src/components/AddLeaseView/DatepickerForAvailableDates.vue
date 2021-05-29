@@ -18,10 +18,10 @@
   </div>
 </template>
 <script setup="">
-import Datepicker from "vue3-datepicker";
+import Datepicker from 'vue3-datepicker';
 </script>
 <script>
-import { ref } from "vue";
+import { ref } from 'vue';
 import Lease from '../../components/Lease.vue';
 
 let thisDay = ref(new Date());
@@ -41,50 +41,50 @@ export default {
   watch: {
     endDate() {
       let latestLease = this.$store.getters.getLeaseToBuild;
-      if(latestLease == null){
+      if (latestLease == null) {
         latestLease = new Lease(
-              this.$store.getters.getCurrentUser.id,
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              ""
-            )
+          this.$store.getters.getCurrentUser.id,
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          ''
+        );
       }
       latestLease.endDate = this.endDate;
-      this.$store.commit("setLeaseToBuild", latestLease);
+      this.$store.commit('setLeaseToBuild', latestLease);
     },
     startDate() {
       let latestLease = this.$store.getters.getLeaseToBuild;
-      if(latestLease == null){
+      if (latestLease == null) {
         latestLease = new Lease(
-              this.$store.getters.getCurrentUser.id,
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              ""
-            )
+          this.$store.getters.getCurrentUser.id,
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          ''
+        );
       }
       latestLease.startDate = this.startDate;
-      this.$store.commit("setLeaseToBuild", latestLease);
+      this.$store.commit('setLeaseToBuild', latestLease);
     },
     disabledDays() {
-      this.$emit("updatedDisabledDays", this.disabledDays);
+      this.$emit('updatedDisabledDays', this.disabledDays);
     },
   },
   methods: {
@@ -95,7 +95,6 @@ export default {
 };
 </script>
 <style scoped>
-
 .AvailableToP {
   margin-top: 30px;
 }
@@ -103,9 +102,9 @@ p {
   margin: 2px;
   font-weight: bolder;
 }
-.myDatePickerDiv{
-  width:max-content;
-  margin-left:auto;
-  margin-right:auto;
+.myDatePickerDiv {
+  width: max-content;
+  margin-left: auto;
+  margin-right: auto;
 }
 </style>

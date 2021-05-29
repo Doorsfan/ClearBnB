@@ -104,7 +104,6 @@ export default {
         getDisabledDatesFunction();
         thisContext.$emit('newDisabledDates', thisContext.disabledDays.dates);
       }, 100);
-
     },
     async getDisabledDates() {
       let res = await fetch('/rest/bookings');
@@ -132,7 +131,9 @@ export default {
           let differenceInDays = differenceInTime / (1000 * 3600 * 24);
           while (differenceInDays > -1) {
             differenceInDays -= 1;
-            this.disabledDays.dates.push(new Date(myEndYear, myEndMonth, myEndDay));
+            this.disabledDays.dates.push(
+              new Date(myEndYear, myEndMonth, myEndDay)
+            );
             if (myEndDay == 1) {
               myEndMonth -= 1;
               if (myEndMonth == -1) {
@@ -149,17 +150,14 @@ export default {
                 myEndMonth == 0
               ) {
                 myEndDay = 31;
-              }
-              else if ( 
-                myEndMonth == 10 
-                || myEndMonth == 8 
-                || myEndMonth == 5 
-                || myEndMonth == 3 
-              ) 
-              {
+              } else if (
+                myEndMonth == 10 ||
+                myEndMonth == 8 ||
+                myEndMonth == 5 ||
+                myEndMonth == 3
+              ) {
                 myEndDay = 30;
-              }
-              else {
+              } else {
                 myEndDay = 28;
               }
             } else {
@@ -168,13 +166,13 @@ export default {
           }
         }
       }
-    }
+    },
   },
 };
 </script>
 <style scoped>
-*{
-  font-family:'mukta';
+* {
+  font-family: 'mukta';
 }
 div {
   width: max-content;

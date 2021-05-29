@@ -58,28 +58,28 @@
 </template>
 <script>
 export default {
-  emits: ["updateChosenHousing", "updateChosenSize"],
+  emits: ['updateChosenHousing', 'updateChosenSize'],
   mounted() {
     if (this.$store.getters.getLeaseToBuild != null) {
       this.firstRowChoice = this.$store.getters.getLeaseToBuild.typeOfHousing;
       this.secondRowChoice =
         this.$store.getters.getLeaseToBuild.entireResidence == true
-          ? "Entire residence"
-          : "Part";
+          ? 'Entire residence'
+          : 'Part';
     }
   },
   data() {
     return {
-      firstRowChoice: "",
-      secondRowChoice: "",
+      firstRowChoice: '',
+      secondRowChoice: '',
     };
   },
   methods: {
     updateChosenHousing() {
-      this.$emit("updateChosenHousing", this.firstRowChoice);
+      this.$emit('updateChosenHousing', this.firstRowChoice);
     },
     updateChosenSize() {
-      this.$emit("updateChosenSize", this.secondRowChoice);
+      this.$emit('updateChosenSize', this.secondRowChoice);
     },
   },
 };
@@ -111,6 +111,4 @@ label {
   margin-right: 5px;
   margin-left: 5px;
 }
-
-
 </style>

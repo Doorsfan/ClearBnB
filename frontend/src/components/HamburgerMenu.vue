@@ -51,11 +51,11 @@ export default {
   display: flex;
   flex-direction: column;
   border-right: 2px solid #00200c;
-  font-family:'mukta';
+  font-family: 'mukta';
 }
 .router-links p {
   width: 180px;
-  font-family:'mukta';
+  font-family: 'mukta';
 }
 .router-links p a {
   display: inline-block;
@@ -66,7 +66,7 @@ export default {
   font-weight: bold;
   width: 100%;
   padding: 20px 0 20px 20px;
-  font-family:'mukta';
+  font-family: 'mukta';
 }
 .fa {
   font-size: 40px;
@@ -86,6 +86,6 @@ export default {
 }
 .router-links p .router-link-active {
   color: blueviolet;
-  font-family:'mukta';
+  font-family: 'mukta';
 }
 </style>

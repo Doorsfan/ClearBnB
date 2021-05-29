@@ -25,24 +25,24 @@ export default {
 <style scoped>
 p {
   color: #029ebb;
-  font-size:20px;
+  font-size: 20px;
 }
-*{
-  font-family:'mukta';
+* {
+  font-family: 'mukta';
 }
 .bedsInputForm {
   width: 150px;
   padding: 7.5px 30.4px;
-  text-align:center;
-  font-size:18px;
-  margin:3px;
-  margin-left:auto;
-  margin-right:auto;
+  text-align: center;
+  font-size: 18px;
+  margin: 3px;
+  margin-left: auto;
+  margin-right: auto;
 }
 .bedsInputText {
-  width:max-content;
-  text-align:center;
-  margin-left:auto;
-  margin-right:auto;
+  width: max-content;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
 }
 </style>

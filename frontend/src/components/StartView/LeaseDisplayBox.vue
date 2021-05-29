@@ -96,7 +96,7 @@ a:visited {
   margin-bottom: 10px;
   display: inline-block;
   min-height: max-content;
-  border-radius:17px;
+  border-radius: 17px;
 }
 .leftArrowBox {
   display: inline-block;
@@ -175,18 +175,21 @@ a:visited {
     margin-top: 10px;
     margin-bottom: 10px;
   }
-  .rightArrowBox, .leftArrowBox{
+  .rightArrowBox,
+  .leftArrowBox {
     top: -270px;
   }
 }
 
 @media only screen and (max-width: 325px) {
-  .rightArrowBox, .leftArrowBox{
+  .rightArrowBox,
+  .leftArrowBox {
     top: -310px;
   }
 }
 @media only screen and (max-width: 300px) {
-  .rightArrowBox, .leftArrowBox{
+  .rightArrowBox,
+  .leftArrowBox {
     top: -380px;
   }
 }

@@ -63,8 +63,8 @@ export default {
 };
 </script>
 <style scoped>
-*{
-  font-family:'mukta';
+* {
+  font-family: 'mukta';
 }
 .myDatePickerDiv {
   width: 210px;

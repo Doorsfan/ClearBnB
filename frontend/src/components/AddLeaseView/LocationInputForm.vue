@@ -14,7 +14,7 @@
 </template>
 <script>
 export default {
-  emits: ["updatedLocation"],
+  emits: ['updatedLocation'],
   mounted() {
     if (this.$store.getters.getLeaseToBuild != null) {
       this.location = this.$store.getters.getLeaseToBuild.location;
@@ -35,9 +35,9 @@ export default {
 </script>
 <style scoped>
 input {
-  text-align:center;
+  text-align: center;
   padding: 7.5px 30.4px;
-  font-size:18px;
+  font-size: 18px;
 }
 .residenceInnerDiv {
   width: max-content;
@@ -61,8 +61,8 @@ input {
   input {
     padding: 5px;
   }
-  .locationDiv{
-    width:100vw;
+  .locationDiv {
+    width: 100vw;
   }
 }
 </style>

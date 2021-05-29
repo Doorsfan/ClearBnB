@@ -5,9 +5,8 @@
   </div>
 </template>
 <script>
-
 export default {
-  props: ["myLease"],
+  props: ['myLease'],
   methods: {
     previousPicture() {
       let firstPicture = this.myLease.imageURLs[0];
@@ -26,33 +25,33 @@ export default {
 </script>
 <style scoped>
 * {
-  font-family: "mukta";
+  font-family: 'mukta';
 }
 .imageCarousel {
   position: relative;
   height: 30vh;
-  max-height:500px;
+  max-height: 500px;
   width: 50vw;
-  max-width:1200px;
+  max-width: 1200px;
   margin: 5px;
   display: inline-block;
 }
 img {
   object-fit: cover;
-  object-position:center;
+  object-position: center;
   height: 30vh;
-  max-height:500px;
+  max-height: 500px;
   width: 52vw;
-  max-width:1200px;
-  margin-left:auto;
-  margin-right:auto;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
   position: absolute;
   left: 0;
   -webkit-transition: opacity 0.7s ease-in-out;
   -moz-transition: opacity 0.7s ease-in-out;
   -o-transition: opacity 0.7s ease-in-out;
   transition: opacity 0.7s ease-in-out;
-  border-radius:15px;
+  border-radius: 15px;
 }
 @keyframes cyclingOpacity {
   0% {
@@ -96,8 +95,9 @@ img {
   }
 }
 @media only screen and (max-width: 475px) {
- img, .imageCarousel{
-   height: 150px;
- } 
+  img,
+  .imageCarousel {
+    height: 150px;
+  }
 }
 </style>

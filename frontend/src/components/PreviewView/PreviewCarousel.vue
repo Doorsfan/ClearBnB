@@ -41,8 +41,8 @@ export default {
 };
 </script>
 <style scoped>
-*{
-  font-family:'mukta';
+* {
+  font-family: 'mukta';
 }
 .mainDiv {
   margin-top: 10px;

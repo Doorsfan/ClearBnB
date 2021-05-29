@@ -11,8 +11,16 @@
         class="leaseTitle"
       />
       <p class="myLocation">Location</p>
-      <LocationInputForm  class="locDiv" v-model="location" @updatedLocation="updateLocation" />
-      <DescriptionForm  class="descriptionTitle" v-model="description" @updatedDescription="updateDescription" />
+      <LocationInputForm
+        class="locDiv"
+        v-model="location"
+        @updatedLocation="updateLocation"
+      />
+      <DescriptionForm
+        class="descriptionTitle"
+        v-model="description"
+        @updatedDescription="updateDescription"
+      />
       <div class="inputForBedsDiv">
         <InputForPricingBedAndPeople
           @updateBeds="updateNrOfBeds"
@@ -54,34 +62,34 @@
   </div>
 </template>
 <script setup="">
-import DatepickerForAvailableDates from "../components/AddLeaseView/DatepickerForAvailableDates.vue";
-import DescriptionForm from "../components/AddLeaseView/DescriptionForm.vue";
-import HousingRadioButtons from "../components/AddLeaseView/HousingRadioButtons.vue";
-import InputForPricingBedAndPeople from "../components/AddLeaseView/InputForPricingBedAndPeople.vue";
-import ImageUrlInputForm from "../components/AddLeaseView/ImageUrlInputForm.vue";
-import LocationInputForm from "../components/AddLeaseView/LocationInputForm.vue";
-import AddAmenities from "../components/AddLeaseView/AddAmenities.vue";
-import Lease from "../components/Lease.vue";
-import ImageBox from "../components/AddLeaseView/ImageBox.vue";
-import store from "../store.js";
+import DatepickerForAvailableDates from '../components/AddLeaseView/DatepickerForAvailableDates.vue';
+import DescriptionForm from '../components/AddLeaseView/DescriptionForm.vue';
+import HousingRadioButtons from '../components/AddLeaseView/HousingRadioButtons.vue';
+import InputForPricingBedAndPeople from '../components/AddLeaseView/InputForPricingBedAndPeople.vue';
+import ImageUrlInputForm from '../components/AddLeaseView/ImageUrlInputForm.vue';
+import LocationInputForm from '../components/AddLeaseView/LocationInputForm.vue';
+import AddAmenities from '../components/AddLeaseView/AddAmenities.vue';
+import Lease from '../components/Lease.vue';
+import ImageBox from '../components/AddLeaseView/ImageBox.vue';
+import store from '../store.js';
 </script>
 <script>
 export default {
-  name: "AddResidence",
+  name: 'AddResidence',
   components: [
-    "DatepickerForAvailableDates",
-    "DescriptionForm",
-    "HousingRadioButtons",
-    "InputForPricingBedAndPeople",
-    "LocationInputForm",
-    "AddAmenities",
-    "ImageBox",
+    'DatepickerForAvailableDates',
+    'DescriptionForm',
+    'HousingRadioButtons',
+    'InputForPricingBedAndPeople',
+    'LocationInputForm',
+    'AddAmenities',
+    'ImageBox',
   ],
   watch: {
     title() {
       this.lease.title = this.title;
-      store.commit("setLeaseToBuild", this.lease);
-    }
+      store.commit('setLeaseToBuild', this.lease);
+    },
   },
   beforeMount() {
     if (this.$store.getters.getLeaseToBuild != null) {
@@ -91,9 +99,9 @@ export default {
       this.description = latestLease.description;
       this.typeOfHousing = latestLease.typeOfHousing;
       if (latestLease.entireResidence == true) {
-        this.size = "Entire residence";
+        this.size = 'Entire residence';
       } else {
-        this.size = "Part";
+        this.size = 'Part';
       }
       this.amenities = latestLease.amenities;
       this.imageURLs = latestLease.imageURLs;
@@ -102,10 +110,10 @@ export default {
       this.lease.endDate = new Date();
     }
   },
-  mounted(){
-    if(this.imageURLs.length > 0){
-      document.getElementsByClassName("mainDiv")[0].style.backgroundImage =
-        "url(" + this.imageURLs[0] + ")";
+  mounted() {
+    if (this.imageURLs.length > 0) {
+      document.getElementsByClassName('mainDiv')[0].style.backgroundImage =
+        'url(' + this.imageURLs[0] + ')';
     }
   },
   data() {
@@ -115,54 +123,54 @@ export default {
         this.$store.getters.getLeaseToBuild == null
           ? new Lease(
               this.$store.getters.getCurrentUser.id,
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              ""
+              '',
+              '',
+              '',
+              '',
+              '',
+              '',
+              '',
+              '',
+              '',
+              '',
+              '',
+              ''
             )
           : this.$store.getters.getLeaseToBuild,
-      title: "",
+      title: '',
       location:
         this.$store.getters.getLeaseToBuild == null
-          ? ""
+          ? ''
           : this.$store.getters.getLeaseToBuild.location,
       description:
         this.$store.getters.getLeaseToBuild == null
-          ? ""
+          ? ''
           : this.$store.getters.getLeaseToBuild.description,
       typeOfHousing:
         this.$store.getters.getLeaseToBuild == null
-          ? ""
+          ? ''
           : this.$store.getters.getLeaseToBuild.typeOfHousing,
       size:
         this.$store.getters.getLeaseToBuild == null
-          ? ""
+          ? ''
           : this.$store.getters.getLeaseToBuild.entireResidence,
       startDate: new Date(),
       endDate: new Date(),
       price:
         this.$store.getters.getLeaseToBuild == null
-          ? ""
+          ? ''
           : this.$store.getters.getLeaseToBuild.price,
       maxGuests:
         this.$store.getters.getLeaseToBuild == null
-          ? ""
+          ? ''
           : this.$store.getters.getLeaseToBuild.maxGuests,
       beds:
         this.$store.getters.getLeaseToBuild == null
-          ? ""
+          ? ''
           : this.$store.getters.getLeaseToBuild.beds,
       amenities:
         this.$store.getters.getLeaseToBuild == null
-          ? ""
+          ? ''
           : this.$store.getters.getLeaseToBuild.amenities,
       hasWifi: false,
       hasKitchen: false,
@@ -178,74 +186,73 @@ export default {
       this.imageURLs = this.imageURLs.filter(function (value, index, arr) {
         return index != 0;
       });
-      let emptyArray = []
-      for(let image of this.imageURLs){
+      let emptyArray = [];
+      for (let image of this.imageURLs) {
         emptyArray.push(image);
       }
       this.lease.imageURLs = emptyArray;
-      store.commit("setLeaseToBuild", this.lease);
-      if(emptyArray.length == 0){
-        document.getElementsByClassName("mainDiv")[0].style.backgroundImage =
-        "url(" + "/public/house.jpg" + ")";
-      }
-      else {
-        document.getElementsByClassName("mainDiv")[0].style.backgroundImage =
-        "url(" + emptyArray[0] + ")";
+      store.commit('setLeaseToBuild', this.lease);
+      if (emptyArray.length == 0) {
+        document.getElementsByClassName('mainDiv')[0].style.backgroundImage =
+          'url(' + '/public/house.jpg' + ')';
+      } else {
+        document.getElementsByClassName('mainDiv')[0].style.backgroundImage =
+          'url(' + emptyArray[0] + ')';
       }
     },
     removeSecondIMGinURLs() {
       this.imageURLs = this.imageURLs.filter(function (value, index, arr) {
         return index != 1;
       });
-      let emptyArray = []
-      for(let image of this.imageURLs){
+      let emptyArray = [];
+      for (let image of this.imageURLs) {
         emptyArray.push(image);
       }
       this.lease.imageURLs = emptyArray;
-      store.commit("setLeaseToBuild", this.lease);
+      store.commit('setLeaseToBuild', this.lease);
     },
     removeThirdIMGinURLs() {
       this.imageURLs = this.imageURLs.filter(function (value, index, arr) {
         return index != 2;
       });
-      let emptyArray = []
-      for(let image of this.imageURLs){
+      let emptyArray = [];
+      for (let image of this.imageURLs) {
         emptyArray.push(image);
       }
       this.lease.imageURLs = emptyArray;
-      store.commit("setLeaseToBuild", this.lease);
+      store.commit('setLeaseToBuild', this.lease);
     },
     removeFourthIMGinURLs() {
       this.imageURLs = this.imageURLs.filter(function (value, index, arr) {
         return index != 3;
       });
-      let emptyArray = []
-      for(let image of this.imageURLs){
+      let emptyArray = [];
+      for (let image of this.imageURLs) {
         emptyArray.push(image);
       }
       this.lease.imageURLs = emptyArray;
-      store.commit("setLeaseToBuild", this.lease);
+      store.commit('setLeaseToBuild', this.lease);
     },
     removeFifthIMGinURLs() {
       this.imageURLs = this.imageURLs.filter(function (value, index, arr) {
         return index != 4;
       });
-      let emptyArray = []
-      for(let image of this.imageURLs){
+      let emptyArray = [];
+      for (let image of this.imageURLs) {
         emptyArray.push(image);
       }
       this.lease.imageURLs = emptyArray;
-      store.commit("setLeaseToBuild", this.lease);
+      store.commit('setLeaseToBuild', this.lease);
     },
     updateIMGUrls(newImageURLs) {
-      if(this.imageURLs == ''){
-        this.imageURLs = []
+      if (this.imageURLs == '') {
+        this.imageURLs = [];
       }
-      let emptyArray = []
-      for(let image of newImageURLs){
+      let emptyArray = [];
+      for (let image of newImageURLs) {
         emptyArray.push(image);
       }
-      for(let oldImage of this.imageURLs){
+      for (let oldImage of this.imageURLs) {
         emptyArray.push(oldImage);
       }
 
@@ -253,55 +260,55 @@ export default {
 
       this.imageURLs = emptyArray;
       this.lease.imageURLs = this.imageURLs;
-      store.commit("setLeaseToBuild", this.lease);
-      if(this.imageURLs.length > 0){
-        document.getElementsByClassName("mainDiv")[0].style.backgroundImage =
-        "url(" + this.imageURLs[0] + ")";
+      store.commit('setLeaseToBuild', this.lease);
+      if (this.imageURLs.length > 0) {
+        document.getElementsByClassName('mainDiv')[0].style.backgroundImage =
+          'url(' + this.imageURLs[0] + ')';
       }
     },
     updateTitle(newTitle) {
       this.title = newTitle;
       this.lease.title = this.title;
-      store.commit("setLeaseToBuild", this.lease);
+      store.commit('setLeaseToBuild', this.lease);
     },
     updateLocation(newLocation) {
       this.location = newLocation;
       this.lease.setLocation(this.location);
-      store.commit("setLeaseToBuild", this.lease);
+      store.commit('setLeaseToBuild', this.lease);
     },
     updateDescription(newDescription) {
       this.description = newDescription;
       this.lease.setDescription(this.description);
-      store.commit("setLeaseToBuild", this.lease);
+      store.commit('setLeaseToBuild', this.lease);
     },
     updateChosenHousing(chosenHousing) {
       this.typeOfHousing = chosenHousing;
       this.lease.setTypeOfHousing(this.typeOfHousing);
-      store.commit("setLeaseToBuild", this.lease);
+      store.commit('setLeaseToBuild', this.lease);
     },
     updateChosenSize(chosenSize) {
       this.size = chosenSize;
-      if (this.size == "Part") {
+      if (this.size == 'Part') {
         this.lease.setEntireResidence(false);
       } else {
         this.lease.setEntireResidence(true);
       }
-      store.commit("setLeaseToBuild", this.lease);
+      store.commit('setLeaseToBuild', this.lease);
     },
     updatePrice(updatedPrice) {
       this.price = updatedPrice;
       this.lease.setPrice(this.price);
-      store.commit("setLeaseToBuild", this.lease);
+      store.commit('setLeaseToBuild', this.lease);
     },
     updateNrOfMaxGuests(maxPeople) {
       this.maxPeople = maxPeople;
       this.lease.setMaxGuests(this.maxPeople);
-      store.commit("setLeaseToBuild", this.lease);
+      store.commit('setLeaseToBuild', this.lease);
     },
     updateNrOfBeds(amountOfBeds) {
       this.nrOfBeds = amountOfBeds;
       this.lease.setBeds(this.nrOfBeds);
-      store.commit("setLeaseToBuild", this.lease);
+      store.commit('setLeaseToBuild', this.lease);
     },
     updateWifi(hasWifi) {
       this.hasWifi = hasWifi;
@@ -329,98 +336,92 @@ export default {
     updateAmenities() {
       this.amenities = [];
       if (this.hasWifi) {
-        this.amenities.push("wifi: true");
+        this.amenities.push('wifi: true');
       } else {
-        this.amenities.push("wifi: false");
+        this.amenities.push('wifi: false');
       }
       if (this.hasKitchen) {
-        this.amenities.push("kitchen: true");
+        this.amenities.push('kitchen: true');
       } else {
-        this.amenities.push("kitchen: false");
+        this.amenities.push('kitchen: false');
       }
       if (this.hasWasher) {
-        this.amenities.push("washer: true");
+        this.amenities.push('washer: true');
       } else {
-        this.amenities.push("washer: false");
+        this.amenities.push('washer: false');
       }
       if (this.hasHeating) {
-        this.amenities.push("heating: true");
+        this.amenities.push('heating: true');
       } else {
-        this.amenities.push("heating: false");
+        this.amenities.push('heating: false');
       }
       if (this.hasAirConditioner) {
-        this.amenities.push("airConditioner: true");
+        this.amenities.push('airConditioner: true');
       } else {
-        this.amenities.push("airConditioner: false");
+        this.amenities.push('airConditioner: false');
       }
-      if(this.hasWasher){
-        this.amenities.push("washer: true");
+      if (this.hasWasher) {
+        this.amenities.push('washer: true');
+      } else {
+        this.amenities.push('washer: false');
       }
-      else{
-        this.amenities.push("washer: false")
+      if (this.hasHeating) {
+        this.amenities.push('heating: true');
+      } else {
+        this.amenities.push('heating: false');
       }
-      if(this.hasHeating){
-        this.amenities.push("heating: true")
+      if (this.hasAirConditioner) {
+        this.amenities.push('airConditioner: true');
+      } else {
+        this.amenities.push('airConditioner: false');
       }
-      else{
-        this.amenities.push("heating: false")
-      }
-      if(this.hasAirConditioner){
-        this.amenities.push("airConditioner: true")
-      }
-      else{
-        this.amenities.push("airConditioner: false")
-      }
-      this.lease.amenities = this.amenities
-      store.commit('setLeaseToBuild', this.lease)
-    }
-  }
-}
-
+      this.lease.amenities = this.amenities;
+      store.commit('setLeaseToBuild', this.lease);
+    },
+  },
+};
 </script>
 <style scoped>
-@media only screen and (min-width: 1200px){
-  .greyBackgroundDiv{
+@media only screen and (min-width: 1200px) {
+  .greyBackgroundDiv {
     max-width: 1500px;
   }
 }
 
-input{
-  text-align:center;
+input {
+  text-align: center;
 }
-.inputForLocationArea{
+.inputForLocationArea {
   padding: 7.5px 30.4px;
   font-size: 18px;
   border-radius: 5px;
-  border:1px solid grey ;
-  text-align:initial;
+  border: 1px solid grey;
+  text-align: initial;
   margin-bottom: 15px;
 }
-.descriptionTitle{
+.descriptionTitle {
   font-family: 'mukta';
   font-size: 20px;
 }
-.myLocation{
+.myLocation {
   font-family: 'mukta';
   font-size: 20px;
 }
-.myTitle{
-
+.myTitle {
   font-family: 'mukta';
   font-size: 20px;
 }
-.addResidenceHeader{
+.addResidenceHeader {
   font-size: 50px;
-    
 }
-.imageURLInputDiv{
-  margin-bottom:10px;
+.imageURLInputDiv {
+  margin-bottom: 10px;
 }
 .buttonDiv {
   margin: 5px;
-  padding-bottom:10px;
+  padding-bottom: 10px;
 }
-.previewButton{
+.previewButton {
   width: 120px;
   height: 50px;
   padding: 10px 20px;
@@ -433,69 +434,69 @@ input{
   font-size: 18px;
   margin-right: 10px;
   margin-left: 10px;
-  text-decoration:none;
+  text-decoration: none;
 }
-.datePickerDiv{
+.datePickerDiv {
   position: inherit;
-  margin:10px;
-  padding-right:18px;
-  padding-bottom:10px;
+  margin: 10px;
+  padding-right: 18px;
+  padding-bottom: 10px;
 }
 p {
   font-weight: bolder;
   margin: 3px;
 }
-.greyBackgroundDiv{
-  width:90vw;
-  margin-top:20px;
-  background-color:rgba(255, 255, 255, 0.9);
-  padding:100px;
+.greyBackgroundDiv {
+  width: 90vw;
+  margin-top: 20px;
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 100px;
   margin: 0px;
   padding: 5px;
   padding-top: 20px;
   padding-bottom: 20px;
   max-width: 1200px;
-  margin-left:auto;
-  margin-right:auto;
+  margin-left: auto;
+  margin-right: auto;
 }
 .mainDiv {
   padding-left: 5vw;
   padding-right: 5vw;
   padding-bottom: 200px;
   padding-top: 2.5vh;
-  background-image: url("/public/house.jpg");
+  background-image: url('/public/house.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   opacity: 0.8;
   height: max-content;
   width: 100vw;
   background-attachment: fixed;
-  overflow-x:hidden;
-  min-height:900px;
-  align-items:center;
-  align-self:center;
-  text-align:center;
-  background-position:center;
+  overflow-x: hidden;
+  min-height: 900px;
+  align-items: center;
+  align-self: center;
+  text-align: center;
+  background-position: center;
   font-family: 'mukta';
   font-weight: bold;
   font-size: 17px;
 }
 .inputForBedsDiv {
   margin-left: auto;
-  margin-right:auto;
+  margin-right: auto;
   padding-bottom: 10px;
   padding-top: 10px;
   margin-top: 5px;
   margin-bottom: 5px;
 }
 
-@media only screen and (max-width: 350px){
+@media only screen and (max-width: 350px) {
   p {
-    display:block;
+    display: block;
     width: 220px;
-    margin-left:auto;
-    margin-right:auto;
-    text-align:center;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
   }
   input {
     padding: 5px;
@@ -506,7 +507,7 @@ p {
 <!--Styling for all subcomponents-->
 <style>
 @media only screen and (max-width: 500px) {
-  #app > main > div > div > div.buttonDiv > a{
+  #app > main > div > div > div.buttonDiv > a {
     border-radius: 10px;
   }
 }
@@ -514,7 +515,7 @@ p {
 .inputForLocationArea,
 .leaseTitle {
   padding: 11.2px 22.4px;
-  font-family: "mukta", sans-serif;
+  font-family: 'mukta', sans-serif;
   font-size: 18px;
   border-radius: 5px;
   border: 1px solid grey;
@@ -523,10 +524,10 @@ p {
 }
 @media only screen and (min-width: 1330px) {
   .inputForLocationArea,
-  .leaseTitle{
+  .leaseTitle {
     width: 400px !important;
   }
-  .descriptionInput{
+  .descriptionInput {
     width: 800px !important;
   }
   .leaseTitle {

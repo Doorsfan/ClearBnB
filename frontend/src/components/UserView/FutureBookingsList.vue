@@ -39,8 +39,8 @@ export default {
 * {
   font-family: 'mukta';
   color: black;
-  font-weight:bold;
-  text-decoration:none;
+  font-weight: bold;
+  text-decoration: none;
   text-decoration-color: white;
 }
 .cancelButton {
@@ -52,17 +52,17 @@ export default {
   color: white;
   cursor: pointer;
   -webkit-text-stroke: solid 3px black;
-  border-radius:10px;
+  border-radius: 10px;
 }
 
 .firstImage {
   object-fit: cover;
-  object-position:center;
-  width:50vw;
+  object-position: center;
+  width: 50vw;
   max-width: 900px;
   height: 700px;
-  max-height:30vh;
-  border-radius:10px;
+  max-height: 30vh;
+  border-radius: 10px;
 }
 .mainBoxDiv {
   margin-left: auto;
@@ -72,8 +72,8 @@ export default {
   margin-top: 10px;
   margin-bottom: 10px;
   background-color: rgba(255, 255, 255, 0.9);
-  border-radius:10px;
-  max-width:1200px;
+  border-radius: 10px;
+  max-width: 1200px;
 }
 .titleDiv {
   text-align: center;

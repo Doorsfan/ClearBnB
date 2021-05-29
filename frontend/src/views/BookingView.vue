@@ -442,7 +442,7 @@ export default {
           let myEndDay = Number(mySplitEndDate[2]);
 
           let takenDay = '';
-          
+
           let date1 = new Date(myStartYear, myStartMonth, myStartDay);
           let date2 = new Date(myEndYear, myEndMonth, myEndDay);
           let differenceInTime = date2.getTime() - date1.getTime();
@@ -466,17 +466,14 @@ export default {
                 myEndMonth == 0
               ) {
                 myEndDay = 31;
-              }
-              else if ( 
-                myEndMonth == 10 
-                || myEndMonth == 8 
-                || myEndMonth == 5 
-                || myEndMonth == 3 
-              ) 
-              {
+              } else if (
+                myEndMonth == 10 ||
+                myEndMonth == 8 ||
+                myEndMonth == 5 ||
+                myEndMonth == 3
+              ) {
                 myEndDay = 30;
-              }
-              else {
+              } else {
                 myEndDay = 28;
               }
             } else {
