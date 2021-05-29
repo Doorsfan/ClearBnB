@@ -204,7 +204,7 @@
           </div>
           <div class="publishButtonDiv">
             <button
-              v-if="$store.getters.getLeaseToBuild.imageURLs.length > 0"
+              v-if="$store.getters.getLeaseToBuild.imageURLs.length > 0 && previewStartYear <= previewEndYear && previewStartMonth <= previewEndMonth && previewStartDate <= previewEndDate"
               @click="PublishLease"
               class="publishButton"
               type="button"
@@ -218,6 +218,9 @@
             class="errorBox"
           >
             Cannot Publish a Lease without a image URL added!
+          </div>
+          <div class="errorBox" v-if="!(previewStartYear <= previewEndYear && previewStartMonth <= previewEndMonth && previewStartDate <= previewEndDate)">
+            Cannot publish with negative date intervals!
           </div>
         </div>
       </div>
@@ -332,6 +335,12 @@ export default {
         }
       }
     }
+    this.previewStartYear = this.previewStartDate.getFullYear();
+    this.previewStartMonth = this.previewStartDate.getMonth();
+    this.previewStartDate = this.previewStartDate.getDate();
+    this.previewEndYear = this.previewEndDate.getFullYear();
+    this.previewEndMonth = this.previewEndDate.getMonth();
+    this.previewEndDate = this.previewEndDate.getDate();
   },
   data() {
     return {
@@ -339,6 +348,12 @@ export default {
       selectedNumberOfGuests: '',
       previewStartDate: '',
       previewEndDate: '',
+      previewStartYear: '',
+      previewStartMonth: '',
+      previewStartDate: '',
+      previewEndYear: '',
+      previewEndMonth: '',
+      previewEndDate: ''
     };
   },
 };
