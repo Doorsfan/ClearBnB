@@ -204,7 +204,7 @@
           </div>
           <div class="publishButtonDiv">
             <button
-              v-if="$store.getters.getLeaseToBuild.imageURLs.length > 0 && previewStartYear <= previewEndYear && previewStartMonth <= previewEndMonth && previewStartDate <= previewEndDate"
+              v-if="$store.getters.getLeaseToBuild.imageURLs.length > 0 && previewStartYear <= previewEndYear && previewStartMonth <= previewEndMonth && previewStartDay <= previewEndDay"
               @click="PublishLease"
               class="publishButton"
               type="button"
@@ -350,10 +350,10 @@ export default {
       previewEndDate: '',
       previewStartYear: '',
       previewStartMonth: '',
-      previewStartDate: '',
+      previewStartDay: '',
       previewEndYear: '',
       previewEndMonth: '',
-      previewEndDate: ''
+      previewEndDay: ''
     };
   },
 };
