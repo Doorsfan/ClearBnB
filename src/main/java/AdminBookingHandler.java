@@ -1,7 +1,5 @@
 import express.Express;
 import models.AdminBooking;
-import models.Booking;
-import models.UserInfo;
 import nosqlite.utilities.Filter;
 
 import static nosqlite.Database.collection;
@@ -40,7 +38,6 @@ public class AdminBookingHandler {
         });
 
         app.delete("/rest/adminBookingsAsAdmin/:id", (req, res) -> {
-            System.out.println("The fed in id in adminBookingsDelete was: " + req.params("id"));
             AdminBooking adminBooking = collection("AdminBooking").findOne(Filter.eq("bookingId", req.params("id")));
             String myBookingId = adminBooking.getBookingId();
             collection("AdminBooking").deleteOne(Filter.eq("bookingId", req.params("id")));

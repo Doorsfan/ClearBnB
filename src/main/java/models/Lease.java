@@ -2,15 +2,12 @@ package models;
 
 import nosqlite.annotations.Document;
 import nosqlite.annotations.Id;
-
 import java.util.Arrays;
-import java.util.List;
 
 @Document
 public class Lease {
     @Id
     private String id;
-    //private String leaseId;
     private String ownerId;
     private String title;
     private String location;
@@ -143,7 +140,6 @@ public class Lease {
     public String toString() {
         return "Lease{" +
                 "id='" + id + '\'' +
-                //", leaseId='" + leaseId + '\'' +
                 ", ownerId='" + ownerId + '\'' +
                 ", title='" + title + '\'' +
                 ", location='" + location + '\'' +

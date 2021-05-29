@@ -40,11 +40,17 @@
           >
             Show Future Bookings
           </button>
-          <p v-if="showPastBookings" class="currentBookingsP">
+          <p v-if="showPastBookings && !user.username == 'admin@ClearBnB.se'" class="currentBookingsP">
             Your Past Bookings
           </p>
-          <p v-if="showFutureBookings" class="currentBookingsP">
+          <p v-if="showFutureBookings && !user.username == 'admin@ClearBnB.se'" class="currentBookingsP">
             Your Current Bookings
+          </p>
+          <p v-if="showPastBookings && user.username == 'admin@ClearBnB.se'" class="currentBookingsP">
+            All Past Bookings
+          </p>
+          <p v-if="showFutureBookings && user.username == 'admin@ClearBnB.se'" class="currentBookingsP">
+            All Current Bookings
           </p>
         </div>
       </div>
@@ -350,6 +356,7 @@ export default {
         body: JSON.stringify(newUserInfo),
       });
       let responseAsJson = await res.json();
+      alert("Your user information has been updated!");
     },
     switchToPastDisplay() {
       if (this.showFutureBookings == true) {

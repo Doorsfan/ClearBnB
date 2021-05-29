@@ -1,8 +1,6 @@
 import express.Express;
-import models.User;
 import models.UserInfo;
 import nosqlite.utilities.Filter;
-
 import static nosqlite.Database.collection;
 
 public class UserInfoHandler {

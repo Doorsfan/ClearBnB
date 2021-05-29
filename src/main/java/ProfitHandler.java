@@ -1,12 +1,7 @@
 import express.Express;
-import models.Booking;
 import models.Profit;
-import models.UserInfo;
-import nosqlite.utilities.Filter;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import static nosqlite.Database.collection;
 
 public class ProfitHandler {
