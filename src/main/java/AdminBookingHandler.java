@@ -1,7 +1,5 @@
 import express.Express;
 import models.AdminBooking;
-import models.Booking;
-import models.UserInfo;
 import nosqlite.utilities.Filter;
 
 import static nosqlite.Database.collection;

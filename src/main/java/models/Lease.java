@@ -4,7 +4,6 @@ import nosqlite.annotations.Document;
 import nosqlite.annotations.Id;
 
 import java.util.Arrays;
-import java.util.List;
 
 @Document
 public class Lease {

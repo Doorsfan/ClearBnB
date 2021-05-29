@@ -2,9 +2,6 @@ package models;
 
 import nosqlite.annotations.Document;
 import nosqlite.annotations.Id;
-import java.util.ArrayList;
-import models.Booking;
-import models.UserInfo;
 
 // use with collections
 @Document

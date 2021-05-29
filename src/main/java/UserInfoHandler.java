@@ -1,5 +1,4 @@
 import express.Express;
-import models.User;
 import models.UserInfo;
 import nosqlite.utilities.Filter;
 
