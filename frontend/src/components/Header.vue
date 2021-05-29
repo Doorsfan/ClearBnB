@@ -3,7 +3,10 @@
     <div v-if="!isSmall" class="pc-nav">
       <div class="left">
         <router-link to="/">
-          <img class="sunIconInHeader" src="../assets/clearbnb-logo-wider.png" />
+          <img
+            class="sunIconInHeader"
+            src="../assets/clearbnb-logo-wider.png"
+          />
         </router-link>
       </div>
       <div class="center"></div>
@@ -79,27 +82,27 @@
 </template>
 
 <script>
-import Hamburger from "./HamburgerMenu.vue";
+import Hamburger from './HamburgerMenu.vue';
 export default {
-  props: ["signUp", "login"],
-  emits: ["loggedOut"],
+  props: ['signUp', 'login'],
+  emits: ['loggedOut'],
   components: {
     Hamburger,
   },
   data() {
     return {
       isSmall: false,
-      big: window.matchMedia("(min-width:750px)"),
+      big: window.matchMedia('(min-width:750px)'),
       currentUser: this.$store.getters.getCurrentUser,
     };
   },
   mounted() {
     this.watchMedia(this.big);
-    this.big.addEventListener("change", this.watchMedia);
+    this.big.addEventListener('change', this.watchMedia);
   },
   methods: {
     logOut() {
-      this.$store.commit("setUser", null);
+      this.$store.commit('setUser', null);
       this.currentUser = null;
     },
     watchMedia: function (x) {
@@ -136,8 +139,8 @@ export default {
   border: none;
 }
 .sunIconInHeader {
-  max-width:100vw;
-  min-height:107px;
+  max-width: 100vw;
+  min-height: 107px;
   height: 107px;
 }
 .logOutLink {
@@ -173,7 +176,7 @@ export default {
   color: black;
 }
 .navbar {
-  font-family: "mukta", sans-serif;
+  font-family: 'mukta', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   padding: 0 20px;

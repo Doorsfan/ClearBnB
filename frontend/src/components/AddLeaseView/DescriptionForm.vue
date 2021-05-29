@@ -12,9 +12,8 @@
   </div>
 </template>
 <script>
-//Between Components, utilize Emit - Between Views, utilize saving into the Database
 export default {
-  emits: ["updatedDescription"],
+  emits: ['updatedDescription'],
   mounted() {
     if (this.$store.getters.getLeaseToBuild != null) {
       this.message = this.$store.getters.getLeaseToBuild.description;
@@ -22,13 +21,13 @@ export default {
   },
   data() {
     return {
-      message: "",
+      message: '',
     };
   },
   methods: {
     sendUpMessage() {
       let messageToSendUp = this.message;
-      this.$emit("updatedDescription", messageToSendUp);
+      this.$emit('updatedDescription', messageToSendUp);
     },
   },
 };
@@ -40,8 +39,8 @@ export default {
   height: 15vh;
   min-height: 80px;
   padding: 7.5px 30.4px;
-  font-size:18px;
-  text-align:center;
+  font-size: 18px;
+  text-align: center;
 }
 .myDescription {
   margin: 3px;

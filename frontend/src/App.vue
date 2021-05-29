@@ -9,7 +9,6 @@
     <Footer />
   </footer>
 </template>
-<script setup=""></script>
 <script>
 import Header from './components/Header.vue';
 import Footer from './components/Footer.vue';
@@ -19,11 +18,6 @@ export default {
   components: {
     Header,
     Footer,
-  },
-  watch: {
-    currentUser() {
-      console.log('There was a change in teh current user');
-    },
   },
   data() {
     return {

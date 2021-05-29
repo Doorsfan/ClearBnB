@@ -7,20 +7,21 @@
       placeholder="Image URL.."
       class="imageURL"
     />
-    <div class="buttonDiv"><button
-      v-if="imageURLs.length <= 4"
-      class="addImageButton"
-      type="button"
-      @click="addImageUrl"
-    >
-      Add
-    </button>
+    <div class="buttonDiv">
+      <button
+        v-if="imageURLs.length <= 4"
+        class="addImageButton"
+        type="button"
+        @click="addImageUrl"
+      >
+        Add
+      </button>
     </div>
   </div>
 </template>
 <script>
 export default {
-  emits: ["updatedImgURLs"],
+  emits: ['updatedImgURLs'],
   mounted() {
     let myimageURLs = [];
     if (this.$store.getters.getLeaseToBuild != null) {
@@ -40,24 +41,22 @@ export default {
     addImageUrl() {
       if (this.imageURL.length > 0) {
         let emptyArray = [];
-        for (let image of this.imageURLs) {
-          emptyArray.push(image);
-        }
+        console.log(this.imageURL);
         emptyArray.push(this.imageURL);
-        this.$emit("updatedImgURLs", emptyArray);
-        this.imageURL = "";
+        this.$emit('updatedImgURLs', emptyArray);
+        this.imageURL = '';
       }
     },
   },
 };
 </script>
 <style scoped>
-.buttonDiv{
-  width:max-content;
-  display:inline-block;
+.buttonDiv {
+  width: max-content;
+  display: inline-block;
 }
-*{
-  font-family:'mukta';
+* {
+  font-family: 'mukta';
 }
 .ImageURLSdiv {
   width: max-content;
@@ -78,27 +77,27 @@ button {
 .addImageButton {
   width: 60px;
   height: 40px;
-  padding:5px;
+  padding: 5px;
   background-color: #029ebb;
   color: white;
   border: 1px solid grey;
   border-radius: 2px;
   cursor: pointer;
   font-size: 18px;
-  text-decoration:none;
-  margin-left:10px;
+  text-decoration: none;
+  margin-left: 10px;
 }
 input {
-  min-width:150px;
-  max-width:300px;
-  width:30vw;
+  min-width: 150px;
+  max-width: 300px;
+  width: 30vw;
   display: inline;
   font-size: 14px;
   padding: 7.5px 30.4px;
 }
-@media only screen and (max-width: 500px){
+@media only screen and (max-width: 500px) {
   .addImageButton {
-    border-radius:10px;
+    border-radius: 10px;
   }
 }
 @media only screen and (max-width: 300px) {
@@ -106,5 +105,4 @@ input {
     padding: 0px;
   }
 }
-
 </style>

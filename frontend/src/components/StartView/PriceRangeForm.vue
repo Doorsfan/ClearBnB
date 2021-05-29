@@ -42,34 +42,37 @@ p {
   color: #029ebb;
   font-size: 20px;
 }
-.firstPriceDiv, .secondPriceDiv{
-  display:block;
+.firstPriceDiv,
+.secondPriceDiv {
+  display: block;
   text-align: center;
 }
 @media only screen and (min-width: 1550px) {
-  .firstPriceDiv, .secondPriceDiv{
-    display:inline-block;
+  .firstPriceDiv,
+  .secondPriceDiv {
+    display: inline-block;
   }
 }
-.firstPriceDiv{
-  margin-left:10px;
+.firstPriceDiv {
+  margin-left: 10px;
 }
-.secondPriceDiv{
-  margin-left:10px;
+.secondPriceDiv {
+  margin-left: 10px;
 }
 input {
   width: 150px;
   margin: 3px;
   padding: 7.5px 30.4px;
-  font-size:18px;
-  text-align:center;
+  font-size: 18px;
+  text-align: center;
 }
 @media only screen and (max-width: 400px) {
-  .firstPriceDiv,.secondPriceDiv{
-    display:block;
+  .firstPriceDiv,
+  .secondPriceDiv {
+    display: block;
   }
-  .secondPriceDiv{
-    margin-left:0px;
+  .secondPriceDiv {
+    margin-left: 0px;
   }
 }
 </style>

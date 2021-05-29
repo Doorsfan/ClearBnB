@@ -49,7 +49,6 @@ export default {
 </script>
 
 <style scoped>
-
 footer {
   margin-top: 0;
   background-color: #fdbf81;
@@ -101,7 +100,7 @@ footer {
   font-weight: bolder;
   font-size: 16px;
   color: black;
-  -webkit-text-stroke: 0.0px white;
+  -webkit-text-stroke: 0px white;
 }
 
 .links a:hover {
@@ -133,10 +132,8 @@ footer {
   border: none;
   margin-top: 0px;
   font-size: 28px;
-  -webkit-text-stroke: 0.0px white;
+  -webkit-text-stroke: 0px white;
   font-weight: bold;
   font-size: 16px;
-  
 }
-
 </style>

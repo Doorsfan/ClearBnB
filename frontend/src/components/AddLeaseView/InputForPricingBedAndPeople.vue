@@ -63,36 +63,36 @@ export default {
 </script>
 
 <style scoped>
-.MaxPeopleP{
-  margin-left:11.5vw;
-  margin-right:11.5vw;
+.MaxPeopleP {
+  margin-left: 11.5vw;
+  margin-right: 11.5vw;
   width: 8vw;
-  min-width:50px;
-  max-width:200px;
+  min-width: 50px;
+  max-width: 200px;
 }
-.BedsP{
-  min-width:50px;
-  max-width:200px;
+.BedsP {
+  min-width: 50px;
+  max-width: 200px;
 }
 input {
   display: inline-block;
-  text-align:center;
+  text-align: center;
   padding: 0px;
-  font-size:18px;
+  font-size: 18px;
   min-width: 50px;
-  max-width:200px;
-  width:8vw;
-  margin-top:3px;
+  max-width: 200px;
+  width: 8vw;
+  margin-top: 3px;
 }
-.peopleInputField{
-  margin-left:10vw;
+.peopleInputField {
+  margin-left: 10vw;
   margin-right: 10vw;
 }
-p{
-  margin-left:0px;
-  margin-right:0px;
-  width:max-content;
-  display:inline-block;
+p {
+  margin-left: 0px;
+  margin-right: 0px;
+  width: max-content;
+  display: inline-block;
 }
 @media only screen and (max-width: 450px) {
   input {

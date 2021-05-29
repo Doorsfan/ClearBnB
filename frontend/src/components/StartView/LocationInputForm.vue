@@ -29,8 +29,8 @@ export default {
 };
 </script>
 <style scoped>
-*{
-  font-family:'mukta';
+* {
+  font-family: 'mukta';
 }
 p {
   width: max-content;
@@ -40,13 +40,13 @@ p {
   color: #029ebb;
 }
 
-.locationInputText{
+.locationInputText {
   font-size: 20px;
 }
 .locationInput {
   width: 150px;
   padding: 5px;
   padding: 7.5px 30.4px;
-  font-size:18px;
+  font-size: 18px;
 }
 </style>

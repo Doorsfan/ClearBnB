@@ -16,9 +16,6 @@
     </router-link>
   </div>
 </template>
-<script setup="">
-import Carousel from '../Carousel.vue';
-</script>
 <script>
 export default {
   props: ['pastBooking'],
@@ -35,20 +32,20 @@ export default {
 <style scoped>
 * {
   font-family: 'mukta';
-  color:black;
-  font-weight:bold;
-  text-decoration:none;
+  color: black;
+  font-weight: bold;
+  text-decoration: none;
   text-decoration-color: white;
 }
 
 .firstImage {
   object-fit: cover;
-  object-position:center;
-  width:50vw;
+  object-position: center;
+  width: 50vw;
   max-width: 900px;
   height: 700px;
-  max-height:30vh;
-  border-radius:10px;
+  max-height: 30vh;
+  border-radius: 10px;
 }
 .mainBoxDiv {
   margin-left: auto;
@@ -58,8 +55,8 @@ export default {
   margin-top: 10px;
   margin-bottom: 10px;
   background-color: rgba(255, 255, 255, 0.9);
-  border-radius:10px;
-  max-width:1200px;
+  border-radius: 10px;
+  max-width: 1200px;
 }
 .titleDiv {
   text-align: center;

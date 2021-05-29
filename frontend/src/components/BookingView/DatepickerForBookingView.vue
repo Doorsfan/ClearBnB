@@ -28,8 +28,6 @@ import { ref } from 'vue';
 import { add } from 'date-fns';
 import BookingHelper from '../../components/BookingHelper.js';
 import store from '../../store.js';
-//NOTE: Datepickers are Readonly in properties, meaning you cannot directly attach CSS to them outside of built in
-// API - which only affects the input field in terms of selection of Date
 
 const disabledDate = ref(add(new Date(), { days: 5 }));
 export default {
@@ -53,16 +51,12 @@ export default {
       originalStartDate: new Date(),
       disabledDate: new Date(),
       disabledDays: {
-        //Can integrate so that there are disabled days, just leaving this open as a possibility
         dates: [],
       },
       newBookingHelper: '',
     };
   },
   watch: {
-    myLease() {
-      console.log('My lease changed!');
-    },
     newBookingHelper() {
       this.$emit('updatedBookingHelper', this.newBookingHelper);
     },
@@ -120,44 +114,51 @@ export default {
           let bookingStartDate = booking.startDate;
           let mySplitStartDate = bookingStartDate.split('-');
           let myStartYear = Number(mySplitStartDate[0]);
-          let myStartMonth = Number(mySplitStartDate[1]);
+          let myStartMonth = Number(mySplitStartDate[1]) - 1;
           let myStartDay = Number(mySplitStartDate[2]);
 
           let bookingEndDate = booking.endDate;
           let mySplitEndDate = bookingEndDate.split('-');
           let myEndYear = Number(mySplitEndDate[0]);
-          let myEndMonth = Number(mySplitEndDate[1]);
+          let myEndMonth = Number(mySplitEndDate[1] - 1);
           let myEndDay = Number(mySplitEndDate[2]);
+
           let takenDay = '';
-          let differenceInYears = myEndYear - myStartYear;
-          let differenceInMonths = myEndMonth - myStartMonth;
-          let differenceInDays = myEndDay - myStartDay;
-          while (differenceInDays >= 0) {
+
+          let date1 = new Date(myStartYear, myStartMonth, myStartDay);
+          let date2 = new Date(myEndYear, myEndMonth, myEndDay);
+          let differenceInTime = date2.getTime() - date1.getTime();
+          let differenceInDays = differenceInTime / (1000 * 3600 * 24);
+          while (differenceInDays > -1) {
             differenceInDays -= 1;
-            this.addDisabledDate(myEndYear, myEndMonth, myEndDay);
-            if (myEndDay == 0) {
+            this.disabledDays.dates.push(
+              new Date(myEndYear, myEndMonth, myEndDay)
+            );
+            if (myEndDay == 1) {
               myEndMonth -= 1;
-              if (myEndMonth == 0) {
+              if (myEndMonth == -1) {
                 myEndYear -= 1;
-                myEndMonth = 12;
+                myEndMonth = 11;
               }
               if (
                 myEndMonth == 11 ||
                 myEndMonth == 9 ||
-                myEndMonth == 6 ||
-                myEndMonth == 4
-              ) {
-                myEndDay = 30;
-              } else if (
-                myEndMonth == 12 ||
-                myEndMonth == 10 ||
-                myEndMonth == 8 ||
                 myEndMonth == 7 ||
-                myEndMonth == 5 ||
-                myEndMonth == 3 ||
-                myEndMonth == 1
+                myEndMonth == 6 ||
+                myEndMonth == 4 ||
+                myEndMonth == 2 ||
+                myEndMonth == 0
               ) {
                 myEndDay = 31;
+              } else if (
+                myEndMonth == 10 ||
+                myEndMonth == 8 ||
+                myEndMonth == 5 ||
+                myEndMonth == 3
+              ) {
+                myEndDay = 30;
+              } else {
+                myEndDay = 28;
               }
             } else {
               myEndDay -= 1;
@@ -166,16 +167,12 @@ export default {
         }
       }
     },
-    addDisabledDate(year, month, day) {
-      //"2021-05-20"
-      this.disabledDays.dates.push(new Date(year + '-' + month + '-' + day));
-    },
   },
 };
 </script>
 <style scoped>
-*{
-  font-family:'mukta';
+* {
+  font-family: 'mukta';
 }
 div {
   width: max-content;

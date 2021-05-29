@@ -18,12 +18,12 @@
   </div>
 </template>
 <script setup="">
-import Datepicker from "vue3-datepicker";
+import Datepicker from 'vue3-datepicker';
 </script>
 <script>
-import { ref } from "vue";
-//NOTE: Datepickers are Readonly in properties, meaning you cannot directly attach CSS to them outside of built in
-// API - which only affects the input field in terms of selection of Date
+import { ref } from 'vue';
+import Lease from '../../components/Lease.vue';
+
 let thisDay = ref(new Date());
 let startDate = ref(new Date());
 let endDate = ref(new Date());
@@ -34,7 +34,6 @@ export default {
       startDate: startDate,
       endDate: endDate,
       disabledDays: {
-        //Can integrate so that there are disabled days, just leaving this open as a possibility
         dates: [],
       },
     };
@@ -42,28 +41,60 @@ export default {
   watch: {
     endDate() {
       let latestLease = this.$store.getters.getLeaseToBuild;
+      if (latestLease == null) {
+        latestLease = new Lease(
+          this.$store.getters.getCurrentUser.id,
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          ''
+        );
+      }
       latestLease.endDate = this.endDate;
-      this.$store.commit("setLeaseToBuild", latestLease);
+      this.$store.commit('setLeaseToBuild', latestLease);
     },
     startDate() {
       let latestLease = this.$store.getters.getLeaseToBuild;
+      if (latestLease == null) {
+        latestLease = new Lease(
+          this.$store.getters.getCurrentUser.id,
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          ''
+        );
+      }
       latestLease.startDate = this.startDate;
-      this.$store.commit("setLeaseToBuild", latestLease);
+      this.$store.commit('setLeaseToBuild', latestLease);
     },
     disabledDays() {
-      this.$emit("updatedDisabledDays", this.disabledDays);
+      this.$emit('updatedDisabledDays', this.disabledDays);
     },
   },
   methods: {
     addDisabledDate(dateString) {
-      //"2021-05-20"
       this.disabledDays.dates.push(new Date(dateString));
     },
   },
 };
 </script>
 <style scoped>
-
 .AvailableToP {
   margin-top: 30px;
 }
@@ -71,9 +102,9 @@ p {
   margin: 2px;
   font-weight: bolder;
 }
-.myDatePickerDiv{
-  width:max-content;
-  margin-left:auto;
-  margin-right:auto;
+.myDatePickerDiv {
+  width: max-content;
+  margin-left: auto;
+  margin-right: auto;
 }
 </style>

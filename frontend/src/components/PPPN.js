@@ -27,14 +27,6 @@ export default class PPPN {
     return year + '-' + month + '-' + day;
   }
 
-  convertToDate(isoDate) {
-    isoDate = isoDate.toString();
-    let day = isoDate.substring(0, 4);
-    let month = isoDate.substring(6, 8);
-    let year = isoDate.substring(9, 11);
-    let date = new Date(year, month, day);
-    return date;
-  }
   computeCost(days, price) {
     return days * price;
   }

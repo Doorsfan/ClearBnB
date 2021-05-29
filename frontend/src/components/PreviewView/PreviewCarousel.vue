@@ -22,12 +22,8 @@
   />
 </template>
 <script>
-//Implement Interaction with Arrow Buttons again in regards to Carousel Component
 export default {
   props: ['lease'],
-  data() {
-    return {};
-  },
   methods: {
     previousPicture() {
       let firstPicture = this.lease.imageURLs[0];
@@ -45,8 +41,8 @@ export default {
 };
 </script>
 <style scoped>
-*{
-  font-family:'mukta';
+* {
+  font-family: 'mukta';
 }
 .mainDiv {
   margin-top: 10px;

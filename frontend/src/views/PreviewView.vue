@@ -46,7 +46,8 @@
           <p class="exampleSize">Whole/Part of Residence goes here</p>
         </div>
         <div v-if="myLease" class="myDatePickerDiv">
-          <PreviewDatePicker v-if="myLease.startDate && myLease.endDate"
+          <PreviewDatePicker
+            v-if="myLease.startDate && myLease.endDate"
             :leaseStartDate="myLease.startDate"
             :leaseEndDate="myLease.endDate"
           />
@@ -64,10 +65,18 @@
       <div v-if="myLease">
         <div class="location-maxguests">
           <h1>{{ myLease.title }}</h1>
-          <p v-if="myLease.location.length > 0 && myLease.maxGuests > 0">{{ myLease.location }} | Maximum {{ myLease.maxGuests }} guests</p>
-          <p v-if="myLease.location.length == 0 && myLease.maxGuests > 0">Your Location | Maximum {{ myLease.maxGuests }} guests</p>
-          <p v-if="myLease.location.length > 0 && myLease.maxGuests == 0">{{ myLease.location }} | Max Amount of Guests</p>
-          <p v-if="myLease.location.length == 0 && myLease.maxGuests == 0">Your Location | Max Amount of Guests</p>
+          <p v-if="myLease.location.length > 0 && myLease.maxGuests > 0">
+            {{ myLease.location }} | Maximum {{ myLease.maxGuests }} guests
+          </p>
+          <p v-if="myLease.location.length == 0 && myLease.maxGuests > 0">
+            Your Location | Maximum {{ myLease.maxGuests }} guests
+          </p>
+          <p v-if="myLease.location.length > 0 && myLease.maxGuests == 0">
+            {{ myLease.location }} | Max Amount of Guests
+          </p>
+          <p v-if="myLease.location.length == 0 && myLease.maxGuests == 0">
+            Your Location | Max Amount of Guests
+          </p>
         </div>
         <div class="booking-view-images-container">
           <img
@@ -98,8 +107,16 @@
         </div>
         <div class="type-price">
           <p>
-            {{ myLease.typeOfHousing ? myLease.typeOfHousing : 'Type of Housing' }} | Per person per night:
-            {{ myLease.price ? Math.round(myLease.price * 1.15 * 100) / 100 : 'X amount of '}} Euro
+            {{
+              myLease.typeOfHousing ? myLease.typeOfHousing : 'Type of Housing'
+            }}
+            | Per person per night:
+            {{
+              myLease.price
+                ? Math.round(myLease.price * 1.15 * 100) / 100
+                : 'X amount of '
+            }}
+            Euro
           </p>
         </div>
         <div class="booking-view-description">
@@ -224,7 +241,7 @@ export default {
     async PublishLease() {
       let leaseToPublish = this.$store.getters.getLeaseToBuild;
       let myURLs = [];
-      for (let image of leaseToPublish.imageURLs[0]) {
+      for (let image of leaseToPublish.imageURLs) {
         myURLs.push(image);
       }
       myURLs.flat();
@@ -263,25 +280,24 @@ export default {
         body: JSON.stringify(completeLeash),
       });
       let response = await res.json();
+      alert('Thank you for putting up a lease at ClearBnB!');
     },
   },
   mounted() {
     this.myLease = this.$store.getters.getLeaseToBuild;
-    if(this.myLease != null){
-      if(this.myLease.startDate != null){
-        this.previewStartDate = this.myLease.startDate; 
-      }
-      else{
+    if (this.myLease != null) {
+      if (this.myLease.startDate != null) {
+        this.previewStartDate = this.myLease.startDate;
+      } else {
         this.previewStartDate = new Date();
       }
-      if(this.myLease.endDate != null){
+      if (this.myLease.endDate != null) {
         this.previewEndDate = this.myLease.endDate;
-      }
-      else{
+      } else {
         this.previewEndDate = new Date();
       }
     }
-    
+
     if (this.myLease != null) {
       if (this.myLease.entireResidence == true) {
         $('.EntireOrPart').text('Entire Residence');
@@ -368,7 +384,6 @@ export default {
   cursor: pointer;
   margin-top: 10px;
   font-size: 18px;
-
 }
 .PriceToPayInTotal {
   margin-top: 10px;
@@ -447,9 +462,8 @@ select {
   background-color: rgba(234, 241, 241);
   margin-right: 10px;
   padding: 7.5px 30.4px;
-  outline:none;
+  outline: none;
 }
-
 .booking-view-container {
   background-color: rgba(218, 224, 224, 0.8);
   display: flex;
@@ -466,7 +480,6 @@ select {
   margin-top: 30px;
   margin-bottom: 30px;
 }
-
 .location-maxguests {
   font-weight: 700;
   padding: 30px 0 30px;
@@ -474,12 +487,10 @@ select {
 .location-maxguests h1 {
   padding: 0 0 10px;
 }
-
 .booking-view-images-container {
   display: inline-block;
   align-items: center;
 }
-
 .booking-view-image-1 {
   width: 50%;
   height: 300px;
@@ -538,7 +549,6 @@ select {
   box-shadow: 5px 5px 5px 0 rgb(136, 154, 160);
   border-radius: 4px;
 }
-
 .booking-view-image-5:hover {
   transform: scale(1.08);
 }
@@ -546,7 +556,6 @@ select {
   font-weight: 700;
   padding: 10px 0 20px;
 }
-
 .booking-view-description {
   text-align: justify;
   padding: 0 90px;
@@ -634,9 +643,9 @@ select {
   .publishButtonDiv {
     width: max-content;
     display: block;
-    padding:0px;
-    margin-left:auto;
-    margin-right:auto;
+    padding: 0px;
+    margin-left: auto;
+    margin-right: auto;
   }
 }
 </style>

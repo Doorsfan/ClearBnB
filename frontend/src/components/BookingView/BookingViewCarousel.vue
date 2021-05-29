@@ -30,7 +30,6 @@
   <i @click="nextPicture" class="arrow right"></i>
 </template>
 <script>
-//Implement Interaction with Arrow Buttons again in regards to Carousel Component
 export default {
   props: ['myLease'],
   data() {
@@ -56,8 +55,8 @@ export default {
 };
 </script>
 <style scoped>
-*{
-  font-family:'mukta';
+* {
+  font-family: 'mukta';
 }
 .imageCarousel {
   position: relative;
